@@ -3,7 +3,11 @@
    Elegant, professional design matching site theme
    =========================================== */
 
-/* The docs page inherits from style.css, so we only add page-specific styles */
+/* Force dark/neutral background for docs page main content area */
+#main-content {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  min-height: 100vh;
+}
 
 /* Documentation Container - positioned below navbar */
 .docs-container {
