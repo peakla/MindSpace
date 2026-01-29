@@ -2295,6 +2295,23 @@
 
 /* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+  .support-hero::before {
+    animation: none;
+  }
+  
+  .support-hero__decorative {
+    animation: none;
+  }
+  
+  .support-hero__badge,
+  .support-hero__title,
+  .support-hero__subtitle,
+  .support-hero__search {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
   .breathing-circle {
     transition: none;
   }
