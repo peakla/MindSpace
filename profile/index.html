@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/toast.css" />
   <link rel="stylesheet" href="../css/analytics.css" />
   <link rel="stylesheet" href="profile.css" />
+  <link rel="stylesheet" href="wellness-enhanced.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/auth.js" defer></script>
@@ -874,10 +875,10 @@
               </button>
             </div>
             <div class="mb-profile__goals-list" id="goalsList">
-              <div class="mb-profile__empty">
-                <ion-icon name="flag-outline"></ion-icon>
-                <p data-translate="profile_no_goals">No goals yet</p>
-                <span data-translate="profile_goals_cta">Set a wellness goal to get started</span>
+              <div class="mb-profile__goals-empty">
+                <span class="empty-icon">🎯</span>
+                <h4 data-translate="profile_no_goals">No goals yet</h4>
+                <p data-translate="profile_goals_cta">Set a wellness goal to get started</p>
               </div>
             </div>
           </div>
@@ -886,16 +887,50 @@
           <div class="mb-profile__wellness-section">
             <h3><ion-icon name="flame-outline"></ion-icon> <span data-translate="profile_reading_streak">Reading Streak</span></h3>
             <div class="mb-profile__streak-display">
-              <div class="mb-profile__streak-current">
+              <div class="mb-profile__streak-stat">
+                <span class="streak-icon flame">🔥</span>
                 <span class="streak-number" id="streakNumber">0</span>
                 <span class="streak-label" data-translate="profile_current_streak">Current Streak</span>
               </div>
-              <div class="mb-profile__streak-best">
+              <div class="mb-profile__streak-stat">
+                <span class="streak-icon">🏆</span>
                 <span class="streak-number" id="bestStreak">0</span>
                 <span class="streak-label" data-translate="profile_best_streak">Best Streak</span>
               </div>
             </div>
-            <div class="mb-profile__streak-calendar" id="streakCalendar"></div>
+            <div class="mb-profile__streak-calendar">
+              <div class="streak-calendar-header">
+                <h5><ion-icon name="calendar-outline"></ion-icon> Reading Activity</h5>
+                <div class="streak-calendar-legend">
+                  <span>Less</span>
+                  <div class="legend-box l0"></div>
+                  <div class="legend-box l1"></div>
+                  <div class="legend-box l2"></div>
+                  <div class="legend-box l3"></div>
+                  <div class="legend-box l4"></div>
+                  <span>More</span>
+                </div>
+              </div>
+              <div class="streak-calendar-grid" id="streakCalendar"></div>
+            </div>
+            <div class="mb-profile__streak-milestones">
+              <div class="streak-milestone achieved" data-days="7">
+                <span class="milestone-icon">🌟</span>
+                <span class="milestone-text">7-Day</span>
+              </div>
+              <div class="streak-milestone" data-days="14">
+                <span class="milestone-icon">⭐</span>
+                <span class="milestone-text">14-Day</span>
+              </div>
+              <div class="streak-milestone locked" data-days="30">
+                <span class="milestone-icon">🏅</span>
+                <span class="milestone-text">30-Day</span>
+              </div>
+              <div class="streak-milestone locked" data-days="100">
+                <span class="milestone-icon">🏆</span>
+                <span class="milestone-text">100-Day</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

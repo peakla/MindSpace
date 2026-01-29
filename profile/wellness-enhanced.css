@@ -1,0 +1,1043 @@
+/* ===== ENHANCED WELLNESS TAB STYLES ===== */
+
+/* Glassmorphism Base */
+.mb-profile__wellness-section {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.mb-profile__wellness-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #b89b5e, #d6bd9f, #8fa67a, #b89b5e);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.mb-profile__wellness-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+}
+
+.mb-profile__wellness-section h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mb-profile__wellness-section h3 ion-icon {
+  font-size: 1.4rem;
+  color: #b89b5e;
+  filter: drop-shadow(0 2px 4px rgba(184, 155, 94, 0.3));
+}
+
+/* ===== ENHANCED MOOD TRACKER ===== */
+.mb-profile__mood-input {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.mb-profile__mood-input p {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #4a4a6a;
+  margin-bottom: 24px;
+}
+
+.mb-profile__mood-selector {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.mb-profile__mood-btn {
+  width: 64px;
+  height: 64px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.mb-profile__mood-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #b89b5e, #d6bd9f, #8fa67a);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.mb-profile__mood-btn:hover {
+  transform: scale(1.15) translateY(-4px);
+  box-shadow: 
+    0 12px 30px rgba(184, 155, 94, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.mb-profile__mood-btn:hover::before {
+  opacity: 0.3;
+}
+
+.mb-profile__mood-btn.is-selected {
+  border-color: #b89b5e;
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.15) 0%, rgba(184, 155, 94, 0.05) 100%);
+  transform: scale(1.2);
+  box-shadow: 
+    0 8px 25px rgba(184, 155, 94, 0.35),
+    0 0 20px rgba(184, 155, 94, 0.2);
+}
+
+.mb-profile__mood-btn.is-selected::before {
+  opacity: 0.5;
+  animation: moodPulse 2s ease-in-out infinite;
+}
+
+@keyframes moodPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+.mood-emoji {
+  font-size: 2rem;
+  transition: transform 0.3s ease;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.mb-profile__mood-btn:hover .mood-emoji {
+  transform: scale(1.1);
+  animation: emojiWiggle 0.5s ease;
+}
+
+@keyframes emojiWiggle {
+  0%, 100% { transform: scale(1.1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Mood Note Input */
+.mb-profile__mood-note {
+  width: 100%;
+  max-width: 450px;
+  padding: 16px 20px;
+  border: 2px solid rgba(184, 155, 94, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  color: #1a1a2e;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.mb-profile__mood-note:focus {
+  outline: none;
+  border-color: #b89b5e;
+  box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.15);
+  background: #fff;
+}
+
+.mb-profile__mood-note::placeholder {
+  color: #9a9ab0;
+}
+
+/* Log Mood Button */
+.mb-profile__mood-log-btn {
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #b89b5e 0%, #c9a968 50%, #d6bd9f 100%);
+  background-size: 200% 100%;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(184, 155, 94, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.mb-profile__mood-log-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.mb-profile__mood-log-btn:hover {
+  background-position: 100% 0;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(184, 155, 94, 0.45);
+}
+
+.mb-profile__mood-log-btn:hover::before {
+  left: 100%;
+}
+
+.mb-profile__mood-log-btn:active {
+  transform: translateY(-1px);
+}
+
+/* ===== MOOD HISTORY - ENHANCED ===== */
+.mb-profile__mood-history {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(184, 155, 94, 0.2);
+}
+
+.mb-profile__mood-history h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6b6b8a;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Recent Moods - Color Coded Cards */
+.mb-profile__mood-entries {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.mood-entry-card {
+  background: linear-gradient(145deg, #fff 0%, #f8f6f2 100%);
+  border-radius: 16px;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.mood-entry-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 16px 16px 0 0;
+}
+
+.mood-entry-card[data-mood="5"]::before { background: linear-gradient(90deg, #10b981, #34d399); }
+.mood-entry-card[data-mood="4"]::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+.mood-entry-card[data-mood="3"]::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.mood-entry-card[data-mood="2"]::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.mood-entry-card[data-mood="1"]::before { background: linear-gradient(90deg, #ef4444, #f87171); }
+
+.mood-entry-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.mood-entry-card .mood-emoji-large {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.15));
+}
+
+.mood-entry-card .mood-date {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 4px;
+}
+
+.mood-entry-card .mood-time {
+  font-size: 0.75rem;
+  color: #9a9ab0;
+}
+
+.mood-entry-card .mood-note-preview {
+  font-size: 0.8rem;
+  color: #6b6b8a;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mood Trend Chart */
+.mb-profile__mood-trend {
+  margin-top: 24px;
+  background: linear-gradient(145deg, rgba(248, 246, 242, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(184, 155, 94, 0.1);
+}
+
+.mb-profile__mood-trend h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mood-trend-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 120px;
+  padding: 0 10px;
+  position: relative;
+}
+
+.mood-trend-chart::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.mood-trend-bar {
+  flex: 1;
+  max-width: 40px;
+  margin: 0 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mood-trend-bar .bar {
+  width: 100%;
+  border-radius: 8px 8px 4px 4px;
+  min-height: 8px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.mood-trend-bar .bar[data-level="5"] { background: linear-gradient(180deg, #10b981, #059669); height: 100%; }
+.mood-trend-bar .bar[data-level="4"] { background: linear-gradient(180deg, #8b5cf6, #7c3aed); height: 80%; }
+.mood-trend-bar .bar[data-level="3"] { background: linear-gradient(180deg, #3b82f6, #2563eb); height: 60%; }
+.mood-trend-bar .bar[data-level="2"] { background: linear-gradient(180deg, #f59e0b, #d97706); height: 40%; }
+.mood-trend-bar .bar[data-level="1"] { background: linear-gradient(180deg, #ef4444, #dc2626); height: 20%; }
+
+.mood-trend-bar .bar:hover {
+  transform: scaleY(1.05);
+  filter: brightness(1.1);
+}
+
+.mood-trend-bar .day-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #9a9ab0;
+  text-transform: uppercase;
+}
+
+/* ===== ENHANCED WELLNESS GOALS ===== */
+.mb-profile__goals-add {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.mb-profile__goal-input {
+  flex: 1;
+  min-width: 220px;
+  padding: 14px 20px;
+  border: 2px solid rgba(184, 155, 94, 0.2);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.mb-profile__goal-input:focus {
+  outline: none;
+  border-color: #b89b5e;
+  box-shadow: 0 0 0 4px rgba(184, 155, 94, 0.12);
+}
+
+.mb-profile__goal-select {
+  padding: 14px 20px;
+  border: 2px solid rgba(184, 155, 94, 0.2);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  color: #4a4a6a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.mb-profile__goal-select:focus {
+  outline: none;
+  border-color: #b89b5e;
+}
+
+.mb-profile__goal-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #b89b5e 0%, #d6bd9f 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(184, 155, 94, 0.3);
+  white-space: nowrap;
+}
+
+.mb-profile__goal-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(184, 155, 94, 0.4);
+}
+
+.mb-profile__goal-add-btn ion-icon {
+  font-size: 1.2rem;
+}
+
+/* Goals List */
+.mb-profile__goals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mb-profile__goal-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%);
+  padding: 18px 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.mb-profile__goal-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #b89b5e, #d6bd9f);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mb-profile__goal-item:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.mb-profile__goal-item:hover::before {
+  opacity: 1;
+}
+
+.mb-profile__goal-item .goal-check {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #b89b5e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.mb-profile__goal-item .goal-check::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: rgba(184, 155, 94, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.mb-profile__goal-item .goal-check:hover::before {
+  opacity: 1;
+}
+
+.mb-profile__goal-item .goal-check.completed {
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-color: #10b981;
+  animation: checkComplete 0.4s ease;
+}
+
+@keyframes checkComplete {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.mb-profile__goal-item .goal-check.completed ion-icon {
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Goal Progress Ring */
+.goal-progress-ring {
+  width: 48px;
+  height: 48px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.goal-progress-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.goal-progress-ring .ring-bg {
+  fill: none;
+  stroke: rgba(184, 155, 94, 0.15);
+  stroke-width: 4;
+}
+
+.goal-progress-ring .ring-progress {
+  fill: none;
+  stroke: url(#goalGradient);
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.goal-progress-ring .ring-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #b89b5e;
+}
+
+.mb-profile__goal-item .goal-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.mb-profile__goal-item .goal-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+}
+
+.mb-profile__goal-item .goal-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #fff;
+  background: linear-gradient(135deg, #b89b5e 0%, #c9a968 100%);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.mb-profile__goal-item .goal-category ion-icon {
+  font-size: 0.85rem;
+}
+
+.mb-profile__goal-item .goal-delete {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.mb-profile__goal-item:hover .goal-delete {
+  opacity: 1;
+}
+
+.mb-profile__goal-item .goal-delete:hover {
+  background: #ef4444;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* Goals Empty State */
+.mb-profile__goals-empty {
+  text-align: center;
+  padding: 50px 30px;
+  background: linear-gradient(145deg, rgba(248, 246, 242, 0.6) 0%, rgba(255, 255, 255, 0.4) 100%);
+  border-radius: 20px;
+  border: 2px dashed rgba(184, 155, 94, 0.25);
+}
+
+.mb-profile__goals-empty .empty-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  opacity: 0.6;
+  animation: emptyFloat 3s ease-in-out infinite;
+}
+
+@keyframes emptyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.mb-profile__goals-empty h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  margin-bottom: 10px;
+}
+
+.mb-profile__goals-empty p {
+  color: #9a9ab0;
+  font-size: 0.95rem;
+}
+
+/* ===== ENHANCED READING STREAK ===== */
+.mb-profile__streak-display {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.mb-profile__streak-stat {
+  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%);
+  border-radius: 20px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mb-profile__streak-stat:first-child {
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.12) 0%, rgba(184, 155, 94, 0.05) 100%);
+  border-color: rgba(184, 155, 94, 0.2);
+}
+
+.mb-profile__streak-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+}
+
+.streak-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.streak-icon.flame {
+  animation: flameFlicker 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 4px 8px rgba(239, 68, 68, 0.4));
+}
+
+@keyframes flameFlicker {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.05) rotate(-2deg); }
+  50% { transform: scale(1.1) rotate(0deg); }
+  75% { transform: scale(1.05) rotate(2deg); }
+}
+
+.mb-profile__streak-stat .streak-number {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #b89b5e 0%, #8fa67a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.mb-profile__streak-stat .streak-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b6b8a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Streak Calendar Heatmap */
+.mb-profile__streak-calendar {
+  background: linear-gradient(145deg, rgba(248, 246, 242, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  border: 1px solid rgba(184, 155, 94, 0.1);
+}
+
+.streak-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.streak-calendar-header h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #4a4a6a;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.streak-calendar-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #9a9ab0;
+}
+
+.streak-calendar-legend span:first-child {
+  margin-right: 8px;
+}
+
+.streak-calendar-legend .legend-box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.streak-calendar-legend .legend-box.l0 { background: rgba(184, 155, 94, 0.1); }
+.streak-calendar-legend .legend-box.l1 { background: rgba(184, 155, 94, 0.3); }
+.streak-calendar-legend .legend-box.l2 { background: rgba(184, 155, 94, 0.5); }
+.streak-calendar-legend .legend-box.l3 { background: rgba(184, 155, 94, 0.7); }
+.streak-calendar-legend .legend-box.l4 { background: #b89b5e; }
+
+.streak-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.streak-day {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: rgba(184, 155, 94, 0.08);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.streak-day:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+.streak-day.active-1 { background: rgba(184, 155, 94, 0.25); }
+.streak-day.active-2 { background: rgba(184, 155, 94, 0.45); }
+.streak-day.active-3 { background: rgba(184, 155, 94, 0.65); }
+.streak-day.active-4 { background: #b89b5e; box-shadow: 0 2px 8px rgba(184, 155, 94, 0.4); }
+
+.streak-day .streak-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  background: #1a1a2e;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.streak-day:hover .streak-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Streak Milestones */
+.mb-profile__streak-milestones {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.streak-milestone {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%);
+  border-radius: 30px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
+}
+
+.streak-milestone.achieved {
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.streak-milestone.achieved .milestone-icon {
+  color: #10b981;
+}
+
+.streak-milestone .milestone-icon {
+  font-size: 1.3rem;
+  color: #9a9ab0;
+}
+
+.streak-milestone .milestone-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a4a6a;
+}
+
+.streak-milestone.locked {
+  opacity: 0.5;
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+[data-theme="dark"] .mb-profile__wellness-section {
+  background: linear-gradient(135deg, rgba(45, 43, 61, 0.95) 0%, rgba(45, 43, 61, 0.85) 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .mb-profile__wellness-section h3 {
+  color: #f5f0e8;
+}
+
+[data-theme="dark"] .mb-profile__mood-input p {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .mb-profile__mood-btn {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .mb-profile__mood-note {
+  background: rgba(45, 43, 61, 0.8);
+  border-color: rgba(184, 155, 94, 0.3);
+  color: #f5f0e8;
+}
+
+[data-theme="dark"] .mb-profile__mood-history h4 {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .mood-entry-card {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .mood-entry-card .mood-date {
+  color: #f5f0e8;
+}
+
+[data-theme="dark"] .mb-profile__mood-trend {
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.6) 0%, rgba(45, 43, 61, 0.4) 100%);
+  border-color: rgba(184, 155, 94, 0.15);
+}
+
+[data-theme="dark"] .mb-profile__mood-trend h5 {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .mb-profile__goal-input,
+[data-theme="dark"] .mb-profile__goal-select {
+  background: rgba(45, 43, 61, 0.9);
+  border-color: rgba(184, 155, 94, 0.3);
+  color: #f5f0e8;
+}
+
+[data-theme="dark"] .mb-profile__goal-item {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .mb-profile__goal-item .goal-title {
+  color: #f5f0e8;
+}
+
+[data-theme="dark"] .mb-profile__goals-empty {
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.4) 0%, rgba(45, 43, 61, 0.2) 100%);
+  border-color: rgba(184, 155, 94, 0.2);
+}
+
+[data-theme="dark"] .mb-profile__goals-empty h4 {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .mb-profile__streak-stat {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .mb-profile__streak-stat:first-child {
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.2) 0%, rgba(184, 155, 94, 0.08) 100%);
+}
+
+[data-theme="dark"] .mb-profile__streak-stat .streak-label {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .mb-profile__streak-calendar {
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.6) 0%, rgba(45, 43, 61, 0.4) 100%);
+  border-color: rgba(184, 155, 94, 0.15);
+}
+
+[data-theme="dark"] .streak-calendar-header h5 {
+  color: #a0a0b8;
+}
+
+[data-theme="dark"] .streak-day {
+  background: rgba(184, 155, 94, 0.12);
+}
+
+[data-theme="dark"] .streak-milestone {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .streak-milestone .milestone-text {
+  color: #a0a0b8;
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 768px) {
+  .mb-profile__wellness-section {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .mb-profile__mood-selector {
+    gap: 12px;
+  }
+
+  .mb-profile__mood-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .mood-emoji {
+    font-size: 1.6rem;
+  }
+
+  .mb-profile__mood-entries {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+
+  .mb-profile__goals-add {
+    flex-direction: column;
+  }
+
+  .mb-profile__goal-input,
+  .mb-profile__goal-select,
+  .mb-profile__goal-add-btn {
+    width: 100%;
+  }
+
+  .mb-profile__streak-display {
+    grid-template-columns: 1fr;
+  }
+
+  .streak-calendar-grid {
+    gap: 4px;
+  }
+
+  .mb-profile__streak-milestones {
+    gap: 8px;
+  }
+
+  .streak-milestone {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mb-profile__mood-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .mood-emoji {
+    font-size: 1.4rem;
+  }
+
+  .mb-profile__streak-stat .streak-number {
+    font-size: 2.5rem;
+  }
+}

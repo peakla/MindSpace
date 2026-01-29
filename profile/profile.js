@@ -107,6 +107,16 @@ function createLikedPost(content, createdAt, likeCount, postId, authorName, auth
 function createGoalItem(goal) {
   const item = createSafeElement('div', 'mb-profile__goal-item');
   
+  // Category icons mapping
+  const categoryIcons = {
+    'mindfulness': 'leaf-outline',
+    'exercise': 'fitness-outline',
+    'sleep': 'moon-outline',
+    'social': 'people-outline',
+    'reading': 'book-outline',
+    'other': 'star-outline'
+  };
+  
   const check = createSafeElement('div', 'goal-check');
   if (goal.completed) {
     check.classList.add('completed');
@@ -118,9 +128,16 @@ function createGoalItem(goal) {
   
   const info = createSafeElement('div', 'goal-info');
   info.appendChild(createSafeElement('div', 'goal-title', goal.title));
-  info.appendChild(createSafeElement('div', 'goal-category', goal.category));
   
-  const deleteBtn = createSafeElement('div', 'goal-delete');
+  // Enhanced category with icon
+  const categoryEl = createSafeElement('div', 'goal-category');
+  const catIcon = document.createElement('ion-icon');
+  catIcon.setAttribute('name', categoryIcons[goal.category] || 'star-outline');
+  categoryEl.appendChild(catIcon);
+  categoryEl.appendChild(document.createTextNode(goal.category.charAt(0).toUpperCase() + goal.category.slice(1)));
+  info.appendChild(categoryEl);
+  
+  const deleteBtn = createSafeElement('button', 'goal-delete');
   const trashIcon = document.createElement('ion-icon');
   trashIcon.setAttribute('name', 'trash-outline');
   deleteBtn.appendChild(trashIcon);
@@ -1356,16 +1373,40 @@ async function loadMoodHistory() {
   };
   
   chart.innerHTML = '';
+  chart.classList.add('mb-profile__mood-entries');
+  
+  const moodLevels = {
+    'very_sad': 1,
+    'sad': 2,
+    'neutral': 3,
+    'happy': 4,
+    'very_happy': 5
+  };
+  
   moods.reverse().forEach(mood => {
     const date = new Date(mood.created_at);
     const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+    const timeStr = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
     const emoji = moodEmojis[mood.mood] || '😐';
+    const moodLevel = moodLevels[mood.mood] || 3;
     
-    const entry = createSafeElement('div', 'mb-mood-entry');
-    entry.title = mood.note || 'No note';
-    entry.appendChild(createSafeElement('span', 'mb-mood-entry__emoji', emoji));
-    entry.appendChild(createSafeElement('span', 'mb-mood-entry__day', dayName));
-    chart.appendChild(entry);
+    const card = createSafeElement('div', 'mood-entry-card');
+    card.setAttribute('data-mood', moodLevel);
+    
+    const emojiSpan = createSafeElement('span', 'mood-emoji-large', emoji);
+    const dateSpan = createSafeElement('span', 'mood-date', dayName);
+    const timeSpan = createSafeElement('span', 'mood-time', timeStr);
+    
+    card.appendChild(emojiSpan);
+    card.appendChild(dateSpan);
+    card.appendChild(timeSpan);
+    
+    if (mood.note) {
+      const noteSpan = createSafeElement('span', 'mood-note-preview', mood.note);
+      card.appendChild(noteSpan);
+    }
+    
+    chart.appendChild(card);
   });
   
   // Update mood insights
@@ -1598,10 +1639,13 @@ async function loadGoals() {
     .order('created_at', { ascending: false });
   
   if (error || !goals || goals.length === 0) {
-    list.innerHTML = '';
-    const empty = createEmptyState('flag-outline', 'No goals yet');
-    empty.appendChild(createSafeElement('span', null, 'Set a wellness goal to get started'));
-    list.appendChild(empty);
+    list.innerHTML = `
+      <div class="mb-profile__goals-empty">
+        <span class="empty-icon">🎯</span>
+        <h4>No goals yet</h4>
+        <p>Set a wellness goal to get started</p>
+      </div>
+    `;
     return;
   }
   
@@ -1739,8 +1783,11 @@ async function loadStreakCalendar() {
     }
   }
   
-  // Create a set of dates with activity for quick lookup
-  const activeDates = new Set(engagementDays.map(d => d.visit_date));
+  // Create a map of dates with activity counts for quick lookup
+  const activityMap = new Map();
+  engagementDays.forEach(d => {
+    activityMap.set(d.visit_date, d.articles_read || 1);
+  });
   
   // Generate calendar for last 28 days
   const today = new Date();
@@ -1753,19 +1800,19 @@ async function loadStreakCalendar() {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
     const dateStr = date.toISOString().split('T')[0];
+    const articles = activityMap.get(dateStr) || 0;
     
     const dayEl = document.createElement('div');
     dayEl.className = 'streak-day';
-    dayEl.textContent = date.getDate();
-    dayEl.title = date.toLocaleDateString();
     
-    if (activeDates.has(dateStr)) {
-      dayEl.classList.add('active');
-      // Find articles count for tooltip
-      const dayData = engagementDays.find(d => d.visit_date === dateStr);
-      if (dayData && dayData.articles_read) {
-        dayEl.title += ` - ${dayData.articles_read} article${dayData.articles_read > 1 ? 's' : ''} read`;
-      }
+    // Calculate activity level (0-4 for color intensity)
+    let activityLevel = 0;
+    if (articles > 0) {
+      if (articles >= 5) activityLevel = 4;
+      else if (articles >= 3) activityLevel = 3;
+      else if (articles >= 2) activityLevel = 2;
+      else activityLevel = 1;
+      dayEl.classList.add(`active-${activityLevel}`);
     }
     
     // Mark today
@@ -1773,8 +1820,33 @@ async function loadStreakCalendar() {
       dayEl.classList.add('today');
     }
     
+    // Add tooltip
+    const tooltip = document.createElement('span');
+    tooltip.className = 'streak-tooltip';
+    const dateLabel = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    tooltip.textContent = articles > 0 
+      ? `${dateLabel}: ${articles} article${articles > 1 ? 's' : ''}`
+      : `${dateLabel}: No activity`;
+    dayEl.appendChild(tooltip);
+    
     calendarEl.appendChild(dayEl);
   }
+  
+  // Update streak milestones
+  updateStreakMilestones(userProfile?.current_streak || 0);
+}
+
+function updateStreakMilestones(currentStreak) {
+  const milestones = document.querySelectorAll('.streak-milestone');
+  milestones.forEach(milestone => {
+    const days = parseInt(milestone.getAttribute('data-days')) || 0;
+    milestone.classList.remove('achieved', 'locked');
+    if (currentStreak >= days) {
+      milestone.classList.add('achieved');
+    } else {
+      milestone.classList.add('locked');
+    }
+  });
 }
 
 // Listen for real-time streak updates
