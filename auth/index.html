@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign In | MindBalance</title>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --primary: #111;
+      --primary-hover: #333;
+      --success: #10b981;
+      --success-bg: #dcfce7;
+      --error: #ef4444;
+      --error-bg: #fee2e2;
+      --info: #3b82f6;
+      --info-bg: #dbeafe;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #f9fafb;
+      --card: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: linear-gradient(135deg, #d6bd9f 0%, #b89b5e 50%, #a08050 100%);
+    }
+    
+    .auth-container {
+      width: 100%;
+      max-width: 440px;
+    }
+    
+    .logo-section {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    
+    .logo-section img {
+      height: 48px;
+      margin-bottom: 8px;
+    }
+    
+    .logo-section h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    
+    .card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+    }
+    
+    .card-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    
+    .card-header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    
+    .card-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+    
+    .form-group {
+      margin-bottom: 18px;
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    
+    .form-group input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(17,17,17,0.1);
+    }
+    
+    .form-group input::placeholder {
+      color: #9ca3af;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: var(--text);
+      margin-top: 10px;
+    }
+    
+    .btn-secondary:hover {
+      background: #e5e7eb;
+    }
+    
+    .btn-guest {
+      background: var(--info-bg);
+      color: var(--info);
+      border: 1px solid #93c5fd;
+      margin-top: 10px;
+    }
+    
+    .btn-guest:hover {
+      background: #bfdbfe;
+    }
+    
+    .btn-google {
+      background: #fff;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+      margin-top: 10px;
+    }
+    
+    .btn-google:hover {
+      background: #f9fafb;
+      border-color: #d1d5db;
+    }
+    
+    .btn-google svg {
+      flex-shrink: 0;
+    }
+    
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    
+    .btn-row .btn {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+    
+    .message {
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      display: none;
+    }
+    
+    .message.show {
+      display: block;
+    }
+    
+    .message.success {
+      background: var(--success-bg);
+      color: #166534;
+      border: 1px solid #86efac;
+    }
+    
+    .message.error {
+      background: var(--error-bg);
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    
+    .message.info {
+      background: var(--info-bg);
+      color: #1e40af;
+      border: 1px solid #93c5fd;
+    }
+    
+    .message.loading {
+      background: #f3f4f6;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 20px 0;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    
+    .help-text {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #92400e;
+      line-height: 1.5;
+    }
+    
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--text-muted);
+      font-size: 14px;
+      text-decoration: none;
+    }
+    
+    .back-link:hover {
+      color: var(--text);
+    }
+    
+    .user-info {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      background: var(--success-bg);
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .user-info.show {
+      display: block;
+    }
+    
+    .user-info .avatar {
+      width: 60px;
+      height: 60px;
+      background: var(--success);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0 auto 12px;
+    }
+    
+    .user-info .email {
+      font-size: 15px;
+      font-weight: 500;
+      color: #166534;
+    }
+    
+    .user-info .status {
+      font-size: 13px;
+      color: #15803d;
+      margin-top: 4px;
+    }
+    
+    .form-section {
+      display: block;
+    }
+    
+    .form-section.hidden {
+      display: none;
+    }
+    
+    @media (max-width: 480px) {
+      .card {
+        padding: 24px 20px;
+      }
+      
+      .btn-row {
+        flex-direction: column;
+      }
+    }
+    
+    /* Preloader styles */
+    .preload {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: transform 0.5s ease, opacity 0.3s ease;
+    }
+    
+    .preload > * {
+      transition: opacity 0.3s ease;
+    }
+    
+    .preload.loaded > * {
+      opacity: 0;
+    }
+    
+    .preload.loaded {
+      transition-delay: 250ms;
+      transform: translateY(100%);
+      pointer-events: none;
+    }
+    
+    .loader-gif {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+    
+    /* Scroll lock during preloader */
+    body:not(.loaded) {
+      overflow: hidden !important;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preload" data-preaload>
+  <img src="../assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
+</div>
+
+<!-- SVG Filters for Colorblind Accessibility -->
+<svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+  <defs>
+    <!-- Protanopia (red-blind) filter -->
+    <filter id="protanopia-filter">
+      <feColorMatrix type="matrix" values="
+        0.567, 0.433, 0,     0, 0
+        0.558, 0.442, 0,     0, 0
+        0,     0.242, 0.758, 0, 0
+        0,     0,     0,     1, 0"/>
+    </filter>
+    <!-- Deuteranopia (green-blind) filter -->
+    <filter id="deuteranopia-filter">
+      <feColorMatrix type="matrix" values="
+        0.625, 0.375, 0,   0, 0
+        0.7,   0.3,   0,   0, 0
+        0,     0.3,   0.7, 0, 0
+        0,     0,     0,   1, 0"/>
+    </filter>
+    <!-- Tritanopia (blue-blind) filter -->
+    <filter id="tritanopia-filter">
+      <feColorMatrix type="matrix" values="
+        0.95, 0.05,  0,     0, 0
+        0,    0.433, 0.567, 0, 0
+        0,    0.475, 0.525, 0, 0
+        0,    0,     0,     1, 0"/>
+    </filter>
+  </defs>
+</svg>
+
+  <div class="auth-container">
+    <div class="logo-section">
+      <a href="../">
+        <img src="../assets/images/MindBalanceLogo.svg" alt="MindBalance" />
+      </a>
+    </div>
+    
+    <div class="card">
+      <div class="user-info" id="userInfo">
+        <div class="avatar" id="userAvatar">MB</div>
+        <div class="email" id="userEmail">user@example.com</div>
+        <div class="status">Signed in</div>
+      </div>
+      
+      <div class="form-section" id="formSection">
+        <div class="card-header">
+          <h2>Welcome Back</h2>
+          <p>Sign in to save articles, join discussions, and personalize your experience.</p>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input id="email" type="email" placeholder="you@example.com" autocomplete="email" />
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" autocomplete="current-password" />
+        </div>
+        
+        <button id="signin" class="btn btn-primary">Sign In</button>
+        <button id="signup" class="btn btn-secondary">Create Account</button>
+        
+        <div class="divider">or</div>
+        
+        <button id="googleSignIn" class="btn btn-google">
+          <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+        
+        <button id="guest" class="btn btn-guest">Continue as Guest</button>
+      </div>
+      
+      <div class="message" id="msg"></div>
+      
+      <div class="btn-row" id="actionBtns" style="display: none;">
+        <button id="signout" class="btn btn-secondary">Sign Out</button>
+        <button id="goBack" class="btn btn-primary">Continue</button>
+      </div>
+      
+      <div class="help-text">
+        Creating an account? You may need to confirm your email before signing in.
+      </div>
+    </div>
+    
+    <a href="../" class="back-link">Back to MindBalance</a>
+  </div>
+
+  <script>
+    // Preloader handler
+    const preloader = document.querySelector("[data-preaload]");
+    window.addEventListener("load", function () {
+      document.body.classList.add("loaded");
+      if (preloader) preloader.classList.add("loaded");
+    });
+
+    const SUPABASE_URL = "https://cxjqessxarjayqxvhnhs.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN4anFlc3N4YXJqYXlxeHZobmhzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgwMjQwOTEsImV4cCI6MjA4MzYwMDA5MX0.SUI4sPOSPxDiGwqwQr19UOKtbK7KmjMqkX6HUT6-yps";
+
+    const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const msgEl = document.getElementById("msg");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const userInfo = document.getElementById("userInfo");
+    const userAvatar = document.getElementById("userAvatar");
+    const userEmail = document.getElementById("userEmail");
+    const formSection = document.getElementById("formSection");
+    const actionBtns = document.getElementById("actionBtns");
+
+    const DISPOSABLE_DOMAINS = [
+      'tempmail.com', 'throwaway.email', 'guerrillamail.com', 'mailinator.com',
+      'temp-mail.org', '10minutemail.com', 'fakeinbox.com', 'trashmail.com',
+      'tempail.com', 'dispostable.com', 'yopmail.com', 'maildrop.cc',
+      'sharklasers.com', 'guerrillamail.info', 'grr.la', 'spam4.me',
+      'tempmailo.com', 'mohmal.com', 'getnada.com', 'mailnesia.com',
+      'temp.email', 'tempinbox.com', 'fakemailgenerator.com', 'emailondeck.com',
+      'mintemail.com', 'discard.email', 'spamgourmet.com', 'mytemp.email',
+      'mt2015.com', 'gmailx.com', 'emailz.ml', 'tempemails.net'
+    ];
+    
+    function isValidEmail(email) {
+      const emailRegex = /^[a-zA-Z0-9](?:[a-zA-Z0-9._-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?(?:\.[a-zA-Z]{2,})+$/;
+      if (!emailRegex.test(email)) return false;
+      
+      const domain = email.split('@')[1].toLowerCase();
+      if (DISPOSABLE_DOMAINS.some(d => domain.includes(d))) return false;
+      
+      if (domain.length < 4) return false;
+      
+      return true;
+    }
+    
+    function setMsg(text, type = 'info') {
+      msgEl.textContent = text;
+      msgEl.className = 'message show ' + type;
+    }
+
+    function hideMsg() {
+      msgEl.className = 'message';
+    }
+
+    function getRedirectUrl() {
+      return sessionStorage.getItem('auth_redirect') || '../';
+    }
+
+    function clearRedirectUrl() {
+      sessionStorage.removeItem('auth_redirect');
+    }
+
+    function navigateBack() {
+      const redirectUrl = getRedirectUrl();
+      clearRedirectUrl();
+      window.location.href = redirectUrl;
+    }
+
+    function updateUI(user) {
+      if (user) {
+        const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'MB';
+        userAvatar.textContent = initials;
+        userEmail.textContent = user.email;
+        userInfo.classList.add('show');
+        formSection.classList.add('hidden');
+        actionBtns.style.display = 'flex';
+        hideMsg();
+      } else {
+        userInfo.classList.remove('show');
+        formSection.classList.remove('hidden');
+        actionBtns.style.display = 'none';
+      }
+    }
+
+    async function refreshStatus() {
+      const { data } = await sb.auth.getSession();
+      const user = data?.session?.user || null;
+      updateUI(user);
+    }
+
+    document.getElementById("signin").addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      
+      if (!email || !password) {
+        setMsg("Please enter your email and password.", "error");
+        return;
+      }
+      
+      if (!isValidEmail(email)) {
+        setMsg("Please enter a valid email address.", "error");
+        return;
+      }
+      
+      setMsg("Signing in...", "loading");
+      
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      
+      if (error) {
+        setMsg(error.message, "error");
+        return;
+      }
+      
+      setMsg("Signed in successfully! Redirecting...", "success");
+      updateUI(data.user);
+      
+      setTimeout(() => {
+        navigateBack();
+      }, 1000);
+    });
+
+    document.getElementById("signup").addEventListener("click", async () => {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+      
+      if (!email || !password) {
+        setMsg("Please enter your email and password.", "error");
+        return;
+      }
+      
+      if (!isValidEmail(email)) {
+        setMsg("Please enter a valid email address. Temporary/disposable emails are not allowed.", "error");
+        return;
+      }
+      
+      if (password.length < 6) {
+        setMsg("Password must be at least 6 characters.", "error");
+        return;
+      }
+      
+      setMsg("Creating your account...", "loading");
+      
+      const { error } = await sb.auth.signUp({ email, password });
+      
+      if (error) {
+        setMsg(error.message, "error");
+        return;
+      }
+      
+      setMsg("Account created! Check your email to confirm, then sign in.", "success");
+    });
+
+    document.getElementById("signout").addEventListener("click", async () => {
+      setMsg("Signing out...", "loading");
+      await sb.auth.signOut();
+      setMsg("Signed out successfully.", "info");
+      updateUI(null);
+    });
+
+    document.getElementById("goBack").addEventListener("click", () => {
+      navigateBack();
+    });
+
+    document.getElementById("guest").addEventListener("click", () => {
+      navigateBack();
+    });
+
+    document.getElementById("googleSignIn").addEventListener("click", async () => {
+      setMsg("Connecting to Google...", "loading");
+      
+      const { error } = await sb.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin + '/auth/'
+        }
+      });
+      
+      if (error) {
+        setMsg(error.message, "error");
+      }
+    });
+
+    emailInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        passwordInput.focus();
+      }
+    });
+
+    passwordInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("signin").click();
+      }
+    });
+
+    sb.auth.onAuthStateChange((event, session) => {
+      updateUI(session?.user || null);
+    });
+
+    refreshStatus();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Hub | MindBalance</title>
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+
+  <!-- Performance: CDN preconnects -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <!-- Supabase (we’ll wire this in Step 3/4) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/auth.js" defer></script>
+  <script src="../js/settings.js" defer></script>
+  <script src="../js/translations.js" defer></script>
+
+  <style>
+    /* Community layout styling (kept scoped) */
+    :root {
+      color-scheme: light;
+    }
+
+    .mb-community {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .mb-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr 320px;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .mb-panel {
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, .08);
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .05);
+    }
+
+    .mb-panelHeader {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+      font-weight: 700;
+    }
+
+    .mb-panelBody {
+      padding: 12px 14px;
+    }
+
+    /* Left nav */
+    .mb-navList {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .mb-navLink {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: #111;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .mb-navLink:hover {
+      background: rgba(0, 0, 0, .04);
+      border-color: rgba(0, 0, 0, .06);
+    }
+
+    .mb-navLink.is-active {
+      background: rgba(0, 0, 0, .06);
+      border-color: rgba(0, 0, 0, .08);
+      font-weight: 700;
+    }
+
+    .mb-pill {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, .06);
+      display: inline-block;
+    }
+
+    /* Center feed */
+    .mb-feedHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+      gap: 10px;
+    }
+
+    .mb-feedTitle {
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .mb-search {
+      width: 260px;
+      max-width: 45vw;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, .14);
+      outline: none;
+    }
+
+    .mb-composer {
+      margin: 14px;
+      border: 1px solid rgba(0, 0, 0, .1);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .mb-composerTop {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      background: rgba(0, 0, 0, .02);
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .mb-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, .12);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .mb-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, .14);
+      outline: none;
+      background: #fff;
+      color: #111;
+      font-size: 14px;
+    }
+
+    .mb-input::placeholder {
+      color: #666;
+    }
+
+    .mb-composerActions {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .mb-btn {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, .12);
+      background: rgba(0, 0, 0, .04);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .mb-btnPrimary {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .mb-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .mb-feedList {
+      padding: 0 14px 14px;
+      display: grid;
+      gap: 12px;
+      max-height: 70vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,0,0,0.2) transparent;
+    }
+    
+    .mb-feedList::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .mb-feedList::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .mb-feedList::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px;
+    }
+    
+    .mb-feedList::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.3);
+    }
+    
+    [data-theme="dark"] .mb-feedList {
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+    
+    [data-theme="dark"] .mb-feedList::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.2);
+    }
+    
+    [data-theme="dark"] .mb-feedList::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .mb-post {
+      border: 1px solid rgba(0, 0, 0, .1);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .mb-postHead {
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+      background: rgba(0, 0, 0, .01);
+    }
+
+    .mb-postMeta {
+      display: grid;
+      gap: 2px;
+    }
+
+    .mb-postName {
+      font-weight: 800;
+    }
+
+    .mb-postAuthorLink {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .mb-postAuthorLink:hover {
+      color: #4a6fa5;
+      text-decoration: underline;
+    }
+
+    [data-theme="dark"] .mb-postAuthorLink:hover {
+      color: #d6bd9f;
+    }
+
+    .mb-postTime {
+      font-size: 12px;
+      opacity: .75;
+    }
+
+    .mb-postBody {
+      padding: 12px;
+      line-height: 1.45;
+    }
+
+    .mb-postFooter {
+      padding: 10px 12px;
+      border-top: 1px solid rgba(0, 0, 0, .07);
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Right widgets */
+    .mb-progressWrap {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mb-progressBar {
+      height: 10px;
+      background: rgba(0, 0, 0, .08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mb-progressFill {
+      width: 70%;
+      height: 100%;
+      background: #111;
+    }
+
+    .mb-miniList {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mb-miniItem {
+      display: grid;
+      gap: 2px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, .08);
+      background: rgba(0, 0, 0, .02);
+    }
+
+    .mb-miniTitle {
+      font-weight: 800;
+    }
+
+    .mb-miniSub {
+      font-size: 12px;
+      opacity: .75;
+    }
+
+    .mb-miniLink {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .mb-miniLink:hover {
+      background: rgba(0, 0, 0, .05);
+      transform: translateX(3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .mb-grid {
+        grid-template-columns: 220px 1fr;
+      }
+
+      .mb-right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .mb-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mb-left {
+        order: 2;
+      }
+
+      .mb-right {
+        display: block;
+        order: 3;
+      }
+
+      .mb-search {
+        width: 100%;
+        max-width: none;
+      }
+    }
+
+    /* Dark Mode Styles */
+    [data-theme="dark"] body {
+      background: #1a1a2e;
+    }
+
+    [data-theme="dark"] .mb-community {
+      color: #e0e0e0;
+      background: #1a1a2e;
+    }
+
+    [data-theme="dark"] .mb-panel {
+      background: #252542;
+      border-color: rgba(255, 255, 255, .08);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, .2);
+    }
+
+    [data-theme="dark"] .mb-panelHeader {
+      border-bottom-color: rgba(255, 255, 255, .1);
+      color: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-navLink {
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-navLink:hover {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .1);
+    }
+
+    [data-theme="dark"] .mb-navLink.is-active {
+      background: rgba(255, 255, 255, .1);
+      border-color: rgba(255, 255, 255, .15);
+    }
+
+    [data-theme="dark"] .mb-pill {
+      background: rgba(255, 255, 255, .1);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-feedHeader {
+      border-bottom-color: rgba(255, 255, 255, .1);
+    }
+
+    [data-theme="dark"] .mb-feedTitle {
+      color: #fff;
+    }
+
+    [data-theme="dark"] .mb-search {
+      background: #1a1a2e;
+      border-color: rgba(255, 255, 255, .15);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-search::placeholder {
+      color: #888;
+    }
+
+    [data-theme="dark"] .mb-composer {
+      border-color: rgba(255, 255, 255, .1);
+    }
+
+    [data-theme="dark"] .mb-composerTop {
+      background: rgba(255, 255, 255, .03);
+      border-bottom-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-avatar {
+      background: rgba(255, 255, 255, .15);
+      color: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-input {
+      background: #1a1a2e;
+      border-color: rgba(255, 255, 255, .15);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-input::placeholder {
+      color: #888;
+    }
+
+    [data-theme="dark"] .mb-btn {
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(255, 255, 255, .12);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-btnPrimary {
+      background: #d6bd9f;
+      color: #1a1a2e;
+      border-color: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-post {
+      background: #2a2a4a;
+      border-color: rgba(255, 255, 255, .1);
+    }
+
+    [data-theme="dark"] .mb-postHead {
+      background: rgba(255, 255, 255, .03);
+      border-bottom-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-postName {
+      color: #fff;
+    }
+
+    [data-theme="dark"] .mb-postTime {
+      color: #aaa;
+    }
+
+    [data-theme="dark"] .mb-postBody {
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-postFooter {
+      border-top-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-progressBar {
+      background: rgba(255, 255, 255, .1);
+    }
+
+    [data-theme="dark"] .mb-progressFill {
+      background: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-miniItem {
+      background: rgba(255, 255, 255, .04);
+      border-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-miniTitle {
+      color: #fff;
+    }
+
+    [data-theme="dark"] .mb-miniSub {
+      color: #aaa;
+    }
+
+    [data-theme="dark"] .mb-miniLink:hover {
+      background: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-deleteBtn {
+      color: #ff6b6b !important;
+    }
+
+    /* Comment styling */
+    .mb-commentBox {
+      padding: 12px;
+      border-top: 1px solid rgba(0, 0, 0, .07);
+      background: rgba(0, 0, 0, .02);
+    }
+
+    .mb-commentInputRow {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mb-commentInput {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 0, 0, .12);
+      border-radius: 20px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .mb-comments {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mb-comment {
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, .03);
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .mb-commentUser {
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .mb-commentAuthorLink {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .mb-commentAuthorLink:hover {
+      color: #4a6fa5;
+      text-decoration: underline;
+    }
+
+    [data-theme="dark"] .mb-commentAuthorLink:hover {
+      color: #d6bd9f;
+    }
+
+    .mb-commentBody {
+      color: inherit;
+    }
+
+    /* Dark mode comments */
+    [data-theme="dark"] .mb-commentBox {
+      background: rgba(255, 255, 255, .03);
+      border-top-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-commentInput {
+      background: #1a1a2e;
+      border-color: rgba(255, 255, 255, .15);
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-commentInput::placeholder {
+      color: #888;
+    }
+
+    [data-theme="dark"] .mb-comment {
+      background: #2a2a4a;
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-commentUser {
+      color: #d6bd9f;
+    }
+
+    /* Media preview styling */
+    .mb-mediaPreview {
+      position: relative;
+      padding: 12px;
+      background: rgba(0, 0, 0, .02);
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .mb-mediaPreview img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .mb-removeMedia {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, .6);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mb-removeMedia:hover {
+      background: rgba(0, 0, 0, .8);
+    }
+
+    [data-theme="dark"] .mb-mediaPreview {
+      background: rgba(255, 255, 255, .03);
+      border-bottom-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-removeMedia {
+      background: rgba(255, 255, 255, .3);
+    }
+
+    /* Post media styling */
+    .mb-postMedia {
+      padding: 0 12px 12px;
+    }
+
+    .mb-postMedia img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    /* Pinned post styling */
+    .mb-post-pinned {
+      border-left: 3px solid #d6bd9f;
+    }
+
+    .mb-pinned-badge {
+      background: rgba(214, 189, 159, .2);
+      color: #8b7355;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    [data-theme="dark"] .mb-pinned-badge {
+      background: rgba(214, 189, 159, .15);
+      color: #d6bd9f;
+    }
+
+    .mb-pinBtn {
+      color: #8b7355 !important;
+    }
+
+    [data-theme="dark"] .mb-pinBtn {
+      color: #d6bd9f !important;
+    }
+
+    /* Improved Like Button */
+    .mb-likeBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: visible;
+    }
+
+    .mb-likeBtn .heart-icon {
+      display: inline-block;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .mb-likeBtn:hover .heart-icon {
+      transform: scale(1.15);
+    }
+
+    .mb-likeBtn[data-liked="true"] {
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.1);
+      border-color: rgba(231, 76, 60, 0.3);
+    }
+
+    .mb-likeBtn[data-liked="true"] .heart-icon {
+      color: #e74c3c;
+    }
+
+    .mb-likeBtn.like-animating {
+      animation: likeBounce 0.4s ease;
+    }
+
+    @keyframes likeBounce {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .like-pop {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 700;
+      color: #e74c3c;
+      animation: popUp 0.6s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes popUp {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    }
+
+    [data-theme="dark"] .mb-likeBtn[data-liked="true"] {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.15);
+      border-color: rgba(255, 107, 107, 0.3);
+    }
+
+    [data-theme="dark"] .mb-likeBtn[data-liked="true"] .heart-icon {
+      color: #ff6b6b;
+    }
+
+    /* Edit Button */
+    .mb-editBtn {
+      color: #3498db;
+      margin-left: 8px;
+    }
+
+    .mb-editBtn:hover {
+      background: rgba(52, 152, 219, 0.1);
+      border-color: rgba(52, 152, 219, 0.3);
+    }
+
+    [data-theme="dark"] .mb-editBtn {
+      color: #5dade2;
+    }
+
+    /* Edit Mode */
+    .mb-editTextarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 2px solid #3498db;
+      background: #fff;
+      color: #111;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+    }
+
+    [data-theme="dark"] .mb-editTextarea {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border-color: #5dade2;
+    }
+
+    .mb-editActions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .mb-saveBtn {
+      background: #27ae60;
+      color: #fff;
+      border-color: #27ae60;
+    }
+
+    .mb-cancelBtn {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    /* Report Button */
+    .mb-reportBtn {
+      color: #95a5a6;
+      margin-left: auto;
+    }
+
+    .mb-reportBtn:hover {
+      color: #e67e22;
+      background: rgba(230, 126, 34, 0.1);
+      border-color: rgba(230, 126, 34, 0.3);
+    }
+
+    [data-theme="dark"] .mb-reportBtn:hover {
+      color: #f39c12;
+      background: rgba(243, 156, 18, 0.15);
+    }
+
+    /* Report Modal */
+    .mb-reportModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .mb-reportModal.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mb-reportModalContent {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .mb-reportModal.is-active .mb-reportModalContent {
+      transform: scale(1);
+    }
+
+    .mb-reportModalTitle {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .mb-reportOptions {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .mb-reportOption {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .mb-reportOption:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .mb-reportOption input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #e67e22;
+    }
+
+    .mb-reportModalActions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .mb-submitReportBtn {
+      background: #e67e22;
+      color: #fff;
+      border-color: #e67e22;
+    }
+
+    .mb-submitReportBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    [data-theme="dark"] .mb-reportModalContent {
+      background: #252542;
+      color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-reportOption {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .mb-reportOption:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .mb-edited-tag {
+      font-size: 11px;
+      color: #95a5a6;
+      font-style: italic;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SVG Filters for Colorblind Accessibility -->
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <defs>
+      <!-- Protanopia (red-blind) filter -->
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="
+        0.567, 0.433, 0,     0, 0
+        0.558, 0.442, 0,     0, 0
+        0,     0.242, 0.758, 0, 0
+        0,     0,     0,     1, 0" />
+      </filter>
+      <!-- Deuteranopia (green-blind) filter -->
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="
+        0.625, 0.375, 0,   0, 0
+        0.7,   0.3,   0,   0, 0
+        0,     0.3,   0.7, 0, 0
+        0,     0,     0,   1, 0" />
+      </filter>
+      <!-- Tritanopia (blue-blind) filter -->
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="
+        0.95, 0.05,  0,     0, 0
+        0,    0.433, 0.567, 0, 0
+        0,    0.475, 0.525, 0, 0
+        0,    0,     0,     1, 0" />
+      </filter>
+    </defs>
+  </svg>
+  <!-- Preloader -->
+  <div class="orientation-lock"></div>
+  <div class="preload" data-preaload>
+    <img src="../assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
+    <div class="progress-bar">
+      <div class="progress-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- Scroll Progress Indicator -->
+  <nav class="scroll-progress" aria-label="Page sections">
+    <div class="scroll-progress__bar" aria-hidden="true"></div>
+    <div class="scroll-progress__sections">
+      <button class="scroll-progress__dot" data-section="main-hero" aria-label="Jump to Hero section">
+        <span class="scroll-progress__label" aria-hidden="true">Hero</span>
+      </button>
+      <button class="scroll-progress__dot" data-section="mb-community" aria-label="Jump to Forum section">
+        <span class="scroll-progress__label" aria-hidden="true">Forum</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- TOP BAR -->
+  <!-- HEADER -->
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container">
+
+      <address class="topbar-item">
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">4601 N MacArthur Blvd, Irving, TX 75038</span>
+      </address>
+
+      <div class="separator"></div>
+
+      <div class="topbar-item item-2">
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">Daily : 8.00 am to 10.00 pm</span>
+      </div>
+
+      <a href="tel:+12142459442" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">+1 (214) 245 9442</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">mindbalancehelp@gmail.com</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" data-header>
+    <div class="container">
+
+      <a href="/" class="logo">
+        <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <div class="navbar-scroll-content">
+          <a href="/" class="logo">
+            <img src="/assets/images/MindBalanceLogo.svg" width="160" height="50" alt="MindBalance - logo" decoding="async">
+          </a>
+
+          <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="/" class="navbar-link hover-underline active">
+              <div class="separator"></div><span class="span" data-translate="nav_home">Home</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/support/" class="navbar-link hover-underline">
+              <div class="separator"></div><span class="span" data-translate="nav_contact">Contact</span>
+            </a>
+          </li>
+
+          <li class="navbar-item has-submenu" data-submenu="resources">
+            <a href="/resourcelib/" class="navbar-link hover-underline">
+              <div class="separator"></div><span class="span" data-translate="nav_resources">Resource Library</span>
+              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
+            </a>
+            <div class="navbar-dropdown">
+              <a href="/resourcelib/?category=anxiety" class="navbar-dropdown__item">
+                <ion-icon name="pulse-outline"></ion-icon> Anxiety Resources
+              </a>
+              <a href="/resourcelib/?category=depression" class="navbar-dropdown__item">
+                <ion-icon name="cloudy-outline"></ion-icon> Depression Support
+              </a>
+              <a href="/resourcelib/?category=stress" class="navbar-dropdown__item">
+                <ion-icon name="flash-outline"></ion-icon> Stress Management
+              </a>
+              <a href="/resourcelib/?category=mindfulness" class="navbar-dropdown__item">
+                <ion-icon name="leaf-outline"></ion-icon> Mindfulness
+              </a>
+              <div class="navbar-dropdown__divider"></div>
+              <a href="/resourcelib/" class="navbar-dropdown__item">
+                <ion-icon name="grid-outline"></ion-icon> View All Resources
+              </a>
+            </div>
+          </li>
+
+          <li class="navbar-item">
+            <a href="/community/" class="navbar-link hover-underline">
+              <div class="separator"></div><span class="span" data-translate="nav_community">Community Hub</span>
+            </a>
+          </li>
+          <li class="navbar-item has-submenu" data-submenu="blog">
+            <a href="/blog/" class="navbar-link hover-underline">
+              <div class="separator"></div><span class="span" data-translate="nav_blog">Blog</span>
+              <ion-icon name="chevron-forward-outline" class="submenu-chevron" aria-hidden="true"></ion-icon>
+            </a>
+            <div class="navbar-dropdown">
+              <a href="/articles/anxiety.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Understanding Anxiety
+              </a>
+              <a href="/articles/depression.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Depression Guide
+              </a>
+              <a href="/articles/stress.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Stress Management
+              </a>
+              <a href="/articles/mindfulness.html" class="navbar-dropdown__item">
+                <ion-icon name="document-text-outline"></ion-icon> Mindfulness Basics
+              </a>
+              <div class="navbar-dropdown__divider"></div>
+              <a href="/blog/" class="navbar-dropdown__item">
+                <ion-icon name="albums-outline"></ion-icon> All Articles
+              </a>
+            </div>
+          </li>
+        </ul>
+        </div>
+
+        <!-- Mobile Settings Section -->
+        <!-- Mobile Settings Section (Collapsible) -->
+        <div class="mobile-settings-section">
+          <button class="mobile-settings-toggle" aria-expanded="true" aria-controls="mobileSettingsList">
+            <span class="mobile-settings-title" data-translate="settings_title">Settings</span>
+            <ion-icon name="chevron-down-outline"></ion-icon>
+          </button>
+          <div class="mobile-settings-list" id="mobileSettingsList">
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="moon-outline"></ion-icon> <span data-translate="settings_dark_mode">Dark Mode</span></span>
+              <label class="theme-toggle-switch">
+                <input type="checkbox" data-theme-toggle>
+                <span class="theme-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="text-outline"></ion-icon> <span data-translate="settings_font_size">Font Size</span></span>
+              <select class="setting-select" data-font-size-select>
+                <option value="normal">Normal</option>
+                <option value="large">Large</option>
+                <option value="x-large">Extra Large</option>
+              </select>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="eye-outline"></ion-icon> <span data-translate="settings_colorblind">Colorblind Mode</span></span>
+              <select class="setting-select" data-colorblind-select>
+                <option value="none">None</option>
+                <option value="protanopia">Protanopia</option>
+                <option value="deuteranopia">Deuteranopia</option>
+                <option value="tritanopia">Tritanopia</option>
+              </select>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="flash-outline"></ion-icon> <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span></span>
+              <label class="theme-toggle-switch">
+                <input type="checkbox" data-adhd-toggle>
+                <span class="theme-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="reader-outline"></ion-icon> <span data-translate="settings_dyslexia">Dyslexia Font</span></span>
+              <label class="theme-toggle-switch">
+                <input type="checkbox" data-dyslexia-toggle>
+                <span class="theme-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="accessibility-outline"></ion-icon> <span data-translate="settings_reduce_motion">Reduce Motion</span></span>
+              <label class="theme-toggle-switch">
+                <input type="checkbox" data-reduce-motion-toggle>
+                <span class="theme-toggle-slider"></span>
+              </label>
+            </div>
+            <div class="mobile-setting-item">
+              <span class="mobile-setting-label"><ion-icon name="language-outline"></ion-icon> <span data-translate="settings_language">Language</span></span>
+              <select class="setting-select" data-language-select>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="zh">中文</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ko">한국어</option>
+              </select>
+            </div>
+          
+        <!-- Mobile Submenu Panels -->
+        <div class="navbar-submenu-panel" data-submenu-panel="resources">
+          <div class="submenu-header">
+            <button class="submenu-back-btn" aria-label="Back to main menu">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+            <h3 class="submenu-title" data-translate="nav_resources">Resource Library</h3>
+          </div>
+          <div class="submenu-items">
+            <a href="/resourcelib/?category=anxiety" class="submenu-item">
+              <ion-icon name="pulse-outline"></ion-icon>
+              <span>Anxiety Resources</span>
+            </a>
+            <a href="/resourcelib/?category=depression" class="submenu-item">
+              <ion-icon name="cloudy-outline"></ion-icon>
+              <span>Depression Support</span>
+            </a>
+            <a href="/resourcelib/?category=stress" class="submenu-item">
+              <ion-icon name="flash-outline"></ion-icon>
+              <span>Stress Management</span>
+            </a>
+            <a href="/resourcelib/?category=mindfulness" class="submenu-item">
+              <ion-icon name="leaf-outline"></ion-icon>
+              <span>Mindfulness</span>
+            </a>
+            <div class="submenu-divider"></div>
+            <a href="/resourcelib/" class="submenu-item">
+              <ion-icon name="grid-outline"></ion-icon>
+              <span>View All Resources</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-submenu-panel" data-submenu-panel="blog">
+          <div class="submenu-header">
+            <button class="submenu-back-btn" aria-label="Back to main menu">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+            <h3 class="submenu-title" data-translate="nav_blog">Blog</h3>
+          </div>
+          <div class="submenu-items">
+            <a href="/articles/anxiety.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Understanding Anxiety</span>
+            </a>
+            <a href="/articles/depression.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Depression Guide</span>
+            </a>
+            <a href="/articles/stress.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Stress Management</span>
+            </a>
+            <a href="/articles/mindfulness.html" class="submenu-item">
+              <ion-icon name="document-text-outline"></ion-icon>
+              <span>Mindfulness Basics</span>
+            </a>
+            <div class="submenu-divider"></div>
+            <a href="/blog/" class="submenu-item">
+              <ion-icon name="albums-outline"></ion-icon>
+              <span>All Articles</span>
+            </a>
+          </div>
+        </div>
+
+
+      </nav>
+
+      <!-- Navbar Actions (User, Settings, Sign In) -->
+      <div class="navbar-actions">
+        <!-- Search Bar -->
+        <div class="navbar-search" id="navbarSearch">
+          <input type="text" class="navbar-search__input" placeholder="Search..." aria-label="Search site" id="searchInput">
+          <button class="navbar-search__btn" aria-label="Toggle search" id="searchToggle">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+          <div class="navbar-search__results" id="searchResults"></div>
+        </div>
+
+        <a href="/profile/" class="navbar-action-btn" id="userBtn" aria-label="User account" data-user-btn>
+          <ion-icon name="person-outline" class="action-icon"></ion-icon>
+          <span class="notif-badge" id="notifBadge" hidden onclick="event.preventDefault(); event.stopPropagation(); openInbox();">0</span>
+        </a>
+
+        <div class="settings-wrapper">
+          <button class="navbar-action-btn" id="settingsBtn" aria-label="Settings" data-settings-toggle>
+            <ion-icon name="settings-outline" class="action-icon"></ion-icon>
+          </button>
+
+          <!-- Settings Dropdown -->
+          <div class="settings-dropdown" data-settings-dropdown>
+            <div class="settings-header">
+              <span class="settings-title" data-translate="settings_preferences">Preferences</span>
+            </div>
+            <div class="settings-content">
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="moon-outline"></ion-icon>
+                  <span data-translate="settings_dark_mode">Dark Mode</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-theme-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="text-outline"></ion-icon>
+                  <span data-translate="settings_font_size">Font Size</span>
+                </div>
+                <select class="setting-select" data-font-size-select>
+                  <option value="normal">Normal</option>
+                  <option value="large">Large</option>
+                  <option value="x-large">Extra Large</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="eye-outline"></ion-icon>
+                  <span data-translate="settings_colorblind">Colorblind Mode</span>
+                </div>
+                <select class="setting-select" data-colorblind-select>
+                  <option value="none">None</option>
+                  <option value="protanopia">Protanopia</option>
+                  <option value="deuteranopia">Deuteranopia</option>
+                  <option value="tritanopia">Tritanopia</option>
+                </select>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="flash-outline"></ion-icon>
+                  <span data-translate="settings_focus_mode">Focus Mode (ADHD)</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-adhd-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="reader-outline"></ion-icon>
+                  <span data-translate="settings_dyslexia">Dyslexia Font</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-dyslexia-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="accessibility-outline"></ion-icon>
+                  <span data-translate="settings_reduce_motion">Reduce Motion</span>
+                </div>
+                <label class="theme-toggle-switch">
+                  <input type="checkbox" data-reduce-motion-toggle>
+                  <span class="theme-toggle-slider"></span>
+                </label>
+              </div>
+              <div class="setting-item">
+                <div class="setting-info">
+                  <ion-icon name="language-outline"></ion-icon>
+                  <span data-translate="settings_language">Language</span>
+                </div>
+                <select class="setting-select" data-language-select>
+                  <option value="en">English</option>
+                  <option value="es">Español</option>
+                  <option value="fr">Français</option>
+                  <option value="zh">中文</option>
+                  <option value="hi">हिन्दी</option>
+                <option value="ko">한국어</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="/support/#crisis" class="crisis-btn" aria-label="Get help now">
+          <ion-icon name="alert-circle" aria-hidden="true"></ion-icon>
+          <span data-translate="nav_get_help">Get Help Now</span>
+        </a>
+
+        <a href="/auth/" class="navbar-action-btn auth-btn" data-auth-btn aria-label="Sign in">
+          <span class="auth-text" data-translate="nav_signin">Sign In</span>
+        </a>
+      </div>
+
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+
+    </div>
+  </header>
+
+  <!-- MAIN HERO -->
+  <div id="main-hero" class="hero community-hero">
+    <video autoplay loop muted playsinline preload="auto" poster="../assets/images/hero-poster.jpg" class="back-video">
+      <source src="../assets/images/MindBalanceHub.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-content">
+      <h1 data-translate="community_hub_title">Community Hub</h1>
+    </div>
+  </div>
+
+  <div class="mb-community">
+    <div class="mb-grid">
+
+      <!-- LEFT SIDEBAR -->
+      <aside class="mb-panel mb-left">
+        <div class="mb-panelHeader" data-translate="sidebar_community">Community</div>
+        <ul class="mb-navList">
+          <li><a class="mb-navLink" href="../"><span>🏠</span> <span data-translate="nav_home">Home</span></a></li>
+          <li><a class="mb-navLink is-active" href="/"><span>💬</span> <span data-translate="sidebar_activity">Activity
+                Feed</span></a></li>
+          <li><a class="mb-navLink" href="../resourcelib/"><span>📚</span> <span data-translate="nav_resources">Resource
+                Library</span></a></li>
+          <li><a class="mb-navLink" href="../blog/"><span>📰</span> <span data-translate="nav_blog">Blog</span></a></li>
+          <li><a class="mb-navLink" href="../auth/"><span>👤</span> <span data-translate="sidebar_signin">Sign in /
+                Register</span></a></li>
+        </ul>
+        <div class="mb-panelBody">
+          <span class="mb-pill" id="authStatusPill" data-translate="sidebar_guest">Guest mode</span>
+          <div style="margin-top:10px; font-size:13px; opacity:.8; line-height:1.35;"
+            data-translate="sidebar_guest_desc">
+            Read posts as a guest. Sign in to create posts, comment, and join discussions.
+          </div>
+        </div>
+      </aside>
+
+      <!-- CENTER FEED -->
+      <main class="mb-panel">
+        <div class="mb-feedHeader">
+          <div class="mb-feedTitle">Activity Feed</div>
+          <input class="mb-search" id="feedSearch" type="search" placeholder="Search posts..." />
+        </div>
+
+        <!-- Composer -->
+        <section class="mb-composer" aria-label="Create a post">
+          <div class="mb-composerTop">
+            <div class="mb-avatar" id="avatarCircle">MB</div>
+            <input class="mb-input" id="postText" type="text" placeholder="Sign in to share an update…" disabled />
+          </div>
+          <div class="mb-mediaPreview" id="mediaPreview" style="display: none;">
+            <img id="mediaPreviewImg" src="" alt="Media preview" />
+            <button type="button" class="mb-removeMedia" id="removeMediaBtn" title="Remove media" data-translate-title="community_remove_media">×</button>
+          </div>
+          <div class="mb-composerActions">
+            <input type="file" id="mediaInput" accept="image/*" style="display: none;" />
+            <button class="mb-btn" type="button" id="mediaBtn" title="Add image to your post" data-translate="community_media_btn">📎 Media</button>
+            <button class="mb-btn mb-btnPrimary" id="postBtn" type="button" disabled
+              data-translate="community_post_btn">Post</button>
+          </div>
+        </section>
+
+        <!-- Feed list - posts loaded from database -->
+        <section class="mb-feedList" id="feedList" aria-label="Posts">
+        </section>
+      </main>
+
+      <!-- RIGHT SIDEBAR -->
+      <aside class="mb-panel mb-right">
+        <div class="mb-panelHeader">Popular Discussions</div>
+        <div class="mb-panelBody">
+          <div class="mb-miniList" id="popularDiscussions">
+            <div class="mb-miniItem">
+              <div class="mb-miniSub">Loading popular posts...</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-panelHeader">Trending Topics</div>
+        <div class="mb-panelBody">
+          <div class="mb-miniList" id="trendingTopics">
+            <a href="/resourcelib/?category=anxiety" class="mb-miniItem mb-miniLink">
+              <div class="mb-miniTitle">Anxiety Resources</div>
+              <div class="mb-miniSub">Popular topic</div>
+            </a>
+            <a href="/resourcelib/?category=stress" class="mb-miniItem mb-miniLink">
+              <div class="mb-miniTitle">Stress Management</div>
+              <div class="mb-miniSub">High engagement</div>
+            </a>
+            <a href="/resourcelib/?category=mindfulness" class="mb-miniItem mb-miniLink">
+              <div class="mb-miniTitle">Mindfulness</div>
+              <div class="mb-miniSub">Beginner-friendly</div>
+            </a>
+            <a href="/resourcelib/?category=sleep" class="mb-miniItem mb-miniLink">
+              <div class="mb-miniTitle">Sleep &amp; Rest</div>
+              <div class="mb-miniSub">Most viewed</div>
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <script>
+    // Search filter for dynamically loaded posts
+    const search = document.getElementById("feedSearch");
+
+    search?.addEventListener("input", () => {
+      const q = search.value.trim().toLowerCase();
+      const posts = document.querySelectorAll(".mb-post");
+      posts.forEach(p => {
+        const text = (p.getAttribute("data-text") || p.innerText).toLowerCase();
+        p.style.display = (!q || text.includes(q)) ? "" : "none";
+      });
+    });
+  </script>
+
+
+  <script src="community.js" defer></script>
+
+  <!-- Inbox Modal -->
+  <div id="inboxModal" class="mb-inbox-modal" hidden role="dialog" aria-modal="true" aria-labelledby="inboxTitle">
+    <div class="mb-inbox-content">
+      <div class="mb-inbox-header">
+        <h3 class="mb-inbox-title" id="inboxTitle">Notifications</h3>
+        <div class="mb-inbox-actions">
+          <button class="mb-inbox-mark-read" onclick="markAllNotificationsRead()">Mark all read</button>
+          <button class="mb-inbox-close" onclick="closeInbox()" aria-label="Close notifications">&times;</button>
+        </div>
+      </div>
+      <div class="mb-inbox-body" id="notificationsList">
+        <div class="mb-inbox-empty">No notifications yet</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mb-footer" aria-label="Site footer">
+    <div class="mb-footer__top">
+      <div class="mb-footer__wrap">
+        <section class="mb-footer__col" aria-label="About MindBalance">
+          <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
+          <p class="mb-footer__text" data-translate="footer_about">
+            MindBalance is a student-built mental health education and support hub.
+            Our goal is to provide clear, reliable information and guide visitors toward safe resources.
+          </p>
+          <a class="mb-footer__link" href="../support/" data-translate="footer_read_more">Read more →</a>
+        </section>
+        <nav class="mb-footer__col" aria-label="Footer navigation">
+          <h4 class="mb-footer__heading" data-translate="footer_pages">Pages</h4>
+          <ul class="mb-footer__list">
+            <li><a class="mb-footer__link" href="../">Home</a></li>
+            <li><a class="mb-footer__link" href="../support/" data-translate="footer_about_link">About</a></li>
+            <li><a class="mb-footer__link" href="../resourcelib/" data-translate="nav_resources">Resource Library</a>
+            </li>
+            <li><a class="mb-footer__link" href="../community/" data-translate="nav_community">Community Hub</a></li>
+            <li><a class="mb-footer__link" href="../blog/" data-translate="nav_blog">Blog</a></li>
+            <li><a class="mb-footer__link" href="../auth/" data-auth-btn>Sign In</a></li>
+          </ul>
+        </nav>
+        <section class="mb-footer__col" aria-label="Popular topics">
+          <h4 class="mb-footer__heading" data-translate="footer_topics">Popular Topics</h4>
+          <div class="mb-footer__tags">
+            <a class="mb-footer__tag" href="/resourcelib/?topic=anxiety"
+              data-translate="blog_filter_anxiety">Anxiety</a>
+            <a class="mb-footer__tag" href="/resourcelib/?topic=depression"
+              data-translate="blog_filter_depression">Depression</a>
+            <a class="mb-footer__tag" href="/resourcelib/?topic=stress" data-translate="blog_filter_stress">Stress</a>
+            <a class="mb-footer__tag" href="/resourcelib/?topic=sleep" data-translate="blog_filter_sleep">Sleep</a>
+            <a class="mb-footer__tag" href="/resourcelib/?topic=mindfulness"
+              data-translate="blog_filter_mindfulness">Mindfulness</a>
+            <a class="mb-footer__tag" href="/resourcelib/?topic=teens" data-translate="blog_filter_teens">Teens</a>
+          </div>
+        </section>
+        <section class="mb-footer__col" aria-label="Take action">
+          <h4 class="mb-footer__heading" data-translate="footer_action">Take Action</h4>
+          <p class="mb-footer__text" data-translate="footer_action_desc">
+            Support mental health education and community access to resources.
+          </p>
+          <div class="mb-footer__cta">
+            <a class="mb-footer__btn" href="../support/" data-translate="footer_get_support">Get Support</a>
+            <a class="mb-footer__btn mb-footer__btn--ghost" href="../auth/" data-auth-btn>Sign In</a>
+          </div>
+          <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
+          <div class="mb-footer__social">
+            <a class="mb-footer__icon" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="mb-footer__bottom">
+      <div class="mb-footer__wrap mb-footer__bottomwrap">
+        <p class="mb-footer__copy">© <span id="mb-footer-year"></span> MindBalance. <span
+            data-translate="footer_copy">For educational purposes only.</span></p>
+        <div class="mb-footer__legal">
+          <a class="mb-footer__legal-link" href="/terms/" data-translate="footer_terms">Terms</a>
+          <a class="mb-footer__legal-link" href="/privacy/" data-translate="footer_privacy">Privacy</a>
+          <a class="mb-footer__legal-link" href="/disclaimer/" data-translate="footer_disclaimer">Disclaimer</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <!-- Main Script -->
+  <script src="../js/script.js" defer></script>
+  <script src="../js/scroll-progress.js" defer></script>
+</body>
+
+</html>
