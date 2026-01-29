@@ -4350,6 +4350,55 @@ body.nav-active .nav-open-btn {
   margin-bottom: 16px;
 }
 
+/* 3-up cards - compact layout for News & Stories */
+.mb-3up {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.mb-3up .mb-postCard__imgWrap {
+  aspect-ratio: 16/9;
+}
+
+.mb-3up .mb-postCard__body {
+  padding: 12px 14px 14px;
+}
+
+.mb-3up .mb-postCard__title {
+  font-size: 0.95rem;
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.mb-3up .mb-postCard__meta {
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+}
+
+.mb-3up .mb-postCard__excerpt {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .mb-3up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mb-3up {
+    grid-template-columns: 1fr;
+  }
+}
+
 .mb-postCard {
   background: rgba(255, 255, 255, 0.90);
   border: 1px solid rgba(0, 0, 0, 0.10);
