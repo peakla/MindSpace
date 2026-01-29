@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="article.css?v=12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -483,7 +484,7 @@
 <main class="article-main">
   <article class="article-container container">
     
-    <div class="article-hero">
+    <div class="article-hero animate-fade-in">
       <img src="https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=1400&q=70" 
            alt="Moody cloudy sky representing melancholy" 
            class="article-hero__img" loading="eager" />
@@ -594,7 +595,7 @@
     </div>
 
     <div class="article-layout">
-      <aside class="article-toc" aria-label="Table of contents">
+      <aside class="article-toc animate-slide-right" aria-label="Table of contents">
         <div class="article-toc__header">
           <div class="article-toc__progress">
             <div class="article-toc__progress-bar"></div>
@@ -618,7 +619,7 @@
         </nav>
       </aside>
 
-      <div class="article-content" data-tts-content>
+      <div class="article-content animate-slide-up" data-tts-content>
         <section id="what-is-depression">
           <h2 data-translate="article_depression_h2_1">What is Depression?</h2>
           <p data-translate="article_depression_p1">Depression, also known as major depressive disorder or clinical depression, is a common and serious mental health condition. It negatively affects how you feel, the way you think, and how you act. Depression causes feelings of sadness and a loss of interest in activities you once enjoyed.</p>
@@ -922,6 +923,7 @@
 </footer>
 
 <script src="../js/script.js" defer></script>
+<script src="../js/animations.js" defer></script>
 
 </body>
 </html>

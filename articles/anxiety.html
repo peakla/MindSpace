@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="article.css?v=12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -482,7 +483,7 @@
 <main class="article-main">
   <article class="article-container container">
     
-    <div class="article-hero">
+    <div class="article-hero animate-fade-in">
       <img src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1400&q=70" 
            alt="Calm sky and clouds representing peace and calm" 
            class="article-hero__img" loading="eager" />
@@ -593,7 +594,7 @@
     </div>
 
     <div class="article-layout">
-      <aside class="article-toc" aria-label="Table of contents">
+      <aside class="article-toc animate-slide-right" aria-label="Table of contents">
         <div class="article-toc__header">
           <div class="article-toc__progress">
             <div class="article-toc__progress-bar"></div>
@@ -617,7 +618,7 @@
         </nav>
       </aside>
 
-      <div class="article-content">
+      <div class="article-content animate-slide-up">
         <section id="what-is-anxiety">
           <h2 data-translate="article_anxiety_h2_1">What is Anxiety?</h2>
           <p data-translate="article_anxiety_p1">Anxiety is a normal human emotion that everyone experiences from time to time. It's the feeling of worry, nervousness, or unease about something with an uncertain outcome. In fact, some anxiety can be helpful—it can alert us to dangers and help us prepare for important events.</p>
@@ -873,6 +874,7 @@
 </footer>
 
 <script src="../js/script.js" defer></script>
+<script src="../js/animations.js" defer></script>
 
 </body>
 </html>

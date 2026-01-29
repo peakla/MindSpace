@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="article.css?v=12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -513,7 +514,7 @@
   <main class="article-main">
     <article class="article-container container">
 
-      <div class="article-hero">
+      <div class="article-hero animate-fade-in">
         <img src="../assets/images/TeenCover.png" alt="Teen sitting and thinking" class="article-hero__img"
           loading="eager" />
         <div class="article-hero__overlay"></div>
@@ -661,7 +662,7 @@
       </div>
 
       <div class="article-layout">
-        <aside class="article-toc" aria-label="Table of contents">
+        <aside class="article-toc animate-slide-right" aria-label="Table of contents">
           <div class="article-toc__header">
             <div class="article-toc__progress">
               <div class="article-toc__progress-bar"></div>
@@ -686,7 +687,7 @@
           </nav>
         </aside>
 
-        <div class="article-content" data-tts-content>
+        <div class="article-content animate-slide-up" data-tts-content>
           <section id="understanding">
             <h2>Understanding Teen Mental Health</h2>
             <p>Adolescence is a time of significant change. Teens are navigating physical development, brain changes,
@@ -1048,6 +1049,7 @@
   </footer>
 
   <script src="../js/script.js" defer></script>
+<script src="../js/animations.js" defer></script>
 
 </body>
 

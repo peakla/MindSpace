@@ -861,7 +861,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     filtered.forEach((item) => {
       const card = document.createElement("article");
-      card.className = "rl-card";
+      card.className = "rl-card card-animated hover-lift";
 
       // Helper to get translated label (use sync version to avoid [object Promise])
       const getLabel = (key, fallback) => {

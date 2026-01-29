@@ -503,7 +503,7 @@
   <section class="rl" aria-label="MindBalance Resource Library">
     <div class="container rl-container">
 
-      <div class="rl-header">
+      <div class="rl-header animate-fade-in">
         <h2 class="rl-title" data-translate="resourcelib_title">THE MINDBALANCE RESOURCE LIBRARY</h2>
 
         <p class="rl-lead" data-translate="resourcelib_lead1">
@@ -530,7 +530,7 @@
           <h3 class="rl-spotlight__title" data-translate="resourcelib_featured">Featured Resources</h3>
           <p class="rl-spotlight__subtitle" data-translate="resourcelib_featured_desc">Highlighted resources from trusted providers</p>
         </div>
-        <div class="rl-spotlight__cards" id="rlSpotlight"></div>
+        <div class="rl-spotlight__cards animate-scale-in" id="rlSpotlight"></div>
       </section>
 
       <!-- SUGGEST RESOURCE BUTTON -->
@@ -542,7 +542,7 @@
       </div>
 
       <!-- SEARCH -->
-      <div class="rl-search">
+      <div class="rl-search animate-slide-up">
         <label class="rl-srOnly" for="rlSearch" data-translate="resourcelib_search_label">Search resources</label>
         <input id="rlSearch" class="rl-searchInput" type="search"
           placeholder="Search for resources by title, description, tag, category..." data-translate-placeholder="resourcelib_search_placeholder" autocomplete="off">
@@ -550,7 +550,7 @@
       </div>
 
       <!-- ACTIVE FILTER CHIPS -->
-      <div class="rl-chips" aria-label="Active filters">
+      <div class="rl-chips animate-slide-up" aria-label="Active filters">
         <div class="rl-chipList" id="rlActiveChips"></div>
         <button class="rl-clearAll" id="rlClearAll" type="button" data-translate="resourcelib_clear_all">CLEAR ALL</button>
       </div>
@@ -574,7 +574,7 @@
         <!-- RESULTS -->
         <div class="rl-results" aria-label="Search results">
           <p class="rl-meta" id="rlMeta"><span data-translate="resourcelib_showing">Showing</span> <span id="rlMetaCount">0</span> <span data-translate="resourcelib_out_of">out of</span> <span id="rlMetaTotal">0</span></p>
-          <div class="rl-cards" id="rlCards"></div>
+          <div class="rl-cards animate-stagger" id="rlCards"></div>
         </div>
 
       </div>

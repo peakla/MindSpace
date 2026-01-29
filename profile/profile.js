@@ -22,7 +22,7 @@ function escapeHtml(str) {
 }
 
 function createActivityItem(activity) {
-  const item = createSafeElement('div', 'mb-activity-item');
+  const item = createSafeElement('div', 'mb-activity-item card-animated hover-lift');
   item.dataset.type = activity.type;
   
   const iconWrap = createSafeElement('div', 'mb-activity-item__icon');
@@ -60,7 +60,7 @@ function createEmptyState(iconName, message, linkHref, linkText) {
 }
 
 function createLikedPost(content, createdAt, likeCount, postId, authorName, authorAvatar) {
-  const post = createSafeElement('div', 'mb-liked-post');
+  const post = createSafeElement('div', 'mb-liked-post card-animated hover-lift');
   post.onclick = () => window.location.href = `../community/#post-${postId}`;
   
   const header = createSafeElement('div', 'mb-liked-post__header');
@@ -133,7 +133,7 @@ function createGoalItem(goal) {
 }
 
 function createBadge(achievement, isUnlocked) {
-  const badge = createSafeElement('div', 'mb-profile__badge');
+  const badge = createSafeElement('div', 'mb-profile__badge card-animated hover-lift');
   if (!isUnlocked) badge.classList.add('locked');
   
   const iconWrap = createSafeElement('div', 'mb-profile__badge-icon', achievement.icon_emoji || '🏆');
@@ -160,7 +160,7 @@ function createMoodBar(mood) {
 }
 
 function createSavedArticleCard(article) {
-  const card = createSafeElement('div', 'mb-profile__saved-card');
+  const card = createSafeElement('div', 'mb-profile__saved-card card-animated hover-lift');
   
   const link = document.createElement('a');
   const slug = (article.article_slug || '').replace(/[^a-zA-Z0-9-]/g, '');

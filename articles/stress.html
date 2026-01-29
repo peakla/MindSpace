@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
   <link rel="stylesheet" href="article.css?v=12" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -483,7 +484,7 @@
 <main class="article-main">
   <article class="article-container container">
     
-    <div class="article-hero">
+    <div class="article-hero animate-fade-in">
       <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1400&q=70" 
            alt="People working at a desk representing workplace stress" 
            class="article-hero__img" loading="eager" />
@@ -594,7 +595,7 @@
     </div>
 
     <div class="article-layout">
-      <aside class="article-toc" aria-label="Table of contents">
+      <aside class="article-toc animate-slide-right" aria-label="Table of contents">
         <div class="article-toc__header">
           <div class="article-toc__progress">
             <div class="article-toc__progress-bar"></div>
@@ -618,7 +619,7 @@
         </nav>
       </aside>
 
-      <div class="article-content">
+      <div class="article-content animate-slide-up">
         <section id="what-is-stress">
           <h2 data-translate="article_stress_h2_1">What is Stress?</h2>
           <p data-translate="article_stress_p1">Stress is your body's natural response to any demand or challenge. When you face a stressful situation, your body releases hormones like cortisol and adrenaline that prepare you to take action. This is often called the "fight or flight" response.</p>
@@ -873,6 +874,7 @@
 </footer>
 
 <script src="../js/script.js" defer></script>
+<script src="../js/animations.js" defer></script>
 
 </body>
 </html>

@@ -885,7 +885,7 @@ async function handlePost() {
   // Create optimistic placeholder while insert happens
   const placeholderId = generateUUID();
   const placeholder = document.createElement('article');
-  placeholder.className = 'mb-post mb-post-pending';
+  placeholder.className = 'mb-post mb-post-pending card-animated hover-lift';
   placeholder.setAttribute('data-placeholder-id', placeholderId);
   placeholder.style.opacity = '0.6';
   const mediaPreviewHtml = uploadedMediaUrl ? `<div class="mb-postMedia"><img src="${uploadedMediaUrl}" alt="Post media" /></div>` : '';
@@ -956,7 +956,7 @@ async function handlePost() {
 
 function createPostElement(postData, timeStr) {
   const article = document.createElement('article');
-  article.className = 'mb-post' + (postData.is_pinned ? ' mb-post-pinned' : '');
+  article.className = 'mb-post card-animated hover-lift' + (postData.is_pinned ? ' mb-post-pinned' : '');
   article.setAttribute('data-text', postData.content);
   article.setAttribute('data-id', postData.id);
   article.setAttribute('data-email', postData.author_email);
