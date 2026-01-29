@@ -1085,138 +1085,398 @@
         </div>
       </section>
 
-      <!-- FAQ Section -->
-      <section class="faq-section" id="faq" aria-label="Frequently Asked Questions">
+      <!-- FAQ Section - Enhanced Design -->
+      <section class="faq-section-new" id="faq" aria-label="Frequently Asked Questions">
         <div class="container">
-          <div class="faq-grid">
-            <!-- Left intro panel -->
-            <div class="faq-intro">
-              <h2 class="faq-intro__title" data-translate="faq_intro_title">How can we help you?</h2>
-              <p class="faq-intro__text" data-translate="faq_intro_text">At MindBalance, we believe in being open and supportive. We know you may have questions about mental health, finding help, and how therapy works. Here are some of the most common questions we receive. If you don't find the answer you're looking for, feel free to reach out.</p>
+          <!-- FAQ Header with gradient -->
+          <div class="faq-header animate-on-scroll">
+            <div class="faq-header__icon">
+              <ion-icon name="help-circle-outline"></ion-icon>
+            </div>
+            <h2 class="faq-header__title" data-translate="faq_intro_title">How can we help you?</h2>
+            <p class="faq-header__subtitle" data-translate="faq_intro_text">At MindBalance, we believe in being open and supportive. Find answers to your questions about mental health, therapy, and getting help.</p>
+          </div>
+
+          <!-- FAQ Search Bar -->
+          <div class="faq-search-wrapper animate-on-scroll">
+            <div class="faq-search">
+              <ion-icon name="search-outline" class="faq-search__icon"></ion-icon>
+              <input type="text" class="faq-search__input" id="faqSearchInput" aria-label="Search frequently asked questions" data-translate-placeholder="faq_search_placeholder" placeholder="Search for a question...">
+              <button class="faq-search__clear" id="faqSearchClear" aria-label="Clear search" style="display: none;">
+                <ion-icon name="close-circle"></ion-icon>
+              </button>
+            </div>
+            <div class="faq-search__results" id="faqSearchResults"></div>
+          </div>
+
+          <!-- Category Filter Pills -->
+          <div class="faq-categories animate-on-scroll">
+            <button class="faq-category-pill active" data-category="all">
+              <ion-icon name="grid-outline"></ion-icon>
+              <span data-translate="faq_cat_all">All Questions</span>
+            </button>
+            <button class="faq-category-pill" data-category="crisis">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <span data-translate="faq_cat_crisis">Crisis Support</span>
+            </button>
+            <button class="faq-category-pill" data-category="therapy">
+              <ion-icon name="medical-outline"></ion-icon>
+              <span data-translate="faq_cat_therapy">Therapy & Treatment</span>
+            </button>
+            <button class="faq-category-pill" data-category="resources">
+              <ion-icon name="library-outline"></ion-icon>
+              <span data-translate="faq_cat_resources">Resources & Costs</span>
+            </button>
+            <button class="faq-category-pill" data-category="coping">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span data-translate="faq_cat_coping">Coping & Self-Help</span>
+            </button>
+          </div>
+
+          <!-- FAQ Items Container -->
+          <div class="faq-container">
+            <!-- Crisis Support Category -->
+            <div class="faq-category-group" data-category-group="crisis">
+              <div class="faq-category-header">
+                <div class="faq-category-header__icon">
+                  <ion-icon name="alert-circle-outline"></ion-icon>
+                </div>
+                <h3 class="faq-category-header__title" data-translate="faq_cat_crisis">Crisis Support</h3>
+                <span class="faq-category-header__count">2</span>
+              </div>
+
+              <div class="faq-items-wrapper stagger-children">
+                <details class="faq-card" data-category="crisis" data-faq-id="1">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">01</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q1">Is the 988 Lifeline really free?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a1">Yes, the 988 Suicide & Crisis Lifeline is completely free and available 24/7. You can call or text 988 from anywhere in the United States. The service is confidential and staffed by trained crisis counselors.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="faq-card" data-category="crisis" data-faq-id="2">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">02</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q2">What happens when I call a crisis line?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a2">When you call a crisis line, you'll be connected with a trained counselor who will listen without judgment. They'll help you work through what you're feeling, provide support, and help you create a plan to stay safe. You don't need to be suicidal to call - any mental health crisis is valid.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
+              </div>
             </div>
 
-            <!-- Right FAQ accordion -->
-            <div class="faq-list">
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q1">Is the 988 Lifeline really free?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a1">Yes, the 988 Suicide & Crisis Lifeline is completely free and available 24/7. You can call or text 988 from anywhere in the United States. The service is confidential and staffed by trained crisis counselors.</p>
+            <!-- Therapy & Treatment Category -->
+            <div class="faq-category-group" data-category-group="therapy">
+              <div class="faq-category-header">
+                <div class="faq-category-header__icon">
+                  <ion-icon name="medical-outline"></ion-icon>
                 </div>
+                <h3 class="faq-category-header__title" data-translate="faq_cat_therapy">Therapy & Treatment</h3>
+                <span class="faq-category-header__count">5</span>
               </div>
-            </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q2">What happens when I call a crisis line?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a2">When you call a crisis line, you'll be connected with a trained counselor who will listen without judgment. They'll help you work through what you're feeling, provide support, and help you create a plan to stay safe. You don't need to be suicidal to call - any mental health crisis is valid.</p>
-                </div>
-              </div>
-            </details>
+              <div class="faq-items-wrapper stagger-children">
+                <details class="faq-card" data-category="therapy" data-faq-id="3">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">03</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q3">How do I know if I need professional help?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a3">Consider seeking professional help if your feelings are affecting your daily life, relationships, work, or school. Signs include persistent sadness, anxiety, changes in sleep or appetite, difficulty concentrating, or thoughts of self-harm. Remember: seeking help is a sign of strength, not weakness.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q3">How do I know if I need professional help?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a3">Consider seeking professional help if your feelings are affecting your daily life, relationships, work, or school. Signs include persistent sadness, anxiety, changes in sleep or appetite, difficulty concentrating, or thoughts of self-harm. Remember: seeking help is a sign of strength, not weakness.</p>
-                </div>
-              </div>
-            </details>
+                <details class="faq-card" data-category="therapy" data-faq-id="4">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">04</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q4">Are counseling sessions confidential?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a4">Yes, all counseling sessions are confidential. Mental health professionals are bound by strict privacy laws and ethical guidelines. The only exceptions are if there's an immediate risk of harm to yourself or others, or in cases involving abuse of minors or vulnerable adults.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q4">Are counseling sessions confidential?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a4">Yes, all counseling sessions are confidential. Mental health professionals are bound by strict privacy laws and ethical guidelines. The only exceptions are if there's an immediate risk of harm to yourself or others, or in cases involving abuse of minors or vulnerable adults.</p>
-                </div>
-              </div>
-            </details>
+                <details class="faq-card" data-category="therapy" data-faq-id="7">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">05</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q7">What's the difference between a therapist, psychologist, and psychiatrist?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a7">Therapists and counselors provide talk therapy and may have various credentials (LCSW, LPC, MFT). Psychologists have doctoral degrees and can provide therapy and psychological testing. Psychiatrists are medical doctors who can prescribe medication. Many people work with a combination - for example, a therapist for regular sessions and a psychiatrist for medication management.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q5">What if I can't afford therapy?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a5">There are many low-cost or free mental health options available. Community mental health centers often offer sliding-scale fees based on income. Many therapists offer reduced rates, and some nonprofits provide free counseling. Crisis lines like 988 are always free, and support groups can be a valuable no-cost resource.</p>
-                </div>
-              </div>
-            </details>
+                <details class="faq-card" data-category="therapy" data-faq-id="8">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">06</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q8">Is it normal to feel nervous about starting therapy?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a8">Absolutely! It's very common to feel anxious about opening up to a stranger. A good therapist will understand this and help you feel comfortable at your own pace. Remember, you're in control of what you share and when. If after a few sessions you don't feel a connection, it's okay to try a different therapist - finding the right fit is important.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
 
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q6">How can I help a friend who's struggling?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a6">Listen without judgment and let them know you care. Avoid trying to "fix" their problems - sometimes just being present is enough. Encourage them to seek professional help, and offer to help them find resources or accompany them to an appointment. Take any mention of self-harm seriously and don't be afraid to involve a trusted adult or crisis line if needed.</p>
-                </div>
+                <details class="faq-card" data-category="therapy" data-faq-id="9">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">07</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q9">How long does therapy usually take?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a9">It varies greatly depending on your goals and situation. Some people benefit from short-term therapy (8-12 sessions) for specific issues like anxiety or stress management. Others may continue longer for deeper work or ongoing support. Your therapist will work with you to set goals and regularly assess your progress.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
               </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q7">What's the difference between a therapist, psychologist, and psychiatrist?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a7">Therapists and counselors provide talk therapy and may have various credentials (LCSW, LPC, MFT). Psychologists have doctoral degrees and can provide therapy and psychological testing. Psychiatrists are medical doctors who can prescribe medication. Many people work with a combination - for example, a therapist for regular sessions and a psychiatrist for medication management.</p>
-                </div>
-              </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q8">Is it normal to feel nervous about starting therapy?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a8">Absolutely! It's very common to feel anxious about opening up to a stranger. A good therapist will understand this and help you feel comfortable at your own pace. Remember, you're in control of what you share and when. If after a few sessions you don't feel a connection, it's okay to try a different therapist - finding the right fit is important.</p>
-                </div>
-              </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q9">How long does therapy usually take?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a9">It varies greatly depending on your goals and situation. Some people benefit from short-term therapy (8-12 sessions) for specific issues like anxiety or stress management. Others may continue longer for deeper work or ongoing support. Your therapist will work with you to set goals and regularly assess your progress.</p>
-                </div>
-              </div>
-            </details>
-
-            <details class="faq-item">
-              <summary class="faq-question">
-                <span data-translate="faq_q10">What should I do if I'm having a panic attack?</span>
-                <ion-icon name="chevron-down-outline" class="faq-icon"></ion-icon>
-              </summary>
-              <div class="faq-answer">
-                <div class="faq-answer-inner">
-                  <p data-translate="faq_a10">Focus on your breathing - try the 4-7-8 technique (breathe in for 4 seconds, hold for 7, exhale for 8). Ground yourself by naming 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. Remind yourself that panic attacks are temporary and not dangerous. If panic attacks are recurring, consider speaking with a mental health professional.</p>
-                </div>
-              </div>
-            </details>
             </div>
+
+            <!-- Resources & Costs Category -->
+            <div class="faq-category-group" data-category-group="resources">
+              <div class="faq-category-header">
+                <div class="faq-category-header__icon">
+                  <ion-icon name="library-outline"></ion-icon>
+                </div>
+                <h3 class="faq-category-header__title" data-translate="faq_cat_resources">Resources & Costs</h3>
+                <span class="faq-category-header__count">1</span>
+              </div>
+
+              <div class="faq-items-wrapper stagger-children">
+                <details class="faq-card" data-category="resources" data-faq-id="5">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">08</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q5">What if I can't afford therapy?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a5">There are many low-cost or free mental health options available. Community mental health centers often offer sliding-scale fees based on income. Many therapists offer reduced rates, and some nonprofits provide free counseling. Crisis lines like 988 are always free, and support groups can be a valuable no-cost resource.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <!-- Coping & Self-Help Category -->
+            <div class="faq-category-group" data-category-group="coping">
+              <div class="faq-category-header">
+                <div class="faq-category-header__icon">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </div>
+                <h3 class="faq-category-header__title" data-translate="faq_cat_coping">Coping & Self-Help</h3>
+                <span class="faq-category-header__count">2</span>
+              </div>
+
+              <div class="faq-items-wrapper stagger-children">
+                <details class="faq-card" data-category="coping" data-faq-id="6">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">09</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q6">How can I help a friend who's struggling?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a6">Listen without judgment and let them know you care. Avoid trying to "fix" their problems - sometimes just being present is enough. Encourage them to seek professional help, and offer to help them find resources or accompany them to an appointment. Take any mention of self-harm seriously and don't be afraid to involve a trusted adult or crisis line if needed.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
+
+                <details class="faq-card" data-category="coping" data-faq-id="10">
+                  <summary class="faq-card__question">
+                    <span class="faq-card__number">10</span>
+                    <div class="faq-card__icon-wrapper">
+                      <ion-icon name="help-circle-outline"></ion-icon>
+                    </div>
+                    <span class="faq-card__text" data-translate="faq_q10">What should I do if I'm having a panic attack?</span>
+                    <ion-icon name="chevron-down-outline" class="faq-card__chevron"></ion-icon>
+                  </summary>
+                  <div class="faq-card__answer">
+                    <div class="faq-card__answer-content">
+                      <p data-translate="faq_a10">Focus on your breathing - try the 4-7-8 technique (breathe in for 4 seconds, hold for 7, exhale for 8). Ground yourself by naming 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. Remind yourself that panic attacks are temporary and not dangerous. If panic attacks are recurring, consider speaking with a mental health professional.</p>
+                    </div>
+                    <div class="faq-card__feedback">
+                      <span class="faq-card__feedback-label" data-translate="faq_helpful">Was this helpful?</span>
+                      <button class="faq-feedback-btn faq-feedback-btn--yes" data-feedback="yes" aria-label="Yes, this was helpful">
+                        <ion-icon name="thumbs-up-outline"></ion-icon>
+                        <span data-translate="faq_yes">Yes</span>
+                      </button>
+                      <button class="faq-feedback-btn faq-feedback-btn--no" data-feedback="no" aria-label="No, this wasn't helpful">
+                        <ion-icon name="thumbs-down-outline"></ion-icon>
+                        <span data-translate="faq_no">No</span>
+                      </button>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="faq-no-results" id="faqNoResults" style="display: none;">
+              <ion-icon name="search-outline"></ion-icon>
+              <p data-translate="faq_no_results">No questions match your search. Try different keywords.</p>
+            </div>
+          </div>
+
+          <!-- Still Need Help CTA -->
+          <div class="faq-cta animate-on-scroll">
+            <div class="faq-cta__content">
+              <ion-icon name="chatbubbles-outline" class="faq-cta__icon"></ion-icon>
+              <div class="faq-cta__text">
+                <h3 data-translate="faq_cta_title">Still have questions?</h3>
+                <p data-translate="faq_cta_text">We're here to help. Reach out to our support team anytime.</p>
+              </div>
+            </div>
+            <a href="mailto:mindbalancehelp@gmail.com" class="faq-cta__btn">
+              <ion-icon name="mail-outline"></ion-icon>
+              <span data-translate="faq_cta_btn">Contact Us</span>
+            </a>
           </div>
         </div>
       </section>

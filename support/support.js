@@ -145,17 +145,22 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Legacy FAQ item handling (backwards compatibility)
   const faqItems = document.querySelectorAll('.faq-item');
-  faqItems.forEach(item => {
-    const summary = item.querySelector('summary');
-    summary.addEventListener('click', function() {
-      faqItems.forEach(other => {
-        if (other !== item && other.hasAttribute('open')) {
-          other.removeAttribute('open');
-        }
-      });
+  if (faqItems.length > 0) {
+    faqItems.forEach(item => {
+      const summary = item.querySelector('summary');
+      if (summary) {
+        summary.addEventListener('click', function() {
+          faqItems.forEach(other => {
+            if (other !== item && other.hasAttribute('open')) {
+              other.removeAttribute('open');
+            }
+          });
+        });
+      }
     });
-  });
+  }
   
   const scrollProgress = document.querySelector('.scroll-progress');
   const progressBar = document.querySelector('.scroll-progress__bar');
@@ -552,6 +557,233 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           goToNextStep();
         }
+      }
+    });
+  });
+
+  // ========================================
+  // ENHANCED FAQ FUNCTIONALITY
+  // ========================================
+
+  const faqSearchInput = document.getElementById('faqSearchInput');
+  const faqSearchClear = document.getElementById('faqSearchClear');
+  const faqSearchResults = document.getElementById('faqSearchResults');
+  const faqCategoryPills = document.querySelectorAll('.faq-category-pill');
+  const faqCategoryGroups = document.querySelectorAll('.faq-category-group');
+  const faqCards = document.querySelectorAll('.faq-card');
+  const faqNoResults = document.getElementById('faqNoResults');
+
+  let activeCategory = 'all';
+
+  // Category filter functionality
+  faqCategoryPills.forEach(pill => {
+    pill.addEventListener('click', function() {
+      const category = this.dataset.category;
+      activeCategory = category;
+
+      // Update active pill
+      faqCategoryPills.forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+
+      // Clear search when switching categories
+      if (faqSearchInput) {
+        faqSearchInput.value = '';
+        faqSearchClear.style.display = 'none';
+        faqSearchResults.textContent = '';
+      }
+
+      // Filter by category
+      filterFAQs('', category);
+    });
+  });
+
+  // Search functionality
+  if (faqSearchInput) {
+    faqSearchInput.addEventListener('input', function() {
+      const query = this.value.trim().toLowerCase();
+      
+      // Show/hide clear button
+      faqSearchClear.style.display = query.length > 0 ? 'block' : 'none';
+
+      // Reset category to "all" when searching
+      if (query.length > 0) {
+        faqCategoryPills.forEach(p => p.classList.remove('active'));
+        document.querySelector('.faq-category-pill[data-category="all"]')?.classList.add('active');
+        activeCategory = 'all';
+      }
+
+      filterFAQs(query, 'all');
+    });
+
+    // Clear button
+    faqSearchClear?.addEventListener('click', function() {
+      faqSearchInput.value = '';
+      faqSearchClear.style.display = 'none';
+      faqSearchResults.textContent = '';
+      filterFAQs('', activeCategory);
+      faqSearchInput.focus();
+    });
+  }
+
+  function filterFAQs(query, category) {
+    let visibleCount = 0;
+    let totalCount = faqCards.length;
+
+    // Hide/show category groups based on category filter
+    faqCategoryGroups.forEach(group => {
+      const groupCategory = group.dataset.categoryGroup;
+      if (category === 'all' || groupCategory === category) {
+        group.classList.remove('hidden');
+      } else {
+        group.classList.add('hidden');
+      }
+    });
+
+    // Filter individual cards by search query
+    faqCards.forEach(card => {
+      const cardCategory = card.dataset.category;
+      const questionText = card.querySelector('.faq-card__text')?.textContent.toLowerCase() || '';
+      const answerText = card.querySelector('.faq-card__answer-content p')?.textContent.toLowerCase() || '';
+      const searchText = questionText + ' ' + answerText;
+
+      const matchesCategory = category === 'all' || cardCategory === category;
+      const matchesSearch = query === '' || searchText.includes(query);
+
+      if (matchesCategory && matchesSearch) {
+        card.classList.remove('hidden');
+        visibleCount++;
+
+        // Highlight matching text if searching
+        if (query.length > 0) {
+          highlightText(card, query);
+        } else {
+          removeHighlights(card);
+        }
+      } else {
+        card.classList.add('hidden');
+        removeHighlights(card);
+      }
+    });
+
+    // Update search results count
+    if (query.length > 0 && faqSearchResults) {
+      if (visibleCount > 0) {
+        faqSearchResults.textContent = `Found ${visibleCount} result${visibleCount !== 1 ? 's' : ''} for "${query}"`;
+      } else {
+        faqSearchResults.textContent = '';
+      }
+    } else if (faqSearchResults) {
+      faqSearchResults.textContent = '';
+    }
+
+    // Show/hide no results message
+    if (faqNoResults) {
+      faqNoResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    // Hide empty category groups
+    faqCategoryGroups.forEach(group => {
+      const visibleCards = group.querySelectorAll('.faq-card:not(.hidden)');
+      if (visibleCards.length === 0 && category === 'all') {
+        group.classList.add('hidden');
+      }
+    });
+  }
+
+  function highlightText(card, query) {
+    const questionSpan = card.querySelector('.faq-card__text');
+    const answerP = card.querySelector('.faq-card__answer-content p');
+
+    if (questionSpan) {
+      const originalText = questionSpan.getAttribute('data-original-text') || questionSpan.textContent;
+      questionSpan.setAttribute('data-original-text', originalText);
+      questionSpan.innerHTML = originalText.replace(
+        new RegExp(`(${escapeRegex(query)})`, 'gi'),
+        '<mark class="faq-highlight">$1</mark>'
+      );
+    }
+
+    if (answerP) {
+      const originalText = answerP.getAttribute('data-original-text') || answerP.textContent;
+      answerP.setAttribute('data-original-text', originalText);
+      answerP.innerHTML = originalText.replace(
+        new RegExp(`(${escapeRegex(query)})`, 'gi'),
+        '<mark class="faq-highlight">$1</mark>'
+      );
+    }
+  }
+
+  function removeHighlights(card) {
+    const questionSpan = card.querySelector('.faq-card__text');
+    const answerP = card.querySelector('.faq-card__answer-content p');
+
+    if (questionSpan) {
+      const originalText = questionSpan.getAttribute('data-original-text');
+      if (originalText) {
+        questionSpan.textContent = originalText;
+      }
+    }
+
+    if (answerP) {
+      const originalText = answerP.getAttribute('data-original-text');
+      if (originalText) {
+        answerP.textContent = originalText;
+      }
+    }
+  }
+
+  function escapeRegex(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // FAQ accordion - close others when opening one
+  faqCards.forEach(card => {
+    const summary = card.querySelector('summary');
+    summary?.addEventListener('click', function(e) {
+      // Close other cards in the same category group
+      const parentGroup = card.closest('.faq-category-group');
+      if (parentGroup) {
+        parentGroup.querySelectorAll('.faq-card[open]').forEach(openCard => {
+          if (openCard !== card) {
+            openCard.removeAttribute('open');
+          }
+        });
+      }
+    });
+  });
+
+  // Feedback button functionality
+  const feedbackBtns = document.querySelectorAll('.faq-feedback-btn');
+  feedbackBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const feedback = this.dataset.feedback;
+      const card = this.closest('.faq-card');
+      const faqId = card?.dataset.faqId;
+      const feedbackContainer = this.closest('.faq-card__feedback');
+
+      // Toggle selection
+      const wasSelected = this.classList.contains('selected');
+      
+      // Remove selected from all buttons in this card
+      feedbackContainer?.querySelectorAll('.faq-feedback-btn').forEach(b => {
+        b.classList.remove('selected');
+      });
+
+      // Select this button if it wasn't already selected
+      if (!wasSelected) {
+        this.classList.add('selected');
+        
+        // Animate the icon
+        const icon = this.querySelector('ion-icon');
+        if (icon) {
+          icon.style.transform = 'scale(1.3)';
+          setTimeout(() => {
+            icon.style.transform = '';
+          }, 200);
+        }
+
+        // Log feedback (could be sent to analytics)
+        console.log(`FAQ #${faqId} feedback: ${feedback}`);
       }
     });
   });
