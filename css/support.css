@@ -2478,6 +2478,12 @@
   color: #e0e0e0;
 }
 
+/* Hide the data elements used for i18n - these store answer/tip text for JS to read */
+.faq-split__answer-data,
+.faq-split__tip-data {
+  display: none !important;
+}
+
 [data-theme="dark"] .faq-split__questions::-webkit-scrollbar-track {
   background: #16213e;
 }
