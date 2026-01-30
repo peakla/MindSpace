@@ -1,19 +1,21 @@
 /* ===== ENHANCED WELLNESS TAB STYLES ===== */
+/* Using !important to override profile.css base styles */
 
 /* Glassmorphism Base */
+.mb-profile__tab-content .mb-profile__wellness-section,
 .mb-profile__wellness-section {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 24px;
-  padding: 28px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.85) 100%) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 24px !important;
+  padding: 28px !important;
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .mb-profile__wellness-section::before {
@@ -76,21 +78,23 @@
   margin-bottom: 24px;
 }
 
+.mb-profile__mood-selector .mb-profile__mood-btn,
 .mb-profile__mood-btn {
-  width: 64px;
-  height: 64px;
-  border: 3px solid transparent;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+  width: 64px !important;
+  height: 64px !important;
+  border: 3px solid transparent !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%) !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
   box-shadow: 
     0 4px 15px rgba(0, 0, 0, 0.08),
-    0 2px 4px rgba(0, 0, 0, 0.04);
+    0 2px 4px rgba(0, 0, 0, 0.04) !important;
+  font-size: 2rem !important;
 }
 
 .mb-profile__mood-btn::before {
@@ -104,24 +108,26 @@
   transition: opacity 0.3s ease;
 }
 
+.mb-profile__mood-selector .mb-profile__mood-btn:hover,
 .mb-profile__mood-btn:hover {
-  transform: scale(1.15) translateY(-4px);
+  transform: scale(1.15) translateY(-4px) !important;
   box-shadow: 
     0 12px 30px rgba(184, 155, 94, 0.25),
-    0 4px 10px rgba(0, 0, 0, 0.1);
+    0 4px 10px rgba(0, 0, 0, 0.1) !important;
 }
 
 .mb-profile__mood-btn:hover::before {
-  opacity: 0.3;
+  opacity: 0.3 !important;
 }
 
+.mb-profile__mood-selector .mb-profile__mood-btn.is-selected,
 .mb-profile__mood-btn.is-selected {
-  border-color: #b89b5e;
-  background: linear-gradient(145deg, rgba(184, 155, 94, 0.15) 0%, rgba(184, 155, 94, 0.05) 100%);
-  transform: scale(1.2);
+  border-color: #b89b5e !important;
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.15) 0%, rgba(184, 155, 94, 0.05) 100%) !important;
+  transform: scale(1.2) !important;
   box-shadow: 
     0 8px 25px rgba(184, 155, 94, 0.35),
-    0 0 20px rgba(184, 155, 94, 0.2);
+    0 0 20px rgba(184, 155, 94, 0.2) !important;
 }
 
 .mb-profile__mood-btn.is-selected::before {
@@ -242,16 +248,17 @@
   gap: 16px;
 }
 
+.mb-profile__mood-history .mood-entry-card,
 .mood-entry-card {
-  background: linear-gradient(145deg, #fff 0%, #f8f6f2 100%);
-  border-radius: 16px;
-  padding: 20px 16px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(145deg, #fff 0%, #f8f6f2 100%) !important;
+  border-radius: 16px !important;
+  padding: 20px 16px !important;
+  text-align: center !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.3s ease !important;
+  border: 1px solid rgba(0, 0, 0, 0.04) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .mood-entry-card::before {
@@ -455,18 +462,19 @@
   gap: 14px;
 }
 
+.mb-profile__goals-list .mb-profile__goal-item,
 .mb-profile__goal-item {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%);
-  padding: 18px 20px;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  position: relative;
-  overflow: hidden;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%) !important;
+  padding: 18px 20px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .mb-profile__goal-item::before {
@@ -666,16 +674,17 @@
   margin-bottom: 32px;
 }
 
+.mb-profile__streak-stats .mb-profile__streak-stat,
 .mb-profile__streak-stat {
-  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%);
-  border-radius: 20px;
-  padding: 28px 24px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(145deg, #fff 0%, #faf9f7 100%) !important;
+  border-radius: 20px !important;
+  padding: 28px 24px !important;
+  text-align: center !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
 .mb-profile__streak-stat:first-child {
@@ -780,13 +789,14 @@
   gap: 6px;
 }
 
+.streak-calendar-grid .streak-day,
 .streak-day {
-  aspect-ratio: 1;
-  border-radius: 6px;
-  background: rgba(184, 155, 94, 0.08);
-  transition: all 0.2s ease;
-  cursor: pointer;
-  position: relative;
+  aspect-ratio: 1 !important;
+  border-radius: 6px !important;
+  background: rgba(184, 155, 94, 0.08) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  position: relative !important;
 }
 
 .streak-day:hover {
@@ -794,10 +804,10 @@
   z-index: 1;
 }
 
-.streak-day.active-1 { background: rgba(184, 155, 94, 0.25); }
-.streak-day.active-2 { background: rgba(184, 155, 94, 0.45); }
-.streak-day.active-3 { background: rgba(184, 155, 94, 0.65); }
-.streak-day.active-4 { background: #b89b5e; box-shadow: 0 2px 8px rgba(184, 155, 94, 0.4); }
+.streak-day.active-1 { background: rgba(184, 155, 94, 0.25) !important; }
+.streak-day.active-2 { background: rgba(184, 155, 94, 0.45) !important; }
+.streak-day.active-3 { background: rgba(184, 155, 94, 0.65) !important; }
+.streak-day.active-4 { background: #b89b5e !important; box-shadow: 0 2px 8px rgba(184, 155, 94, 0.4) !important; }
 
 .streak-day .streak-tooltip {
   position: absolute;
