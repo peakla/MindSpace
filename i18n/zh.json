@@ -1222,5 +1222,17 @@
   "blog_pill_workplace": "职场",
   "blog_pill_wins": "成就",
   "blog_read_article": "阅读文章 →",
-  "blog_hero_lead": "可靠的信息来源、通俗易懂的摘要和实用的建议——以现代杂志的形式呈现。探索关于焦虑、抑郁、压力管理和正念的专家支持文章。无论您是在寻找应对策略、了解症状，还是支持亲人，我们精心策划的内容让心理健康对每个人都触手可及。"
+  "blog_hero_lead": "可靠的信息来源、通俗易懂的摘要和实用的建议——以现代杂志的形式呈现。探索关于焦虑、抑郁、压力管理和正念的专家支持文章。无论您是在寻找应对策略、了解症状，还是支持亲人，我们精心策划的内容让心理健康对每个人都触手可及。",
+  "footer_stay_updated": "保持更新",
+  "footer_newsletter_desc": "将心理健康提示和资源发送到您的收件箱。",
+  "footer_email_placeholder": "输入您的邮箱",
+  "footer_subscribe": "订阅",
+  "footer_privacy_note": "我们尊重您的隐私。随时取消订阅。",
+  "footer_latest_articles": "最新文章",
+  "footer_post_research_news": "心理健康研究新闻",
+  "footer_post_research_meta": "最新发现",
+  "footer_post_recovery": "康复故事",
+  "footer_post_recovery_meta": "真实经历",
+  "footer_post_workplace": "职场健康",
+  "footer_post_workplace_meta": "专业建议"
 }

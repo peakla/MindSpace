@@ -1222,5 +1222,17 @@
   "blog_pill_workplace": "Travail",
   "blog_pill_wins": "Victoires",
   "blog_read_article": "Lire l'article →",
-  "blog_hero_lead": "Des sources fiables, des résumés en langage simple et des conseils pratiques, organisés comme un magazine moderne. Explorez des articles soutenus par des experts sur l'anxiété, la dépression, la gestion du stress et la pleine conscience. Que vous cherchiez des stratégies d'adaptation, à comprendre les symptômes ou à soutenir un proche, notre contenu rend le bien-être mental accessible à tous."
+  "blog_hero_lead": "Des sources fiables, des résumés en langage simple et des conseils pratiques, organisés comme un magazine moderne. Explorez des articles soutenus par des experts sur l'anxiété, la dépression, la gestion du stress et la pleine conscience. Que vous cherchiez des stratégies d'adaptation, à comprendre les symptômes ou à soutenir un proche, notre contenu rend le bien-être mental accessible à tous.",
+  "footer_stay_updated": "Restez Informé",
+  "footer_newsletter_desc": "Recevez des conseils de bien-être mental dans votre boîte mail.",
+  "footer_email_placeholder": "Entrez votre email",
+  "footer_subscribe": "S'abonner",
+  "footer_privacy_note": "Nous respectons votre vie privée. Désabonnez-vous à tout moment.",
+  "footer_latest_articles": "Derniers Articles",
+  "footer_post_research_news": "Actualités de la Recherche en Santé Mentale",
+  "footer_post_research_meta": "Dernières découvertes",
+  "footer_post_recovery": "Témoignages de Rétablissement",
+  "footer_post_recovery_meta": "Parcours réels",
+  "footer_post_workplace": "Bien-être au Travail",
+  "footer_post_workplace_meta": "Conseils professionnels"
 }

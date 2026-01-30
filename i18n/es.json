@@ -1222,5 +1222,17 @@
   "blog_pill_workplace": "Trabajo",
   "blog_pill_wins": "Logros",
   "blog_read_article": "Leer artículo →",
-  "blog_hero_lead": "Fuentes confiables, resúmenes en lenguaje sencillo y consejos prácticos, organizados como una revista moderna. Explora artículos respaldados por expertos sobre ansiedad, depresión, manejo del estrés y mindfulness. Ya sea que busques estrategias de afrontamiento, comprender síntomas o apoyar a un ser querido, nuestro contenido hace que el bienestar mental sea accesible para todos."
+  "blog_hero_lead": "Fuentes confiables, resúmenes en lenguaje sencillo y consejos prácticos, organizados como una revista moderna. Explora artículos respaldados por expertos sobre ansiedad, depresión, manejo del estrés y mindfulness. Ya sea que busques estrategias de afrontamiento, comprender síntomas o apoyar a un ser querido, nuestro contenido hace que el bienestar mental sea accesible para todos.",
+  "footer_stay_updated": "Mantente Actualizado",
+  "footer_newsletter_desc": "Recibe consejos de bienestar mental y recursos en tu correo.",
+  "footer_email_placeholder": "Ingresa tu correo",
+  "footer_subscribe": "Suscribirse",
+  "footer_privacy_note": "Respetamos tu privacidad. Cancela cuando quieras.",
+  "footer_latest_articles": "Últimos Artículos",
+  "footer_post_research_news": "Noticias de Investigación en Salud Mental",
+  "footer_post_research_meta": "Últimos hallazgos",
+  "footer_post_recovery": "Historias de Recuperación",
+  "footer_post_recovery_meta": "Experiencias reales",
+  "footer_post_workplace": "Bienestar Laboral",
+  "footer_post_workplace_meta": "Consejos profesionales"
 }

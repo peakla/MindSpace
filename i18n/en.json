@@ -1222,5 +1222,17 @@
   "faq_helpful": "Was this answer helpful?",
   "faq_no": "No",
   "faq_no_results": "No results found for your search.",
-  "faq_yes": "Yes"
+  "faq_yes": "Yes",
+  "footer_stay_updated": "Stay Updated",
+  "footer_newsletter_desc": "Get mental wellness tips and resources delivered to your inbox.",
+  "footer_email_placeholder": "Enter your email",
+  "footer_subscribe": "Subscribe",
+  "footer_privacy_note": "We respect your privacy. Unsubscribe anytime.",
+  "footer_latest_articles": "Latest Articles",
+  "footer_post_research_news": "Mental Health Research News",
+  "footer_post_research_meta": "Latest findings",
+  "footer_post_recovery": "Recovery Stories",
+  "footer_post_recovery_meta": "Real journeys",
+  "footer_post_workplace": "Workplace Wellness",
+  "footer_post_workplace_meta": "Professional tips"
 }
