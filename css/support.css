@@ -1013,6 +1013,469 @@
   color: #fff;
 }
 
+/* ========================== */
+/* HELPLINES ENHANCED VISUALS */
+/* ========================== */
+
+/* Pulse animation for 24/7 badges */
+@keyframes badge-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(46, 125, 50, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 8px rgba(46, 125, 50, 0); }
+}
+
+.helpline-card__badge--24-7 {
+  animation: badge-pulse 2.5s ease-in-out infinite;
+}
+
+/* Floating animation for card icons */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.helpline-card__icon-wrapper {
+  animation: icon-float 3s ease-in-out infinite;
+}
+
+.helpline-card__icon-wrapper:hover {
+  animation-play-state: paused;
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Ripple effect on buttons */
+.helpline-contact {
+  position: relative;
+  overflow: hidden;
+}
+
+.helpline-contact::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.helpline-contact:active::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* Shine sweep effect on hover */
+.helpline-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.helpline-card:hover::after {
+  left: 100%;
+}
+
+/* Animated gradient glow border */
+@keyframes gradient-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.helpline-card--crisis:hover::before {
+  background: linear-gradient(90deg, #e53935, #ff5252, #e53935);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+.helpline-card--lgbtq:hover::before,
+.helpline-card--trans:hover::before {
+  background: linear-gradient(90deg, #9c27b0, #e91e63, #9c27b0);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+.helpline-card--youth:hover::before {
+  background: linear-gradient(90deg, #ff9800, #ffb74d, #ff9800);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+.helpline-card--veterans:hover::before {
+  background: linear-gradient(90deg, #1565c0, #42a5f5, #1565c0);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+.helpline-card--specialized:hover::before {
+  background: linear-gradient(90deg, #00897b, #4db6ac, #00897b);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+.helpline-card--general:hover::before {
+  background: linear-gradient(90deg, #2196f3, #64b5f6, #2196f3);
+  background-size: 200% 100%;
+  animation: gradient-glow 2s ease infinite;
+}
+
+/* SVG Wave Separator */
+.helplines-wave-separator {
+  position: relative;
+  height: 80px;
+  overflow: hidden;
+  margin-bottom: -2px;
+}
+
+.helplines-wave-separator svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.helplines-wave-separator .wave-1 {
+  fill: rgba(214, 189, 159, 0.1);
+  animation: wave-float 8s ease-in-out infinite;
+}
+
+.helplines-wave-separator .wave-2 {
+  fill: rgba(214, 189, 159, 0.15);
+  animation: wave-float 6s ease-in-out infinite reverse;
+}
+
+.helplines-wave-separator .wave-3 {
+  fill: #f8f9fa;
+  animation: wave-float 10s ease-in-out infinite;
+}
+
+@keyframes wave-float {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-20px); }
+}
+
+/* Dot pattern background */
+.helplines-section {
+  position: relative;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(214, 189, 159, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(100, 181, 246, 0.06) 0%, transparent 50%),
+    #f8f9fa;
+}
+
+.helplines-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+/* Floating decorative shapes */
+.helplines-decoration {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.helplines-decoration--1 {
+  top: 10%;
+  left: 5%;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.1) 0%, transparent 70%);
+  animation: decoration-float 7s ease-in-out infinite;
+}
+
+.helplines-decoration--2 {
+  top: 30%;
+  right: 8%;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.08) 0%, transparent 70%);
+  animation: decoration-float 9s ease-in-out infinite reverse;
+}
+
+.helplines-decoration--3 {
+  bottom: 20%;
+  left: 10%;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, transparent 70%);
+  animation: decoration-float 8s ease-in-out infinite;
+  transform: rotate(45deg);
+}
+
+.helplines-decoration--4 {
+  bottom: 40%;
+  right: 5%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 137, 123, 0.1) 0%, transparent 70%);
+  animation: decoration-float 6s ease-in-out infinite reverse;
+}
+
+@keyframes decoration-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+  50% { transform: translateY(-15px) rotate(5deg); opacity: 1; }
+}
+
+/* Category Filter Pills */
+.helplines-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 32px;
+  padding: 0 20px;
+}
+
+.helplines-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.helplines-filter-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.helplines-filter-pill.active,
+.helplines-filter-pill[data-filter="all"].active {
+  background: linear-gradient(135deg, #d6bd9f 0%, #c4a67a 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="crisis"] {
+  border-color: #ffcdd2;
+}
+.helplines-filter-pill[data-filter="crisis"].active,
+.helplines-filter-pill[data-filter="crisis"]:hover {
+  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="lgbtq"] {
+  border-color: #e1bee7;
+}
+.helplines-filter-pill[data-filter="lgbtq"].active,
+.helplines-filter-pill[data-filter="lgbtq"]:hover {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="youth"] {
+  border-color: #ffe0b2;
+}
+.helplines-filter-pill[data-filter="youth"].active,
+.helplines-filter-pill[data-filter="youth"]:hover {
+  background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="veterans"] {
+  border-color: #bbdefb;
+}
+.helplines-filter-pill[data-filter="veterans"].active,
+.helplines-filter-pill[data-filter="veterans"]:hover {
+  background: linear-gradient(135deg, #1565c0 0%, #0d47a1 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="specialized"] {
+  border-color: #b2dfdb;
+}
+.helplines-filter-pill[data-filter="specialized"].active,
+.helplines-filter-pill[data-filter="specialized"]:hover {
+  background: linear-gradient(135deg, #00897b 0%, #00695c 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill[data-filter="general"] {
+  border-color: #bbdefb;
+}
+.helplines-filter-pill[data-filter="general"].active,
+.helplines-filter-pill[data-filter="general"]:hover {
+  background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.helplines-filter-pill ion-icon {
+  font-size: 16px;
+}
+
+/* Filter animation for cards */
+.helpline-card.filter-hidden {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+.helpline-card.filter-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Quick Copy Button */
+.helpline-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.helpline-copy-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.helpline-copy-btn ion-icon {
+  font-size: 16px;
+  color: #666;
+}
+
+.helpline-copy-btn.copied {
+  background: #43a047;
+}
+
+.helpline-copy-btn.copied ion-icon {
+  color: #fff;
+}
+
+/* Availability badges */
+.helpline-card__availability {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #e0e0e0;
+}
+
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.availability-badge--call {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  color: #2e7d32;
+}
+
+.availability-badge--text {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+  color: #1565c0;
+}
+
+.availability-badge--chat {
+  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+  color: #7b1fa2;
+}
+
+.availability-badge--tty {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+  color: #e65100;
+}
+
+.availability-badge ion-icon {
+  font-size: 12px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .helpline-card__badge--24-7,
+  .helpline-card__icon-wrapper,
+  .helplines-wave-separator .wave-1,
+  .helplines-wave-separator .wave-2,
+  .helplines-wave-separator .wave-3,
+  .helplines-decoration--1,
+  .helplines-decoration--2,
+  .helplines-decoration--3,
+  .helplines-decoration--4 {
+    animation: none;
+  }
+  
+  .helpline-card::after {
+    display: none;
+  }
+  
+  .helpline-card--crisis:hover::before,
+  .helpline-card--lgbtq:hover::before,
+  .helpline-card--trans:hover::before,
+  .helpline-card--youth:hover::before,
+  .helpline-card--veterans:hover::before,
+  .helpline-card--specialized:hover::before,
+  .helpline-card--general:hover::before {
+    animation: none;
+  }
+  
+  .helpline-contact::after {
+    display: none;
+  }
+  
+  .helplines-filter-pill,
+  .helpline-copy-btn,
+  .helpline-contact {
+    transition: none;
+  }
+}
+
 .helpline-contact ion-icon {
   font-size: 1rem;
   transition: color 0.3s ease, transform 0.3s ease;
@@ -3364,6 +3827,116 @@
 
 [data-theme="dark"] .helpline-contact:hover ion-icon {
   color: #fff;
+}
+
+/* Dark mode for new visual enhancements */
+[data-theme="dark"] .helplines-section {
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(155, 126, 217, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(100, 181, 246, 0.06) 0%, transparent 50%),
+    #1a1a2e;
+}
+
+[data-theme="dark"] .helplines-section::before {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+[data-theme="dark"] .helplines-wave-separator .wave-1 {
+  fill: rgba(155, 126, 217, 0.08);
+}
+
+[data-theme="dark"] .helplines-wave-separator .wave-2 {
+  fill: rgba(155, 126, 217, 0.12);
+}
+
+[data-theme="dark"] .helplines-wave-separator .wave-3 {
+  fill: #1a1a2e;
+}
+
+[data-theme="dark"] .helplines-decoration--1 {
+  background: linear-gradient(135deg, rgba(229, 57, 53, 0.15) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .helplines-decoration--2 {
+  background: linear-gradient(135deg, rgba(156, 39, 176, 0.12) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .helplines-decoration--3 {
+  background: linear-gradient(135deg, rgba(33, 150, 243, 0.15) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .helplines-decoration--4 {
+  background: linear-gradient(135deg, rgba(0, 137, 123, 0.15) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .helplines-filter-pill {
+  background: #252542;
+  border-color: #3a3a5c;
+  color: #b0b0c0;
+}
+
+[data-theme="dark"] .helplines-filter-pill:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="crisis"] {
+  border-color: #5a3030;
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="lgbtq"] {
+  border-color: #4a3055;
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="youth"] {
+  border-color: #5a4028;
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="veterans"] {
+  border-color: #253a5a;
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="specialized"] {
+  border-color: #254545;
+}
+
+[data-theme="dark"] .helplines-filter-pill[data-filter="general"] {
+  border-color: #253a5a;
+}
+
+[data-theme="dark"] .helpline-copy-btn {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .helpline-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .helpline-copy-btn ion-icon {
+  color: #b0b0c0;
+}
+
+[data-theme="dark"] .helpline-card__availability {
+  border-top-color: #3a3a5c;
+}
+
+[data-theme="dark"] .availability-badge--call {
+  background: linear-gradient(135deg, #2a4a30 0%, #355540 100%);
+  color: #8bc48f;
+}
+
+[data-theme="dark"] .availability-badge--text {
+  background: linear-gradient(135deg, #1a3050 0%, #253a5a 100%);
+  color: #64b5f6;
+}
+
+[data-theme="dark"] .availability-badge--chat {
+  background: linear-gradient(135deg, #3a2845 0%, #4a3055 100%);
+  color: #ce93d8;
+}
+
+[data-theme="dark"] .availability-badge--tty {
+  background: linear-gradient(135deg, #4a3520 0%, #5a4028 100%);
+  color: #ffb74d;
 }
 
 [data-theme="dark"] .crisis-section,

@@ -645,8 +645,23 @@
         </div>
       </div>
 
+      <!-- Wave Separator -->
+      <div class="helplines-wave-separator">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="wave-1" d="M0,60 C150,90 350,30 600,60 C850,90 1050,30 1200,60 L1200,120 L0,120 Z"></path>
+          <path class="wave-2" d="M0,80 C200,50 400,100 600,80 C800,60 1000,100 1200,70 L1200,120 L0,120 Z"></path>
+          <path class="wave-3" d="M0,100 C300,70 600,110 900,90 C1100,75 1150,100 1200,95 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
       <!-- Helplines Section -->
       <section class="helplines-section" id="helplines" aria-label="Helplines">
+        <!-- Decorative floating shapes -->
+        <div class="helplines-decoration helplines-decoration--1"></div>
+        <div class="helplines-decoration helplines-decoration--2"></div>
+        <div class="helplines-decoration helplines-decoration--3"></div>
+        <div class="helplines-decoration helplines-decoration--4"></div>
+
         <div class="container">
           <div class="section-header">
             <div class="section-icon">
@@ -654,6 +669,38 @@
             </div>
             <h2 class="section-title" data-translate="helplines_title">Talk to Someone</h2>
             <p class="section-subtitle" data-translate="helplines_subtitle">Free, confidential support is available 24/7</p>
+          </div>
+
+          <!-- Filter Pills -->
+          <div class="helplines-filters">
+            <button class="helplines-filter-pill active" data-filter="all">
+              <ion-icon name="apps-outline"></ion-icon>
+              <span data-translate="hl_filter_all">All</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="crisis">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <span data-translate="hl_filter_crisis">Crisis</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="lgbtq">
+              <ion-icon name="heart-half-outline"></ion-icon>
+              <span data-translate="hl_filter_lgbtq">LGBTQ+</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="youth">
+              <ion-icon name="school-outline"></ion-icon>
+              <span data-translate="hl_filter_youth">Youth</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="veterans">
+              <ion-icon name="shield-checkmark-outline"></ion-icon>
+              <span data-translate="hl_filter_veterans">Veterans</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="specialized">
+              <ion-icon name="medical-outline"></ion-icon>
+              <span data-translate="hl_filter_specialized">Specialized</span>
+            </button>
+            <button class="helplines-filter-pill" data-filter="general">
+              <ion-icon name="call-outline"></ion-icon>
+              <span data-translate="hl_filter_general">General</span>
+            </button>
           </div>
 
           <div class="helplines-expect">
@@ -667,7 +714,7 @@
           </div>
 
           <div class="helplines-grid">
-            <div class="helpline-card helpline-card--crisis">
+            <div class="helpline-card helpline-card--crisis" data-category="crisis">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="heart-circle-outline"></ion-icon>
               </div>
@@ -700,7 +747,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--general">
+            <div class="helpline-card helpline-card--general" data-category="general">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="medical-outline"></ion-icon>
               </div>
@@ -725,7 +772,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--general">
+            <div class="helpline-card helpline-card--general" data-category="general">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="people-outline"></ion-icon>
               </div>
@@ -749,7 +796,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--lgbtq">
+            <div class="helpline-card helpline-card--lgbtq" data-category="lgbtq">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="heart-half-outline"></ion-icon>
               </div>
@@ -778,7 +825,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--trans">
+            <div class="helpline-card helpline-card--trans" data-category="lgbtq">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="people-circle-outline"></ion-icon>
               </div>
@@ -798,7 +845,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--youth">
+            <div class="helpline-card helpline-card--youth" data-category="youth">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="school-outline"></ion-icon>
               </div>
@@ -822,7 +869,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--veterans">
+            <div class="helpline-card helpline-card--veterans" data-category="veterans">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="shield-checkmark-outline"></ion-icon>
               </div>
@@ -855,7 +902,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--youth">
+            <div class="helpline-card helpline-card--youth" data-category="youth">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="home-outline"></ion-icon>
               </div>
@@ -875,7 +922,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--specialized">
+            <div class="helpline-card helpline-card--specialized" data-category="specialized">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="hand-left-outline"></ion-icon>
               </div>
@@ -907,7 +954,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--specialized">
+            <div class="helpline-card helpline-card--specialized" data-category="specialized">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="nutrition-outline"></ion-icon>
               </div>
@@ -931,7 +978,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--specialized">
+            <div class="helpline-card helpline-card--specialized" data-category="specialized">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="body-outline"></ion-icon>
               </div>
@@ -955,7 +1002,7 @@
               </div>
             </div>
 
-            <div class="helpline-card helpline-card--specialized">
+            <div class="helpline-card helpline-card--specialized" data-category="specialized">
               <div class="helpline-card__icon-wrapper">
                 <ion-icon name="thunderstorm-outline"></ion-icon>
               </div>
@@ -1821,6 +1868,7 @@
     <script src="../js/animations.js" defer></script>
     <script src="support.js" defer></script>
     <script src="support-animations.js" defer></script>
+    <script src="../js/helplines.js" defer></script>
 <script src="../js/footer.js" defer></script>
 </body>
 </html>
