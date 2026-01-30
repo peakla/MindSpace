@@ -26,6 +26,12 @@
   /* Navigation animation timing */
   --nav-transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --nav-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Dark mode purple accent colors */
+  --purple-accent: #9b7ed9;
+  --purple-accent-dark: #7c5fc4;
+  --purple-gradient: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
+  --purple-glow: rgba(155, 126, 217, 0.3);
 }
 
 *,
@@ -3932,11 +3938,11 @@ body.dark-theme .rl-local-search__error {
 }
 
 [data-theme="dark"] .mb-footer__brand::after {
-  background: linear-gradient(90deg, #9b7ed9, transparent);
+  background: linear-gradient(90deg, var(--purple-accent), transparent);
 }
 
 [data-theme="dark"] .mb-footer__link:hover {
-  color: #9b7ed9;
+  color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__tag:hover {
@@ -3945,8 +3951,8 @@ body.dark-theme .rl-local-search__error {
 }
 
 [data-theme="dark"] .mb-footer__btn {
-  background: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
-  box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
+  background: var(--purple-gradient);
+  box-shadow: 0 4px 15px var(--purple-glow);
 }
 
 [data-theme="dark"] .mb-footer__btn:hover {
@@ -3954,20 +3960,20 @@ body.dark-theme .rl-local-search__error {
 }
 
 [data-theme="dark"] .mb-footer__badge ion-icon {
-  color: #9b7ed9;
+  color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__newsletter-content .newsletter-icon {
-  color: #9b7ed9;
+  color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__newsletter-input:focus {
-  border-color: #9b7ed9;
+  border-color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__newsletter-btn {
-  background: linear-gradient(135deg, #9b7ed9 0%, #7c5fc4 100%);
-  box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
+  background: var(--purple-gradient);
+  box-shadow: 0 4px 15px var(--purple-glow);
 }
 
 [data-theme="dark"] .mb-footer__newsletter-btn:hover {
@@ -3979,15 +3985,15 @@ body.dark-theme .rl-local-search__error {
 }
 
 [data-theme="dark"] .mb-footer__post-icon ion-icon {
-  color: #9b7ed9;
+  color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__select:focus {
-  border-color: #9b7ed9;
+  border-color: var(--purple-accent);
 }
 
 [data-theme="dark"] .mb-footer__theme-toggle input:checked + .mb-footer__theme-slider {
-  background: #9b7ed9;
+  background: var(--purple-accent);
 }
 
 /* -----------------------------------

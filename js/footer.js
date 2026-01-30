@@ -80,11 +80,11 @@ function initFooterControls() {
       const lang = e.target.value;
       localStorage.setItem('preferredLanguage', lang);
       
-      const headerLangSelect = document.querySelector('[data-language-select]');
-      if (headerLangSelect) {
-        headerLangSelect.value = lang;
-        headerLangSelect.dispatchEvent(new Event('change', { bubbles: true }));
-      }
+      document.querySelectorAll('[data-language-select]').forEach(select => {
+        if (select !== langSelect) {
+          select.value = lang;
+        }
+      });
       
       if (typeof loadTranslations === 'function') {
         loadTranslations(lang);
@@ -93,27 +93,55 @@ function initFooterControls() {
   }
 
   if (themeToggle) {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark' ||
-                   localStorage.getItem('darkMode') === 'true';
+    const savedTheme = localStorage.getItem('mindbalance_theme') || 'light';
+    const isDark = savedTheme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
     themeToggle.checked = isDark;
 
     themeToggle.addEventListener('change', (e) => {
       const isDarkMode = e.target.checked;
+      const newTheme = isDarkMode ? 'dark' : 'light';
+      
+      localStorage.setItem('mindbalance_theme', newTheme);
       
       if (isDarkMode) {
         document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('darkMode', 'true');
       } else {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('darkMode', 'false');
       }
 
-      const headerThemeToggle = document.querySelector('[data-theme-toggle]');
-      if (headerThemeToggle && headerThemeToggle.checked !== isDarkMode) {
-        headerThemeToggle.checked = isDarkMode;
-      }
+      document.querySelectorAll('[data-theme-toggle]').forEach(toggle => {
+        if (toggle !== themeToggle) {
+          toggle.checked = isDarkMode;
+        }
+      });
     });
   }
+
+  listenForHeaderChanges();
+}
+
+function listenForHeaderChanges() {
+  document.querySelectorAll('[data-theme-toggle]').forEach(toggle => {
+    if (toggle.id !== 'footerThemeToggle') {
+      toggle.addEventListener('change', function() {
+        const footerToggle = document.getElementById('footerThemeToggle');
+        if (footerToggle && footerToggle.checked !== this.checked) {
+          footerToggle.checked = this.checked;
+        }
+      });
+    }
+  });
+
+  document.querySelectorAll('[data-language-select]').forEach(select => {
+    if (select.id !== 'footerLangSelect') {
+      select.addEventListener('change', function() {
+        const footerSelect = document.getElementById('footerLangSelect');
+        if (footerSelect && footerSelect.value !== this.value) {
+          footerSelect.value = this.value;
+        }
+      });
+    }
+  });
 }
 
 function showToast(message) {

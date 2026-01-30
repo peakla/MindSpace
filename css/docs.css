@@ -3,16 +3,15 @@
    Elegant, professional design matching site theme
    =========================================== */
 
-/* Documentation page main content - respects theme */
+/* Documentation page main content - light mode by default */
 .docs-page #main-content {
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
   min-height: 100vh;
 }
 
-/* Light mode support for docs page */
-[data-theme="light"] .docs-page #main-content,
-body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
-  background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+/* Dark mode support for docs page */
+[data-theme="dark"] .docs-page #main-content {
+  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
 }
 
 /* Documentation Container - positioned below navbar */
@@ -59,15 +58,23 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
 .docs-header__brand h1 {
   font-size: 2.75rem;
   font-weight: 700;
-  color: var(--white, #ffffff);
+  color: #1a1a2e;
   letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .docs-header__brand h1 {
+  color: var(--white, #ffffff);
 }
 
 .docs-header__subtitle {
   font-size: 1.15rem;
-  color: var(--quick-silver, #a3a3a3);
+  color: #666666;
   font-weight: 400;
   letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .docs-header__subtitle {
+  color: var(--quick-silver, #a3a3a3);
 }
 
 /* Main Content Area */
@@ -77,14 +84,20 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
   gap: 2.5rem;
 }
 
-/* Section Base Styling */
+/* Section Base Styling - Light mode by default */
 .docs-section {
-  background: var(--eerie-black-2, #1a1a1a);
-  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.1));
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 16px;
   padding: 2rem 2.5rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .docs-section {
+  background: var(--eerie-black-2, #1a1a1a);
+  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .docs-section:hover {
@@ -120,27 +133,40 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* Section Titles */
+/* Section Titles - Light mode by default */
 .docs-section__title {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--white, #ffffff);
+  color: #1a1a2e;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.15));
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 1.5rem;
+}
+
+[data-theme="dark"] .docs-section__title {
+  color: var(--white, #ffffff);
+  border-bottom-color: var(--white-alpha-10, rgba(255, 255, 255, 0.15));
 }
 
 .docs-section__title ion-icon {
   font-size: 1.75rem;
+  color: #2d6a4f;
+}
+
+[data-theme="dark"] .docs-section__title ion-icon {
   color: var(--gold-crayola, #d4a574);
 }
 
 .docs-section__desc {
   margin-bottom: 1.5rem;
   font-size: 1rem;
+  color: #666666;
+}
+
+[data-theme="dark"] .docs-section__desc {
   color: var(--quick-silver, #a3a3a3);
 }
 
@@ -212,10 +238,14 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
   opacity: 1;
 }
 
-/* Content Text */
+/* Content Text - Light mode by default */
 .docs-content {
-  color: var(--quick-silver, #a3a3a3);
+  color: #444444;
   line-height: 1.8;
+}
+
+[data-theme="dark"] .docs-content {
+  color: var(--quick-silver, #a3a3a3);
 }
 
 .docs-content p {
@@ -227,11 +257,15 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
 }
 
 .docs-content strong {
-  color: var(--white, #ffffff);
+  color: #1a1a2e;
   font-weight: 600;
 }
 
-/* Features List */
+[data-theme="dark"] .docs-content strong {
+  color: var(--white, #ffffff);
+}
+
+/* Features List - Light mode by default */
 .docs-features {
   display: flex;
   flex-direction: column;
@@ -242,16 +276,26 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
   display: flex;
   gap: 1.25rem;
   padding: 1.5rem;
-  background: var(--eerie-black-3, #242424);
-  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.08));
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 14px;
   transition: all 0.3s ease;
 }
 
+[data-theme="dark"] .docs-feature {
+  background: var(--eerie-black-3, #242424);
+  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.08));
+}
+
 .docs-feature:hover {
+  background: #f8f9fa;
+  border-color: #2d6a4f;
+  transform: translateX(6px);
+}
+
+[data-theme="dark"] .docs-feature:hover {
   background: var(--eerie-black-4, #2a2a2a);
   border-color: var(--gold-crayola, #d4a574);
-  transform: translateX(6px);
 }
 
 .docs-feature__icon {
@@ -273,17 +317,25 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
 .docs-feature__content h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--white, #ffffff);
+  color: #1a1a2e;
   margin-bottom: 0.5rem;
+}
+
+[data-theme="dark"] .docs-feature__content h3 {
+  color: var(--white, #ffffff);
 }
 
 .docs-feature__content p {
   font-size: 0.95rem;
-  color: var(--quick-silver, #a3a3a3);
+  color: #666666;
   line-height: 1.65;
 }
 
-/* Tech Stack Grid */
+[data-theme="dark"] .docs-feature__content p {
+  color: var(--quick-silver, #a3a3a3);
+}
+
+/* Tech Stack Grid - Light mode by default */
 .docs-tech-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -291,14 +343,23 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
 }
 
 .docs-tech-item {
-  background: var(--eerie-black-3, #242424);
-  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.08));
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 14px;
   padding: 1.5rem;
   transition: border-color 0.3s ease;
 }
 
+[data-theme="dark"] .docs-tech-item {
+  background: var(--eerie-black-3, #242424);
+  border: 1px solid var(--white-alpha-10, rgba(255, 255, 255, 0.08));
+}
+
 .docs-tech-item:hover {
+  border-color: #2d6a4f;
+}
+
+[data-theme="dark"] .docs-tech-item:hover {
   border-color: var(--gold-crayola, #d4a574);
 }
 
@@ -317,10 +378,14 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
 
 .docs-tech-item li {
   font-size: 0.9rem;
-  color: var(--quick-silver, #a3a3a3);
+  color: #666666;
   padding: 0.4rem 0;
   padding-left: 1.25rem;
   position: relative;
+}
+
+[data-theme="dark"] .docs-tech-item li {
+  color: var(--quick-silver, #a3a3a3);
 }
 
 .docs-tech-item li::before {
@@ -465,58 +530,3 @@ body:not([data-theme="dark"]):not(.dark-mode) .docs-page #main-content {
   }
 }
 
-/* =========================================
-   Light Mode Support (if user disables dark mode)
-   ========================================= */
-
-body:not([data-theme="dark"]):not(.dark-mode) .docs-container {
-  /* Keep dark theme for docs - it matches the site */
-}
-
-/* When site is in explicit light mode */
-[data-theme="light"] .docs-section {
-  background: #f8f9fa;
-  border-color: #e0e0e0;
-}
-
-[data-theme="light"] .docs-section__title {
-  color: #1a1a2e;
-}
-
-[data-theme="light"] .docs-section__title ion-icon {
-  color: #2d6a4f;
-}
-
-[data-theme="light"] .docs-feature {
-  background: #ffffff;
-  border-color: #e0e0e0;
-}
-
-[data-theme="light"] .docs-feature__content h3 {
-  color: #1a1a2e;
-}
-
-[data-theme="light"] .docs-feature__content p {
-  color: #666666;
-}
-
-[data-theme="light"] .docs-tech-item {
-  background: #ffffff;
-  border-color: #e0e0e0;
-}
-
-[data-theme="light"] .docs-content {
-  color: #444444;
-}
-
-[data-theme="light"] .docs-content strong {
-  color: #1a1a2e;
-}
-
-[data-theme="light"] .docs-header__brand h1 {
-  color: #1a1a2e;
-}
-
-[data-theme="light"] .docs-header__subtitle {
-  color: #666666;
-}
