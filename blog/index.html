@@ -1331,10 +1331,12 @@
           <p class="mb-widget__text">
             Monthly mental health tips + new resources we add to the library. No spam—unsubscribe anytime.
           </p>
-          <form class="mb-newsletter" id="newsletterForm">
-            <label class="mb-srOnly" for="newsEmail">Email</label>
-            <input id="newsEmail" class="mb-sideSearch__input" type="email" placeholder="you@example.com" required />
-            <button class="mb-actionBtn" type="submit">Subscribe</button>
+          <form class="mb-footer__newsletter-form" id="newsletterForm">
+            <input type="email" class="mb-footer__newsletter-input" placeholder="Enter your email" required aria-label="Email address">
+            <button type="submit" class="mb-footer__newsletter-btn">
+              <span>Subscribe</span>
+              <ion-icon name="arrow-forward-outline"></ion-icon>
+            </button>
           </form>
         </div>
 
