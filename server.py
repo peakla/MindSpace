@@ -1,10 +1,14 @@
 import os
 import time
+import uuid
+import psycopg2
+import requests
 from collections import defaultdict
 from flask import Flask, request, jsonify, send_from_directory, Response
 from flask_cors import CORS
 from elevenlabs.client import ElevenLabs
 from functools import wraps
+from resend import Emails
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
@@ -33,6 +37,42 @@ CORS(app, resources={
 })
 
 ELEVENLABS_API_KEY = os.environ.get('ELEVENLABS_API_KEY')
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+def get_resend_credentials():
+    """Get Resend API credentials from Replit connector"""
+    hostname = os.environ.get('REPLIT_CONNECTORS_HOSTNAME')
+    repl_identity = os.environ.get('REPL_IDENTITY')
+    web_repl_renewal = os.environ.get('WEB_REPL_RENEWAL')
+    
+    if repl_identity:
+        x_replit_token = 'repl ' + repl_identity
+    elif web_repl_renewal:
+        x_replit_token = 'depl ' + web_repl_renewal
+    else:
+        return None, None
+    
+    try:
+        response = requests.get(
+            f'https://{hostname}/api/v2/connection?include_secrets=true&connector_names=resend',
+            headers={
+                'Accept': 'application/json',
+                'X_REPLIT_TOKEN': x_replit_token
+            }
+        )
+        data = response.json()
+        connection = data.get('items', [{}])[0]
+        settings = connection.get('settings', {})
+        return settings.get('api_key'), settings.get('from_email')
+    except Exception as e:
+        print(f"Error getting Resend credentials: {e}")
+        return None, None
+
+def get_db_connection():
+    """Get database connection"""
+    if not DATABASE_URL:
+        return None
+    return psycopg2.connect(DATABASE_URL)
 
 request_counts = defaultdict(list)
 RATE_LIMIT_REQUESTS = 10
@@ -272,6 +312,137 @@ def tts_health():
         'available': bool(ELEVENLABS_API_KEY),
         'service': 'elevenlabs'
     })
+
+@app.route('/api/newsletter/subscribe', methods=['POST'])
+@check_referer
+@rate_limit
+def newsletter_subscribe():
+    """Handle newsletter subscription"""
+    data = request.get_json()
+    if not data:
+        return jsonify({'error': 'No data provided'}), 400
+    
+    email = data.get('email', '').strip().lower()
+    if not email:
+        return jsonify({'error': 'Email address is required'}), 400
+    
+    # Basic email validation
+    import re
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_pattern, email):
+        return jsonify({'error': 'Please enter a valid email address'}), 400
+    
+    conn = None
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({'error': 'Database connection failed'}), 500
+        
+        cursor = conn.cursor()
+        
+        # Check if email already exists
+        cursor.execute("SELECT id, confirmed FROM newsletter_subscribers WHERE email = %s", (email,))
+        existing = cursor.fetchone()
+        
+        if existing:
+            if existing[1]:  # Already confirmed
+                return jsonify({'message': 'You are already subscribed to our newsletter!', 'already_subscribed': True}), 200
+            else:
+                # Resend confirmation email
+                pass  # Will send email below
+        else:
+            # Generate confirmation token
+            confirmation_token = str(uuid.uuid4())
+            
+            # Insert new subscriber
+            cursor.execute(
+                """INSERT INTO newsletter_subscribers (email, confirmation_token, confirmed) 
+                   VALUES (%s, %s, TRUE) 
+                   ON CONFLICT (email) DO UPDATE SET confirmed = TRUE, subscribed_at = NOW()""",
+                (email, confirmation_token)
+            )
+            conn.commit()
+        
+        # Send welcome email via Resend
+        api_key, from_email = get_resend_credentials()
+        if api_key and from_email:
+            try:
+                import resend as resend_module
+                resend_module.api_key = api_key
+                Emails.send({
+                    "from": from_email,
+                    "to": [email],
+                    "subject": "Welcome to MindBalance Newsletter!",
+                    "html": f"""
+                    <div style="font-family: 'Poppins', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+                        <div style="text-align: center; margin-bottom: 30px;">
+                            <h1 style="color: #3d3a50; font-size: 28px; margin: 0;">MindBalance</h1>
+                            <p style="color: #af916d; font-size: 14px; margin-top: 5px;">Your Mental Wellness Companion</p>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%); border-radius: 16px; padding: 30px; border: 1px solid #e8e4dc;">
+                            <h2 style="color: #3d3a50; font-size: 22px; margin-top: 0;">Welcome to Our Community!</h2>
+                            
+                            <p style="color: #5a5770; font-size: 16px; line-height: 1.6;">
+                                Thank you for subscribing to the MindBalance newsletter! You'll now receive:
+                            </p>
+                            
+                            <ul style="color: #5a5770; font-size: 15px; line-height: 1.8; padding-left: 20px;">
+                                <li>Weekly mental wellness tips and strategies</li>
+                                <li>New articles and resources</li>
+                                <li>Community updates and stories</li>
+                                <li>Exclusive content and early access</li>
+                            </ul>
+                            
+                            <p style="color: #5a5770; font-size: 16px; line-height: 1.6;">
+                                We're committed to supporting your mental health journey with credible, 
+                                compassionate resources.
+                            </p>
+                            
+                            <div style="text-align: center; margin-top: 30px;">
+                                <a href="https://mindbalance.replit.app" 
+                                   style="display: inline-block; background: #af916d; color: #fff; padding: 14px 32px; 
+                                          border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px;">
+                                    Visit MindBalance
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e8e4dc;">
+                            <p style="color: #8a8899; font-size: 13px; margin: 0;">
+                                You received this email because you subscribed to MindBalance newsletter.
+                            </p>
+                            <p style="color: #8a8899; font-size: 13px; margin-top: 10px;">
+                                <a href="https://mindbalance.replit.app" style="color: #af916d; text-decoration: none;">
+                                    mindbalance.replit.app
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    """
+                })
+            except Exception as e:
+                print(f"Error sending welcome email: {e}")
+                # Don't fail the subscription if email fails
+        
+        cursor.close()
+        return jsonify({
+            'success': True,
+            'message': 'Thank you for subscribing! Check your inbox for a welcome email.'
+        }), 200
+        
+    except psycopg2.IntegrityError:
+        if conn:
+            conn.rollback()
+        return jsonify({'message': 'You are already subscribed!', 'already_subscribed': True}), 200
+    except Exception as e:
+        print(f"Newsletter subscription error: {e}")
+        if conn:
+            conn.rollback()
+        return jsonify({'error': 'Something went wrong. Please try again.'}), 500
+    finally:
+        if conn:
+            conn.close()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)

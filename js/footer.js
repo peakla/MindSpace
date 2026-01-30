@@ -31,7 +31,7 @@ function initNewsletterForm() {
   const form = document.getElementById('newsletterForm');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const emailInput = form.querySelector('.mb-footer__newsletter-input');
@@ -40,20 +40,55 @@ function initNewsletterForm() {
     
     if (!email) return;
 
+    // Basic email validation
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+      showToast('Please enter a valid email address.');
+      return;
+    }
+
     const originalContent = btn.innerHTML;
-    btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
-    btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+    btn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon> Subscribing...';
     btn.disabled = true;
     
-    emailInput.value = '';
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
+      
+      const data = await response.json();
+      
+      if (response.ok) {
+        btn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Subscribed!';
+        btn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        emailInput.value = '';
+        
+        if (data.already_subscribed) {
+          showToast(data.message || 'You are already subscribed!');
+        } else {
+          showToast(data.message || 'Thanks for subscribing! Check your inbox for a welcome email.');
+        }
+      } else {
+        btn.innerHTML = '<ion-icon name="close-outline"></ion-icon> Error';
+        btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+        showToast(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Newsletter subscription error:', error);
+      btn.innerHTML = '<ion-icon name="close-outline"></ion-icon> Error';
+      btn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+      showToast('Connection error. Please try again later.');
+    }
 
     setTimeout(() => {
       btn.innerHTML = originalContent;
       btn.style.background = '';
       btn.disabled = false;
     }, 3000);
-
-    showToast('Thanks for subscribing! Check your inbox for updates.');
   });
 }
 
