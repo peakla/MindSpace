@@ -57,15 +57,24 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Wellness goals with category icons (leaf, fitness, moon, people, book), enhanced empty states, and delete button hover effects
     - Reading streak with animated flame icon, GitHub-style activity calendar with 4 intensity levels, and milestone badges (7/14/30/100 day)
     - Full dark mode support and mobile responsive design (768px/480px breakpoints)
--   **Analytics & Tracking System**: Comprehensive user activity tracking via centralized `analytics.js` module:
+-   **Analytics & Tracking System**: Comprehensive user activity tracking via centralized `analytics.js` and `auth.js` modules:
     - Tracks page views, article reads/completions, scroll depth, time spent on pages
+    - **Daily visit logging** with streak calculation - automatically logs visits to `user_engagement` table
+    - **Reading streak tracking** - calculates consecutive daily visits with current and longest streak stats
     - Achievement system with 15 unlockable badges and unlock animations
     - Calendar heatmap visualization (GitHub-style) showing daily activity levels
     - Activity timeline with icons, timestamps, and smooth animations
     - Reading stats cards with animated bar charts
     - Progress rings for wellness goals
-    - Three Supabase tables: `user_activity_logs`, `reading_progress`, `user_achievements`
+    - Four Supabase tables: `user_activity_logs`, `reading_progress`, `user_achievements`, `user_engagement`
     - Full dark mode support and skeleton loading states
+-   **Enhanced Footer**: Modern footer design with:
+    - Wave separator SVG above footer creating smooth transition
+    - Gradient backgrounds with subtle radial overlay effects
+    - Rounded pill-style buttons with shadows and hover effects
+    - Glassmorphism topic tags with backdrop blur
+    - Circular social media icons with Instagram-style gradient on hover
+    - Full dark mode support with purple accent colors
 -   **Community Hub Enhancements**: Features popular discussions sidebar, clickable usernames linking to profiles, an @mentions system with autocomplete, and an inbox/notifications modal.
 -   **Article Pages**: Dedicated `/articles/` directory for full-length, TTS-enabled articles with a magazine-style layout, TTS audio player with advanced controls (speed, highlighting, progress), floating reading controls panel (font size, line spacing, dark mode, focus mode, print), text highlighting, bookmarking, and an enhanced sticky Table of Contents sidebar. Includes reading time per section, completion checkmarks, mini-map, scroll position indicator, keyboard navigation, and social share buttons. Also features a "Save Article" button and related articles section.
 -   **News & Stories Section**: Dedicated blog section featuring real stories, research updates, and community spotlights. Includes 6 article pages: Mental Health Research News, Recovery Stories, Workplace Wellness, Teen Mental Health Support, Community Support, and Mental Health Wins. All articles feature "New" badges with pulse animation, TTS audio, and full reading controls.
