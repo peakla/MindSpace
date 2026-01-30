@@ -8,7 +8,19 @@
     highContrast: 'mindbalance_high_contrast',
     colorblind: 'mindbalance_colorblind',
     adhdMode: 'mindbalance_adhd_mode',
-    dyslexiaFont: 'mindbalance_dyslexia_font'
+    dyslexiaFont: 'mindbalance_dyslexia_font',
+    accentColor: 'mindbalance_accent_color'
+  };
+
+  const ACCENT_COLORS = {
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217' },
+    blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
+    green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150' },
+    teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172' },
+    pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171' },
+    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92' },
+    red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' },
+    gold: { hex: '#d6bd9f', hover: '#c4ab8d', rgb: '214, 189, 159' }
   };
 
   function getPreference(key, defaultValue) {
@@ -125,6 +137,23 @@
     });
   }
 
+  function applyAccentColor(colorName) {
+    const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.purple;
+    
+    document.documentElement.style.setProperty('--user-accent', color.hex);
+    document.documentElement.style.setProperty('--user-accent-hover', color.hover);
+    document.documentElement.style.setProperty('--user-accent-rgb', color.rgb);
+    document.documentElement.style.setProperty('--user-accent-glow', `rgba(${color.rgb}, 0.3)`);
+    
+    document.querySelectorAll('[data-accent-color]').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-accent-color') === colorName);
+    });
+    
+    document.querySelectorAll('select[data-accent-select]').forEach(select => {
+      select.value = colorName;
+    });
+  }
+
   function initSettings() {
     const savedTheme = getPreference(STORAGE_KEYS.theme, 'light');
     const savedFontSize = getPreference(STORAGE_KEYS.fontSize, 'normal');
@@ -132,6 +161,7 @@
     const savedColorblind = getPreference(STORAGE_KEYS.colorblind, 'none');
     const savedAdhdMode = getPreference(STORAGE_KEYS.adhdMode, 'false');
     const savedDyslexiaFont = getPreference(STORAGE_KEYS.dyslexiaFont, 'false');
+    const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, 'purple');
 
     // Clear any stored high contrast preference (feature removed)
     try { localStorage.removeItem(STORAGE_KEYS.highContrast); } catch(e) {}
@@ -143,6 +173,7 @@
     applyColorblind(savedColorblind);
     applyAdhdMode(savedAdhdMode);
     applyDyslexiaFont(savedDyslexiaFont);
+    applyAccentColor(savedAccentColor);
   }
 
   function initSettingsListeners() {
@@ -199,6 +230,22 @@
         const newValue = this.checked ? 'true' : 'false';
         setPreference(STORAGE_KEYS.dyslexiaFont, newValue);
         applyDyslexiaFont(newValue);
+      });
+    });
+
+    document.querySelectorAll('[data-accent-color]').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const colorName = this.getAttribute('data-accent-color');
+        setPreference(STORAGE_KEYS.accentColor, colorName);
+        applyAccentColor(colorName);
+      });
+    });
+
+    document.querySelectorAll('select[data-accent-select]').forEach(select => {
+      select.addEventListener('change', function() {
+        const colorName = this.value;
+        setPreference(STORAGE_KEYS.accentColor, colorName);
+        applyAccentColor(colorName);
       });
     });
   }
@@ -302,6 +349,13 @@
       setPreference(STORAGE_KEYS.dyslexiaFont, enabled ? 'true' : 'false');
       applyDyslexiaFont(enabled);
     },
+    setAccentColor: function(colorName) {
+      setPreference(STORAGE_KEYS.accentColor, colorName);
+      applyAccentColor(colorName);
+    },
+    getAccentColors: function() {
+      return ACCENT_COLORS;
+    },
     getPreferences: function() {
       return {
         theme: getPreference(STORAGE_KEYS.theme, 'light'),
@@ -310,7 +364,8 @@
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false') === 'true',
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
         adhdMode: getPreference(STORAGE_KEYS.adhdMode, 'false') === 'true',
-        dyslexiaFont: getPreference(STORAGE_KEYS.dyslexiaFont, 'false') === 'true'
+        dyslexiaFont: getPreference(STORAGE_KEYS.dyslexiaFont, 'false') === 'true',
+        accentColor: getPreference(STORAGE_KEYS.accentColor, 'purple')
       };
     }
   };

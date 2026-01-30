@@ -17,7 +17,7 @@
 .article-reading-progress__fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #4a6fa5, #d6bd9f);
+  background: var(--user-accent, #9b7ed9);
   transition: width 0.1s ease-out;
 }
 
@@ -661,13 +661,13 @@
 .article-toc__progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #4a6fa5, #6b8fc7);
+  background: var(--user-accent, #9b7ed9);
   border-radius: 4px;
   transition: width 0.2s ease;
 }
 
 [data-theme="dark"] .article-toc__progress-bar {
-  background: linear-gradient(90deg, #d6bd9f, #e8d4bc);
+  background: var(--user-accent, #9b7ed9);
 }
 
 /* Toggle Button */
@@ -713,7 +713,7 @@
   height: 48px;
   padding: 0 20px;
   border-radius: 24px;
-  background: linear-gradient(135deg, #4a6fa5, #6b8fc7);
+  background: var(--user-accent, #9b7ed9);
   color: white;
   border: 2px solid white;
   cursor: pointer;
@@ -723,21 +723,15 @@
   gap: 8px;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(var(--user-accent-rgb, 155, 126, 217), 0.3);
   z-index: 1000;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: tocBtnPulse 2s ease-in-out infinite;
-}
-
-@keyframes tocBtnPulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(74, 111, 165, 0.4); }
-  50% { box-shadow: 0 4px 30px rgba(74, 111, 165, 0.7); }
 }
 
 .article-toc-show-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
-  animation: none;
+  background: var(--user-accent-hover, #8a6dc8);
+  box-shadow: 0 6px 24px rgba(var(--user-accent-rgb, 155, 126, 217), 0.4);
 }
 
 .article-toc-show-btn.visible {
@@ -745,14 +739,15 @@
 }
 
 [data-theme="dark"] .article-toc-show-btn {
-  background: linear-gradient(135deg, #d6bd9f, #c4a882);
+  background: var(--user-accent, #9b7ed9);
   border-color: #2d2b3d;
-  color: #2d2b3d;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(var(--user-accent-rgb, 155, 126, 217), 0.4);
 }
 
 [data-theme="dark"] .article-toc-show-btn:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6);
+  background: var(--user-accent-hover, #8a6dc8);
+  box-shadow: 0 6px 24px rgba(var(--user-accent-rgb, 155, 126, 217), 0.5);
 }
 
 @keyframes tocBtnPulseDark {
@@ -794,21 +789,21 @@
 }
 
 .article-toc__pill:hover {
-  background: #e8f0f8;
-  color: #4a6fa5;
+  background: rgba(var(--user-accent-rgb, 155, 126, 217), 0.1);
+  color: var(--user-accent, #9b7ed9);
   transform: translateX(4px);
 }
 
 .article-toc__pill.active {
-  background: #4a6fa5;
+  background: var(--user-accent, #9b7ed9);
   color: #fff;
-  border-color: #4a6fa5;
-  box-shadow: 0 2px 8px rgba(74, 111, 165, 0.25);
+  border-color: var(--user-accent, #9b7ed9);
+  box-shadow: 0 2px 8px rgba(var(--user-accent-rgb, 155, 126, 217), 0.25);
 }
 
 .article-toc__pill.active:hover {
   transform: translateX(4px);
-  background: #3d5f8a;
+  background: var(--user-accent-hover, #8a6dc8);
 }
 
 /* Number Badge */
@@ -828,8 +823,8 @@
 }
 
 .article-toc__pill:hover .article-toc__num {
-  background: rgba(74, 111, 165, 0.15);
-  color: #4a6fa5;
+  background: rgba(var(--user-accent-rgb, 155, 126, 217), 0.15);
+  color: var(--user-accent, #9b7ed9);
 }
 
 .article-toc__pill.active .article-toc__num {
@@ -853,18 +848,18 @@
 
 [data-theme="dark"] .article-toc__pill:hover {
   background: #4d4a60;
-  color: #d6bd9f;
+  color: var(--user-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .article-toc__pill.active {
-  background: #d6bd9f;
-  color: #1a1a2e;
-  border-color: #d6bd9f;
-  box-shadow: 0 2px 8px rgba(214, 189, 159, 0.25);
+  background: var(--user-accent, #9b7ed9);
+  color: #fff;
+  border-color: var(--user-accent, #9b7ed9);
+  box-shadow: 0 2px 8px rgba(var(--user-accent-rgb, 155, 126, 217), 0.25);
 }
 
 [data-theme="dark"] .article-toc__pill.active:hover {
-  background: #c9ad8f;
+  background: var(--user-accent-hover, #8a6dc8);
 }
 
 [data-theme="dark"] .article-toc__num {
@@ -872,13 +867,13 @@
 }
 
 [data-theme="dark"] .article-toc__pill:hover .article-toc__num {
-  background: rgba(214, 189, 159, 0.2);
-  color: #d6bd9f;
+  background: rgba(var(--user-accent-rgb, 155, 126, 217), 0.2);
+  color: var(--user-accent, #9b7ed9);
 }
 
 [data-theme="dark"] .article-toc__pill.active .article-toc__num {
-  background: rgba(0, 0, 0, 0.15);
-  color: #1a1a2e;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
 }
 
 /* Reduced Motion */
