@@ -1205,5 +1205,20 @@
   "docs_tech_sources_1": "राष्ट्रीय मानसिक स्वास्थ्य संस्थान (NIMH)",
   "docs_tech_sources_2": "Mayo Clinic",
   "docs_tech_sources_3": "अमेरिकी मनोवैज्ञानिक संघ",
-  "docs_tech_sources_4": "NAMI, Mental Health America"
+  "docs_tech_sources_4": "NAMI, Mental Health America",
+  "blog_filter_news": "समाचार",
+  "blog_filter_stories": "कहानियां",
+  "blog_filter_community": "समुदाय",
+  "blog_news_stories": "समाचार और कहानियां",
+  "blog_trending_news": "ट्रेंडिंग समाचार",
+  "blog_audio": "ऑडियो",
+  "blog_audio_available": "ऑडियो उपलब्ध",
+  "blog_best_for": "के लिए उपयुक्त:",
+  "blog_min_read": "मिनट पढ़ना",
+  "blog_pill_stories": "कहानियां",
+  "blog_pill_community": "समुदाय",
+  "blog_pill_news": "समाचार",
+  "blog_pill_research": "अनुसंधान",
+  "blog_pill_workplace": "कार्यस्थल",
+  "blog_pill_wins": "जीत"
 }

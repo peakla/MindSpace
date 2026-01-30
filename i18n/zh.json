@@ -1205,5 +1205,20 @@
   "docs_tech_sources_1": "美国国家心理健康研究所 (NIMH)",
   "docs_tech_sources_2": "梅奥诊所",
   "docs_tech_sources_3": "美国心理学会",
-  "docs_tech_sources_4": "NAMI、Mental Health America"
+  "docs_tech_sources_4": "NAMI、Mental Health America",
+  "blog_filter_news": "新闻",
+  "blog_filter_stories": "故事",
+  "blog_filter_community": "社区",
+  "blog_news_stories": "新闻与故事",
+  "blog_trending_news": "热门新闻",
+  "blog_audio": "音频",
+  "blog_audio_available": "提供音频",
+  "blog_best_for": "适合：",
+  "blog_min_read": "分钟阅读",
+  "blog_pill_stories": "故事",
+  "blog_pill_community": "社区",
+  "blog_pill_news": "新闻",
+  "blog_pill_research": "研究",
+  "blog_pill_workplace": "职场",
+  "blog_pill_wins": "成就"
 }

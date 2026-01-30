@@ -1205,5 +1205,20 @@
   "docs_tech_sources_1": "Instituto Nacional de Salud Mental (NIMH)",
   "docs_tech_sources_2": "Mayo Clinic",
   "docs_tech_sources_3": "Asociación Americana de Psicología",
-  "docs_tech_sources_4": "NAMI, Mental Health America"
+  "docs_tech_sources_4": "NAMI, Mental Health America",
+  "blog_filter_news": "Noticias",
+  "blog_filter_stories": "Historias",
+  "blog_filter_community": "Comunidad",
+  "blog_news_stories": "Noticias e Historias",
+  "blog_trending_news": "Noticias Destacadas",
+  "blog_audio": "Audio",
+  "blog_audio_available": "Audio disponible",
+  "blog_best_for": "Ideal para:",
+  "blog_min_read": "min de lectura",
+  "blog_pill_stories": "Historias",
+  "blog_pill_community": "Comunidad",
+  "blog_pill_news": "Noticias",
+  "blog_pill_research": "Investigación",
+  "blog_pill_workplace": "Trabajo",
+  "blog_pill_wins": "Logros"
 }

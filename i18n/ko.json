@@ -1205,5 +1205,20 @@
   "docs_tech_sources_1": "국립정신건강연구소 (NIMH)",
   "docs_tech_sources_2": "Mayo Clinic",
   "docs_tech_sources_3": "미국심리학회",
-  "docs_tech_sources_4": "NAMI, Mental Health America"
+  "docs_tech_sources_4": "NAMI, Mental Health America",
+  "blog_filter_news": "뉴스",
+  "blog_filter_stories": "이야기",
+  "blog_filter_community": "커뮤니티",
+  "blog_news_stories": "뉴스 및 이야기",
+  "blog_trending_news": "인기 뉴스",
+  "blog_audio": "오디오",
+  "blog_audio_available": "오디오 제공",
+  "blog_best_for": "추천 대상:",
+  "blog_min_read": "분 소요",
+  "blog_pill_stories": "이야기",
+  "blog_pill_community": "커뮤니티",
+  "blog_pill_news": "뉴스",
+  "blog_pill_research": "연구",
+  "blog_pill_workplace": "직장",
+  "blog_pill_wins": "성과"
 }
