@@ -1,0 +1,477 @@
+/* ===== IMMERSIVE PROFILE EXPERIENCE ===== */
+/* Day/night cycle, personalized greetings, scroll animations, haptic feedback */
+
+(function() {
+  'use strict';
+  
+  // ===== DAY/NIGHT CYCLE =====
+  const TimeOfDay = {
+    MORNING: 'morning',    // 6am - 12pm
+    AFTERNOON: 'afternoon', // 12pm - 5pm
+    EVENING: 'evening',    // 5pm - 8pm
+    NIGHT: 'night'         // 8pm - 6am
+  };
+  
+  function getTimeOfDay() {
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 12) return TimeOfDay.MORNING;
+    if (hour >= 12 && hour < 17) return TimeOfDay.AFTERNOON;
+    if (hour >= 17 && hour < 20) return TimeOfDay.EVENING;
+    return TimeOfDay.NIGHT;
+  }
+  
+  function getGreeting() {
+    const time = getTimeOfDay();
+    switch (time) {
+      case TimeOfDay.MORNING: return 'Good morning';
+      case TimeOfDay.AFTERNOON: return 'Good afternoon';
+      case TimeOfDay.EVENING: return 'Good evening';
+      case TimeOfDay.NIGHT: return 'Good night';
+      default: return 'Welcome back';
+    }
+  }
+  
+  function getTimeEmoji() {
+    const time = getTimeOfDay();
+    switch (time) {
+      case TimeOfDay.MORNING: return '🌅';
+      case TimeOfDay.AFTERNOON: return '☀️';
+      case TimeOfDay.EVENING: return '🌇';
+      case TimeOfDay.NIGHT: return '🌙';
+      default: return '✨';
+    }
+  }
+  
+  // Affirmations based on time of day
+  const affirmations = {
+    morning: [
+      "Today is full of possibilities.",
+      "You have the strength to face whatever comes.",
+      "Take a deep breath and embrace the day.",
+      "Your potential is limitless.",
+      "Every morning is a fresh start."
+    ],
+    afternoon: [
+      "You're doing great. Keep going!",
+      "Take a moment to appreciate your progress.",
+      "Your efforts are making a difference.",
+      "Stay focused, you've got this.",
+      "Remember to take breaks and breathe."
+    ],
+    evening: [
+      "You've accomplished more than you realize.",
+      "It's okay to slow down now.",
+      "Reflect on the good moments of today.",
+      "You deserve rest and relaxation.",
+      "Be proud of how far you've come."
+    ],
+    night: [
+      "Rest well, tomorrow is a new beginning.",
+      "Let go of today's worries.",
+      "You did your best today, and that's enough.",
+      "Sweet dreams await you.",
+      "The night is for healing and renewal."
+    ]
+  };
+  
+  function getRandomAffirmation() {
+    const time = getTimeOfDay();
+    const timeAffirmations = affirmations[time] || affirmations.morning;
+    return timeAffirmations[Math.floor(Math.random() * timeAffirmations.length)];
+  }
+  
+  function applyTimeOfDay() {
+    const time = getTimeOfDay();
+    const body = document.body;
+    const profile = document.querySelector('.mb-profile');
+    
+    // Remove all time classes
+    body.classList.remove('time-morning', 'time-afternoon', 'time-evening', 'time-night');
+    
+    // Add current time class
+    body.classList.add(`time-${time}`);
+    
+    // Add immersive class to profile
+    if (profile) {
+      profile.classList.add('immersive');
+    }
+    
+    // Create immersive background if it doesn't exist
+    createImmersiveBackground();
+    
+    // Update greeting
+    updateGreeting();
+  }
+  
+  function createImmersiveBackground() {
+    if (document.querySelector('.immersive-bg')) return;
+    
+    const bg = document.createElement('div');
+    bg.className = 'immersive-bg';
+    bg.innerHTML = `
+      <div class="immersive-bg__gradient"></div>
+      <div class="immersive-bg__shapes">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+      </div>
+      <div class="immersive-bg__stars" id="starsContainer"></div>
+      <div class="immersive-bg__sun"></div>
+      <div class="immersive-bg__moon"></div>
+    `;
+    
+    document.body.insertBefore(bg, document.body.firstChild);
+    
+    // Generate stars for night mode
+    generateStars();
+  }
+  
+  function generateStars() {
+    const container = document.getElementById('starsContainer');
+    if (!container) return;
+    
+    // Clear existing stars
+    container.innerHTML = '';
+    
+    // Generate 50 random stars
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 60}%`;
+      star.style.width = `${2 + Math.random() * 3}px`;
+      star.style.height = star.style.width;
+      star.style.animationDelay = `${Math.random() * 3}s`;
+      container.appendChild(star);
+    }
+  }
+  
+  function updateGreeting() {
+    const greetingEl = document.querySelector('.profile-greeting');
+    if (!greetingEl) return;
+    
+    const timeEl = greetingEl.querySelector('.profile-greeting__time');
+    const messageEl = greetingEl.querySelector('.profile-greeting__message');
+    const affirmationEl = greetingEl.querySelector('.profile-greeting__affirmation');
+    
+    // Get user name from profile
+    const userName = window.userProfile?.display_name || 
+                     document.querySelector('.mb-profile__name')?.textContent ||
+                     'there';
+    
+    const firstName = userName.split(' ')[0];
+    
+    if (timeEl) {
+      timeEl.textContent = `${getTimeEmoji()} ${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`;
+    }
+    
+    if (messageEl) {
+      messageEl.innerHTML = `${getGreeting()}, <span class="profile-greeting__name">${firstName}</span>!`;
+    }
+    
+    if (affirmationEl) {
+      affirmationEl.textContent = `"${getRandomAffirmation()}"`;
+    }
+  }
+  
+  // ===== SCROLL-TRIGGERED ANIMATIONS =====
+  function initScrollAnimations() {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          
+          // Trigger counter animations if present
+          const counters = entry.target.querySelectorAll('.stat-counter[data-target]');
+          counters.forEach(counter => animateCounter(counter));
+          
+          // Trigger progress rings if present
+          const rings = entry.target.querySelectorAll('.progress-ring__circle-progress');
+          rings.forEach(ring => animateProgressRing(ring));
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all scroll-reveal elements
+    document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale, .stagger-reveal').forEach(el => {
+      observer.observe(el);
+    });
+  }
+  
+  function animateCounter(counter) {
+    if (counter.classList.contains('counted')) return;
+    counter.classList.add('counted');
+    
+    const target = parseInt(counter.dataset.target) || 0;
+    const duration = 1500;
+    const start = performance.now();
+    
+    function update(currentTime) {
+      const elapsed = currentTime - start;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const current = Math.round(easeOutQuart * target);
+      
+      counter.textContent = current.toLocaleString();
+      
+      if (progress < 1) {
+        counter.classList.add('counting');
+        requestAnimationFrame(update);
+      } else {
+        counter.classList.remove('counting');
+      }
+    }
+    
+    requestAnimationFrame(update);
+  }
+  
+  function animateProgressRing(ring) {
+    if (ring.classList.contains('animated')) return;
+    ring.classList.add('animated');
+    
+    const percent = parseFloat(ring.dataset.percent) || 0;
+    const circumference = 226; // 2 * PI * 36 (radius)
+    const offset = circumference - (percent / 100) * circumference;
+    
+    setTimeout(() => {
+      ring.style.strokeDashoffset = offset;
+    }, 100);
+  }
+  
+  // ===== HAPTIC FEEDBACK =====
+  const HapticIntensity = {
+    LIGHT: 'light',
+    MEDIUM: 'medium',
+    HEAVY: 'heavy'
+  };
+  
+  function triggerHaptic(intensity = HapticIntensity.LIGHT) {
+    if (!window.navigator?.vibrate) return;
+    
+    // Check if user prefers reduced motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    switch (intensity) {
+      case HapticIntensity.LIGHT:
+        navigator.vibrate(10);
+        break;
+      case HapticIntensity.MEDIUM:
+        navigator.vibrate(25);
+        break;
+      case HapticIntensity.HEAVY:
+        navigator.vibrate([30, 10, 30]);
+        break;
+    }
+  }
+  
+  function initHapticFeedback() {
+    // Light haptics for buttons
+    document.querySelectorAll('.haptic-light, .quick-action-btn, .mb-profile__tab').forEach(el => {
+      el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.LIGHT), { passive: true });
+    });
+    
+    // Medium haptics for important actions
+    document.querySelectorAll('.haptic-medium, .follow-btn, .save-btn').forEach(el => {
+      el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.MEDIUM), { passive: true });
+    });
+    
+    // Heavy haptics for achievements
+    document.querySelectorAll('.haptic-heavy, .achievement-unlock').forEach(el => {
+      el.addEventListener('touchstart', () => triggerHaptic(HapticIntensity.HEAVY), { passive: true });
+    });
+    
+    // Visual feedback for haptic interactions
+    document.querySelectorAll('.haptic-feedback').forEach(el => {
+      el.addEventListener('touchstart', function() {
+        this.classList.add('touched');
+        setTimeout(() => this.classList.remove('touched'), 400);
+      }, { passive: true });
+    });
+  }
+  
+  // ===== PARALLAX EFFECT =====
+  function initParallax() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    
+    const shapes = document.querySelectorAll('.floating-shape');
+    
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      
+      shapes.forEach((shape, i) => {
+        const speed = 0.05 + (i * 0.02);
+        shape.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    }, { passive: true });
+  }
+  
+  // ===== ONLINE STATUS =====
+  function updateOnlineStatus(isOnline = true) {
+    const statusEl = document.querySelector('.online-status');
+    if (!statusEl) return;
+    
+    statusEl.classList.remove('online-status--online', 'online-status--away', 'online-status--offline');
+    
+    if (isOnline) {
+      statusEl.classList.add('online-status--online');
+      statusEl.querySelector('.online-status__text').textContent = 'Online';
+    } else {
+      statusEl.classList.add('online-status--offline');
+      statusEl.querySelector('.online-status__text').textContent = 'Offline';
+    }
+  }
+  
+  // ===== PEOPLE SUGGESTIONS =====
+  async function loadPeopleSuggestions() {
+    const container = document.getElementById('peopleSuggestions');
+    const list = document.getElementById('peopleSuggestionsList');
+    if (!container || !list || !window.supabaseClient) return;
+    
+    try {
+      const { data: { user } } = await window.supabaseClient.auth.getUser();
+      if (!user) return;
+      
+      // Get users the current user is already following
+      const { data: following } = await window.supabaseClient
+        .from('followers')
+        .select('following_id')
+        .eq('follower_id', user.id);
+      
+      const followingIds = following?.map(f => f.following_id) || [];
+      followingIds.push(user.id); // Exclude self
+      
+      // Get active users (with posts or comments) that user doesn't follow
+      const { data: suggestions } = await window.supabaseClient
+        .from('profiles')
+        .select('id, display_name, avatar_url')
+        .not('id', 'in', `(${followingIds.join(',')})`)
+        .not('display_name', 'is', null)
+        .limit(5);
+      
+      if (!suggestions || suggestions.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      
+      container.style.display = 'block';
+      list.innerHTML = '';
+      
+      for (const person of suggestions) {
+        // Count mutual connections (users you both follow)
+        const { count: mutualCount } = await window.supabaseClient
+          .from('followers')
+          .select('*', { count: 'exact', head: true })
+          .eq('following_id', person.id)
+          .in('follower_id', followingIds.filter(id => id !== user.id));
+        
+        const item = document.createElement('div');
+        item.className = 'people-suggestion';
+        item.innerHTML = `
+          <img src="${person.avatar_url || '/assets/images/user.png'}" alt="${person.display_name}" class="people-suggestion__avatar">
+          <div class="people-suggestion__info">
+            <a href="/profile/?user=${person.id}" class="people-suggestion__name">${person.display_name}</a>
+            <span class="people-suggestion__mutual">${mutualCount || 0} mutual connection${mutualCount !== 1 ? 's' : ''}</span>
+          </div>
+          <button class="people-suggestion__follow-btn haptic-light" data-user-id="${person.id}">Follow</button>
+        `;
+        
+        // Add follow button functionality
+        const followBtn = item.querySelector('.people-suggestion__follow-btn');
+        followBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          const userId = followBtn.dataset.userId;
+          
+          try {
+            await window.supabaseClient
+              .from('followers')
+              .insert({ follower_id: user.id, following_id: userId });
+            
+            followBtn.textContent = 'Following';
+            followBtn.disabled = true;
+            followBtn.style.opacity = '0.6';
+            
+            // Haptic feedback
+            triggerHaptic(HapticIntensity.MEDIUM);
+          } catch (err) {
+            console.error('Failed to follow:', err);
+          }
+        });
+        
+        list.appendChild(item);
+      }
+    } catch (err) {
+      console.error('Failed to load people suggestions:', err);
+      container.style.display = 'none';
+    }
+  }
+  
+  // ===== INITIALIZE =====
+  function init() {
+    // Apply time-based theme
+    applyTimeOfDay();
+    
+    // Update time every minute
+    setInterval(applyTimeOfDay, 60000);
+    
+    // Initialize scroll animations
+    initScrollAnimations();
+    
+    // Initialize haptic feedback
+    initHapticFeedback();
+    
+    // Initialize parallax
+    initParallax();
+    
+    // Update greeting when user data loads
+    window.addEventListener('profileLoaded', () => {
+      updateGreeting();
+      loadPeopleSuggestions();
+    });
+    
+    // Also try to load suggestions after a delay if profile is already loaded
+    setTimeout(() => {
+      if (window.userProfile) {
+        updateGreeting();
+        loadPeopleSuggestions();
+      }
+    }, 2000);
+    
+    // Listen for theme changes to adjust colors
+    const observer = new MutationObserver(() => {
+      applyTimeOfDay();
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+  }
+  
+  // Expose functions globally for other scripts
+  window.ImmersiveProfile = {
+    triggerHaptic,
+    loadPeopleSuggestions,
+    updateGreeting,
+    animateCounter,
+    animateProgressRing,
+    getTimeOfDay,
+    getGreeting,
+    getRandomAffirmation
+  };
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

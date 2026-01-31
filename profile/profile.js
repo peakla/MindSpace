@@ -1186,13 +1186,14 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
   if (allAchievements.length === 0) return;
   
   // Get user stats
-  const [postsResult, commentsResult, likesResult, moodResult, goalsResult, savedResult] = await Promise.all([
+  const [postsResult, commentsResult, likesResult, moodResult, goalsResult, savedResult, followersResult] = await Promise.all([
     supabaseClient.from('posts').select('id', { count: 'exact' }).eq('author_id', currentUser.id),
     supabaseClient.from('post_comments').select('id', { count: 'exact' }).eq('author_id', currentUser.id),
     supabaseClient.from('posts').select('like_count').eq('author_id', currentUser.id),
     supabaseClient.from('mood_logs').select('id', { count: 'exact' }).eq('user_id', currentUser.id),
     supabaseClient.from('wellness_goals').select('id, completed').eq('user_id', currentUser.id),
-    supabaseClient.from('saved_articles').select('id', { count: 'exact' }).eq('user_id', currentUser.id)
+    supabaseClient.from('saved_articles').select('id', { count: 'exact' }).eq('user_id', currentUser.id),
+    supabaseClient.from('followers').select('id', { count: 'exact' }).eq('following_id', currentUser.id)
   ]);
   
   const postCount = postsResult.count || 0;
@@ -1203,6 +1204,7 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
   const completedGoals = (goalsResult.data || []).filter(g => g.completed).length;
   const savedCount = savedResult.count || 0;
   const currentStreak = userProfile?.current_streak || 0;
+  const followerCount = followersResult.count || 0;
   
   const stats = {
     posts: postCount,
@@ -1212,11 +1214,12 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     goals: goalCount,
     goals_completed: completedGoals,
     saves: savedCount,
-    streak: currentStreak
+    streak: currentStreak,
+    followers: followerCount
   };
   
   // Known criteria types that we can evaluate
-  const knownCriteriaTypes = ['posts', 'comments', 'likes_received', 'mood_logs', 'goals', 'goals_completed', 'saves', 'streak', 'profile_complete'];
+  const knownCriteriaTypes = ['posts', 'comments', 'likes_received', 'mood_logs', 'goals', 'goals_completed', 'saves', 'streak', 'profile_complete', 'followers'];
   
   // Check each achievement and award if ALL criteria met
   const newBadges = [];
@@ -1246,6 +1249,7 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
     if (criteria.goals_completed !== undefined && stats.goals_completed < criteria.goals_completed) earned = false;
     if (criteria.saves !== undefined && stats.saves < criteria.saves) earned = false;
     if (criteria.streak !== undefined && stats.streak < criteria.streak) earned = false;
+    if (criteria.followers !== undefined && stats.followers < criteria.followers) earned = false;
     
     // Check profile_complete criteria - user must have avatar, bio, and at least one social link
     if (criteria.profile_complete !== undefined) {

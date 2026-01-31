@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="../css/analytics.css" />
   <link rel="stylesheet" href="profile.css" />
   <link rel="stylesheet" href="wellness-enhanced.css" />
+  <link rel="stylesheet" href="profile-immersive.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="../js/auth.js" defer></script>
@@ -26,6 +27,7 @@
   <script src="../js/translations.js" defer></script>
   <script src="../js/analytics.js" defer></script>
   <script src="profile-analytics.js" defer></script>
+  <script src="profile-immersive.js" defer></script>
 </head>
 
 <body>
@@ -498,8 +500,15 @@
   <!-- Logged In State -->
   <div class="mb-profile__wrap" id="profileView" style="display: none;">
     
+    <!-- Personalized Greeting -->
+    <div class="profile-greeting scroll-reveal">
+      <p class="profile-greeting__time"></p>
+      <h2 class="profile-greeting__message">Welcome back!</h2>
+      <p class="profile-greeting__affirmation"></p>
+    </div>
+    
     <!-- Profile Header -->
-    <div class="mb-profile__header animate-fade-in">
+    <div class="mb-profile__header glass-card scroll-reveal animate-fade-in">
       <div class="mb-profile__cover" id="coverPhoto">
         <button class="mb-profile__cover-edit" id="editCoverBtn" aria-label="Change cover photo">
           <ion-icon name="camera-outline"></ion-icon>
@@ -653,7 +662,7 @@
     </div>
     
     <!-- Tabs -->
-    <div class="mb-profile__tabs animate-slide-up">
+    <div class="mb-profile__tabs scroll-reveal animate-slide-up">
       <button class="mb-profile__tab is-active" data-tab="activity">
         <ion-icon name="newspaper-outline"></ion-icon> Activity
       </button>
@@ -675,13 +684,22 @@
     </div>
     
     <!-- Tab Content -->
-    <div class="mb-profile__content animate-fade-in">
+    <div class="mb-profile__content scroll-reveal animate-fade-in">
       
       <!-- Activity Tab -->
       <div class="mb-profile__panel is-active" id="activityPanel">
         
+        <!-- People You May Know -->
+        <div class="people-suggestions glass-card scroll-reveal" id="peopleSuggestions" style="display: none;">
+          <h3 class="people-suggestions__title">
+            <ion-icon name="people-outline"></ion-icon> People You May Know
+          </h3>
+          <div class="people-suggestions__list" id="peopleSuggestionsList">
+          </div>
+        </div>
+        
         <!-- Reading Stats Section -->
-        <div class="mb-profile__analytics-section" id="profileReadingStats"></div>
+        <div class="mb-profile__analytics-section scroll-reveal" id="profileReadingStats"></div>
         
         <!-- Activity Chart Section -->
         <div class="mb-profile__analytics-section" id="profileActivityChart"></div>
@@ -746,6 +764,28 @@
       <!-- Wellness Tab -->
       <div class="mb-profile__panel" id="wellnessPanel">
         <div class="mb-profile__wellness">
+          
+          <!-- AI-Powered Wellness Insights -->
+          <div class="ai-insights glass-card scroll-reveal" id="aiInsightsSection">
+            <div class="ai-insights__header">
+              <div class="ai-insights__icon">
+                <ion-icon name="sparkles"></ion-icon>
+              </div>
+              <div>
+                <h3 class="ai-insights__title">AI Wellness Insights</h3>
+                <span class="ai-insights__badge">Powered by AI</span>
+              </div>
+            </div>
+            <div class="ai-insights__content" id="aiInsightsContent">
+              <div class="ai-insights__loading">
+                <span>Analyzing your wellness journey</span>
+                <div class="ai-insights__loading-dots">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+            </div>
+            <div class="ai-insights__affirmation" id="aiAffirmation" style="display: none;"></div>
+          </div>
           
           <!-- Mood Section -->
           <div class="mb-profile__wellness-section">
