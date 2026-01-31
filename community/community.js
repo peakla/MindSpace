@@ -964,12 +964,13 @@ async function handlePost() {
     .single();
   
   if (error) {
-    console.error('Error creating post:', error);
+    console.error('Error creating post:', error.message || error);
+    console.error('Full error details:', JSON.stringify(error, null, 2));
     placeholder.remove();
     if (error.message && error.message.includes('does not exist')) {
       alert('The forum database needs to be set up. Please run the supabase-setup.sql script in your Supabase SQL Editor.');
     } else {
-      alert('Failed to create post. Please try again.');
+      alert('Failed to create post: ' + (error.message || 'Unknown error'));
     }
     return;
   }
