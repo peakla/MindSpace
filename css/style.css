@@ -7286,6 +7286,11 @@ textarea::placeholder {
   font-weight: 600;
 }
 
+.mb-communityMember {
+  color: #af916d;
+  font-weight: 600;
+}
+
 .mb-commentAuthorLink {
   color: #af916d;
   text-decoration: none;
@@ -7453,6 +7458,10 @@ textarea::placeholder {
 
 [data-theme="dark"] .mb-teamBadge {
   background: linear-gradient(135deg, #9b7ed9, #b794f6);
+}
+
+[data-theme="dark"] .mb-communityMember {
+  color: #9b7ed9;
 }
 
 [data-theme="dark"] .mb-commentAuthorLink {

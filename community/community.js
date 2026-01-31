@@ -821,10 +821,31 @@ function createCommentElement(commentData) {
   comment.className = 'mb-comment';
   comment.setAttribute('data-comment-id', commentData.id);
   
-  const authorName = commentData.author_name || (commentData.author_id ? 'Anonymous' : 'MindBalance Team');
+  // Generate a consistent fake username for NULL author comments based on comment ID
+  const fakeUsernames = [
+    'earthygreens0', 'mindfuljourney', 'calmwaters22', 'peacefulpath',
+    'hopefulheart', 'serenesky', 'gentlebreeze', 'quietmind99',
+    'warmthoughts', 'kindspirit', 'healingvibes', 'brightdays',
+    'softglow', 'tranquilsoul', 'innerpeace21'
+  ];
+  
+  let authorName;
+  if (commentData.author_name) {
+    authorName = commentData.author_name;
+  } else if (commentData.author_id) {
+    authorName = 'Anonymous';
+  } else {
+    // Use comment ID to pick a consistent fake username
+    const hash = commentData.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    authorName = fakeUsernames[hash % fakeUsernames.length];
+  }
   
   const userSpan = document.createElement('span');
   userSpan.className = 'mb-commentUser';
+  
+  const authorSpan = document.createElement('span');
+  authorSpan.className = commentData.author_id ? 'mb-commentAuthorLink' : 'mb-communityMember';
+  authorSpan.textContent = authorName;
   
   if (commentData.author_id) {
     const authorLink = document.createElement('a');
@@ -833,10 +854,7 @@ function createCommentElement(commentData) {
     authorLink.textContent = authorName;
     userSpan.appendChild(authorLink);
   } else {
-    const teamBadge = document.createElement('span');
-    teamBadge.className = 'mb-teamBadge';
-    teamBadge.textContent = authorName;
-    userSpan.appendChild(teamBadge);
+    userSpan.appendChild(authorSpan);
   }
   
   const colonText = document.createTextNode(': ');
