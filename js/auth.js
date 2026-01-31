@@ -187,7 +187,7 @@ async function updateUserButton(user) {
         const { data: profile } = await sb
           .from('profiles')
           .select('avatar_url, display_name')
-          .eq('user_id', user.id)
+          .eq('id', user.id)
           .single();
         
         if (profile?.avatar_url) {

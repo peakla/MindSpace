@@ -1405,6 +1405,49 @@
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="../js/toast.js"></script>
+<!-- Profile Setup Onboarding Modal -->
+<div id="onboardingModal" class="onboarding-modal" hidden>
+  <div class="onboarding-modal__backdrop"></div>
+  <div class="onboarding-modal__content">
+    <div class="onboarding-modal__header">
+      <div class="onboarding-modal__icon">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <h2 class="onboarding-modal__title">Welcome to MindBalance!</h2>
+      <p class="onboarding-modal__subtitle">Let's set up your profile so others can get to know you</p>
+    </div>
+    
+    <div class="onboarding-modal__body">
+      <div class="onboarding-modal__step" data-step="1">
+        <div class="form-group">
+          <label for="onboardingDisplayName">
+            Display Name <span class="required">*</span>
+          </label>
+          <input type="text" id="onboardingDisplayName" placeholder="How would you like to be called?" maxlength="30" required>
+          <span class="form-hint">This will be shown on your posts and comments</span>
+        </div>
+        
+        <div class="form-group">
+          <label for="onboardingBio">Bio (optional)</label>
+          <textarea id="onboardingBio" placeholder="Tell us a little about yourself..." maxlength="200" rows="3"></textarea>
+          <span class="form-hint">Share your interests, goals, or a short introduction</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="onboarding-modal__footer">
+      <p class="onboarding-modal__note">
+        <i class="fas fa-lock"></i>
+        Your information is private and you can update it anytime
+      </p>
+      <button type="button" id="onboardingSaveBtn" class="btn-primary" disabled>
+        <i class="fas fa-check"></i>
+        Complete Setup
+      </button>
+    </div>
+  </div>
+</div>
+
 <script src="../js/script.js" defer></script>
 <script src="../js/scroll-progress.js" defer></script>
 <script src="../js/animations.js" defer></script>

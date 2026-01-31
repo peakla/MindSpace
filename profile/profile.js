@@ -485,17 +485,18 @@ async function loadProfileData(userId) {
       document.getElementById('reputationPoints').textContent = profile.reputation_points;
     }
   } else if (isOwnProfile && currentUser) {
-    // Use email as display name fallback (only for own profile)
-    const displayName = currentUser.email?.split('@')[0] || 'User';
-    document.getElementById('profileName').textContent = displayName;
+    // No profile exists for new user - display temporary name
+    document.getElementById('profileName').textContent = 'New User';
     
-    // Create profile if it doesn't exist
+    // Create minimal profile (without display_name so onboarding triggers)
     await supabaseClient.from('profiles').upsert({
       id: currentUser.id,
-      username: displayName,
-      display_name: displayName,
+      username: currentUser.email?.split('@')[0] || 'user',
       created_at: new Date().toISOString()
     });
+    
+    // Mark as needing onboarding
+    profile = { id: currentUser.id, display_name: null };
   } else {
     // Profile not found for the viewed user
     document.getElementById('profileName').textContent = 'User';
@@ -507,6 +508,12 @@ async function loadProfileData(userId) {
   // Set up real-time subscriptions for own profile
   if (isOwnProfile) {
     setupRealtimeSubscriptions(userId);
+    
+    // Check if onboarding is needed (no display name set)
+    const needsOnboarding = !profile?.display_name || profile.display_name.trim() === '';
+    if (needsOnboarding) {
+      showOnboardingModal();
+    }
   }
 }
 
@@ -2834,4 +2841,102 @@ function updateSocialLinksVisibility() {
   
   const visibleLinks = container.querySelectorAll('a:not([hidden])');
   container.style.display = visibleLinks.length > 0 ? 'flex' : 'none';
+}
+
+// ===== ONBOARDING MODAL =====
+
+let onboardingInitialized = false;
+
+function showOnboardingModal() {
+  const modal = document.getElementById('onboardingModal');
+  if (!modal) return;
+  
+  modal.hidden = false;
+  document.body.style.overflow = 'hidden';
+  
+  const displayNameInput = document.getElementById('onboardingDisplayName');
+  const bioInput = document.getElementById('onboardingBio');
+  const saveBtn = document.getElementById('onboardingSaveBtn');
+  
+  // Focus the display name input
+  setTimeout(() => displayNameInput?.focus(), 100);
+  
+  // Guard against duplicate event handlers
+  if (onboardingInitialized) return;
+  onboardingInitialized = true;
+  
+  // Enable/disable save button based on display name input
+  displayNameInput?.addEventListener('input', () => {
+    const name = displayNameInput.value.trim();
+    saveBtn.disabled = name.length < 2;
+  });
+  
+  // Handle save
+  saveBtn?.addEventListener('click', async () => {
+    const displayName = displayNameInput.value.trim();
+    const bio = bioInput.value.trim();
+    
+    if (displayName.length < 2) {
+      ToastManager.error('Display name must be at least 2 characters');
+      displayNameInput.focus();
+      return;
+    }
+    
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+    
+    try {
+      const supabaseClient = getSupabaseClient();
+      if (!supabaseClient || !currentUser) {
+        throw new Error('Not authenticated');
+      }
+      
+      const { error } = await supabaseClient
+        .from('profiles')
+        .upsert({
+          id: currentUser.id,
+          display_name: displayName,
+          bio: bio || null,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+      
+      if (error) throw error;
+      
+      // Update local state
+      userProfile = { ...userProfile, display_name: displayName, bio: bio };
+      window.userProfile = userProfile;
+      
+      // Update UI
+      document.getElementById('profileName').textContent = displayName;
+      document.getElementById('profileBio').textContent = bio || 'No bio yet...';
+      document.getElementById('settingsName').value = displayName;
+      document.getElementById('settingsBio').value = bio;
+      
+      // Update profile completion
+      updateProfileCompletion(userProfile);
+      
+      // Update immersive greeting if available
+      if (window.MindBalanceImmersive?.updateGreeting) {
+        window.MindBalanceImmersive.updateGreeting();
+      }
+      
+      // Close modal
+      hideOnboardingModal();
+      
+      ToastManager.success('Profile setup complete! Welcome to MindBalance!');
+    } catch (error) {
+      console.error('Onboarding error:', error);
+      ToastManager.error('Failed to save profile. Please try again.');
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<i class="fas fa-check"></i> Complete Setup';
+    }
+  });
+}
+
+function hideOnboardingModal() {
+  const modal = document.getElementById('onboardingModal');
+  if (!modal) return;
+  
+  modal.hidden = true;
+  document.body.style.overflow = '';
 }
