@@ -172,6 +172,7 @@ CREATE TABLE posts (
   like_count INTEGER DEFAULT 0,
   comment_count INTEGER DEFAULT 0,
   is_pinned BOOLEAN DEFAULT FALSE,
+  pinned_at TIMESTAMPTZ,
   is_hidden BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
