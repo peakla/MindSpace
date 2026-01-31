@@ -793,6 +793,101 @@
   }
 }
 
+/* ===== AI MOOD SUGGESTION ===== */
+.ai-mood-suggestion {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  background: linear-gradient(135deg, rgba(155, 126, 217, 0.1) 0%, rgba(135, 206, 235, 0.1) 100%);
+  border-radius: 12px;
+  border-left: 3px solid var(--user-accent, #9b7ed9);
+}
+
+.ai-mood-suggestion ion-icon {
+  font-size: 1.2rem;
+  color: var(--user-accent, #9b7ed9);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.ai-mood-suggestion span {
+  font-size: 0.9rem;
+  color: var(--time-text);
+  line-height: 1.5;
+}
+
+/* ===== AI GOAL SUGGESTION ===== */
+.ai-goal-suggestion {
+  padding: 18px;
+  margin: 15px 0;
+  background: linear-gradient(135deg, rgba(155, 126, 217, 0.15) 0%, rgba(135, 206, 235, 0.1) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(155, 126, 217, 0.3);
+}
+
+.ai-goal-suggestion__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--user-accent, #9b7ed9);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ai-goal-suggestion__header ion-icon {
+  font-size: 1rem;
+}
+
+.ai-goal-suggestion__text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--time-text);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.ai-goal-suggestion__reason {
+  font-size: 0.85rem;
+  color: var(--time-text);
+  opacity: 0.7;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.ai-goal-suggestion__add {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--user-accent, #9b7ed9) 0%, #7c5fc4 100%);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ai-goal-suggestion__add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(155, 126, 217, 0.4);
+}
+
+.ai-goal-suggestion__add ion-icon {
+  font-size: 1rem;
+}
+
+[data-theme="dark"] .ai-mood-suggestion,
+[data-theme="dark"] .ai-goal-suggestion {
+  background: linear-gradient(135deg, rgba(155, 126, 217, 0.2) 0%, rgba(75, 70, 100, 0.3) 100%);
+}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
   .profile-greeting {

@@ -66,6 +66,16 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 -   **User Settings**: Persistent panel for customizing accessibility options.
 -   **Navigation**: Dynamic navbar with a crisis button, search bar with typeahead, dropdown menus, notification badges, and a mobile-specific hamburger menu.
 -   **User Profile Page**: Instagram-style profile with cover and avatar uploads, editable display name and bio, social links, unified stats card (posts, comments, likes, followers, following, reputation, streak badges), and multiple tabs (Activity, Liked Posts, Saved Articles, Achievements, Wellness, Settings). Includes a mood tracker, wellness goals CRUD, reading streak calendar, profile theme picker, privacy controls, and account deletion functionality. Supports public profile viewing with privacy considerations and a social follow/unfollow system.
+-   **Immersive Profile Experience** (`profile/profile-immersive.css` and `profile/profile-immersive.js`): Cinematic, full-page profile with:
+    - **Day/Night Cycle**: Time-based gradients, colors, and decorative elements that change based on user's local time (morning/afternoon/evening/night)
+    - **Personalized Greeting**: Time-aware welcome messages with user's name and daily affirmations
+    - **Parallax Background**: Floating animated shapes, stars (night), sun rays (day), and moon elements
+    - **Scroll-Triggered Animations**: Reveal effects for all profile sections (fade-in, slide-up, scale, stagger)
+    - **Glassmorphism Cards**: Backdrop blur effects with subtle borders and shadows
+    - **Haptic Feedback**: Vibration feedback on mobile for button interactions (light/medium/heavy)
+    - **Community Connections**: "People You May Know" suggestions with follow functionality
+    - **AI Wellness Insights**: OpenAI-powered personalized insights, mood analysis, and goal suggestions
+    - Full dark mode support and reduced motion respect
 -   **Enhanced Wellness Tab** (`profile/wellness-enhanced.css`): Comprehensive visual overhaul including:
     - Full-width profile layout (1400px max-width) for better laptop/desktop experience
     - Glassmorphism card effects with subtle blur backgrounds and gradient top borders
@@ -78,7 +88,7 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Tracks page views, article reads/completions, scroll depth, time spent on pages
     - **Daily visit logging** with streak calculation - automatically logs visits to `user_engagement` table
     - **Reading streak tracking** - calculates consecutive daily visits with current and longest streak stats
-    - Achievement system with 15 unlockable badges and unlock animations
+    - **Expanded Achievement System**: 28 unlockable badges across 5 categories (community, engagement, reading, wellness, social) with unlock animations
     - Calendar heatmap visualization (GitHub-style) showing daily activity levels
     - Activity timeline with icons, timestamps, and smooth animations
     - Reading stats cards with animated bar charts
@@ -112,3 +122,5 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 -   **Font Awesome**: For iconography.
 -   **Google Fonts**: For "Poppins", "Montserrat", and "Noto Sans KR" font families.
 -   **External Content Providers**: National Institute of Mental Health (NIMH) and Mayo Clinic for credible resource content.
+-   **OpenAI (via Replit AI Integrations)**: For AI-powered wellness insights, mood analysis, and goal suggestions in the profile wellness tab.
+-   **ElevenLabs**: For high-quality text-to-speech in article pages.

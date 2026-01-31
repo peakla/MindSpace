@@ -9,6 +9,7 @@ from flask_cors import CORS
 from elevenlabs.client import ElevenLabs
 from functools import wraps
 from resend import Emails
+from api.wellness_insights import generate_wellness_insight, generate_mood_analysis, generate_goal_suggestion
 
 app = Flask(__name__, static_folder='.', static_url_path='')
 
@@ -445,6 +446,73 @@ def newsletter_subscribe():
     finally:
         if conn:
             conn.close()
+
+@app.route('/api/wellness/insights', methods=['POST', 'OPTIONS'])
+def wellness_insights_endpoint():
+    """Generate AI-powered wellness insights"""
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.get_json() or {}
+        mood_data = data.get('mood_data', [])
+        goals_data = data.get('goals_data', [])
+        streak_data = data.get('streak_data', {})
+        
+        result = generate_wellness_insight(mood_data, goals_data, streak_data)
+        return jsonify(result)
+    except Exception as e:
+        print(f"Wellness insights error: {e}")
+        return jsonify({
+            'success': False,
+            'insight': 'Keep up your wellness journey!',
+            'affirmation': 'You are doing great!'
+        })
+
+
+@app.route('/api/wellness/mood-analysis', methods=['POST', 'OPTIONS'])
+def mood_analysis_endpoint():
+    """Analyze mood patterns"""
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.get_json() or {}
+        mood_entries = data.get('mood_entries', [])
+        
+        result = generate_mood_analysis(mood_entries)
+        return jsonify(result)
+    except Exception as e:
+        print(f"Mood analysis error: {e}")
+        return jsonify({
+            'success': False,
+            'analysis': 'Keep tracking your moods for insights.',
+            'suggestion': 'Try logging your mood daily.'
+        })
+
+
+@app.route('/api/wellness/goal-suggestion', methods=['POST', 'OPTIONS'])
+def goal_suggestion_endpoint():
+    """Suggest new wellness goals"""
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.get_json() or {}
+        current_goals = data.get('current_goals', [])
+        completed_goals = data.get('completed_goals', [])
+        
+        result = generate_goal_suggestion(current_goals, completed_goals)
+        return jsonify(result)
+    except Exception as e:
+        print(f"Goal suggestion error: {e}")
+        return jsonify({
+            'success': False,
+            'goal': 'Take a 10-minute mindfulness break today',
+            'category': 'mindfulness',
+            'why': 'Small steps lead to big changes.'
+        })
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
