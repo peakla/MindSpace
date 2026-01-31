@@ -54,6 +54,23 @@
   --time-glow: rgba(155, 126, 217, 0.4);
 }
 
+/* ===== MAKE PROFILE BACKGROUND TRANSPARENT FOR IMMERSIVE MODE ===== */
+/* When any time class is active, make .mb-profile transparent so immersive bg shows */
+.time-morning .mb-profile,
+.time-afternoon .mb-profile,
+.time-evening .mb-profile,
+.time-night .mb-profile {
+  background: transparent !important;
+}
+
+/* Also make body background transparent */
+.time-morning,
+.time-afternoon,
+.time-evening,
+.time-night {
+  background: transparent !important;
+}
+
 /* ===== IMMERSIVE BACKGROUND LAYERS ===== */
 .immersive-bg {
   position: fixed;

@@ -167,7 +167,16 @@
     }
     
     if (messageEl) {
-      messageEl.innerHTML = `${getGreeting()}, <span class="profile-greeting__name">${firstName}</span>!`;
+      // Use DOM APIs to prevent XSS
+      messageEl.textContent = '';
+      const greetingText = document.createTextNode(`${getGreeting()}, `);
+      const nameSpan = document.createElement('span');
+      nameSpan.className = 'profile-greeting__name';
+      nameSpan.textContent = firstName;
+      const exclamation = document.createTextNode('!');
+      messageEl.appendChild(greetingText);
+      messageEl.appendChild(nameSpan);
+      messageEl.appendChild(exclamation);
     }
     
     if (affirmationEl) {
