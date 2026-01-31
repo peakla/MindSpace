@@ -2394,7 +2394,7 @@
             user_id: user.id,
             article_slug: slug,
             article_title: title,
-            article_thumbnail: image
+            article_image: image
           }, { onConflict: 'user_id,article_slug' });
         
         btn.classList.add('is-saved');
