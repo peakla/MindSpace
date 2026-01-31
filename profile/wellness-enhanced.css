@@ -1033,8 +1033,8 @@
 }
 
 [data-theme="dark"] .mb-profile__goals-empty {
-  background: linear-gradient(145deg, rgba(61, 58, 80, 0.4) 0%, rgba(45, 43, 61, 0.2) 100%);
-  border-color: rgba(184, 155, 94, 0.2);
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.8) 0%, rgba(45, 43, 61, 0.6) 100%) !important;
+  border-color: rgba(184, 155, 94, 0.3) !important;
 }
 
 [data-theme="dark"] .mb-profile__goals-empty h4 {
@@ -1042,12 +1042,13 @@
 }
 
 [data-theme="dark"] .mb-profile__streak-stat {
-  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%);
-  border-color: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
 }
 
 [data-theme="dark"] .mb-profile__streak-stat:first-child {
-  background: linear-gradient(145deg, rgba(184, 155, 94, 0.2) 0%, rgba(184, 155, 94, 0.08) 100%);
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.25) 0%, rgba(184, 155, 94, 0.12) 100%) !important;
 }
 
 [data-theme="dark"] .mb-profile__streak-stat .streak-label {
@@ -1055,8 +1056,8 @@
 }
 
 [data-theme="dark"] .mb-profile__streak-calendar {
-  background: linear-gradient(145deg, rgba(61, 58, 80, 0.6) 0%, rgba(45, 43, 61, 0.4) 100%);
-  border-color: rgba(184, 155, 94, 0.15);
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.9) 0%, rgba(45, 43, 61, 0.75) 100%) !important;
+  border-color: rgba(184, 155, 94, 0.2) !important;
 }
 
 [data-theme="dark"] .streak-calendar-header h5 {
