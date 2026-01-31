@@ -108,21 +108,25 @@ function initFooterControls() {
   const themeToggle = document.getElementById('footerThemeToggle');
 
   if (langSelect) {
-    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+    // Use the translation system's current language
+    const savedLang = window.MindBalanceTranslations?.getCurrentLanguage?.() || 
+                      localStorage.getItem('mindbalance-language') || 'en';
     langSelect.value = savedLang;
 
     langSelect.addEventListener('change', (e) => {
       const lang = e.target.value;
-      localStorage.setItem('preferredLanguage', lang);
       
-      document.querySelectorAll('[data-language-select]').forEach(select => {
-        if (select !== langSelect) {
-          select.value = lang;
-        }
-      });
-      
-      if (typeof loadTranslations === 'function') {
-        loadTranslations(lang);
+      // Use the translation system's setLanguage which handles everything
+      if (window.MindBalanceTranslations?.setLanguage) {
+        window.MindBalanceTranslations.setLanguage(lang);
+      } else {
+        // Fallback if translation system not loaded yet
+        localStorage.setItem('mindbalance-language', lang);
+        document.querySelectorAll('[data-language-select]').forEach(select => {
+          if (select !== langSelect) {
+            select.value = lang;
+          }
+        });
       }
     });
   }
