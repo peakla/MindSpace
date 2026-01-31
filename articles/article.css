@@ -3066,3 +3066,19 @@ body[data-article-spacing="relaxed"] .article-content li {
 [data-theme="dark"] .save-article-btn:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
+
+/* =====================================================
+   Back-to-Top Button Position on Article Pages
+   Moved up to avoid overlap with TTS mini player
+   ===================================================== */
+.back-to-top {
+  bottom: 100px;
+  right: 30px;
+}
+
+@media (max-width: 768px) {
+  .back-to-top {
+    bottom: 90px;
+    right: 20px;
+  }
+}
