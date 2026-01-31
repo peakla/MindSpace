@@ -820,10 +820,35 @@ function createCommentElement(commentData) {
   const comment = document.createElement('div');
   comment.className = 'mb-comment';
   comment.setAttribute('data-comment-id', commentData.id);
-  const authorLink = commentData.author_id 
-    ? `<a href="/profile/?user=${commentData.author_id}" class="mb-commentAuthorLink">${escapeHtml(commentData.author_name)}</a>`
-    : escapeHtml(commentData.author_name);
-  comment.innerHTML = `<span class="mb-commentUser">${authorLink}:</span> <span class="mb-commentBody">${escapeHtml(commentData.content)}</span>`;
+  
+  const authorName = commentData.author_name || (commentData.author_id ? 'Anonymous' : 'MindBalance Team');
+  
+  const userSpan = document.createElement('span');
+  userSpan.className = 'mb-commentUser';
+  
+  if (commentData.author_id) {
+    const authorLink = document.createElement('a');
+    authorLink.href = '/profile/?user=' + commentData.author_id;
+    authorLink.className = 'mb-commentAuthorLink';
+    authorLink.textContent = authorName;
+    userSpan.appendChild(authorLink);
+  } else {
+    const teamBadge = document.createElement('span');
+    teamBadge.className = 'mb-teamBadge';
+    teamBadge.textContent = authorName;
+    userSpan.appendChild(teamBadge);
+  }
+  
+  const colonText = document.createTextNode(': ');
+  userSpan.appendChild(colonText);
+  
+  const bodySpan = document.createElement('span');
+  bodySpan.className = 'mb-commentBody';
+  bodySpan.textContent = commentData.content;
+  
+  comment.appendChild(userSpan);
+  comment.appendChild(bodySpan);
+  
   return comment;
 }
 

@@ -7277,6 +7277,26 @@ textarea::placeholder {
   color: #333;
 }
 
+.mb-teamBadge {
+  background: linear-gradient(135deg, #af916d, #d4a574);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.mb-commentAuthorLink {
+  color: #af916d;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mb-commentAuthorLink:hover {
+  color: #d4a574;
+  text-decoration: underline;
+}
+
 /* ===== COMMUNITY HUB DARK MODE ===== */
 /* Main container */
 [data-theme="dark"] .mb-community {
@@ -7429,6 +7449,18 @@ textarea::placeholder {
 
 [data-theme="dark"] .mb-commentBody {
   color: #e0e0e0;
+}
+
+[data-theme="dark"] .mb-teamBadge {
+  background: linear-gradient(135deg, #9b7ed9, #b794f6);
+}
+
+[data-theme="dark"] .mb-commentAuthorLink {
+  color: #9b7ed9;
+}
+
+[data-theme="dark"] .mb-commentAuthorLink:hover {
+  color: #b794f6;
 }
 
 /* Right sidebar */
