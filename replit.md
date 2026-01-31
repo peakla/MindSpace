@@ -39,6 +39,15 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Integrated across all 21+ pages
 -   **User Accent Color System**: Theme-aware accent color picker with 8 color options (gold, purple, blue, green, teal, pink, orange, red). Applied via CSS custom properties (`--user-accent`, `--user-accent-hover`, `--user-accent-rgb`, `--user-accent-glow`) at `:root` level. Default accent is gold-crayola (#af916d) for light mode and purple (#9b7ed9) for dark mode. User-selected accent persists independently of theme and is applied to all interactive elements (buttons, links, progress bars, TOC pills, TTS controls, scrollbars).
 -   **Responsiveness**: Full responsive design with orientation lock messages and safe area support.
+-   **Responsive Design System** (`css/responsive-system.css`): Comprehensive responsive framework providing:
+    - Fluid typography scale using clamp() for seamless scaling (--fs-display through --fs-tiny)
+    - Consistent spacing scale (--space-3xs through --space-3xl) using CSS variables
+    - Line-height and letter-spacing scales for consistent vertical rhythm
+    - Text wrapping improvements (overflow-wrap, text-wrap: balance/pretty)
+    - Opt-in utility classes for grids, flexbox, spacing, and typography
+    - Container, card, and section utility classes (resp-container, resp-card, resp-section)
+    - Print styles and reduced motion support
+    - Integrated across all 21+ pages
 -   **Multilingual Support**: Supports 6 languages (English, Spanish, French, Chinese Simplified, Hindi, Korean) using `data-translate` attributes and JSON-based translation files. Language preference persists in localStorage. A CSV master file (`translations.csv`) is the single source of truth for translations, with Python scripts to generate JSON files and audit for completeness.
 
 ### Backend/Data
