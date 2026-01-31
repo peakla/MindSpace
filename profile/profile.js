@@ -157,11 +157,24 @@ function createBadge(achievement, isUnlocked) {
     badge.classList.add('locked');
   }
   
-  const iconWrap = createSafeElement('div', 'mb-profile__badge-icon', achievement.icon_emoji || '🏆');
+  // Create icon wrapper - supports both ion-icons and emoji fallback
+  const iconWrap = createSafeElement('div', 'mb-profile__badge-icon');
+  const iconName = achievement.icon || 'trophy-outline';
+  
+  // If icon looks like an ion-icon name (contains hyphen), create ion-icon element
+  if (iconName.includes('-')) {
+    const ionIcon = document.createElement('ion-icon');
+    ionIcon.setAttribute('name', iconName);
+    iconWrap.appendChild(ionIcon);
+  } else {
+    // Treat as emoji
+    iconWrap.textContent = iconName || '🏆';
+  }
+  
   badge.appendChild(iconWrap);
-  badge.appendChild(createSafeElement('h4', null, achievement.name));
-  badge.appendChild(createSafeElement('p', null, achievement.description));
-  badge.appendChild(createSafeElement('div', 'badge-points', `+${achievement.points} pts`));
+  badge.appendChild(createSafeElement('h4', null, achievement.name || 'Achievement'));
+  badge.appendChild(createSafeElement('p', null, achievement.description || ''));
+  badge.appendChild(createSafeElement('div', 'badge-points', `+${achievement.points || 0} pts`));
   
   return badge;
 }

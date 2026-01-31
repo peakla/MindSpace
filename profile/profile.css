@@ -1237,6 +1237,10 @@
   color: #9a9ab5;
 }
 
+.mb-profile__badge-icon ion-icon {
+  font-size: 1.5rem;
+}
+
 .mb-profile__badge.unlocked .mb-profile__badge-icon {
   background: linear-gradient(135deg, rgba(184, 155, 94, 0.25) 0%, rgba(184, 155, 94, 0.1) 100%);
   color: #b89b5e;
