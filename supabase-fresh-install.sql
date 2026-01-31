@@ -665,6 +665,66 @@ CREATE POLICY "Anyone can delete their avatar" ON storage.objects
   FOR DELETE USING (bucket_id = 'avatars');
 
 -- =====================================================
--- COMPLETE! All 18 tables + 2 functions created.
+-- 22. PREPOPULATED STARTER POSTS
 -- =====================================================
-SELECT 'SUCCESS: All tables and functions created!' as status;
+INSERT INTO posts (id, author_id, content, category, like_count, comment_count, is_pinned, pinned_at, created_at) VALUES
+(
+  'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+  NULL,
+  'Welcome to MindBalance Community Hub! 🌟 This is a safe space to share your mental health journey, connect with others, and find support. Remember: You are not alone, and your feelings are valid. Feel free to introduce yourself!',
+  'general',
+  12,
+  3,
+  true,
+  NOW(),
+  NOW() - INTERVAL '7 days'
+),
+(
+  'b2c3d4e5-f6a7-8901-bcde-f12345678901',
+  NULL,
+  'Daily reminder: Taking care of your mental health is not selfish—it''s necessary. What''s one small act of self-care you''re doing for yourself today? Share below! 💚',
+  'support',
+  25,
+  8,
+  false,
+  NULL,
+  NOW() - INTERVAL '3 days'
+),
+(
+  'c3d4e5f6-a7b8-9012-cdef-123456789012',
+  NULL,
+  'Breathing exercise tip: Try the 4-7-8 technique when feeling anxious. Breathe in for 4 seconds, hold for 7 seconds, exhale for 8 seconds. It activates your parasympathetic nervous system and helps calm your mind. Has anyone tried this?',
+  'tips',
+  18,
+  5,
+  false,
+  NULL,
+  NOW() - INTERVAL '2 days'
+),
+(
+  'd4e5f6a7-b8c9-0123-defa-234567890123',
+  NULL,
+  'Mental health wins don''t have to be big. Got out of bed today? Win. Drank some water? Win. Took a shower? Win. Reached out for help? Huge win. Celebrate your progress, no matter how small it seems. 🎉',
+  'wins',
+  42,
+  12,
+  false,
+  NULL,
+  NOW() - INTERVAL '1 day'
+),
+(
+  'e5f6a7b8-c9d0-1234-efab-345678901234',
+  NULL,
+  'Resources reminder: If you''re struggling, please check out our Resource Library and Find Help pages. They have crisis hotlines, therapy finder tools, and free mental health resources. You deserve support. 💙',
+  'resources',
+  15,
+  2,
+  false,
+  NULL,
+  NOW() - INTERVAL '12 hours'
+);
+
+-- =====================================================
+-- COMPLETE! All 18 tables + 2 functions + starter data created.
+-- =====================================================
+SELECT 'SUCCESS: All tables, functions, and starter posts created!' as status;
