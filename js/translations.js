@@ -78,17 +78,19 @@ async function loadTranslations(lang) {
 }
 
 /**
- * Apply translations to the page
+ * Apply translations to the page or a specific container
+ * @param {Object} translations - The translations object
+ * @param {HTMLElement} container - Optional container to apply translations within
  */
-function applyTranslationsSync(translations) {
-  console.log('[Translations] Applying translations to page...');
+function applyTranslationsSync(translations, container = document) {
+  console.log('[Translations] Applying translations to', container === document ? 'page' : 'container');
   // Helper to check if text contains HTML tags
   function containsHTML(text) {
     return /<[a-z][\s\S]*>/i.test(text);
   }
   
   // Apply to data-translate elements
-  const translateEls = document.querySelectorAll('[data-translate]');
+  const translateEls = container.querySelectorAll('[data-translate]');
   console.log('[Translations] Found', translateEls.length, 'elements with data-translate');
   let appliedCount = 0;
   translateEls.forEach(el => {
@@ -106,7 +108,7 @@ function applyTranslationsSync(translations) {
   console.log('[Translations] Applied', appliedCount, 'translations');
   
   // Apply to data-translate-placeholder elements
-  document.querySelectorAll('[data-translate-placeholder]').forEach(el => {
+  container.querySelectorAll('[data-translate-placeholder]').forEach(el => {
     const key = el.getAttribute('data-translate-placeholder');
     if (translations[key]) {
       el.placeholder = translations[key];
@@ -114,7 +116,7 @@ function applyTranslationsSync(translations) {
   });
   
   // Apply to data-translate-html elements (for content with HTML)
-  document.querySelectorAll('[data-translate-html]').forEach(el => {
+  container.querySelectorAll('[data-translate-html]').forEach(el => {
     const key = el.getAttribute('data-translate-html');
     if (translations[key]) {
       el.innerHTML = translations[key];
@@ -124,8 +126,20 @@ function applyTranslationsSync(translations) {
 
 /**
  * Apply translations (async version)
+ * @param {string|HTMLElement} langOrContainer - Language code or container element
+ * @returns {Promise<Object>} The translations object
  */
-async function applyTranslations(lang) {
+async function applyTranslations(langOrContainer) {
+  // If passed a DOM element, apply translations to that container
+  if (langOrContainer instanceof HTMLElement) {
+    const currentLang = getCurrentLanguage();
+    const translations = await loadTranslations(currentLang);
+    applyTranslationsSync(translations, langOrContainer);
+    return translations;
+  }
+  
+  // Otherwise treat as language code
+  const lang = langOrContainer || getCurrentLanguage();
   const translations = await loadTranslations(lang);
   applyTranslationsSync(translations);
   return translations;

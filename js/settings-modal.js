@@ -142,26 +142,26 @@
             <div class="settings-sidebar-header">
               <h2 class="settings-sidebar-title">
                 <ion-icon name="settings-outline"></ion-icon>
-                Settings
+                <span data-translate="settings_title">Settings</span>
               </h2>
             </div>
             
             <div class="settings-categories">
               <button class="settings-category-btn active" data-category="appearance">
                 <ion-icon name="color-palette-outline"></ion-icon>
-                Appearance
+                <span data-translate="settings_appearance">Appearance</span>
               </button>
               <button class="settings-category-btn" data-category="accessibility">
                 <ion-icon name="accessibility-outline"></ion-icon>
-                Accessibility
+                <span data-translate="settings_accessibility">Accessibility</span>
               </button>
               <button class="settings-category-btn" data-category="reading">
                 <ion-icon name="book-outline"></ion-icon>
-                Reading
+                <span data-translate="settings_reading">Reading</span>
               </button>
               <button class="settings-category-btn" data-category="language">
                 <ion-icon name="globe-outline"></ion-icon>
-                Language
+                <span data-translate="settings_language">Language</span>
               </button>
             </div>
             
@@ -174,22 +174,22 @@
                 </svg>
                 <span class="accessibility-score-value">25</span>
               </div>
-              <span class="accessibility-score-label">Accessibility Score</span>
+              <span class="accessibility-score-label" data-translate="settings_accessibility_score">Accessibility Score</span>
             </div>
           </div>
           
           <!-- Main Content -->
           <div class="settings-main">
             <div class="settings-main-header">
-              <h3 class="settings-main-title" id="settingsPanelTitle">Appearance</h3>
+              <h3 class="settings-main-title" id="settingsPanelTitle" data-translate="settings_appearance">Appearance</h3>
               <div class="settings-header-actions">
                 <div class="settings-sync-indicator" id="syncIndicator">
                   <ion-icon name="cloud-done-outline"></ion-icon>
-                  <span>Synced</span>
+                  <span data-translate="settings_synced">Synced</span>
                 </div>
                 <button class="settings-compare-toggle" id="compareToggle">
                   <ion-icon name="git-compare-outline"></ion-icon>
-                  <span>Compare</span>
+                  <span data-translate="settings_compare">Compare</span>
                 </button>
                 <button class="settings-close-btn" id="settingsCloseBtn">
                   <ion-icon name="close-outline"></ion-icon>
@@ -199,55 +199,55 @@
             
             <!-- Mobile Tabs -->
             <div class="settings-mobile-tabs">
-              <button class="settings-mobile-tab active" data-category="appearance">Appearance</button>
-              <button class="settings-mobile-tab" data-category="accessibility">Accessibility</button>
-              <button class="settings-mobile-tab" data-category="reading">Reading</button>
-              <button class="settings-mobile-tab" data-category="language">Language</button>
+              <button class="settings-mobile-tab active" data-category="appearance" data-translate="settings_appearance">Appearance</button>
+              <button class="settings-mobile-tab" data-category="accessibility" data-translate="settings_accessibility">Accessibility</button>
+              <button class="settings-mobile-tab" data-category="reading" data-translate="settings_reading">Reading</button>
+              <button class="settings-mobile-tab" data-category="language" data-translate="settings_language">Language</button>
             </div>
             
             <div class="settings-content">
               <!-- Appearance Panel -->
               <div class="settings-panel active" id="panelAppearance">
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Theme Presets</h4>
+                  <h4 class="settings-section-title" data-translate="settings_theme_presets">Theme Presets</h4>
                   <div class="theme-presets-grid">
                     <div class="theme-preset-card theme-preset-default" data-preset="default">
-                      <div class="theme-preset-name">Default</div>
-                      <div class="theme-preset-desc">Classic MindBalance</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_default">Default</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindBalance</div>
                     </div>
                     <div class="theme-preset-card theme-preset-ocean" data-preset="ocean">
-                      <div class="theme-preset-name">Calm Ocean</div>
-                      <div class="theme-preset-desc">Peaceful blue tones</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_ocean">Calm Ocean</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_ocean_desc">Peaceful blue tones</div>
                     </div>
                     <div class="theme-preset-card theme-preset-sunset" data-preset="sunset">
-                      <div class="theme-preset-name">Warm Sunset</div>
-                      <div class="theme-preset-desc">Cozy warm colors</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_sunset">Warm Sunset</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_sunset_desc">Cozy warm colors</div>
                     </div>
                     <div class="theme-preset-card theme-preset-forest" data-preset="forest">
-                      <div class="theme-preset-name">Forest Green</div>
-                      <div class="theme-preset-desc">Natural serenity</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_forest">Forest Green</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_forest_desc">Natural serenity</div>
                     </div>
                     <div class="theme-preset-card theme-preset-night" data-preset="night">
-                      <div class="theme-preset-name">Night Mode</div>
-                      <div class="theme-preset-desc">Easy on the eyes</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_night">Night Mode</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_night_desc">Easy on the eyes</div>
                     </div>
                     <div class="theme-preset-card theme-preset-contrast" data-preset="contrast">
-                      <div class="theme-preset-name">High Contrast</div>
-                      <div class="theme-preset-desc">Maximum readability</div>
+                      <div class="theme-preset-name" data-translate="settings_preset_contrast">High Contrast</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_contrast_desc">Maximum readability</div>
                     </div>
                   </div>
                 </div>
                 
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Theme</h4>
+                  <h4 class="settings-section-title" data-translate="settings_theme">Theme</h4>
                   <div class="settings-item">
                     <div class="settings-item-info">
                       <div class="settings-item-icon">
                         <ion-icon name="moon-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Dark Mode</h4>
-                        <p>Reduce eye strain in low light</p>
+                        <h4 data-translate="settings_dark_mode">Dark Mode</h4>
+                        <p data-translate="settings_dark_mode_desc">Reduce eye strain in low light</p>
                       </div>
                     </div>
                     <label class="settings-toggle">
@@ -258,7 +258,7 @@
                 </div>
                 
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Accent Color</h4>
+                  <h4 class="settings-section-title" data-translate="settings_accent_color">Accent Color</h4>
                   <div class="accent-color-grid" id="accentColorGrid">
                     <!-- Colors will be inserted here -->
                   </div>
@@ -266,11 +266,11 @@
                 
                 <!-- Live Preview -->
                 <div class="settings-preview">
-                  <div class="settings-preview-title">Live Preview</div>
+                  <div class="settings-preview-title" data-translate="settings_live_preview">Live Preview</div>
                   <div class="settings-preview-frame">
-                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">Welcome to MindBalance</p>
-                    <p class="preview-sample-text" style="font-size: 14px; opacity: 0.8; margin-bottom: 16px;">Your journey to mental wellness starts here.</p>
-                    <span class="preview-sample-btn">Get Started</span>
+                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindBalance</p>
+                    <p class="preview-sample-text" style="font-size: 14px; opacity: 0.8; margin-bottom: 16px;" data-translate="settings_preview_journey">Your journey to mental wellness starts here.</p>
+                    <span class="preview-sample-btn" data-translate="settings_preview_btn">Get Started</span>
                   </div>
                 </div>
               </div>
@@ -278,7 +278,7 @@
               <!-- Accessibility Panel -->
               <div class="settings-panel" id="panelAccessibility">
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Visual Accessibility</h4>
+                  <h4 class="settings-section-title" data-translate="settings_visual_accessibility">Visual Accessibility</h4>
                   
                   <div class="settings-item">
                     <div class="settings-item-info">
@@ -286,8 +286,8 @@
                         <ion-icon name="contrast-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>High Contrast</h4>
-                        <p>Increase contrast for better readability</p>
+                        <h4 data-translate="settings_high_contrast">High Contrast</h4>
+                        <p data-translate="settings_high_contrast_desc">Increase contrast for better readability</p>
                       </div>
                     </div>
                     <label class="settings-toggle">
@@ -302,21 +302,21 @@
                         <ion-icon name="eye-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Colorblind Mode</h4>
-                        <p>Adjust colors for color vision deficiency</p>
+                        <h4 data-translate="settings_colorblind_mode">Colorblind Mode</h4>
+                        <p data-translate="settings_colorblind_desc">Adjust colors for color vision deficiency</p>
                       </div>
                     </div>
                     <select class="settings-select" id="settingsColorblind" data-colorblind-select>
-                      <option value="none">None</option>
-                      <option value="protanopia">Protanopia (Red-blind)</option>
-                      <option value="deuteranopia">Deuteranopia (Green-blind)</option>
-                      <option value="tritanopia">Tritanopia (Blue-blind)</option>
+                      <option value="none" data-translate="settings_colorblind_none">None</option>
+                      <option value="protanopia" data-translate="settings_colorblind_protanopia">Protanopia (Red-blind)</option>
+                      <option value="deuteranopia" data-translate="settings_colorblind_deuteranopia">Deuteranopia (Green-blind)</option>
+                      <option value="tritanopia" data-translate="settings_colorblind_tritanopia">Tritanopia (Blue-blind)</option>
                     </select>
                   </div>
                 </div>
                 
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Cognitive Accessibility</h4>
+                  <h4 class="settings-section-title" data-translate="settings_cognitive_accessibility">Cognitive Accessibility</h4>
                   
                   <div class="settings-item">
                     <div class="settings-item-info">
@@ -324,8 +324,8 @@
                         <ion-icon name="flash-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Focus Mode (ADHD)</h4>
-                        <p>Reduce distractions for better focus</p>
+                        <h4 data-translate="settings_focus_mode">Focus Mode (ADHD)</h4>
+                        <p data-translate="settings_focus_mode_desc">Reduce distractions for better focus</p>
                       </div>
                     </div>
                     <label class="settings-toggle">
@@ -340,8 +340,8 @@
                         <ion-icon name="text-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Dyslexia-Friendly Font</h4>
-                        <p>Use OpenDyslexic font for easier reading</p>
+                        <h4 data-translate="settings_dyslexia_font">Dyslexia-Friendly Font</h4>
+                        <p data-translate="settings_dyslexia_font_desc">Use OpenDyslexic font for easier reading</p>
                       </div>
                     </div>
                     <label class="settings-toggle">
@@ -352,7 +352,7 @@
                 </div>
                 
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Motion & Animation</h4>
+                  <h4 class="settings-section-title" data-translate="settings_motion_animation">Motion & Animation</h4>
                   
                   <div class="settings-item">
                     <div class="settings-item-info">
@@ -360,8 +360,8 @@
                         <ion-icon name="pause-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Reduce Motion</h4>
-                        <p>Minimize animations and transitions</p>
+                        <h4 data-translate="settings_reduce_motion">Reduce Motion</h4>
+                        <p data-translate="settings_reduce_motion_desc">Minimize animations and transitions</p>
                       </div>
                     </div>
                     <label class="settings-toggle">
@@ -375,7 +375,7 @@
               <!-- Reading Panel -->
               <div class="settings-panel" id="panelReading">
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Text Size</h4>
+                  <h4 class="settings-section-title" data-translate="settings_text_size">Text Size</h4>
                   
                   <div class="settings-item">
                     <div class="settings-item-info">
@@ -383,24 +383,24 @@
                         <ion-icon name="resize-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Font Size</h4>
-                        <p>Adjust text size for comfortable reading</p>
+                        <h4 data-translate="settings_font_size">Font Size</h4>
+                        <p data-translate="settings_font_size_desc">Adjust text size for comfortable reading</p>
                       </div>
                     </div>
                     <select class="settings-select" id="settingsFontSize" data-font-size-select>
-                      <option value="small">Small</option>
-                      <option value="normal">Normal</option>
-                      <option value="large">Large</option>
-                      <option value="xlarge">Extra Large</option>
+                      <option value="small" data-translate="settings_font_small">Small</option>
+                      <option value="normal" data-translate="settings_font_normal">Normal</option>
+                      <option value="large" data-translate="settings_font_large">Large</option>
+                      <option value="xlarge" data-translate="settings_font_xlarge">Extra Large</option>
                     </select>
                   </div>
                 </div>
                 
                 <!-- Live Preview for Reading -->
                 <div class="settings-preview">
-                  <div class="settings-preview-title">Text Preview</div>
+                  <div class="settings-preview-title" data-translate="settings_text_preview">Text Preview</div>
                   <div class="settings-preview-frame">
-                    <p class="preview-sample-text" id="readingPreviewText">
+                    <p class="preview-sample-text" id="readingPreviewText" data-translate="settings_reading_preview_text">
                       Mental health is just as important as physical health. Taking time each day to check in with yourself, practice mindfulness, and seek support when needed are all crucial steps toward maintaining your wellbeing.
                     </p>
                   </div>
@@ -410,7 +410,7 @@
               <!-- Language Panel -->
               <div class="settings-panel" id="panelLanguage">
                 <div class="settings-section">
-                  <h4 class="settings-section-title">Language</h4>
+                  <h4 class="settings-section-title" data-translate="settings_language">Language</h4>
                   
                   <div class="settings-item">
                     <div class="settings-item-info">
@@ -418,8 +418,8 @@
                         <ion-icon name="language-outline"></ion-icon>
                       </div>
                       <div class="settings-item-text">
-                        <h4>Display Language</h4>
-                        <p>Choose your preferred language</p>
+                        <h4 data-translate="settings_display_language">Display Language</h4>
+                        <p data-translate="settings_display_language_desc">Choose your preferred language</p>
                       </div>
                     </div>
                     <select class="settings-select" id="settingsLanguage">
@@ -437,7 +437,7 @@
               <!-- Reset Button -->
               <button class="settings-reset-btn" id="settingsResetBtn">
                 <ion-icon name="refresh-outline"></ion-icon>
-                Reset to Defaults
+                <span data-translate="settings_reset_defaults">Reset to Defaults</span>
               </button>
             </div>
           </div>
@@ -448,12 +448,12 @@
               <div class="onboarding-icon">
                 <ion-icon name="sparkles-outline"></ion-icon>
               </div>
-              <h3 class="onboarding-title">Welcome to Settings!</h3>
-              <p class="onboarding-text">
+              <h3 class="onboarding-title" data-translate="settings_onboarding_title">Welcome to Settings!</h3>
+              <p class="onboarding-text" data-translate="settings_onboarding_text">
                 Customize your MindBalance experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
               </p>
-              <button class="onboarding-btn" id="onboardingStartBtn">Let's Get Started</button>
-              <button class="onboarding-skip" id="onboardingSkipBtn">Skip for now</button>
+              <button class="onboarding-btn" id="onboardingStartBtn" data-translate="settings_onboarding_start">Let's Get Started</button>
+              <button class="onboarding-skip" id="onboardingSkipBtn" data-translate="settings_onboarding_skip">Skip for now</button>
             </div>
           </div>
         </div>
@@ -807,6 +807,14 @@
     document.body.style.overflow = 'hidden';
     loadCurrentSettings();
     updateAccessibilityScore();
+    
+    // Apply translations to the modal when opened
+    if (window.MindBalanceTranslations?.applyTranslations) {
+      const modal = document.getElementById('settingsModalOverlay');
+      if (modal) {
+        window.MindBalanceTranslations.applyTranslations(modal);
+      }
+    }
   }
 
   function closeSettingsModal() {
