@@ -7,6 +7,7 @@ MindBalance is a static website platform providing curated, credible information
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preference: NO glassmorphism (no backdrop-blur effects). Use solid, clean card designs with subtle shadows and borders instead.
 
 ## System Architecture
 
@@ -57,6 +58,11 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 -   **Resource Suggestions**: User-submitted resource suggestions are stored in a Supabase table for administrative review.
 
 ### Key Features
+-   **Homepage Enhancements** (`css/quote-banner.css` and `js/quote-banner.js`):
+    - **Inspirational Quote Banner**: Rotating quotes from mental health advocates with smooth fade transitions, navigation dots, auto-rotation (12s), pause on hover/focus, and full accessibility support
+    - **Daily Wellness Tip**: Day-of-week rotating tips with actionable advice, icon, and call-to-action button linking to relevant resources
+    - Full translation support for all 6 languages
+    - Dark mode styling and reduced motion respect
 -   **Resource Library**: Interactive directory with featured resources spotlight, non-profit organizations (NAMI, Mental Health America, Crisis Text Line, The Trevor Project, 988 Lifeline), community resources with local examples, a suggestion form, real-time search and filtering (including Non-Profit and Community categories), share buttons, and visual polish (card effects, animations, skeleton loading).
 -   **Find Help** (`/find-help/`): Dedicated page for finding local mental health services:
     - Always-visible crisis resources section (988 Lifeline, Crisis Text Line, Trevor Project)
@@ -72,14 +78,14 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - **Personalized Greeting**: Time-aware welcome messages with user's name and daily affirmations
     - **Parallax Background**: Floating animated shapes, stars (night), sun rays (day), and moon elements
     - **Scroll-Triggered Animations**: Reveal effects for all profile sections (fade-in, slide-up, scale, stagger)
-    - **Glassmorphism Cards**: Backdrop blur effects with subtle borders and shadows
+    - **Clean Card Design**: Solid cards with subtle shadows and borders
     - **Haptic Feedback**: Vibration feedback on mobile for button interactions (light/medium/heavy)
     - **Community Connections**: "People You May Know" suggestions with follow functionality
     - **AI Wellness Insights**: OpenAI-powered personalized insights, mood analysis, and goal suggestions
     - Full dark mode support and reduced motion respect
 -   **Enhanced Wellness Tab** (`profile/wellness-enhanced.css`): Comprehensive visual overhaul including:
     - Full-width profile layout (1400px max-width) for better laptop/desktop experience
-    - Glassmorphism card effects with subtle blur backgrounds and gradient top borders
+    - Clean card effects with solid backgrounds and gradient top borders
     - Mood tracker with large animated emoji buttons (2rem), glow effects on selection, and wiggle animations
     - Mood entry cards redesigned to match Liked Posts style: emoji in circular container, mood label (color-coded), date/time, and note preview with chat icon
     - Wellness goals with category icons (leaf, fitness, moon, people, book), enhanced empty states, and delete button hover effects
@@ -107,7 +113,7 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
     - Footer controls: language selector dropdown + dark/light mode toggle with bidirectional sync to header
     - Social media icons: Instagram + YouTube (https://www.youtube.com/@MindBaIance)
     - Rounded pill-style buttons with shadows and hover effects
-    - Glassmorphism topic tags with backdrop blur
+    - Clean topic tags with solid backgrounds
     - Full dark mode support with consistent purple accent colors (--purple-accent, --purple-gradient variables)
     - Back-to-top button with smooth scroll and bounce animation
     - Control sync: Footer and header theme/language toggles stay synchronized via shared localStorage keys
