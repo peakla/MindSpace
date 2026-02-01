@@ -274,9 +274,12 @@
   margin-bottom: 8px;
   line-height: 1.2;
   white-space: nowrap;
+  display: inline;
 }
 
 .profile-greeting__name {
+  display: inline;
+  white-space: nowrap;
   background: linear-gradient(135deg, var(--user-accent, #b89b5e) 0%, var(--time-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
