@@ -1411,6 +1411,7 @@
   
   "wellness_mood_title": "Mood Check-In",
   "wellness_daily_tip": "Today's Wellness Tip",
+  "wellness_select_mood_prompt": "Select your mood to get personalized tips and resources.",
   "greeting_morning": "Good morning",
   "greeting_afternoon": "Good afternoon",
   "greeting_evening": "Good evening",

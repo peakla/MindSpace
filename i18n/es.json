@@ -1367,5 +1367,13 @@
   "settings_onboarding_title": "¡Bienvenido a Configuración!",
   "settings_onboarding_text": "Personaliza tu experiencia MindBalance con temas, opciones de accesibilidad y más. Tus preferencias se sincronizan en todas las páginas.",
   "settings_onboarding_start": "Comenzar",
-  "settings_onboarding_skip": "Omitir por ahora"
+  "settings_onboarding_skip": "Omitir por ahora",
+  
+  "wellness_mood_title": "Estado de Ánimo",
+  "wellness_daily_tip": "Consejo de Bienestar del Día",
+  "wellness_select_mood_prompt": "Selecciona tu estado de ánimo para obtener consejos y recursos personalizados.",
+  "greeting_morning": "Buenos días",
+  "greeting_afternoon": "Buenas tardes",
+  "greeting_evening": "Buenas tardes",
+  "greeting_night": "Buenas noches"
 }

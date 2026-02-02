@@ -1367,5 +1367,13 @@
   "settings_onboarding_title": "欢迎来到设置！",
   "settings_onboarding_text": "使用主题预设、无障碍选项等自定义您的MindBalance体验。您的偏好设置会在所有页面同步。",
   "settings_onboarding_start": "开始",
-  "settings_onboarding_skip": "暂时跳过"
+  "settings_onboarding_skip": "暂时跳过",
+  
+  "wellness_mood_title": "心情签到",
+  "wellness_daily_tip": "今日健康小贴士",
+  "wellness_select_mood_prompt": "选择您的心情，获取个性化建议和资源。",
+  "greeting_morning": "早上好",
+  "greeting_afternoon": "下午好",
+  "greeting_evening": "晚上好",
+  "greeting_night": "晚安"
 }

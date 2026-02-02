@@ -513,6 +513,25 @@
   opacity: 0.7;
 }
 
+/* Dark Mode: Force dark text on light-background preset cards */
+[data-theme="dark"] .theme-preset-default,
+[data-theme="dark"] .theme-preset-ocean,
+[data-theme="dark"] .theme-preset-sunset,
+[data-theme="dark"] .theme-preset-forest {
+  color: #1a1a2e;
+}
+
+[data-theme="dark"] .theme-preset-default .theme-preset-name,
+[data-theme="dark"] .theme-preset-default .theme-preset-desc,
+[data-theme="dark"] .theme-preset-ocean .theme-preset-name,
+[data-theme="dark"] .theme-preset-ocean .theme-preset-desc,
+[data-theme="dark"] .theme-preset-sunset .theme-preset-name,
+[data-theme="dark"] .theme-preset-sunset .theme-preset-desc,
+[data-theme="dark"] .theme-preset-forest .theme-preset-name,
+[data-theme="dark"] .theme-preset-forest .theme-preset-desc {
+  color: #1a1a2e;
+}
+
 /* Settings Item Rows */
 .settings-item {
   display: flex;

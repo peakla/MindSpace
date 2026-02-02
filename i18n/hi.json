@@ -1367,5 +1367,13 @@
   "settings_onboarding_title": "सेटिंग्स में आपका स्वागत है!",
   "settings_onboarding_text": "थीम प्रीसेट, सुगमता विकल्प और बहुत कुछ के साथ अपने MindBalance अनुभव को अनुकूलित करें। आपकी प्राथमिकताएं सभी पृष्ठों पर सिंक होती हैं।",
   "settings_onboarding_start": "शुरू करें",
-  "settings_onboarding_skip": "अभी के लिए छोड़ें"
+  "settings_onboarding_skip": "अभी के लिए छोड़ें",
+  
+  "wellness_mood_title": "मूड चेक-इन",
+  "wellness_daily_tip": "आज का वेलनेस टिप",
+  "wellness_select_mood_prompt": "व्यक्तिगत सुझाव और संसाधन प्राप्त करने के लिए अपना मूड चुनें।",
+  "greeting_morning": "सुप्रभात",
+  "greeting_afternoon": "नमस्कार",
+  "greeting_evening": "शुभ संध्या",
+  "greeting_night": "शुभ रात्रि"
 }
