@@ -198,29 +198,26 @@ function getTranslationSync(key, lang = null) {
   return translations[key] || key;
 }
 
+// Use event delegation for ALL language selectors (including dynamically added ones)
+// This prevents duplicate handlers when both direct and delegated listeners are used
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.matches('[data-language-select]')) {
+    console.log('[Translations] Language changed to:', e.target.value);
+    setLanguage(e.target.value);
+  }
+});
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async function() {
   console.log('[Translations] Initializing translation system...');
   const currentLang = getCurrentLanguage();
   console.log('[Translations] Current language:', currentLang);
   
-  // Set up language selectors
+  // Set initial value on all language selectors (no event listeners - handled by delegation above)
   const langSelects = document.querySelectorAll('[data-language-select]');
   console.log('[Translations] Found', langSelects.length, 'language selectors');
   langSelects.forEach(langSelect => {
     langSelect.value = currentLang;
-    langSelect.addEventListener('change', function(e) {
-      console.log('[Translations] Language changed to:', this.value);
-      setLanguage(this.value);
-    });
-  });
-  
-  // Also use event delegation for dynamically added selectors or hidden ones
-  document.addEventListener('change', function(e) {
-    if (e.target && e.target.matches('[data-language-select]')) {
-      console.log('[Translations] Language changed via delegation to:', e.target.value);
-      setLanguage(e.target.value);
-    }
   });
   
   // Load and apply translations

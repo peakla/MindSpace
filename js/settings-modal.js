@@ -422,7 +422,7 @@
                         <p data-translate="settings_display_language_desc">Choose your preferred language</p>
                       </div>
                     </div>
-                    <select class="settings-select" id="settingsLanguage">
+                    <select class="settings-select" id="settingsLanguage" data-language-select>
                       <option value="en">English</option>
                       <option value="es">Español</option>
                       <option value="fr">Français</option>
@@ -573,12 +573,8 @@
     document.getElementById('settingsLanguage')?.addEventListener('change', (e) => {
       const lang = e.target.value;
       setPreference(STORAGE_KEYS.language, lang);
-      // Use the MindBalance translation system
-      if (window.MindBalanceTranslations?.setLanguage) {
-        window.MindBalanceTranslations.setLanguage(lang);
-      } else if (window.changeLanguage) {
-        window.changeLanguage(lang);
-      }
+      // The language change is handled by translations.js via data-language-select attribute
+      // We only need to save the preference and update sync status here
       updateSyncStatus();
     });
     
