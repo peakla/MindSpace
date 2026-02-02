@@ -602,63 +602,63 @@
         </p>
         <h2 class="wellness-checkin__title" data-translate="wellness_checkin_title">How are you feeling today?</h2>
         <p class="wellness-checkin__subtitle" data-translate="wellness_checkin_subtitle">Select your mood and we'll guide you to helpful resources</p>
-        
-        <!-- Streak Badge -->
-        <div class="wellness-checkin__streak" style="display: none;">
-          <span class="wellness-checkin__streak-icon">🔥</span>
-          <span><span class="wellness-checkin__streak-count">0</span> day streak</span>
+      </div>
+
+      <!-- Side by Side Layout -->
+      <div class="wellness-checkin__grid">
+        <!-- Left: Mood Check-in -->
+        <div class="wellness-checkin__card wellness-checkin__card--mood">
+          <h3 class="wellness-checkin__card-title" data-translate="wellness_mood_title">Mood Check-In</h3>
+          <div class="wellness-checkin__moods" role="radiogroup" aria-label="Select your mood">
+            <button class="wellness-checkin__mood-btn" data-mood="happy" type="button" role="radio" aria-checked="false" aria-label="Feeling happy">
+              <span class="wellness-checkin__mood-emoji">😊</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_happy">Happy</span>
+            </button>
+            <button class="wellness-checkin__mood-btn" data-mood="calm" type="button" role="radio" aria-checked="false" aria-label="Feeling calm">
+              <span class="wellness-checkin__mood-emoji">😌</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_calm">Calm</span>
+            </button>
+            <button class="wellness-checkin__mood-btn" data-mood="okay" type="button" role="radio" aria-checked="false" aria-label="Feeling okay">
+              <span class="wellness-checkin__mood-emoji">😐</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_okay">Okay</span>
+            </button>
+            <button class="wellness-checkin__mood-btn" data-mood="anxious" type="button" role="radio" aria-checked="false" aria-label="Feeling anxious">
+              <span class="wellness-checkin__mood-emoji">😰</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_anxious">Anxious</span>
+            </button>
+            <button class="wellness-checkin__mood-btn" data-mood="sad" type="button" role="radio" aria-checked="false" aria-label="Feeling sad">
+              <span class="wellness-checkin__mood-emoji">😢</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_sad">Sad</span>
+            </button>
+            <button class="wellness-checkin__mood-btn" data-mood="stressed" type="button" role="radio" aria-checked="false" aria-label="Feeling stressed">
+              <span class="wellness-checkin__mood-emoji">😤</span>
+              <span class="wellness-checkin__mood-label" data-translate="mood_stressed">Stressed</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Daily Tip / Response -->
+        <div class="wellness-checkin__card wellness-checkin__card--tip">
+          <!-- Default Daily Tip (before mood selection) -->
+          <div class="wellness-checkin__default-tip">
+            <div class="wellness-checkin__default-tip-icon">🌟</div>
+            <h3 class="wellness-checkin__default-tip-title" data-translate="wellness_daily_tip">Today's Wellness Tip</h3>
+            <p class="wellness-checkin__default-tip-text">Select your mood to get personalized tips and resources.</p>
+          </div>
+
+          <!-- Response Section (shown after mood selection) -->
+          <div class="wellness-checkin__response" aria-live="polite">
+            <p class="wellness-checkin__affirmation"></p>
+            <div class="wellness-checkin__tip">
+              <p class="wellness-checkin__tip-title"></p>
+              <p class="wellness-checkin__tip-text"></p>
+            </div>
+            <div class="wellness-checkin__actions"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Main Card -->
-      <div class="wellness-checkin__card">
-        
-        <!-- Mood Buttons -->
-        <div class="wellness-checkin__moods" role="radiogroup" aria-label="Select your mood">
-          <button class="wellness-checkin__mood-btn" data-mood="happy" type="button" role="radio" aria-checked="false" aria-label="Feeling happy">
-            <span class="wellness-checkin__mood-emoji">😊</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_happy">Happy</span>
-          </button>
-          <button class="wellness-checkin__mood-btn" data-mood="calm" type="button" role="radio" aria-checked="false" aria-label="Feeling calm">
-            <span class="wellness-checkin__mood-emoji">😌</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_calm">Calm</span>
-          </button>
-          <button class="wellness-checkin__mood-btn" data-mood="okay" type="button" role="radio" aria-checked="false" aria-label="Feeling okay">
-            <span class="wellness-checkin__mood-emoji">😐</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_okay">Okay</span>
-          </button>
-          <button class="wellness-checkin__mood-btn" data-mood="anxious" type="button" role="radio" aria-checked="false" aria-label="Feeling anxious">
-            <span class="wellness-checkin__mood-emoji">😰</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_anxious">Anxious</span>
-          </button>
-          <button class="wellness-checkin__mood-btn" data-mood="sad" type="button" role="radio" aria-checked="false" aria-label="Feeling sad">
-            <span class="wellness-checkin__mood-emoji">😢</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_sad">Sad</span>
-          </button>
-          <button class="wellness-checkin__mood-btn" data-mood="stressed" type="button" role="radio" aria-checked="false" aria-label="Feeling stressed">
-            <span class="wellness-checkin__mood-emoji">😤</span>
-            <span class="wellness-checkin__mood-label" data-translate="mood_stressed">Stressed</span>
-          </button>
-        </div>
-
-        <!-- Default Daily Tip (before mood selection) -->
-        <div class="wellness-checkin__default-tip">
-          <div class="wellness-checkin__default-tip-icon">🌟</div>
-          <h3 class="wellness-checkin__default-tip-title">Today's Wellness Tip</h3>
-          <p class="wellness-checkin__default-tip-text">Select your mood above to get personalized tips and resources.</p>
-        </div>
-
-        <!-- Response Section (shown after mood selection) -->
-        <div class="wellness-checkin__response" aria-live="polite">
-          <p class="wellness-checkin__affirmation"></p>
-          <div class="wellness-checkin__tip">
-            <p class="wellness-checkin__tip-title"></p>
-            <p class="wellness-checkin__tip-text"></p>
-          </div>
-          <div class="wellness-checkin__actions"></div>
-        </div>
-
-        <!-- Community Mood Bar -->
+      <!-- Community Mood Bar -->
         <div class="wellness-checkin__community">
           <p class="wellness-checkin__community-title">
             <span>👥</span>
