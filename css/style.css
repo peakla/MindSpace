@@ -6218,11 +6218,24 @@ body.nav-active .nav-open-btn {
 /* ==== DYSLEXIA-FRIENDLY FONT ==== */
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
 
-[data-dyslexia-font="true"] * {
+[data-dyslexia-font="true"] *:not(.fa):not(.fas):not(.far):not(.fab):not(.fal):not(.fad):not([class*="fa-"]) {
   font-family: 'Lexend', 'OpenDyslexic', sans-serif !important;
   letter-spacing: 0.05em !important;
   word-spacing: 0.1em !important;
   line-height: 1.8 !important;
+}
+
+[data-dyslexia-font="true"] .fa,
+[data-dyslexia-font="true"] .fas,
+[data-dyslexia-font="true"] .far,
+[data-dyslexia-font="true"] .fab,
+[data-dyslexia-font="true"] .fal,
+[data-dyslexia-font="true"] .fad,
+[data-dyslexia-font="true"] [class*="fa-"] {
+  font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+  line-height: normal !important;
 }
 
 /* Font size adjustments */
