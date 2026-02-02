@@ -32,7 +32,7 @@ MindBalance is a static website built with HTML, CSS, and JavaScript, employing 
 -   **Resource Library**: Interactive directory with featured resources, non-profit organizations, community resources, search/filtering, and share functionalities.
 -   **Find Help**: Dedicated page for local mental health services, crisis resources, and national non-profits.
 -   **Support Page**: Provides crisis support, helplines, self-help tools, an appointment scheduler, and a modern FAQ section.
--   **Navigation**: Dynamic navbar with crisis button, search bar, dropdowns, and mobile hamburger menu.
+-   **Navigation**: Dynamic navbar with crisis button, search bar, dropdowns, and mobile hamburger menu. Enhanced mobile navigation includes polished card-based UI with gradient backgrounds, collapsible settings section, and complete auth section with notification inbox button, profile link, and logout functionality.
 -   **User Profile Page**: Instagram-style profile with cover/avatar uploads, editable display name/bio, social links, unified stats, and multiple tabs (Activity, Liked Posts, Saved Articles, Achievements, Wellness, Settings). Features a mood tracker, wellness goals, reading streak, and privacy controls. Includes a first-time onboarding modal.
 -   **Immersive Profile Experience**: Cinematic, full-page profile with day/night cycles, personalized greetings, parallax backgrounds, and scroll-triggered animations. Incorporates "People You May Know" and AI-powered wellness insights.
 -   **Enhanced Wellness Tab**: Comprehensive visual overhaul for mood tracking, wellness goals, and reading streaks within the profile.
