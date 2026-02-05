@@ -148,18 +148,28 @@ const ProfileAnalytics = (function() {
       </div>
     `;
 
-    if (typeof MBAnalytics !== 'undefined') {
+    const listEl = document.getElementById('timelineList');
+    
+    const showEmptyState = () => {
+      listEl.innerHTML = `
+        <div class="mb-empty-state">
+          <ion-icon name="footsteps-outline" class="mb-empty-state__icon"></ion-icon>
+          <h4 class="mb-empty-state__title">No Activity Yet</h4>
+          <p class="mb-empty-state__desc">Start exploring articles, resources, and the community to see your activity here.</p>
+        </div>
+      `;
+    };
+
+    if (typeof MBAnalytics === 'undefined') {
+      showEmptyState();
+      return;
+    }
+
+    try {
       const activities = await MBAnalytics.getRecentActivity(userId, 10);
-      const listEl = document.getElementById('timelineList');
       
-      if (activities.length === 0) {
-        listEl.innerHTML = `
-          <div class="mb-empty-state">
-            <ion-icon name="footsteps-outline" class="mb-empty-state__icon"></ion-icon>
-            <h4 class="mb-empty-state__title">No Activity Yet</h4>
-            <p class="mb-empty-state__desc">Start exploring articles, resources, and the community to see your activity here.</p>
-          </div>
-        `;
+      if (!activities || activities.length === 0) {
+        showEmptyState();
         return;
       }
       
@@ -174,6 +184,8 @@ const ProfileAnalytics = (function() {
           </div>
         </div>
       `).join('');
+    } catch (err) {
+      showEmptyState();
     }
   }
 
