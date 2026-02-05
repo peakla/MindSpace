@@ -151,6 +151,13 @@
     const greetingEl = document.querySelector('.profile-greeting');
     if (!greetingEl) return;
     
+    // Only show greeting on own profile (treat undefined as not own profile to avoid flicker)
+    if (window.isOwnProfile !== true) {
+      greetingEl.style.display = 'none';
+      return;
+    }
+    greetingEl.style.display = '';
+    
     const timeEl = greetingEl.querySelector('.profile-greeting__time');
     const messageEl = greetingEl.querySelector('.profile-greeting__message');
     const affirmationEl = greetingEl.querySelector('.profile-greeting__affirmation');

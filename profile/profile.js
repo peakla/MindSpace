@@ -256,6 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
       viewedUserId = user ? user.id : null;
     }
     
+    // Expose immediately for immersive features
+    window.isOwnProfile = isOwnProfile;
+    
     if (viewedUserId) {
       // We have a user to view (either own or someone else's)
       showProfileView();
@@ -289,12 +292,14 @@ document.addEventListener('DOMContentLoaded', () => {
           currentUser = user;
           if (viewedUserId) {
             isOwnProfile = user && user.id === viewedUserId;
+            window.isOwnProfile = isOwnProfile;
             applyViewMode();
             if (!isOwnProfile && currentUser) {
               checkFollowStatus();
             }
           } else if (user) {
             isOwnProfile = true;
+            window.isOwnProfile = isOwnProfile;
             viewedUserId = user.id;
             showProfileView();
             applyViewMode();
@@ -411,8 +416,9 @@ async function loadProfileData(userId) {
 
   if (profile) {
     userProfile = profile;
-    // Expose to window for immersive greeting
+    // Expose to window for immersive features
     window.userProfile = profile;
+    window.isOwnProfile = isOwnProfile;
     document.getElementById('profileName').textContent = profile.display_name || profile.username || 'User';
     document.getElementById('profileBio').textContent = profile.bio || 'No bio yet...';
     
