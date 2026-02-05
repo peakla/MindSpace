@@ -1182,15 +1182,14 @@ async function loadAchievements() {
   }
   
   const unlockedIds = new Set((userAchievements || []).map(ua => ua.achievement_id));
-  const unlockedCount = unlockedIds.size;
   const totalPoints = allAchievements
     .filter(a => unlockedIds.has(a.id))
     .reduce((sum, a) => sum + (a.points || 0), 0);
   
-  document.getElementById('unlockedBadges').textContent = unlockedCount;
-  document.getElementById('totalBadges').textContent = allAchievements.length;
-  document.getElementById('totalPoints').textContent = totalPoints;
+  const totalPointsEl = document.getElementById('totalPoints');
+  if (totalPointsEl) totalPointsEl.textContent = totalPoints;
   
+  if (!grid) return;
   grid.innerHTML = '';
   allAchievements.forEach(achievement => {
     const isUnlocked = unlockedIds.has(achievement.id);
