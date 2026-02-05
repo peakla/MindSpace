@@ -1077,6 +1077,86 @@
   color: #a0a0b8;
 }
 
+/* ===== ADDITIONAL DARK MODE FIXES ===== */
+[data-theme="dark"] .mb-profile__wellness-section,
+[data-theme="dark"] .mb-profile__tab-content .mb-profile__wellness-section {
+  background: linear-gradient(135deg, rgba(45, 43, 61, 0.98) 0%, rgba(45, 43, 61, 0.92) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .mb-profile__goal-input,
+[data-theme="dark"] .mb-profile__goal-select {
+  background: rgba(45, 43, 61, 0.95) !important;
+  border-color: rgba(184, 155, 94, 0.3) !important;
+  color: #f5f0e8 !important;
+}
+
+[data-theme="dark"] .mb-profile__goal-input::placeholder {
+  color: #7a7a8a !important;
+}
+
+[data-theme="dark"] .mb-profile__goals-list .mb-profile__goal-item,
+[data-theme="dark"] .mb-profile__goal-item {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="dark"] .mb-profile__goal-item .goal-title {
+  color: #f5f0e8 !important;
+}
+
+[data-theme="dark"] .mb-profile__goal-item .goal-check {
+  border-color: #d6bd9f !important;
+}
+
+[data-theme="dark"] .mb-profile__streak-display .mb-profile__streak-stat,
+[data-theme="dark"] .mb-profile__streak-stats .mb-profile__streak-stat,
+[data-theme="dark"] .mb-profile__streak-stat {
+  background: linear-gradient(145deg, #3d3a50 0%, #2d2b3d 100%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .mb-profile__streak-stat:first-child {
+  background: linear-gradient(145deg, rgba(184, 155, 94, 0.2) 0%, rgba(184, 155, 94, 0.08) 100%) !important;
+}
+
+[data-theme="dark"] .mb-profile__streak-stat .streak-label {
+  color: #a0a0b8 !important;
+}
+
+[data-theme="dark"] .mb-profile__streak-calendar {
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.95) 0%, rgba(45, 43, 61, 0.85) 100%) !important;
+  border-color: rgba(184, 155, 94, 0.2) !important;
+}
+
+[data-theme="dark"] .streak-calendar-header h5 {
+  color: #b0b0c0 !important;
+}
+
+[data-theme="dark"] .streak-calendar-legend {
+  color: #8a8a9a !important;
+}
+
+[data-theme="dark"] .streak-day {
+  background: rgba(184, 155, 94, 0.15) !important;
+}
+
+[data-theme="dark"] .mb-profile__goals-empty {
+  background: linear-gradient(145deg, rgba(61, 58, 80, 0.9) 0%, rgba(45, 43, 61, 0.7) 100%) !important;
+  border-color: rgba(184, 155, 94, 0.35) !important;
+}
+
+[data-theme="dark"] .mb-profile__goals-empty h4 {
+  color: #c0c0d0 !important;
+}
+
+[data-theme="dark"] .mb-profile__goals-empty p {
+  color: #8a8a9a !important;
+}
+
 /* ===== RESPONSIVE ADJUSTMENTS ===== */
 @media (max-width: 768px) {
   .mb-profile__wellness-section {
