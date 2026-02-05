@@ -9393,6 +9393,39 @@ body.reading-mode[data-theme="dark"] {
   }
 }
 
+/* ===== NAVBAR SETTINGS BUTTON ===== */
+.navbar-settings-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: #1a1a2e;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-settings-btn:hover {
+  background: rgba(184, 155, 94, 0.1);
+  color: #b89b5e;
+}
+
+.navbar-settings-btn ion-icon {
+  font-size: 1.4rem;
+}
+
+[data-theme="dark"] .navbar-settings-btn {
+  color: #fff;
+}
+
+[data-theme="dark"] .navbar-settings-btn:hover {
+  background: rgba(184, 155, 94, 0.2);
+  color: #b89b5e;
+}
+
 /* ===== NAVBAR DROPDOWN MENUS ===== */
 .navbar-item {
   position: relative;

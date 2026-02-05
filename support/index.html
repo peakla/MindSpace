@@ -389,7 +389,7 @@
 
       </nav>
 
-      <!-- Navbar Actions (Search, User Menu, Crisis) -->
+      <!-- Navbar Actions (Search, Settings, User Menu, Crisis) -->
       <div class="navbar-actions">
         <!-- Search Bar -->
         <div class="navbar-search" id="navbarSearch">
@@ -399,6 +399,11 @@
           </button>
           <div class="navbar-search__results" id="searchResults"></div>
         </div>
+        
+        <!-- Accessibility Settings Button - Always Visible -->
+        <button class="navbar-settings-btn" onclick="openSettingsModal()" aria-label="Accessibility settings" title="Settings">
+          <ion-icon name="settings-outline"></ion-icon>
+        </button>
         
         <!-- Consolidated User Menu -->
         <div class="user-menu-wrapper" id="userMenuWrapper">
