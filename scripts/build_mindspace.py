@@ -73,6 +73,34 @@ def is_text_file(filepath):
     return ext.lower() in TEXT_EXTENSIONS
 
 
+COLOR_REPLACEMENTS = [
+    ("#af916d", "#5BA4E6"),
+    ("#9d8260", "#4893D4"),
+    ("#d4a574", "#7BBDF7"),
+    ("#b89b5e", "#5BA4E6"),
+    ("#a08550", "#4893D4"),
+    ("#c9a227", "#3B8DD4"),
+    ("#d4aa00", "#3B8DD4"),
+    ("#c49464", "#4893D4"),
+    ("#c49466", "#4893D4"),
+    ("#d4b896", "#A8D4FF"),
+    ("#e4c094", "#A8D4FF"),
+    ("#e8dfd4", "#D6EBFF"),
+
+    ("#9b7ed9", "#6DB3F2"),
+    ("#7c5fc4", "#4A93D4"),
+    ("#8a6dc8", "#5CA3E6"),
+    ("#b794f6", "#8ECAFF"),
+    ("#7c5fb8", "#4A93D4"),
+    ("#7c5cbf", "#4A93D4"),
+    ("#6366f1", "#3B8DD4"),
+    ("#7a5dc7", "#4A93D4"),
+
+    ("175, 145, 109", "91, 164, 230"),
+    ("155, 126, 217", "109, 179, 242"),
+]
+
+
 def transform_content(content, filepath):
     basename = os.path.basename(filepath)
     _, ext = os.path.splitext(filepath)
@@ -88,6 +116,10 @@ def transform_content(content, filepath):
     content = content.replace("mindbalance", "mindspace")
     content = content.replace("MINDBALANCE", "MINDSPACE")
     content = content.replace("Mindbalance", "Mindspace")
+
+    if ext.lower() in {".css", ".html", ".js"}:
+        for old_color, new_color in COLOR_REPLACEMENTS:
+            content = content.replace(old_color, new_color)
 
     return content
 

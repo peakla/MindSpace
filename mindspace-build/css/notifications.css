@@ -129,7 +129,7 @@
 
 .inbox-title ion-icon {
   font-size: 22px;
-  color: var(--user-accent, #af916d);
+  color: var(--user-accent, #5BA4E6);
 }
 
 [data-theme="dark"] .inbox-title {
@@ -157,8 +157,8 @@
 }
 
 .inbox-mark-all:hover {
-  background: var(--user-accent, #af916d);
-  border-color: var(--user-accent, #af916d);
+  background: var(--user-accent, #5BA4E6);
+  border-color: var(--user-accent, #5BA4E6);
   color: #fff;
 }
 
@@ -221,7 +221,7 @@
   width: 32px;
   height: 32px;
   border: 3px solid #e5e7eb;
-  border-top-color: var(--user-accent, #af916d);
+  border-top-color: var(--user-accent, #5BA4E6);
   border-radius: 50%;
   animation: inbox-spin 0.8s linear infinite;
 }
@@ -295,11 +295,11 @@
 }
 
 [data-theme="dark"] .inbox-item.unread {
-  background: rgba(175, 145, 109, 0.15);
+  background: rgba(91, 164, 230, 0.15);
 }
 
 [data-theme="dark"] .inbox-item.unread:hover {
-  background: rgba(175, 145, 109, 0.25);
+  background: rgba(91, 164, 230, 0.25);
 }
 
 .inbox-item__icon {
@@ -307,7 +307,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--user-accent, #af916d), #d4a574);
+  background: linear-gradient(135deg, var(--user-accent, #5BA4E6), #7BBDF7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -381,7 +381,7 @@
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  background: var(--user-accent, #af916d);
+  background: var(--user-accent, #5BA4E6);
   border-radius: 50%;
 }
 
