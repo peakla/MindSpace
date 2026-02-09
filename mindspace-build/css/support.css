@@ -695,8 +695,8 @@
 .helplines-grid.list-view .helpline-card {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  padding: 16px 24px;
+  align-items: flex-start;
+  padding: 20px 24px;
   gap: 20px;
 }
 
@@ -704,6 +704,7 @@
   width: 50px;
   height: 50px;
   flex-shrink: 0;
+  margin-bottom: 0;
 }
 
 .helplines-grid.list-view .helpline-card__icon-wrapper ion-icon {
@@ -719,7 +720,7 @@
 
 .helplines-grid.list-view .helpline-card__header {
   flex: 1;
-  min-width: 200px;
+  min-width: 160px;
 }
 
 .helplines-grid.list-view .helpline-card__title {
@@ -746,6 +747,53 @@
 .helplines-grid.list-view .helpline-contact {
   padding: 8px 16px;
   font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .helplines-grid.list-view .helpline-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .helplines-grid.list-view .helpline-card__icon-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+
+  .helplines-grid.list-view .helpline-card__content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .helplines-grid.list-view .helpline-card__header {
+    min-width: unset;
+  }
+
+  .helplines-grid.list-view .helpline-card__title {
+    font-size: 1.05rem;
+  }
+
+  .helplines-grid.list-view .helpline-card__description {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .helplines-grid.list-view .helpline-card__details {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .helplines-grid.list-view .helpline-contact {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
 }
 
 body.dark-mode .helplines-view-toggle {
@@ -4428,6 +4476,31 @@ body.dark-mode .view-toggle-btn.active {
 
   .quicklinks-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .helplines-grid:not(.list-view) {
+    grid-template-columns: 1fr;
+  }
+
+  .helpline-card {
+    padding: 20px;
+  }
+
+  .helpline-card__contacts {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .helpline-contact {
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .helpline-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
   }
 
   .appointment-content {
