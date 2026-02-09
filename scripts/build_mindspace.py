@@ -110,12 +110,12 @@ COLOR_REPLACEMENTS = [
     ("#e5a800", "#4893D4"),
     ("#d49600", "#3B8DD4"),
 
-    ("#f5f0e8", "#EBF3FC"),
-    ("#f8f6f2", "#EFF5FC"),
-    ("#fbf4e8", "#EBF3FC"),
-    ("#e8e4dc", "#D6E8F8"),
-    ("#e8e4df", "#D6E8F8"),
-    ("#f8f6f3", "#EFF5FC"),
+    ("#f5f0e8", "#bde0fe"),
+    ("#f8f6f2", "#d4ecff"),
+    ("#fbf4e8", "#bde0fe"),
+    ("#e8e4dc", "#a3d1f7"),
+    ("#e8e4df", "#a3d1f7"),
+    ("#f8f6f3", "#d4ecff"),
 
     ("#9b7ed9", "#6DB3F2"),
     ("#7c5fc4", "#4A93D4"),
@@ -131,6 +131,11 @@ COLOR_REPLACEMENTS = [
 
     ("242, 163, 59", "32, 104, 168"),
     ("242, 194, 0", "32, 104, 168"),
+
+    ("#e8c87a", "#7BBDF7"),
+    ("#EBF3FC", "#bde0fe"),
+    ("#EFF5FC", "#d4ecff"),
+    ("#D6E8F8", "#a3d1f7"),
 ]
 
 
@@ -198,7 +203,7 @@ def transform_content(content, filepath):
         content = content.replace("#f8a29e", "#38b6ff")
 
         if basename == "style.css":
-            footer_btn_override = """
+            mindspace_overrides = """
 /* MindSpace: white-on-blue footer buttons */
 .mb-footer__btn {
   background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important;
@@ -208,8 +213,24 @@ def transform_content(content, filepath):
 .mb-footer__btn:hover {
   box-shadow: 0 6px 20px rgba(32, 104, 168, 0.4) !important;
 }
+/* MindSpace: light blue navbar & header */
+.header { background-color: #bde0fe !important; }
+.header.active { background-color: #bde0fe !important; }
+.navbar { background: #bde0fe !important; }
+.navbar-link,
+.navbar-link .span { color: #1a3a5c !important; }
+.navbar-link:is(:hover, :focus-visible),
+.navbar-link:is(:hover, :focus-visible) .span,
+.navbar-link.active,
+.navbar-link.active .span { color: #0d2847 !important; }
+.header .btn-outline { color: #1a3a5c !important; border-color: #1a3a5c !important; }
+.header .btn-outline:hover { background: #1a3a5c !important; color: #fff !important; }
+.header-search-btn ion-icon { color: #1a3a5c !important; }
+.header-action-btn ion-icon { color: #1a3a5c !important; }
+.settings-trigger-btn { color: #1a3a5c !important; }
+.mb-footer__top { background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important; }
 """
-            content += footer_btn_override
+            content += mindspace_overrides
 
     return content
 

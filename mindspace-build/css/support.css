@@ -77,7 +77,7 @@
 
 /* === HERO SECTION === */
 .support-hero {
-  background: linear-gradient(135deg, #EFF5FC 0%, #efe9e1 50%, #D6E8F8 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #efe9e1 50%, #a3d1f7 100%);
   padding: 100px 20px 80px;
   text-align: center;
   position: relative;
@@ -552,7 +552,7 @@
 
 /* === QUICK LINKS === */
 .quicklinks-section {
-  background: #EFF5FC;
+  background: #d4ecff;
   padding: 80px 20px;
 }
 
@@ -573,7 +573,7 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
               box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
               border-color 0.3s ease;
-  border: 1px solid #D6E8F8;
+  border: 1px solid #a3d1f7;
   opacity: 0;
   transform: translateY(30px);
   animation: support-card-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -1132,7 +1132,7 @@ body.dark-mode .view-toggle-btn.active {
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #EFF5FC 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #f0ebe4 100%);
 }
 
 .helpline-card--crisis .helpline-card__icon-wrapper {
@@ -1279,7 +1279,7 @@ body.dark-mode .view-toggle-btn.active {
   align-items: center;
   gap: 8px;
   padding: 10px 16px;
-  background: linear-gradient(135deg, #EFF5FC 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #f0ebe4 100%);
   border-radius: 10px;
   color: #2d2d2d;
   font-size: 0.85rem;
@@ -1800,7 +1800,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .resources-section {
-  background: #EFF5FC;
+  background: #d4ecff;
   padding: 80px 20px;
 }
 
@@ -1816,7 +1816,7 @@ body.dark-mode .view-toggle-btn.active {
   padding: 28px;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid #D6E8F8;
+  border: 1px solid #a3d1f7;
 }
 
 .resource-card:hover {
@@ -1917,7 +1917,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .appointment-section {
-  background: linear-gradient(135deg, #EFF5FC 0%, #D6E8F8 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #a3d1f7 100%);
   padding: 80px 20px;
 }
 
@@ -2242,7 +2242,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-section-new {
-  background: linear-gradient(180deg, #EFF5FC 0%, #fff 50%, #EFF5FC 100%);
+  background: linear-gradient(180deg, #d4ecff 0%, #fff 50%, #d4ecff 100%);
   padding: 80px 20px 100px;
   position: relative;
   overflow: hidden;
@@ -2393,7 +2393,7 @@ body.dark-mode .view-toggle-btn.active {
   gap: 8px;
   padding: 12px 20px;
   background: #fff;
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   border-radius: 50px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -2490,7 +2490,7 @@ body.dark-mode .view-toggle-btn.active {
 .faq-card {
   background: #fff;
   border-radius: 16px;
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
@@ -2819,7 +2819,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-split {
-  background: linear-gradient(180deg, #EFF5FC 0%, #fff 50%, #EFF5FC 100%);
+  background: linear-gradient(180deg, #d4ecff 0%, #fff 50%, #d4ecff 100%);
   padding: 80px 20px 100px;
   position: relative;
   overflow: hidden;
@@ -2943,7 +2943,7 @@ body.dark-mode .view-toggle-btn.active {
 .faq-split__left {
   background: #fff;
   border-radius: 20px;
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   overflow: hidden;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   display: flex;
@@ -2956,7 +2956,7 @@ body.dark-mode .view-toggle-btn.active {
   gap: 8px;
   padding: 16px;
   background: linear-gradient(135deg, rgba(214, 189, 159, 0.1) 0%, rgba(196, 166, 122, 0.05) 100%);
-  border-bottom: 2px solid #D6E8F8;
+  border-bottom: 2px solid #a3d1f7;
 }
 
 .faq-split__tab {
@@ -2965,7 +2965,7 @@ body.dark-mode .view-toggle-btn.active {
   gap: 6px;
   padding: 8px 14px;
   background: #fff;
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   border-radius: 25px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -3126,7 +3126,7 @@ body.dark-mode .view-toggle-btn.active {
 .faq-split__answer-panel {
   background: #fff;
   border-radius: 20px;
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   padding: 32px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
   animation: faq-answer-slide-in 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -3179,7 +3179,7 @@ body.dark-mode .view-toggle-btn.active {
   line-height: 1.4;
   margin: 0 0 24px 0;
   padding-bottom: 20px;
-  border-bottom: 2px solid #D6E8F8;
+  border-bottom: 2px solid #a3d1f7;
 }
 
 .faq-split__answer-content {
@@ -3297,7 +3297,7 @@ body.dark-mode .view-toggle-btn.active {
   gap: 8px;
   padding: 12px 24px;
   background: linear-gradient(135deg, rgba(214, 189, 159, 0.1) 0%, rgba(196, 166, 122, 0.05) 100%);
-  border: 2px solid #D6E8F8;
+  border: 2px solid #a3d1f7;
   border-radius: 12px;
   font-size: 0.9rem;
   font-weight: 600;
@@ -4815,7 +4815,7 @@ body.dark-mode .view-toggle-btn.active {
 
 .wellness-modal__content {
   position: relative;
-  background: linear-gradient(145deg, #EFF5FC 0%, #fff 100%);
+  background: linear-gradient(145deg, #d4ecff 0%, #fff 100%);
   border-radius: 24px;
   padding: 40px;
   max-width: 500px;
@@ -4912,7 +4912,7 @@ body.dark-mode .view-toggle-btn.active {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #7BBDF7 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5029,7 +5029,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .breathing-btn--start {
-  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #7BBDF7 100%);
   color: #fff;
   box-shadow: 0 4px 20px rgba(212, 168, 83, 0.4);
 }
@@ -5106,7 +5106,7 @@ body.dark-mode .view-toggle-btn.active {
 .grounding-progress {
   width: 100%;
   height: 6px;
-  background: #D6E8F8;
+  background: #a3d1f7;
   border-radius: 3px;
   margin-bottom: 32px;
   overflow: hidden;
@@ -5115,7 +5115,7 @@ body.dark-mode .view-toggle-btn.active {
 .grounding-progress__bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--blue-crayola, #2068A8) 0%, #e8c87a 100%);
+  background: linear-gradient(90deg, var(--blue-crayola, #2068A8) 0%, #7BBDF7 100%);
   border-radius: 3px;
   transition: width 0.5s ease;
 }
@@ -5145,7 +5145,7 @@ body.dark-mode .view-toggle-btn.active {
   width: 80px;
   height: 80px;
   margin: 0 auto 20px;
-  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #7BBDF7 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -5238,7 +5238,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .grounding-nav__btn--prev {
-  background: #D6E8F8;
+  background: #a3d1f7;
   color: #555;
 }
 
@@ -5252,7 +5252,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .grounding-nav__btn--next {
-  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--blue-crayola, #2068A8) 0%, #7BBDF7 100%);
   color: #fff;
 }
 
@@ -5276,7 +5276,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .wellness-modal__title {
-  color: #EBF3FC;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .wellness-modal__close {
@@ -5304,13 +5304,13 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .grounding-step__title {
-  color: #EBF3FC;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .grounding-input {
   background: #3d3a50;
   border-color: #4d4a60;
-  color: #EBF3FC;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .grounding-input::placeholder {
@@ -5472,7 +5472,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .quote-callout {
-  background: linear-gradient(135deg, #EFF5FC 0%, #f0ebe4 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #f0ebe4 100%);
   border-left: 4px solid #2068A8;
   border-radius: 0 16px 16px 0;
   padding: 28px 32px;
