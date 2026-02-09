@@ -190,6 +190,8 @@ def transform_content(content, filepath):
         content = content.replace('data-accent-color="gold"', 'data-accent-color="blue"')
         content = content.replace("title=\"Gold\"", "title=\"Blue\"")
         content = content.replace("--gold-crayola", "--blue-crayola")
+        content = content.replace("MindSpaceLogo.svg", "MindSpaceLogo.png")
+        content = content.replace("MindBalanceLogo.svg", "MindSpaceLogo.png")
 
     if ext.lower() == ".css":
         content = content.replace("--gold-crayola", "--blue-crayola")
@@ -273,6 +275,15 @@ def build():
         if os.path.exists(old_path):
             os.rename(old_path, os.path.join(images_dir, new_name))
             print(f"  Renamed: {old_name} -> {new_name}")
+
+    ms_logo_src = os.path.join(SOURCE_DIR, "assets", "images", "mindspace-logo.png")
+    ms_logo_dst = os.path.join(images_dir, "MindSpaceLogo.png")
+    if os.path.exists(ms_logo_src):
+        shutil.copy2(ms_logo_src, ms_logo_dst)
+        print("  Replaced: logo with MindSpace PNG logo")
+    old_svg_logo = os.path.join(images_dir, "MindSpaceLogo.svg")
+    if os.path.exists(old_svg_logo):
+        os.remove(old_svg_logo)
 
     ms_favicon_src = os.path.join(SOURCE_DIR, "assets", "images", "mindspace-favicon.png")
     ms_favicon_dst = os.path.join(images_dir, "favicon.png")
