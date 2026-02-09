@@ -32,8 +32,8 @@ if REPLIT_DOMAINS:
 
 # ==================== CORS CONFIGURATION ====================
 CORS(app, resources={
-    r"/api/tts/*": {
-        "origins": "*",
+    r"/api/*": {
+        "origins": ["https://mindbalance.cloud", "https://www.mindbalance.cloud", "https://mindspace.site", "https://www.mindspace.site", "*"],
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type"]
     }
@@ -129,6 +129,10 @@ def check_referer(f):
         if 'replit.app' in referer or 'replit.app' in origin:
             valid = True
         if 'replit.dev' in referer or 'replit.dev' in origin:
+            valid = True
+        if 'mindbalance.cloud' in referer or 'mindbalance.cloud' in origin:
+            valid = True
+        if 'mindspace.site' in referer or 'mindspace.site' in origin:
             valid = True
         
         if not valid:

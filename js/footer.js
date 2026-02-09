@@ -1,5 +1,14 @@
 // ==================== FOOTER ====================
 
+function getApiBase() {
+  const host = window.location.hostname;
+  if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+      host === 'mindspace.site' || host === 'www.mindspace.site') {
+    return 'https://mind-balance-earthlygreens0.replit.app';
+  }
+  return '';
+}
+
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
   initBackToTop();
@@ -56,7 +65,7 @@ function initNewsletterForm() {
     btn.disabled = true;
     
     try {
-      const response = await fetch('/api/newsletter/subscribe', {
+      const response = await fetch(getApiBase() + '/api/newsletter/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
