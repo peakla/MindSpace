@@ -180,7 +180,7 @@ def transform_content(content, filepath):
 
     if ext.lower() == ".css":
         content = content.replace("--gold-crayola", "--blue-crayola")
-        content = content.replace("#f8a29e", "#9EC8F8")
+        content = content.replace("#f8a29e", "#38b6ff")
 
     return content
 
@@ -252,6 +252,12 @@ def build():
     if os.path.exists(ms_favicon_src):
         shutil.copy2(ms_favicon_src, ms_favicon_dst)
         print("  Replaced: favicon.png with MindSpace logo")
+
+    ms_preload_src = os.path.join(SOURCE_DIR, "assets", "images", "mindspace-preload.gif")
+    ms_preload_dst = os.path.join(images_dir, "preload.gif")
+    if os.path.exists(ms_preload_src):
+        shutil.copy2(ms_preload_src, ms_preload_dst)
+        print("  Replaced: preload.gif with MindSpace preloader")
 
     print(f"MindSpace build complete!")
     print(f"  Output: {OUTPUT_DIR}")
