@@ -92,7 +92,7 @@
   width: 200%;
   height: 200%;
   background: radial-gradient(circle at 30% 70%, rgba(214, 189, 159, 0.2) 0%, transparent 50%),
-              radial-gradient(circle at 70% 30%, rgba(242, 194, 0, 0.12) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(32, 104, 168, 0.12) 0%, transparent 50%),
               radial-gradient(circle at 50% 50%, rgba(184, 155, 94, 0.08) 0%, transparent 60%);
   pointer-events: none;
   animation: hero-gradient-pulse 8s ease-in-out infinite alternate;
@@ -107,7 +107,7 @@
   bottom: 0;
   background: 
     radial-gradient(ellipse 600px 300px at 20% 80%, rgba(214, 189, 159, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(242, 194, 0, 0.1) 0%, transparent 70%);
+    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(32, 104, 168, 0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -137,7 +137,7 @@
   right: 15%;
   width: 60px;
   height: 60px;
-  background: linear-gradient(45deg, rgba(242, 194, 0, 0.15) 0%, transparent 70%);
+  background: linear-gradient(45deg, rgba(32, 104, 168, 0.15) 0%, transparent 70%);
   border-radius: 50%;
   animation: float-element 8s ease-in-out infinite reverse;
 }
@@ -257,7 +257,7 @@
 .support-hero__input:focus {
   outline: none;
   border-color: #5BA4E6;
-  box-shadow: 0 0 0 4px rgba(242, 194, 0, 0.15), 0 8px 30px rgba(214, 189, 159, 0.25);
+  box-shadow: 0 0 0 4px rgba(32, 104, 168, 0.15), 0 8px 30px rgba(214, 189, 159, 0.25);
   background-color: #fffef8;
   transform: scale(1.01);
 }
@@ -2724,14 +2724,14 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-highlight {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
   color: inherit;
   padding: 2px 4px;
   border-radius: 4px;
 }
 
 [data-theme="dark"] .faq-highlight {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
 }
 
 .faq-cta {
@@ -3194,7 +3194,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-split__answer-tips {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.08) 0%, rgba(214, 189, 159, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.08) 0%, rgba(214, 189, 159, 0.08) 100%);
   border-radius: 16px;
   padding: 20px 24px;
   margin-bottom: 24px;
@@ -3408,7 +3408,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .faq-split__highlight {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.4) 0%, rgba(214, 189, 159, 0.4) 100%);
   color: inherit;
   padding: 2px 4px;
   border-radius: 4px;
@@ -3419,7 +3419,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .faq-split::before {
-  background: linear-gradient(90deg, rgba(214, 189, 159, 0.6), rgba(242, 194, 0, 0.6), rgba(214, 189, 159, 0.6));
+  background: linear-gradient(90deg, rgba(214, 189, 159, 0.6), rgba(32, 104, 168, 0.6), rgba(214, 189, 159, 0.6));
 }
 
 [data-theme="dark"] .faq-split__title {
@@ -3503,7 +3503,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .faq-split__answer-tips {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.1) 0%, rgba(214, 189, 159, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.1) 0%, rgba(214, 189, 159, 0.08) 100%);
 }
 
 [data-theme="dark"] .faq-split__answer-tips p {
@@ -3532,7 +3532,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .faq-split__highlight {
-  background: linear-gradient(135deg, rgba(242, 194, 0, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(32, 104, 168, 0.3) 0%, rgba(214, 189, 159, 0.3) 100%);
 }
 
 @media (max-width: 968px) {
@@ -3633,7 +3633,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .faq-section-new::before {
-  background: linear-gradient(90deg, rgba(214, 189, 159, 0.6), rgba(242, 194, 0, 0.6), rgba(214, 189, 159, 0.6));
+  background: linear-gradient(90deg, rgba(214, 189, 159, 0.6), rgba(32, 104, 168, 0.6), rgba(214, 189, 159, 0.6));
 }
 
 [data-theme="dark"] .faq-header__title {
@@ -3885,14 +3885,14 @@ body.dark-mode .view-toggle-btn.active {
 
 [data-theme="dark"] .support-hero::before {
   background: radial-gradient(circle at 30% 70%, rgba(214, 189, 159, 0.08) 0%, transparent 50%),
-              radial-gradient(circle at 70% 30%, rgba(242, 194, 0, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 70% 30%, rgba(32, 104, 168, 0.05) 0%, transparent 50%),
               radial-gradient(circle at 50% 50%, rgba(184, 155, 94, 0.04) 0%, transparent 60%);
 }
 
 [data-theme="dark"] .support-hero::after {
   background: 
     radial-gradient(ellipse 600px 300px at 20% 80%, rgba(214, 189, 159, 0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(242, 194, 0, 0.04) 0%, transparent 70%);
+    radial-gradient(ellipse 500px 400px at 80% 20%, rgba(32, 104, 168, 0.04) 0%, transparent 70%);
 }
 
 [data-theme="dark"] .support-hero__decorative--1 {
@@ -3900,7 +3900,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 [data-theme="dark"] .support-hero__decorative--2 {
-  background: linear-gradient(45deg, rgba(242, 194, 0, 0.08) 0%, transparent 70%);
+  background: linear-gradient(45deg, rgba(32, 104, 168, 0.08) 0%, transparent 70%);
 }
 
 [data-theme="dark"] .support-hero__decorative--3 {
@@ -3937,7 +3937,7 @@ body.dark-mode .view-toggle-btn.active {
 [data-theme="dark"] .support-hero__input:focus {
   border-color: #5BA4E6;
   background-color: #2d2d4d;
-  box-shadow: 0 0 0 4px rgba(242, 194, 0, 0.2), 0 8px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0 4px rgba(32, 104, 168, 0.2), 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 [data-theme="dark"] .support-hero__input::placeholder {
