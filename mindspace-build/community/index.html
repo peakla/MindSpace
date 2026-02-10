@@ -942,6 +942,21 @@
       font-style: italic;
       margin-left: 8px;
     }
+
+    .mb-charCount { width: 38px; height: 38px; position: relative; display: grid; place-items: center; }
+    .mb-charCount__svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
+    .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
+
+    .mb-onlineDot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .mb-onlineCount { font-size: 14px; font-weight: 600; color: #666; margin-left: auto; }
+
+    .mb-categorySelect { padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(0,0,0,.12); background: rgba(0,0,0,.02); font-size: 13px; cursor: pointer; outline: none; }
+
+    [data-theme="dark"] .mb-onlineCount { color: #aaa; }
+    [data-theme="dark"] .mb-charCount__num { color: #aaa; }
+    [data-theme="dark"] .mb-categorySelect { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #e0e0e0; }
   </style>
 </head>
 
@@ -1436,9 +1451,26 @@
           </div>
           <div class="mb-composerActions">
             <input type="file" id="mediaInput" accept="image/*" style="display: none;" />
-            <button class="mb-btn" type="button" id="mediaBtn" title="Add image to your post" data-translate="community_media_btn">📎 Media</button>
+            <div class="mb-charCount" id="charCountRing">
+              <svg viewBox="0 0 36 36" class="mb-charCount__svg">
+                <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="3"/>
+                <circle cx="18" cy="18" r="16" fill="none" stroke="#AF916D" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" class="mb-charCount__progress" id="charProgress"/>
+              </svg>
+              <span class="mb-charCount__num" id="charCountNum">0</span>
+            </div>
             <button class="mb-btn mb-btnPrimary" id="postBtn" type="button" disabled
               data-translate="community_post_btn">Post</button>
+            <button class="mb-btn" type="button" id="mediaBtn" title="Add image to your post" data-translate="community_media_btn">📎 Media</button>
+          </div>
+          <div class="mb-composerTags" style="padding: 0 16px 10px;">
+            <select class="mb-categorySelect" id="postCategory">
+              <option value="" data-translate="community_add_tag">Add tag...</option>
+              <option value="motivation" data-translate="community_tag_motivation">💪 Motivation</option>
+              <option value="question" data-translate="community_tag_question">❓ Question</option>
+              <option value="story" data-translate="community_tag_story">📖 Story</option>
+              <option value="resource" data-translate="community_tag_resource">📚 Resource</option>
+              <option value="tip" data-translate="community_tag_tip">💡 Tip</option>
+            </select>
           </div>
         </section>
 
@@ -1455,6 +1487,13 @@
             <div class="mb-miniItem">
               <div class="mb-miniSub">Loading popular posts...</div>
             </div>
+          </div>
+        </div>
+
+        <div class="mb-onlineNow">
+          <div class="mb-panelHeader" style="font-size: 15px; display: flex; align-items: center; gap: 6px;">
+            <span class="mb-onlineDot"></span> <span data-translate="community_online_now">Online Now</span>
+            <span class="mb-onlineCount" id="onlineCount">--</span>
           </div>
         </div>
 

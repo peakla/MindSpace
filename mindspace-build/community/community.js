@@ -27,6 +27,18 @@ let mentionUsers = [];
 let mentionStartPos = 0;
 let activeMentionInput = null;
 
+const profileCache = {};
+
+async function fetchUserProfile(userId) {
+  if (profileCache[userId]) return profileCache[userId];
+  const client = initSupabase();
+  if (!client) return null;
+  try {
+    const { data } = await client.from('profiles').select('avatar_url, display_name').eq('id', userId).single();
+    if (data) profileCache[userId] = data;
+    return data;
+  } catch (e) { return null; }
+}
 
 // --- Helpers ---
 function getTranslation(key, fallback) {
@@ -1014,12 +1026,22 @@ async function handlePost() {
 }
 
 // --- Post Rendering ---
+function getUserLevel(authorId) {
+  const hash = (authorId || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const level = hash % 4;
+  if (level === 3) return { label: '🏆 ' + getTranslation('community_level_champion', 'Champion'), cls: 'mb-levelBadge--champion' };
+  if (level === 2) return { label: '💪 ' + getTranslation('community_level_supporter', 'Supporter'), cls: 'mb-levelBadge--supporter' };
+  if (level === 1) return { label: '👤 ' + getTranslation('community_level_regular', 'Regular'), cls: 'mb-levelBadge--regular' };
+  return { label: '🌱 ' + getTranslation('community_level_newcomer', 'Newcomer'), cls: 'mb-levelBadge--newcomer' };
+}
+
 function createPostElement(postData, timeStr) {
   const article = document.createElement('article');
   article.className = 'mb-post card-animated hover-lift' + (postData.is_pinned ? ' mb-post-pinned' : '');
   article.setAttribute('data-text', postData.content);
   article.setAttribute('data-id', postData.id);
   article.setAttribute('data-email', postData.author_email);
+  article.setAttribute('data-author-id', postData.author_id || '');
   article.setAttribute('data-pinned', postData.is_pinned ? 'true' : 'false');
 
   const isOwnPost = currentUser && currentUser.email === postData.author_email;
@@ -1053,10 +1075,29 @@ function createPostElement(postData, timeStr) {
     ? `<a href="/profile/?user=${postData.author_id}" class="mb-postAuthorLink">${escapeHtml(displayName)}</a>`
     : escapeHtml(displayName);
 
+  const isTeamPost = !postData.author_id || displayName === 'MindBalance Team';
+  const initials = displayName.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+  const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'];
+  const colorIndex = (postData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
+  const avatarColor = avatarColors[colorIndex];
+
+  const level = isTeamPost ? null : getUserLevel(postData.author_id || displayName);
+  const levelBadgeHtml = level ? `<span class="mb-levelBadge ${level.cls}">${level.label}</span>` : '';
+
+  let avatarHtml;
+  if (isTeamPost) {
+    avatarHtml = `<div class="mb-postAvatar mb-postAvatar--team">MB</div>`;
+  } else if (postData.avatar_url) {
+    avatarHtml = `<div class="mb-postAvatar" style="padding:0; overflow:hidden;"><img src="${escapeHtml(postData.avatar_url)}" alt="${escapeHtml(displayName)}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" /></div>`;
+  } else {
+    avatarHtml = `<div class="mb-postAvatar" style="background: ${avatarColor}; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px;">${initials}</div>`;
+  }
+
   article.innerHTML = `
     <div class="mb-postHead">
+      ${avatarHtml}
       <div class="mb-postMeta">
-        <div class="mb-postName">${authorLink} <span class="mb-pill">Community</span> ${pinnedBadge}</div>
+        <div class="mb-postName">${authorLink} ${levelBadgeHtml} ${pinnedBadge}</div>
         <div class="mb-postTime">${timeStr || formatTime(postData.created_at)}</div>
       </div>
     </div>
@@ -1252,6 +1293,20 @@ async function loadPosts(forceReload = false) {
   }
 
   if (data && data.length > 0) {
+    const uniqueAuthorIds = [...new Set(data.map(p => p.author_id).filter(Boolean))];
+    if (uniqueAuthorIds.length > 0) {
+      const { data: profiles } = await client.from('profiles').select('id, avatar_url').in('id', uniqueAuthorIds);
+      if (profiles) {
+        const profileMap = {};
+        profiles.forEach(p => { profileMap[p.id] = p; });
+        data.forEach(post => {
+          if (post.author_id && profileMap[post.author_id]) {
+            post.avatar_url = profileMap[post.author_id].avatar_url;
+          }
+        });
+      }
+    }
+
     if (currentUser) {
       const { data: userLikes } = await client
         .from('post_likes')

@@ -27,6 +27,19 @@ let mentionUsers = [];
 let mentionStartPos = 0;
 let activeMentionInput = null;
 
+const profileCache = {};
+
+async function fetchUserProfile(userId) {
+  if (profileCache[userId]) return profileCache[userId];
+  const client = initSupabase();
+  if (!client) return null;
+  try {
+    const { data } = await client.from('profiles').select('avatar_url, display_name').eq('id', userId).single();
+    if (data) profileCache[userId] = data;
+    return data;
+  } catch (e) { return null; }
+}
+
 function showConfetti() {
   const colors = ['#AF916D', '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
   for (let i = 0; i < 30; i++) {
@@ -1059,8 +1072,8 @@ async function handlePost() {
 }
 
 // --- Post Rendering ---
-function getUserLevel(authorName) {
-  const hash = (authorName || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+function getUserLevel(authorId) {
+  const hash = (authorId || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const level = hash % 4;
   if (level === 3) return { label: '🏆 ' + getTranslation('community_level_champion', 'Champion'), cls: 'mb-levelBadge--champion' };
   if (level === 2) return { label: '💪 ' + getTranslation('community_level_supporter', 'Supporter'), cls: 'mb-levelBadge--supporter' };
@@ -1124,12 +1137,14 @@ function createPostElement(postData, timeStr) {
     displayContent = displayContent.replace(catMatch[0], '');
   }
 
-  const level = isTeamPost ? null : getUserLevel(displayName);
+  const level = isTeamPost ? null : getUserLevel(postData.author_id || displayName);
   const levelBadgeHtml = level ? `<span class="mb-levelBadge ${level.cls}">${level.label}</span>` : '';
 
   let avatarHtml;
   if (isTeamPost) {
     avatarHtml = `<div class="mb-postAvatar mb-postAvatar--team">MB</div>`;
+  } else if (postData.avatar_url) {
+    avatarHtml = `<div class="mb-postAvatar" style="padding:0; overflow:hidden;"><img src="${escapeHtml(postData.avatar_url)}" alt="${escapeHtml(displayName)}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" /></div>`;
   } else {
     avatarHtml = `<div class="mb-postAvatar" style="background: ${avatarColor}; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px;">${initials}</div>`;
   }
@@ -1414,6 +1429,20 @@ async function loadPosts(forceReload = false) {
   feedList.innerHTML = '';
 
   if (data && data.length > 0) {
+    const uniqueAuthorIds = [...new Set(data.map(p => p.author_id).filter(Boolean))];
+    if (uniqueAuthorIds.length > 0) {
+      const { data: profiles } = await client.from('profiles').select('id, avatar_url').in('id', uniqueAuthorIds);
+      if (profiles) {
+        const profileMap = {};
+        profiles.forEach(p => { profileMap[p.id] = p; });
+        data.forEach(post => {
+          if (post.author_id && profileMap[post.author_id]) {
+            post.avatar_url = profileMap[post.author_id].avatar_url;
+          }
+        });
+      }
+    }
+
     if (currentUser) {
       const { data: userLikes } = await client
         .from('post_likes')
@@ -1766,7 +1795,7 @@ async function loadFollowingPosts() {
 
   try {
     const { data: follows, error: followError } = await client
-      .from('follows')
+      .from('followers')
       .select('following_id')
       .eq('follower_id', currentUser.id);
 

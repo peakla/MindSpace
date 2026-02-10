@@ -655,7 +655,12 @@ async function loadActivityData(userId) {
 
   if (activities.length === 0) {
     activityFeed.innerHTML = '';
-    activityFeed.appendChild(createEmptyState('newspaper-outline', 'No activity yet', '../community/', 'Join the conversation'));
+    if (isOwnProfile) {
+      activityFeed.appendChild(createEmptyState('newspaper-outline', 'No activity yet', '../community/', 'Join the conversation'));
+    } else {
+      const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+      activityFeed.appendChild(createEmptyState('newspaper-outline', viewedName + ' has no activity yet', null, null));
+    }
     return;
   }
 
@@ -2143,7 +2148,12 @@ function filterActivities(filter) {
   if (filtered.length === 0) {
     const message = filter === 'all' ? 'activity' : filter;
     activityFeed.innerHTML = '';
-    activityFeed.appendChild(createEmptyState('newspaper-outline', `No ${message} yet`, '../community/', 'Join the conversation'));
+    if (isOwnProfile) {
+      activityFeed.appendChild(createEmptyState('newspaper-outline', `No ${message} yet`, '../community/', 'Join the conversation'));
+    } else {
+      const viewedName = document.getElementById('profileName')?.textContent || 'This user';
+      activityFeed.appendChild(createEmptyState('newspaper-outline', `${viewedName} has no ${message} yet`, null, null));
+    }
     return;
   }
 
