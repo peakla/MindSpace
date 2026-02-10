@@ -36,15 +36,16 @@
     }
 
     .mb-community {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
-      padding: 18px;
+      padding: 24px;
+      background: #f8f6f3;
     }
 
     .mb-grid {
       display: grid;
       grid-template-columns: 240px 1fr 320px;
-      gap: 16px;
+      gap: 20px;
       align-items: start;
     }
 
@@ -53,12 +54,15 @@
       border: 1px solid rgba(0, 0, 0, .08);
       border-radius: 14px;
       box-shadow: 0 12px 28px rgba(0, 0, 0, .05);
+      transition: box-shadow 0.3s ease;
     }
 
     .mb-panelHeader {
-      padding: 12px 14px;
+      padding: 14px 16px;
       border-bottom: 1px solid rgba(0, 0, 0, .07);
       font-weight: 700;
+      font-size: 20px;
+      color: #AF916D;
     }
 
     .mb-panelBody {
@@ -78,21 +82,25 @@
       display: flex;
       gap: 10px;
       align-items: center;
-      padding: 10px 10px;
+      padding: 12px 14px;
       border-radius: 12px;
       color: #111;
       text-decoration: none;
       border: 1px solid transparent;
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
     }
 
     .mb-navLink:hover {
-      background: rgba(0, 0, 0, .04);
+      background: rgba(175, 145, 109, 0.05);
       border-color: rgba(0, 0, 0, .06);
+      border-left-color: rgba(175, 145, 109, 0.3);
     }
 
     .mb-navLink.is-active {
-      background: rgba(0, 0, 0, .06);
+      background: rgba(175, 145, 109, 0.08);
       border-color: rgba(0, 0, 0, .08);
+      border-left: 3px solid #AF916D;
       font-weight: 700;
     }
 
@@ -100,8 +108,35 @@
       font-size: 12px;
       padding: 4px 8px;
       border-radius: 999px;
-      background: rgba(0, 0, 0, .06);
+      background: rgba(175, 145, 109, 0.12);
+      color: #8b7355;
+      font-weight: 600;
       display: inline-block;
+    }
+
+    .mb-communityStats {
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      text-align: center;
+      border-top: 1px solid rgba(0,0,0,.07);
+    }
+    .mb-statItem {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .mb-statNum {
+      font-size: 18px;
+      font-weight: 800;
+      color: #AF916D;
+    }
+    .mb-statLabel {
+      font-size: 11px;
+      opacity: 0.7;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     
@@ -110,13 +145,25 @@
       align-items: center;
       justify-content: space-between;
       padding: 12px 14px;
-      border-bottom: 1px solid rgba(0, 0, 0, .07);
+      border-bottom: 2px solid transparent;
+      border-image: linear-gradient(to right, #AF916D, transparent) 1;
       gap: 10px;
     }
 
     .mb-feedTitle {
       font-weight: 800;
-      font-size: 18px;
+      font-size: 20px;
+    }
+
+    .mb-feedTitle::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: #AF916D;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
     }
 
     .mb-search {
@@ -126,13 +173,20 @@
       border-radius: 12px;
       border: 1px solid rgba(0, 0, 0, .14);
       outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mb-search:focus {
+      border-color: #AF916D;
+      box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.15);
     }
 
     .mb-composer {
       margin: 14px;
       border: 1px solid rgba(0, 0, 0, .1);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
     }
 
     .mb-composerTop {
@@ -140,7 +194,7 @@
       gap: 10px;
       align-items: center;
       padding: 12px;
-      background: rgba(0, 0, 0, .02);
+      background: rgba(175, 145, 109, .03);
       border-bottom: 1px solid rgba(0, 0, 0, .07);
     }
 
@@ -177,18 +231,20 @@
     }
 
     .mb-btn {
-      padding: 10px 12px;
-      border-radius: 12px;
+      padding: 8px 14px;
+      border-radius: 20px;
       border: 1px solid rgba(0, 0, 0, .12);
       background: rgba(0, 0, 0, .04);
       cursor: pointer;
       font-weight: 700;
+      font-size: 13px;
+      transition: all 0.2s ease;
     }
 
     .mb-btnPrimary {
-      background: #111;
+      background: #AF916D;
       color: #fff;
-      border-color: #111;
+      border-color: #AF916D;
     }
 
     .mb-btn:disabled {
@@ -200,7 +256,6 @@
       padding: 0 14px 14px;
       display: grid;
       gap: 12px;
-      max-height: 70vh;
       overflow-y: auto;
       overflow-x: hidden;
       scrollbar-width: thin;
@@ -241,24 +296,55 @@
       border-radius: 14px;
       overflow: hidden;
       background: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+    }
+
+    .mb-post:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
     }
 
     .mb-postHead {
       padding: 12px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 12px;
       border-bottom: 1px solid rgba(0, 0, 0, .07);
       background: rgba(0, 0, 0, .01);
+    }
+
+    .mb-postAvatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(175, 145, 109, 0.3);
+      flex-shrink: 0;
+    }
+    .mb-postAvatar--team {
+      border-color: #AF916D;
+      background: linear-gradient(135deg, #AF916D, #8b7355);
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 16px;
     }
 
     .mb-postMeta {
       display: grid;
       gap: 2px;
+      flex: 1;
+      min-width: 0;
     }
 
     .mb-postName {
       font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .mb-postAuthorLink {
@@ -282,15 +368,16 @@
     }
 
     .mb-postBody {
-      padding: 12px;
-      line-height: 1.45;
+      padding: 14px 16px;
+      line-height: 1.55;
+      font-size: 15px;
     }
 
     .mb-postFooter {
       padding: 10px 12px;
       border-top: 1px solid rgba(0, 0, 0, .07);
       display: flex;
-      gap: 10px;
+      gap: 8px;
     }
 
     
@@ -309,7 +396,7 @@
     .mb-progressFill {
       width: 70%;
       height: 100%;
-      background: #111;
+      background: #AF916D;
     }
 
     .mb-miniList {
@@ -320,14 +407,21 @@
     .mb-miniItem {
       display: grid;
       gap: 2px;
-      padding: 10px;
+      padding: 12px 14px;
       border-radius: 12px;
       border: 1px solid rgba(0, 0, 0, .08);
       background: rgba(0, 0, 0, .02);
+      border-left: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .mb-miniItem:hover {
+      border-left: 3px solid #AF916D;
     }
 
     .mb-miniTitle {
       font-weight: 800;
+      font-size: 14px;
     }
 
     .mb-miniSub {
@@ -345,6 +439,44 @@
     .mb-miniLink:hover {
       background: rgba(0, 0, 0, .05);
       transform: translateX(3px);
+    }
+
+    .mb-welcomeCard {
+      padding: 16px;
+      background: linear-gradient(135deg, rgba(175, 145, 109, 0.08), rgba(175, 145, 109, 0.02));
+      border-radius: 12px;
+      margin: 14px;
+      border: 1px solid rgba(175, 145, 109, 0.15);
+      text-align: center;
+    }
+    .mb-welcomeCard h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #AF916D;
+    }
+    .mb-welcomeCard p {
+      font-size: 13px;
+      line-height: 1.4;
+      opacity: 0.8;
+      margin-bottom: 12px;
+    }
+    .mb-welcomeCard .mb-btn {
+      width: 100%;
+      text-align: center;
+      background: #AF916D;
+      color: #fff;
+      border-color: #AF916D;
+    }
+
+    .mb-likeBtn:hover {
+      background: rgba(231, 76, 60, 0.08);
+    }
+    .mb-commentBtn:hover {
+      background: rgba(52, 152, 219, 0.08);
+    }
+    .mb-shareBtn:hover {
+      background: rgba(39, 174, 96, 0.08);
     }
 
     
@@ -404,32 +536,53 @@
     }
 
     [data-theme="dark"] .mb-navLink:hover {
-      background: rgba(255, 255, 255, .06);
+      background: rgba(214, 189, 159, 0.06);
       border-color: rgba(255, 255, 255, .1);
+      border-left-color: rgba(214, 189, 159, 0.3);
     }
 
     [data-theme="dark"] .mb-navLink.is-active {
-      background: rgba(255, 255, 255, .1);
+      background: rgba(214, 189, 159, 0.1);
       border-color: rgba(255, 255, 255, .15);
+      border-left-color: #d6bd9f;
     }
 
     [data-theme="dark"] .mb-pill {
-      background: rgba(255, 255, 255, .1);
-      color: #e0e0e0;
+      background: rgba(214, 189, 159, 0.15);
+      color: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-communityStats {
+      border-top-color: rgba(255, 255, 255, .08);
+    }
+    [data-theme="dark"] .mb-statNum {
+      color: #d6bd9f;
+    }
+    [data-theme="dark"] .mb-statLabel {
+      color: #aaa;
     }
 
     [data-theme="dark"] .mb-feedHeader {
-      border-bottom-color: rgba(255, 255, 255, .1);
+      border-image: linear-gradient(to right, #d6bd9f, transparent) 1;
     }
 
     [data-theme="dark"] .mb-feedTitle {
       color: #fff;
     }
 
+    [data-theme="dark"] .mb-feedTitle::before {
+      background: #d6bd9f;
+    }
+
     [data-theme="dark"] .mb-search {
       background: #1a1a2e;
       border-color: rgba(255, 255, 255, .15);
       color: #e0e0e0;
+    }
+
+    [data-theme="dark"] .mb-search:focus {
+      border-color: #d6bd9f;
+      box-shadow: 0 0 0 3px rgba(214, 189, 159, 0.15);
     }
 
     [data-theme="dark"] .mb-search::placeholder {
@@ -441,7 +594,7 @@
     }
 
     [data-theme="dark"] .mb-composerTop {
-      background: rgba(255, 255, 255, .03);
+      background: rgba(214, 189, 159, .04);
       border-bottom-color: rgba(255, 255, 255, .08);
     }
 
@@ -477,9 +630,20 @@
       border-color: rgba(255, 255, 255, .1);
     }
 
+    [data-theme="dark"] .mb-post:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .3);
+    }
+
     [data-theme="dark"] .mb-postHead {
       background: rgba(255, 255, 255, .03);
       border-bottom-color: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-postAvatar {
+      border-color: rgba(214, 189, 159, 0.3);
+    }
+    [data-theme="dark"] .mb-postAvatar--team {
+      border-color: #d6bd9f;
     }
 
     [data-theme="dark"] .mb-postName {
@@ -511,6 +675,10 @@
       border-color: rgba(255, 255, 255, .08);
     }
 
+    [data-theme="dark"] .mb-miniItem:hover {
+      border-left-color: #d6bd9f;
+    }
+
     [data-theme="dark"] .mb-miniTitle {
       color: #fff;
     }
@@ -521,6 +689,29 @@
 
     [data-theme="dark"] .mb-miniLink:hover {
       background: rgba(255, 255, 255, .08);
+    }
+
+    [data-theme="dark"] .mb-welcomeCard {
+      background: linear-gradient(135deg, rgba(214, 189, 159, 0.08), rgba(214, 189, 159, 0.02));
+      border-color: rgba(214, 189, 159, 0.15);
+    }
+    [data-theme="dark"] .mb-welcomeCard h4 {
+      color: #d6bd9f;
+    }
+    [data-theme="dark"] .mb-welcomeCard .mb-btn {
+      background: #d6bd9f;
+      color: #1a1a2e;
+      border-color: #d6bd9f;
+    }
+
+    [data-theme="dark"] .mb-likeBtn:hover {
+      background: rgba(255, 107, 107, 0.1);
+    }
+    [data-theme="dark"] .mb-commentBtn:hover {
+      background: rgba(93, 173, 226, 0.1);
+    }
+    [data-theme="dark"] .mb-shareBtn:hover {
+      background: rgba(39, 174, 96, 0.1);
     }
 
     [data-theme="dark"] .mb-deleteBtn {
@@ -1400,7 +1591,7 @@
 
       
       <aside class="mb-panel mb-left animate-slide-right">
-        <div class="mb-panelHeader" data-translate="sidebar_community">Community</div>
+        <div class="mb-panelHeader" data-translate="sidebar_community">🌐 Community</div>
         <ul class="mb-navList">
           <li><a class="mb-navLink" href="../"><span>🏠</span> <span data-translate="nav_home">Home</span></a></li>
           <li><a class="mb-navLink is-active" href="/"><span>💬</span> <span data-translate="sidebar_activity">Activity
@@ -1416,6 +1607,20 @@
           <div style="margin-top:10px; font-size:13px; opacity:.8; line-height:1.35;"
             data-translate="sidebar_guest_desc">
             Read posts as a guest. Sign in to create posts, comment, and join discussions.
+          </div>
+        </div>
+        <div class="mb-communityStats">
+          <div class="mb-statItem">
+            <span class="mb-statNum" id="statMembers">--</span>
+            <span class="mb-statLabel">Members</span>
+          </div>
+          <div class="mb-statItem">
+            <span class="mb-statNum" id="statPosts">--</span>
+            <span class="mb-statLabel">Posts</span>
+          </div>
+          <div class="mb-statItem">
+            <span class="mb-statNum" id="statActive">--</span>
+            <span class="mb-statLabel">Active</span>
           </div>
         </div>
       </aside>
@@ -1453,6 +1658,11 @@
 
       
       <aside class="mb-panel mb-right animate-slide-right">
+        <div class="mb-welcomeCard" id="welcomeCard">
+          <h4>👋 Welcome!</h4>
+          <p>Join our community to share your journey, connect with others, and find support.</p>
+          <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:block; text-decoration:none; text-align:center;">Join the Community</a>
+        </div>
         <div class="mb-panelHeader">Popular Discussions</div>
         <div class="mb-panelBody">
           <div class="mb-miniList animate-fade-in" id="popularDiscussions">
