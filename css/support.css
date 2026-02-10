@@ -1030,6 +1030,17 @@ body.dark-mode .view-toggle-btn.active {
   transition: opacity 0.15s ease;
 }
 
+@media (max-width: 768px) {
+  .helplines-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .helpline-card {
+    grid-template-columns: 36px 1fr;
+  }
+}
+
 .helpline-card {
   background: #fff;
   border: 1px solid #e0e0e0;
