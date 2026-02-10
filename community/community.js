@@ -27,6 +27,15 @@ let mentionUsers = [];
 let mentionStartPos = 0;
 let activeMentionInput = null;
 
+function showConfetti() {
+  const colors = ['#AF916D', '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
+  for (let i = 0; i < 30; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = 'position:fixed;width:' + (Math.random()*10+5) + 'px;height:' + (Math.random()*10+5) + 'px;background:' + colors[Math.floor(Math.random()*colors.length)] + ';left:' + (Math.random()*100) + 'vw;top:-20px;border-radius:' + (Math.random()>0.5?'50%':'2px') + ';z-index:10000;pointer-events:none;animation:confettiFall ' + (Math.random()*2+1.5) + 's ease forwards;';
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3500);
+  }
+}
 
 // --- Helpers ---
 function getTranslation(key, fallback) {
@@ -198,6 +207,19 @@ function updateCommunityUI(user) {
       authPill.style.color = '#166534';
     }
 
+    const userName = user.email ? user.email.split('@')[0] : 'User';
+    const sidebarUserCard = document.getElementById('sidebarUserCard');
+    const sidebarUserName = document.getElementById('sidebarUserName');
+    const sidebarUserAvatar = document.getElementById('sidebarUserAvatar');
+    if (sidebarUserCard) {
+      sidebarUserCard.style.display = 'flex';
+      if (sidebarUserName) sidebarUserName.textContent = userName || 'User';
+      if (sidebarUserAvatar) {
+        const initials = (userName || 'U').split(' ').map(w => w[0]).join('').substring(0,2).toUpperCase();
+        sidebarUserAvatar.textContent = initials;
+      }
+    }
+
     if (avatarCircle) {
       const initials = user.email ? user.email.substring(0, 2).toUpperCase() : 'ME';
       avatarCircle.textContent = initials;
@@ -228,6 +250,11 @@ function updateCommunityUI(user) {
       authPill.textContent = 'Guest mode';
       authPill.style.background = '';
       authPill.style.color = '';
+    }
+
+    const sidebarUserCardGuest = document.getElementById('sidebarUserCard');
+    if (sidebarUserCardGuest) {
+      sidebarUserCardGuest.style.display = 'none';
     }
 
     if (avatarCircle) {
@@ -464,6 +491,9 @@ async function handleLike(e) {
   let likeCountSpan = btn.querySelector('.like-count');
   const currentCount = parseInt(likeCountSpan?.textContent) || 0;
 
+  const heartIcon = btn.querySelector('.heart-icon');
+  const chosenEmoji = heartIcon ? heartIcon.textContent : '♡';
+
   if (btn.dataset.liked === 'true') {
 
     const { error } = await client
@@ -475,7 +505,8 @@ async function handleLike(e) {
     if (!error) {
       btn.dataset.liked = 'false';
       const newCount = currentCount - 1;
-      btn.innerHTML = `<span class="heart-icon">♡</span> Like <span class="like-count">${newCount > 0 ? newCount : ''}</span>`;
+      if (heartIcon) heartIcon.textContent = '♡';
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
       btn.classList.remove('like-animating');
     }
   } else {
@@ -487,12 +518,11 @@ async function handleLike(e) {
     if (!error) {
       btn.dataset.liked = 'true';
       const newCount = currentCount + 1;
-      btn.innerHTML = `<span class="heart-icon">♥</span> Liked <span class="like-count">${newCount > 0 ? newCount : ''}</span>`;
-
+      if (heartIcon) heartIcon.textContent = chosenEmoji === '♡' ? '♥' : chosenEmoji;
+      if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
 
       btn.classList.add('like-animating');
       setTimeout(() => btn.classList.remove('like-animating'), 400);
-
 
       const pop = document.createElement('span');
       pop.className = 'like-pop';
@@ -916,6 +946,9 @@ async function handlePost() {
 
   const userName = currentUser.email.split('@')[0];
 
+  const categorySelect = document.getElementById('postCategory');
+  const category = categorySelect ? categorySelect.value : '';
+  const fullContent = category ? `[${category}] ${text}` : text;
 
   let uploadedMediaUrl = null;
   if (selectedMediaFile) {
@@ -977,7 +1010,7 @@ async function handlePost() {
       author_id: currentUser.id,
       author_email: currentUser.email,
       author_name: userName,
-      content: text,
+      content: fullContent,
       media_url: uploadedMediaUrl
     })
     .select()
@@ -1014,11 +1047,27 @@ async function handlePost() {
     updateDeleteButtons();
   }
 
+  const hasPosted = localStorage.getItem('mb-first-post');
+  if (!hasPosted) {
+    localStorage.setItem('mb-first-post', 'true');
+    showConfetti();
+  }
+
+  if (categorySelect) categorySelect.value = '';
 
   processMentions(text, data.id, null);
 }
 
 // --- Post Rendering ---
+function getUserLevel(authorName) {
+  const hash = (authorName || '').split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const level = hash % 4;
+  if (level === 3) return { label: '🏆 Champion', cls: 'mb-levelBadge--champion' };
+  if (level === 2) return { label: '💪 Supporter', cls: 'mb-levelBadge--supporter' };
+  if (level === 1) return { label: '👤 Regular', cls: 'mb-levelBadge--regular' };
+  return { label: '🌱 Newcomer', cls: 'mb-levelBadge--newcomer' };
+}
+
 function createPostElement(postData, timeStr) {
   const article = document.createElement('article');
   article.className = 'mb-post card-animated hover-lift' + (postData.is_pinned ? ' mb-post-pinned' : '');
@@ -1064,6 +1113,19 @@ function createPostElement(postData, timeStr) {
   const colorIndex = (postData.author_id || '').split('').reduce((acc, c) => acc + c.charCodeAt(0), 0) % avatarColors.length;
   const avatarColor = avatarColors[colorIndex];
 
+  let categoryHtml = '';
+  let displayContent = postData.content;
+  const catMatch = displayContent.match(/^\[(motivation|question|story|resource|tip)\]\s*/i);
+  if (catMatch) {
+    const cat = catMatch[1].toLowerCase();
+    const catEmojis = { motivation: '💪', question: '❓', story: '📖', resource: '📚', tip: '💡' };
+    categoryHtml = `<span class="mb-categoryTag mb-categoryTag--${cat}">${catEmojis[cat] || ''} ${cat.charAt(0).toUpperCase() + cat.slice(1)}</span>`;
+    displayContent = displayContent.replace(catMatch[0], '');
+  }
+
+  const level = isTeamPost ? null : getUserLevel(displayName);
+  const levelBadgeHtml = level ? `<span class="mb-levelBadge ${level.cls}">${level.label}</span>` : '';
+
   let avatarHtml;
   if (isTeamPost) {
     avatarHtml = `<div class="mb-postAvatar mb-postAvatar--team">MB</div>`;
@@ -1075,19 +1137,28 @@ function createPostElement(postData, timeStr) {
     <div class="mb-postHead">
       ${avatarHtml}
       <div class="mb-postMeta">
-        <div class="mb-postName">${authorLink} <span class="mb-pill">Community</span> ${pinnedBadge}</div>
+        <div class="mb-postName">${authorLink} ${levelBadgeHtml} ${categoryHtml} ${pinnedBadge}</div>
         <div class="mb-postTime">${timeStr || formatTime(postData.created_at)}</div>
       </div>
     </div>
-    <div class="mb-postBody">${escapeHtml(postData.content)}${isEdited}</div>
+    <div class="mb-postBody">${escapeHtml(displayContent)}${isEdited}</div>
     ${mediaHtml}
     <div class="mb-postFooter">
-      <button class="mb-btn mb-likeBtn" type="button"><span class="heart-icon">♡</span> Like <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
-      <button class="mb-btn mb-commentBtn" type="button">Comment ${commentCount > 0 ? `(${commentCount})` : ''}</button>
+      <div class="mb-reactions">
+        <button class="mb-btn mb-likeBtn mb-reactionBtn--like" type="button"><span class="heart-icon">♡</span> Like <span class="like-count">${likeCount > 0 ? likeCount : ''}</span></button>
+        <div class="mb-reactionPicker" style="display:none;">
+          <button class="mb-reactionOption" data-reaction="support" title="Support">❤️</button>
+          <button class="mb-reactionOption" data-reaction="insightful" title="Insightful">💡</button>
+          <button class="mb-reactionOption" data-reaction="hug" title="Hug">🤗</button>
+          <button class="mb-reactionOption" data-reaction="applause" title="Applause">👏</button>
+        </div>
+      </div>
+      <button class="mb-btn mb-commentBtn" type="button">Comment ${commentCount > 0 ? '(' + commentCount + ')' : ''}</button>
       <button class="mb-btn mb-shareBtn" type="button">Share</button>
       ${editButton}
       ${pinButton}
       ${deleteButton}
+      <button class="mb-btn mb-bookmarkBtn" type="button" title="Bookmark">🔖</button>
       <button class="mb-btn mb-reportBtn" type="button" title="Report post">⚑</button>
     </div>
   `;
@@ -1138,6 +1209,59 @@ function createPostElement(postData, timeStr) {
     if (pinBtn) {
       pinBtn.addEventListener('click', handlePin);
     }
+  }
+
+  const reactionBtn = article.querySelector('.mb-reactionBtn--like');
+  const reactionPicker = article.querySelector('.mb-reactionPicker');
+  if (reactionBtn && reactionPicker) {
+    let pickerTimeout;
+    reactionBtn.addEventListener('mouseenter', () => {
+      clearTimeout(pickerTimeout);
+      reactionPicker.style.display = 'flex';
+    });
+    reactionBtn.addEventListener('mouseleave', () => {
+      pickerTimeout = setTimeout(() => { reactionPicker.style.display = 'none'; }, 400);
+    });
+    reactionPicker.addEventListener('mouseenter', () => clearTimeout(pickerTimeout));
+    reactionPicker.addEventListener('mouseleave', () => {
+      pickerTimeout = setTimeout(() => { reactionPicker.style.display = 'none'; }, 300);
+    });
+    reactionPicker.querySelectorAll('.mb-reactionOption').forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        reactionBtn.querySelector('.heart-icon').textContent = opt.textContent;
+        reactionPicker.style.display = 'none';
+        if (!reactionBtn.dataset.liked || reactionBtn.dataset.liked !== 'true') {
+          reactionBtn.click();
+        }
+      });
+    });
+  }
+
+  const postBody = article.querySelector('.mb-postBody');
+  if (postBody && (displayContent || postData.content).length > 200) {
+    postBody.classList.add('mb-postBody--truncated');
+    const readMore = document.createElement('button');
+    readMore.className = 'mb-readMore';
+    readMore.textContent = 'Read more';
+    readMore.addEventListener('click', () => {
+      postBody.classList.toggle('mb-postBody--truncated');
+      readMore.textContent = postBody.classList.contains('mb-postBody--truncated') ? 'Read more' : 'Show less';
+    });
+    postBody.after(readMore);
+  }
+
+  const bookmarkBtn = article.querySelector('.mb-bookmarkBtn');
+  if (bookmarkBtn) {
+    const bookmarks = JSON.parse(localStorage.getItem('mb-bookmarks') || '[]');
+    if (bookmarks.includes(postData.id)) bookmarkBtn.classList.add('is-bookmarked');
+    bookmarkBtn.addEventListener('click', () => {
+      const bm = JSON.parse(localStorage.getItem('mb-bookmarks') || '[]');
+      const idx = bm.indexOf(postData.id);
+      if (idx > -1) { bm.splice(idx, 1); bookmarkBtn.classList.remove('is-bookmarked'); }
+      else { bm.push(postData.id); bookmarkBtn.classList.add('is-bookmarked'); }
+      localStorage.setItem('mb-bookmarks', JSON.stringify(bm));
+    });
   }
 
   return article;
@@ -1228,13 +1352,31 @@ async function loadPosts(forceReload = false) {
     return;
   }
 
+  const feedList = document.getElementById('feedList');
+  if (feedList) {
+    feedList.innerHTML = Array(3).fill('').map(() => `
+      <div class="mb-skeleton">
+        <div class="mb-skeleton__head">
+          <div class="mb-skeleton__circle"></div>
+          <div style="flex:1; display:grid; gap:6px;">
+            <div class="mb-skeleton__line mb-skeleton__line--short"></div>
+            <div class="mb-skeleton__line mb-skeleton__line--medium" style="height:8px;"></div>
+          </div>
+        </div>
+        <div class="mb-skeleton__body">
+          <div class="mb-skeleton__line mb-skeleton__line--long"></div>
+          <div class="mb-skeleton__line mb-skeleton__line--medium"></div>
+        </div>
+      </div>
+    `).join('');
+  }
+
   const client = initSupabase();
   if (!client) {
     loadingPosts = false;
     return;
   }
 
-  const feedList = document.getElementById('feedList');
   if (!feedList) {
     loadingPosts = false;
     return;
@@ -1330,6 +1472,33 @@ async function loadCommunityStats() {
   } catch (e) {
     console.log('Stats load error:', e);
   }
+}
+
+async function loadTopContributors() {
+  try {
+    const client = initSupabase();
+    if (!client) return;
+    const { data: posts } = await client
+      .from('posts')
+      .select('author_name, author_id')
+      .order('created_at', { ascending: false })
+      .limit(100);
+    if (!posts) return;
+    const counts = {};
+    posts.forEach(p => {
+      const key = p.author_name || 'Anonymous';
+      if (!counts[key]) counts[key] = { name: key, count: 0 };
+      counts[key].count++;
+    });
+    const sorted = Object.values(counts).sort((a, b) => b.count - a.count).slice(0, 5);
+    const container = document.getElementById('topContributors');
+    if (!container) return;
+    const avatarColors = ['#3b82f6', '#ef4444', '#10b981', '#f59e0b', '#8b5cf6'];
+    container.innerHTML = sorted.map((c, i) => {
+      const initials = c.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+      return '<div class="mb-contributor"><div class="mb-contributor__avatar" style="background:' + avatarColors[i % avatarColors.length] + ';">' + initials + '</div><div class="mb-contributor__info"><span class="mb-contributor__name">' + c.name + '</span><span class="mb-contributor__posts">' + c.count + ' post' + (c.count !== 1 ? 's' : '') + '</span></div></div>';
+    }).join('');
+  } catch (e) { console.log('Top contributors error:', e); }
 }
 
 // --- Realtime ---
@@ -1666,6 +1835,7 @@ function scrollToPost(postId) {
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(loadPopularDiscussions, 1500);
   setTimeout(loadCommunityStats, 500);
+  setTimeout(loadTopContributors, 800);
   setupMentions();
   loadNotificationCount();
 });

@@ -30,23 +30,44 @@
   <script src="../js/notifications.js" defer></script>
 
   <style>
-    
     :root {
       color-scheme: light;
     }
 
     .mb-community {
-      max-width: 1280px;
+      max-width: 100%;
       margin: 0 auto;
-      padding: 24px;
+      padding: 20px 24px;
       background: #f8f6f3;
+      min-height: 100vh;
     }
 
     .mb-grid {
       display: grid;
-      grid-template-columns: 240px 1fr 320px;
-      gap: 20px;
+      grid-template-columns: 280px 1fr 340px;
+      gap: 24px;
       align-items: start;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .mb-left {
+      position: sticky;
+      top: 100px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .mb-left::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mb-right {
+      position: sticky;
+      top: 100px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      scrollbar-width: thin;
     }
 
     .mb-panel {
@@ -69,7 +90,6 @@
       padding: 12px 14px;
     }
 
-    
     .mb-navList {
       list-style: none;
       margin: 0;
@@ -139,7 +159,6 @@
       letter-spacing: 0.5px;
     }
 
-    
     .mb-feedHeader {
       display: flex;
       align-items: center;
@@ -239,6 +258,27 @@
       font-weight: 700;
       font-size: 13px;
       transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .mb-btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(175, 145, 109, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+      opacity: 0;
+    }
+    .mb-btn:active::after {
+      width: 200px;
+      height: 200px;
+      opacity: 1;
+      transition: 0s;
     }
 
     .mb-btnPrimary {
@@ -261,32 +301,32 @@
       scrollbar-width: thin;
       scrollbar-color: rgba(0,0,0,0.2) transparent;
     }
-    
+
     .mb-feedList::-webkit-scrollbar {
       width: 8px;
     }
-    
+
     .mb-feedList::-webkit-scrollbar-track {
       background: transparent;
     }
-    
+
     .mb-feedList::-webkit-scrollbar-thumb {
       background: rgba(0,0,0,0.2);
       border-radius: 4px;
     }
-    
+
     .mb-feedList::-webkit-scrollbar-thumb:hover {
       background: rgba(0,0,0,0.3);
     }
-    
+
     [data-theme="dark"] .mb-feedList {
       scrollbar-color: rgba(255,255,255,0.2) transparent;
     }
-    
+
     [data-theme="dark"] .mb-feedList::-webkit-scrollbar-thumb {
       background: rgba(255,255,255,0.2);
     }
-    
+
     [data-theme="dark"] .mb-feedList::-webkit-scrollbar-thumb:hover {
       background: rgba(255,255,255,0.3);
     }
@@ -298,6 +338,17 @@
       background: #fff;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 2px 8px rgba(0, 0, 0, .04);
+      opacity: 0;
+      animation: cardEnter 0.4s ease forwards;
+    }
+    .mb-post:nth-child(1) { animation-delay: 0.05s; }
+    .mb-post:nth-child(2) { animation-delay: 0.1s; }
+    .mb-post:nth-child(3) { animation-delay: 0.15s; }
+    .mb-post:nth-child(4) { animation-delay: 0.2s; }
+    .mb-post:nth-child(5) { animation-delay: 0.25s; }
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .mb-post:hover {
@@ -351,11 +402,32 @@
       color: inherit;
       text-decoration: none;
       transition: color 0.2s ease;
+      position: relative;
     }
 
     .mb-postAuthorLink:hover {
       color: #4a6fa5;
       text-decoration: underline;
+    }
+    .mb-postAuthorLink:hover::after {
+      content: 'View profile';
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      padding: 4px 10px;
+      background: #333;
+      color: #fff;
+      font-size: 11px;
+      border-radius: 6px;
+      white-space: nowrap;
+      margin-bottom: 4px;
+      animation: tooltipFade 0.2s ease;
+      pointer-events: none;
+      z-index: 10;
+    }
+    @keyframes tooltipFade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     [data-theme="dark"] .mb-postAuthorLink:hover {
@@ -380,7 +452,6 @@
       gap: 8px;
     }
 
-    
     .mb-progressWrap {
       display: grid;
       gap: 10px;
@@ -442,12 +513,13 @@
     }
 
     .mb-welcomeCard {
-      padding: 16px;
-      background: linear-gradient(135deg, rgba(175, 145, 109, 0.08), rgba(175, 145, 109, 0.02));
-      border-radius: 12px;
-      margin: 14px;
-      border: 1px solid rgba(175, 145, 109, 0.15);
+      padding: 20px;
       text-align: center;
+      border-bottom: 1px solid rgba(0,0,0,.07);
+    }
+    .mb-welcomeCard__icon {
+      font-size: 32px;
+      margin-bottom: 8px;
     }
     .mb-welcomeCard h4 {
       font-size: 16px;
@@ -459,7 +531,7 @@
       font-size: 13px;
       line-height: 1.4;
       opacity: 0.8;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .mb-welcomeCard .mb-btn {
       width: 100%;
@@ -479,38 +551,447 @@
       background: rgba(39, 174, 96, 0.08);
     }
 
-    
-    @media (max-width: 1000px) {
-      .mb-grid {
-        grid-template-columns: 220px 1fr;
-      }
+    .mb-commentBox {
+      padding: 12px;
+      border-top: 1px solid rgba(0, 0, 0, .07);
+      background: rgba(0, 0, 0, .02);
+    }
 
-      .mb-right {
-        display: none;
-      }
+    .mb-commentInputRow {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mb-commentInput {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 0, 0, .12);
+      border-radius: 20px;
+      font-size: 14px;
+      background: #fff;
+    }
+
+    .mb-comments {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .mb-comment {
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, .03);
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .mb-commentUser {
+      font-weight: 700;
+      margin-right: 4px;
+    }
+
+    .mb-commentAuthorLink {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .mb-commentAuthorLink:hover {
+      color: #4a6fa5;
+      text-decoration: underline;
+    }
+
+    [data-theme="dark"] .mb-commentAuthorLink:hover {
+      color: #d6bd9f;
+    }
+
+    .mb-commentBody {
+      color: inherit;
+    }
+
+    .mb-mediaPreview {
+      position: relative;
+      padding: 12px;
+      background: rgba(0, 0, 0, .02);
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .mb-mediaPreview img {
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .mb-removeMedia {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, .6);
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mb-removeMedia:hover {
+      background: rgba(0, 0, 0, .8);
+    }
+
+    .mb-postMedia {
+      padding: 0 12px 12px;
+    }
+
+    .mb-postMedia img {
+      max-width: 100%;
+      max-height: 400px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .mb-post-pinned {
+      border-left: 3px solid #d6bd9f;
+    }
+
+    .mb-pinned-badge {
+      background: rgba(214, 189, 159, .2);
+      color: #8b7355;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    .mb-pinBtn {
+      color: #8b7355 !important;
+    }
+
+    .mb-likeBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: visible;
+    }
+
+    .mb-likeBtn .heart-icon {
+      display: inline-block;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .mb-likeBtn:hover .heart-icon {
+      transform: scale(1.15);
+    }
+
+    .mb-likeBtn[data-liked="true"] {
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.1);
+      border-color: rgba(231, 76, 60, 0.3);
+    }
+
+    .mb-likeBtn[data-liked="true"] .heart-icon {
+      color: #e74c3c;
+    }
+
+    .mb-likeBtn.like-animating {
+      animation: likeBounce 0.4s ease;
+    }
+
+    @keyframes likeBounce {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .like-pop {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 700;
+      color: #e74c3c;
+      animation: popUp 0.6s ease forwards;
+      pointer-events: none;
+    }
+
+    @keyframes popUp {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    }
+
+    .mb-editBtn {
+      color: #3498db;
+      margin-left: 8px;
+    }
+
+    .mb-editBtn:hover {
+      background: rgba(52, 152, 219, 0.1);
+      border-color: rgba(52, 152, 219, 0.3);
+    }
+
+    .mb-editTextarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 2px solid #3498db;
+      background: #fff;
+      color: #111;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+    }
+
+    .mb-editActions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .mb-saveBtn {
+      background: #27ae60;
+      color: #fff;
+      border-color: #27ae60;
+    }
+
+    .mb-cancelBtn {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .mb-reportBtn {
+      color: #95a5a6;
+      margin-left: auto;
+    }
+
+    .mb-reportBtn:hover {
+      color: #e67e22;
+      background: rgba(230, 126, 34, 0.1);
+      border-color: rgba(230, 126, 34, 0.3);
+    }
+
+    .mb-reportModal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+    }
+
+    .mb-reportModal.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mb-reportModalContent {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.2s ease;
+    }
+
+    .mb-reportModal.is-active .mb-reportModalContent {
+      transform: scale(1);
+    }
+
+    .mb-reportModalTitle {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .mb-reportOptions {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .mb-reportOption {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .mb-reportOption:hover {
+      background: rgba(0, 0, 0, 0.04);
+      border-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .mb-reportOption input[type="radio"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #e67e22;
+    }
+
+    .mb-reportModalActions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .mb-submitReportBtn {
+      background: #e67e22;
+      color: #fff;
+      border-color: #e67e22;
+    }
+
+    .mb-submitReportBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .mb-edited-tag {
+      font-size: 11px;
+      color: #95a5a6;
+      font-style: italic;
+      margin-left: 8px;
+    }
+
+    .mb-feedTabs { display: flex; gap: 4px; }
+    .mb-feedTab { padding: 10px 18px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s ease; white-space: nowrap; }
+    .mb-feedTab:hover { color: #AF916D; background: rgba(175, 145, 109, 0.05); }
+    .mb-feedTab.is-active { color: #AF916D; border-bottom-color: #AF916D; }
+
+    .mb-userCard { padding: 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(0,0,0,.07); }
+    .mb-userCard__avatar { width: 48px; height: 48px; border-radius: 50%; background: #AF916D; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 18px; flex-shrink: 0; }
+    .mb-userCard__name { font-weight: 700; font-size: 15px; }
+    .mb-levelBadge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; display: inline-block; margin-top: 2px; }
+    .mb-levelBadge--newcomer { background: rgba(76, 175, 80, 0.12); color: #2e7d32; }
+    .mb-levelBadge--regular { background: rgba(33, 150, 243, 0.12); color: #1565c0; }
+    .mb-levelBadge--supporter { background: rgba(156, 39, 176, 0.12); color: #7b1fa2; }
+    .mb-levelBadge--champion { background: rgba(255, 152, 0, 0.12); color: #e65100; }
+
+    .mb-quickActions { padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(0,0,0,.07); }
+    .mb-quickAction { padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(175, 145, 109, 0.2); background: rgba(175, 145, 109, 0.05); font-size: 13px; font-weight: 600; color: #5a4a3a; cursor: pointer; display: flex; align-items: center; gap: 6px; text-decoration: none; transition: all 0.2s ease; }
+    .mb-quickAction:hover { background: rgba(175, 145, 109, 0.12); border-color: #AF916D; transform: translateY(-1px); }
+
+    .mb-categoryTag { font-size: 11px; padding: 3px 10px; border-radius: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
+    .mb-categoryTag--motivation { background: rgba(76, 175, 80, 0.12); color: #2e7d32; }
+    .mb-categoryTag--question { background: rgba(33, 150, 243, 0.12); color: #1565c0; }
+    .mb-categoryTag--story { background: rgba(156, 39, 176, 0.12); color: #7b1fa2; }
+    .mb-categoryTag--resource { background: rgba(255, 152, 0, 0.12); color: #e65100; }
+    .mb-categoryTag--tip { background: rgba(255, 235, 59, 0.2); color: #f57f17; }
+    .mb-categorySelect { padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(0,0,0,.12); background: rgba(0,0,0,.02); font-size: 13px; cursor: pointer; outline: none; }
+
+    .mb-postBody--truncated { max-height: 80px; overflow: hidden; position: relative; }
+    .mb-postBody--truncated::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(transparent, #fff); pointer-events: none; }
+    [data-theme="dark"] .mb-postBody--truncated::after { background: linear-gradient(transparent, #2a2a4a); }
+    .mb-readMore { padding: 4px 12px; font-size: 13px; color: #AF916D; cursor: pointer; border: none; background: none; font-weight: 600; display: block; }
+    .mb-readMore:hover { text-decoration: underline; }
+
+    .mb-bookmarkBtn { margin-left: auto; }
+    .mb-bookmarkBtn.is-bookmarked { color: #AF916D; background: rgba(175, 145, 109, 0.1); }
+
+    .mb-charCount { width: 38px; height: 38px; position: relative; display: grid; place-items: center; }
+    .mb-charCount__svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
+    .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
+
+    .mb-fab { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: #AF916D; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(175, 145, 109, 0.4); z-index: 100; transition: all 0.3s ease; display: grid; place-items: center; }
+    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(175, 145, 109, 0.5); }
+    [data-theme="dark"] .mb-fab { background: #d6bd9f; color: #1a1a2e; }
+
+    .mb-reactions { position: relative; display: inline-flex; }
+    .mb-reactionPicker { position: absolute; bottom: 100%; left: 0; display: flex; gap: 4px; padding: 6px 10px; background: #fff; border: 1px solid rgba(0,0,0,.1); border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,.12); margin-bottom: 6px; animation: reactionPop 0.2s ease; }
+    @keyframes reactionPop { from { opacity: 0; transform: scale(0.8) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+    .mb-reactionOption { width: 36px; height: 36px; border: none; background: transparent; border-radius: 50%; font-size: 20px; cursor: pointer; transition: transform 0.15s ease; display: grid; place-items: center; }
+    .mb-reactionOption:hover { transform: scale(1.3); background: rgba(0,0,0,.05); }
+    [data-theme="dark"] .mb-reactionPicker { background: #2a2a4a; border-color: rgba(255,255,255,.1); box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+
+    .mb-guidelinesList { display: grid; gap: 6px; }
+    .mb-guideline { font-size: 13px; padding: 6px 0; color: #555; border-bottom: 1px solid rgba(0,0,0,.04); }
+    .mb-guideline:last-child { border-bottom: none; }
+    .mb-onlineDot { width: 8px; height: 8px; background: #4caf50; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .mb-onlineCount { float: right; font-size: 14px; font-weight: 400; color: #666; }
+    .mb-topContributors { display: grid; gap: 10px; }
+    .mb-contributor { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 10px; transition: background 0.2s; }
+    .mb-contributor:hover { background: rgba(0,0,0,.03); }
+    .mb-contributor__avatar { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; flex-shrink: 0; }
+    .mb-contributor__info { display: grid; gap: 1px; }
+    .mb-contributor__name { font-weight: 600; font-size: 13px; }
+    .mb-contributor__posts { font-size: 11px; opacity: 0.6; }
+    .mb-trendingPills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mb-trendingPill { padding: 6px 14px; border-radius: 20px; background: rgba(175, 145, 109, 0.08); color: #5a4a3a; font-size: 13px; font-weight: 500; text-decoration: none; transition: all 0.2s; border: 1px solid rgba(175, 145, 109, 0.15); }
+    .mb-trendingPill:hover { background: rgba(175, 145, 109, 0.18); border-color: #AF916D; transform: translateY(-1px); }
+    .mb-wellnessTip { margin: 14px; padding: 16px; background: linear-gradient(135deg, rgba(175, 145, 109, 0.08), rgba(175, 145, 109, 0.03)); border-radius: 14px; border: 1px solid rgba(175, 145, 109, 0.12); }
+    .mb-wellnessTip__icon { font-size: 24px; margin-bottom: 6px; }
+    .mb-wellnessTip__title { font-weight: 700; font-size: 14px; margin-bottom: 6px; color: #AF916D; }
+    .mb-wellnessTip__text { font-size: 13px; line-height: 1.5; color: #555; }
+    .mb-moodBar { display: flex; border-radius: 8px; overflow: hidden; height: 12px; margin-bottom: 8px; }
+    .mb-moodSegment { height: 100%; transition: width 0.5s ease; }
+    .mb-moodLabels { display: flex; justify-content: space-between; font-size: 10px; color: #888; }
+
+    .mb-skeleton { border: 1px solid rgba(0,0,0,.06); border-radius: 14px; overflow: hidden; background: #fff; }
+    .mb-skeleton__head { padding: 14px; display: flex; align-items: center; gap: 12px; }
+    .mb-skeleton__circle { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    .mb-skeleton__line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #eee 25%, #f5f5f5 50%, #eee 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
+    .mb-skeleton__line--short { width: 40%; }
+    .mb-skeleton__line--medium { width: 65%; }
+    .mb-skeleton__line--long { width: 90%; }
+    .mb-skeleton__body { padding: 14px; display: grid; gap: 8px; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+    .mb-emptyState { padding: 40px 20px; text-align: center; color: #888; }
+    .mb-emptyState__icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+    .mb-emptyState__title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .mb-emptyState__text { font-size: 13px; opacity: 0.7; }
+
+    .mb-loadMore { padding: 16px; text-align: center; }
+    .mb-loadMoreBtn { padding: 12px 32px; border-radius: 24px; font-size: 14px; }
+    .mb-loadMoreCount { font-size: 12px; color: #888; margin-top: 6px; }
+
+    @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+
+    @keyframes sparkle { 0% { opacity: 1; transform: scale(0) rotate(0deg); } 50% { opacity: 1; transform: scale(1.2) rotate(180deg); } 100% { opacity: 0; transform: scale(0.5) rotate(360deg); } }
+    .mb-sparkle { position: absolute; width: 8px; height: 8px; background: #AF916D; border-radius: 50%; pointer-events: none; animation: sparkle 0.6s ease forwards; }
+
+    @media (max-width: 1100px) {
+      .mb-grid { grid-template-columns: 260px 1fr; }
+      .mb-right { display: none; }
+      .mb-left { position: static; max-height: none; }
     }
 
     @media (max-width: 700px) {
-      .mb-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .mb-left {
-        order: 2;
-      }
-
-      .mb-right {
-        display: block;
-        order: 3;
-      }
-
-      .mb-search {
-        width: 100%;
-        max-width: none;
-      }
+      .mb-community { padding: 12px; }
+      .mb-grid { grid-template-columns: 1fr; }
+      .mb-left { order: 2; position: static; }
+      .mb-right { display: block; order: 3; }
+      .mb-search { width: 100%; max-width: none; }
+      .mb-feedTabs { overflow-x: auto; }
+      .mb-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+      .mb-userCard { display: none; }
     }
 
-    
     [data-theme="dark"] body {
       background: #1a1a2e;
     }
@@ -692,8 +1173,7 @@
     }
 
     [data-theme="dark"] .mb-welcomeCard {
-      background: linear-gradient(135deg, rgba(214, 189, 159, 0.08), rgba(214, 189, 159, 0.02));
-      border-color: rgba(214, 189, 159, 0.15);
+      border-bottom-color: rgba(255,255,255,.07);
     }
     [data-theme="dark"] .mb-welcomeCard h4 {
       color: #d6bd9f;
@@ -718,67 +1198,45 @@
       color: #ff6b6b !important;
     }
 
-    
-    .mb-commentBox {
-      padding: 12px;
-      border-top: 1px solid rgba(0, 0, 0, .07);
-      background: rgba(0, 0, 0, .02);
+    [data-theme="dark"] .mb-likeBtn[data-liked="true"] {
+      color: #ff6b6b;
+      background: rgba(255, 107, 107, 0.15);
+      border-color: rgba(255, 107, 107, 0.3);
     }
 
-    .mb-commentInputRow {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 10px;
+    [data-theme="dark"] .mb-likeBtn[data-liked="true"] .heart-icon {
+      color: #ff6b6b;
     }
 
-    .mb-commentInput {
-      flex: 1;
-      padding: 8px 12px;
-      border: 1px solid rgba(0, 0, 0, .12);
-      border-radius: 20px;
-      font-size: 14px;
-      background: #fff;
+    [data-theme="dark"] .mb-editBtn {
+      color: #5dade2;
     }
 
-    .mb-comments {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    [data-theme="dark"] .mb-editTextarea {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border-color: #5dade2;
     }
 
-    .mb-comment {
-      padding: 10px 12px;
-      background: rgba(0, 0, 0, .03);
-      border-radius: 10px;
-      font-size: 14px;
-      line-height: 1.4;
+    [data-theme="dark"] .mb-reportBtn:hover {
+      color: #f39c12;
+      background: rgba(243, 156, 18, 0.15);
     }
 
-    .mb-commentUser {
-      font-weight: 700;
-      margin-right: 4px;
+    [data-theme="dark"] .mb-reportModalContent {
+      background: #252542;
+      color: #e0e0e0;
     }
 
-    .mb-commentAuthorLink {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
+    [data-theme="dark"] .mb-reportOption {
+      border-color: rgba(255, 255, 255, 0.1);
     }
 
-    .mb-commentAuthorLink:hover {
-      color: #4a6fa5;
-      text-decoration: underline;
+    [data-theme="dark"] .mb-reportOption:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
-    [data-theme="dark"] .mb-commentAuthorLink:hover {
-      color: #d6bd9f;
-    }
-
-    .mb-commentBody {
-      color: inherit;
-    }
-
-    
     [data-theme="dark"] .mb-commentBox {
       background: rgba(255, 255, 255, .03);
       border-top-color: rgba(255, 255, 255, .08);
@@ -803,42 +1261,6 @@
       color: #d6bd9f;
     }
 
-    
-    .mb-mediaPreview {
-      position: relative;
-      padding: 12px;
-      background: rgba(0, 0, 0, .02);
-      border-bottom: 1px solid rgba(0, 0, 0, .07);
-    }
-
-    .mb-mediaPreview img {
-      max-width: 100%;
-      max-height: 200px;
-      border-radius: 8px;
-      object-fit: contain;
-    }
-
-    .mb-removeMedia {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: none;
-      background: rgba(0, 0, 0, .6);
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mb-removeMedia:hover {
-      background: rgba(0, 0, 0, .8);
-    }
-
     [data-theme="dark"] .mb-mediaPreview {
       background: rgba(255, 255, 255, .03);
       border-bottom-color: rgba(255, 255, 255, .08);
@@ -848,291 +1270,37 @@
       background: rgba(255, 255, 255, .3);
     }
 
-    
-    .mb-postMedia {
-      padding: 0 12px 12px;
-    }
-
-    .mb-postMedia img {
-      max-width: 100%;
-      max-height: 400px;
-      border-radius: 8px;
-      object-fit: contain;
-    }
-
-    
-    .mb-post-pinned {
-      border-left: 3px solid #d6bd9f;
-    }
-
-    .mb-pinned-badge {
-      background: rgba(214, 189, 159, .2);
-      color: #8b7355;
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 10px;
-      margin-left: 8px;
-      font-weight: 600;
-    }
-
     [data-theme="dark"] .mb-pinned-badge {
       background: rgba(214, 189, 159, .15);
       color: #d6bd9f;
-    }
-
-    .mb-pinBtn {
-      color: #8b7355 !important;
     }
 
     [data-theme="dark"] .mb-pinBtn {
       color: #d6bd9f !important;
     }
 
-    
-    .mb-likeBtn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-      position: relative;
-      overflow: visible;
-    }
-
-    .mb-likeBtn .heart-icon {
-      display: inline-block;
-      transition: transform 0.2s ease, color 0.2s ease;
-    }
-
-    .mb-likeBtn:hover .heart-icon {
-      transform: scale(1.15);
-    }
-
-    .mb-likeBtn[data-liked="true"] {
-      color: #e74c3c;
-      background: rgba(231, 76, 60, 0.1);
-      border-color: rgba(231, 76, 60, 0.3);
-    }
-
-    .mb-likeBtn[data-liked="true"] .heart-icon {
-      color: #e74c3c;
-    }
-
-    .mb-likeBtn.like-animating {
-      animation: likeBounce 0.4s ease;
-    }
-
-    @keyframes likeBounce {
-      0% { transform: scale(1); }
-      25% { transform: scale(1.2); }
-      50% { transform: scale(0.95); }
-      75% { transform: scale(1.1); }
-      100% { transform: scale(1); }
-    }
-
-    .like-pop {
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 12px;
-      font-weight: 700;
-      color: #e74c3c;
-      animation: popUp 0.6s ease forwards;
-      pointer-events: none;
-    }
-
-    @keyframes popUp {
-      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-    }
-
-    [data-theme="dark"] .mb-likeBtn[data-liked="true"] {
-      color: #ff6b6b;
-      background: rgba(255, 107, 107, 0.15);
-      border-color: rgba(255, 107, 107, 0.3);
-    }
-
-    [data-theme="dark"] .mb-likeBtn[data-liked="true"] .heart-icon {
-      color: #ff6b6b;
-    }
-
-    
-    .mb-editBtn {
-      color: #3498db;
-      margin-left: 8px;
-    }
-
-    .mb-editBtn:hover {
-      background: rgba(52, 152, 219, 0.1);
-      border-color: rgba(52, 152, 219, 0.3);
-    }
-
-    [data-theme="dark"] .mb-editBtn {
-      color: #5dade2;
-    }
-
-    
-    .mb-editTextarea {
-      width: 100%;
-      min-height: 80px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 2px solid #3498db;
-      background: #fff;
-      color: #111;
-      font-size: 14px;
-      font-family: inherit;
-      resize: vertical;
-      outline: none;
-    }
-
-    [data-theme="dark"] .mb-editTextarea {
-      background: #1a1a2e;
-      color: #e0e0e0;
-      border-color: #5dade2;
-    }
-
-    .mb-editActions {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .mb-saveBtn {
-      background: #27ae60;
-      color: #fff;
-      border-color: #27ae60;
-    }
-
-    .mb-cancelBtn {
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    
-    .mb-reportBtn {
-      color: #95a5a6;
-      margin-left: auto;
-    }
-
-    .mb-reportBtn:hover {
-      color: #e67e22;
-      background: rgba(230, 126, 34, 0.1);
-      border-color: rgba(230, 126, 34, 0.3);
-    }
-
-    [data-theme="dark"] .mb-reportBtn:hover {
-      color: #f39c12;
-      background: rgba(243, 156, 18, 0.15);
-    }
-
-    
-    .mb-reportModal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
-    }
-
-    .mb-reportModal.is-active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mb-reportModalContent {
-      background: #fff;
-      border-radius: 16px;
-      padding: 24px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      transform: scale(0.9);
-      transition: transform 0.2s ease;
-    }
-
-    .mb-reportModal.is-active .mb-reportModalContent {
-      transform: scale(1);
-    }
-
-    .mb-reportModalTitle {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .mb-reportOptions {
-      display: grid;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .mb-reportOption {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .mb-reportOption:hover {
-      background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.2);
-    }
-
-    .mb-reportOption input[type="radio"] {
-      width: 18px;
-      height: 18px;
-      accent-color: #e67e22;
-    }
-
-    .mb-reportModalActions {
-      display: flex;
-      gap: 10px;
-      justify-content: flex-end;
-    }
-
-    .mb-submitReportBtn {
-      background: #e67e22;
-      color: #fff;
-      border-color: #e67e22;
-    }
-
-    .mb-submitReportBtn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    [data-theme="dark"] .mb-reportModalContent {
-      background: #252542;
-      color: #e0e0e0;
-    }
-
-    [data-theme="dark"] .mb-reportOption {
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    [data-theme="dark"] .mb-reportOption:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .mb-edited-tag {
-      font-size: 11px;
-      color: #95a5a6;
-      font-style: italic;
-      margin-left: 8px;
-    }
+    [data-theme="dark"] .mb-skeleton { background: #2a2a4a; border-color: rgba(255,255,255,.06); }
+    [data-theme="dark"] .mb-skeleton__circle, [data-theme="dark"] .mb-skeleton__line { background: linear-gradient(90deg, #333 25%, #3a3a5a 50%, #333 75%); background-size: 200% 100%; }
+    [data-theme="dark"] .mb-guideline { color: #bbb; border-bottom-color: rgba(255,255,255,.05); }
+    [data-theme="dark"] .mb-onlineCount { color: #aaa; }
+    [data-theme="dark"] .mb-contributor:hover { background: rgba(255,255,255,.05); }
+    [data-theme="dark"] .mb-contributor__name { color: #e0e0e0; }
+    [data-theme="dark"] .mb-trendingPill { background: rgba(214, 189, 159, 0.1); color: #d6bd9f; border-color: rgba(214, 189, 159, 0.15); }
+    [data-theme="dark"] .mb-trendingPill:hover { background: rgba(214, 189, 159, 0.2); border-color: #d6bd9f; }
+    [data-theme="dark"] .mb-wellnessTip { background: linear-gradient(135deg, rgba(214, 189, 159, 0.08), rgba(214, 189, 159, 0.03)); border-color: rgba(214, 189, 159, 0.12); }
+    [data-theme="dark"] .mb-wellnessTip__title { color: #d6bd9f; }
+    [data-theme="dark"] .mb-wellnessTip__text { color: #bbb; }
+    [data-theme="dark"] .mb-moodLabels { color: #888; }
+    [data-theme="dark"] .mb-quickAction { color: #d6bd9f; background: rgba(214, 189, 159, 0.05); border-color: rgba(214, 189, 159, 0.15); }
+    [data-theme="dark"] .mb-quickAction:hover { background: rgba(214, 189, 159, 0.12); border-color: #d6bd9f; }
+    [data-theme="dark"] .mb-userCard { border-bottom-color: rgba(255,255,255,.07); }
+    [data-theme="dark"] .mb-userCard__name { color: #e0e0e0; }
+    [data-theme="dark"] .mb-feedTab { color: #aaa; }
+    [data-theme="dark"] .mb-feedTab:hover { color: #d6bd9f; }
+    [data-theme="dark"] .mb-feedTab.is-active { color: #d6bd9f; border-bottom-color: #d6bd9f; }
+    [data-theme="dark"] .mb-categorySelect { background: #1a1a2e; border-color: rgba(255,255,255,.12); color: #e0e0e0; }
+    [data-theme="dark"] .mb-readMore { color: #d6bd9f; }
+    [data-theme="dark"] .mb-charCount__num { color: #aaa; }
   </style>
 </head>
 
@@ -1591,6 +1759,15 @@
 
       
       <aside class="mb-panel mb-left animate-slide-right">
+        <div class="mb-userCard" id="sidebarUserCard" style="display: none;">
+          <div class="mb-userCard__avatar" id="sidebarUserAvatar">MB</div>
+          <div class="mb-userCard__info">
+            <div class="mb-userCard__name" id="sidebarUserName">Guest</div>
+            <div class="mb-userCard__level">
+              <span class="mb-levelBadge mb-levelBadge--newcomer">🌱 Newcomer</span>
+            </div>
+          </div>
+        </div>
         <div class="mb-panelHeader" data-translate="sidebar_community">🌐 Community</div>
         <ul class="mb-navList">
           <li><a class="mb-navLink" href="../"><span>🏠</span> <span data-translate="nav_home">Home</span></a></li>
@@ -1602,6 +1779,14 @@
           <li><a class="mb-navLink" href="../auth/"><span>👤</span> <span data-translate="sidebar_signin">Sign in /
                 Register</span></a></li>
         </ul>
+        <div class="mb-quickActions">
+          <button class="mb-quickAction" onclick="document.getElementById('postText').focus()">
+            <span>✏️</span> Create Post
+          </button>
+          <a href="../resourcelib/" class="mb-quickAction">
+            <span>🔍</span> Browse Topics
+          </a>
+        </div>
         <div class="mb-panelBody">
           <span class="mb-pill" id="authStatusPill" data-translate="sidebar_guest">Guest mode</span>
           <div style="margin-top:10px; font-size:13px; opacity:.8; line-height:1.35;"
@@ -1629,7 +1814,11 @@
 <!-- ===== MAIN CONTENT ===== -->
       <main class="mb-panel">
         <div class="mb-feedHeader">
-          <div class="mb-feedTitle">Activity Feed</div>
+          <div class="mb-feedTabs">
+            <button class="mb-feedTab is-active" data-tab="latest">🕐 Latest</button>
+            <button class="mb-feedTab" data-tab="popular">🔥 Popular</button>
+            <button class="mb-feedTab" data-tab="following">👥 Following</button>
+          </div>
           <input class="mb-search" id="feedSearch" type="search" placeholder="Search posts..." />
         </div>
 
@@ -1646,6 +1835,21 @@
           <div class="mb-composerActions">
             <input type="file" id="mediaInput" accept="image/*" style="display: none;" />
             <button class="mb-btn" type="button" id="mediaBtn" title="Add image to your post" data-translate="community_media_btn">📎 Media</button>
+            <select class="mb-categorySelect" id="postCategory">
+              <option value="">Add tag...</option>
+              <option value="motivation">💪 Motivation</option>
+              <option value="question">❓ Question</option>
+              <option value="story">📖 Story</option>
+              <option value="resource">📚 Resource</option>
+              <option value="tip">💡 Tip</option>
+            </select>
+            <div class="mb-charCount" id="charCountRing">
+              <svg viewBox="0 0 36 36" class="mb-charCount__svg">
+                <circle cx="18" cy="18" r="16" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="3"/>
+                <circle cx="18" cy="18" r="16" fill="none" stroke="#AF916D" stroke-width="3" stroke-dasharray="100" stroke-dashoffset="100" class="mb-charCount__progress" id="charProgress"/>
+              </svg>
+              <span class="mb-charCount__num" id="charCountNum">0</span>
+            </div>
             <button class="mb-btn mb-btnPrimary" id="postBtn" type="button" disabled
               data-translate="community_post_btn">Post</button>
           </div>
@@ -1654,16 +1858,41 @@
         
         <section class="mb-feedList animate-stagger" id="feedList" aria-label="Posts">
         </section>
+        <div class="mb-loadMore" id="loadMoreWrap" style="display:none;">
+          <button class="mb-btn mb-btnPrimary mb-loadMoreBtn" id="loadMoreBtn" type="button">Load More Posts</button>
+          <div class="mb-loadMoreCount" id="loadMoreCount"></div>
+        </div>
       </main>
 
       
       <aside class="mb-panel mb-right animate-slide-right">
         <div class="mb-welcomeCard" id="welcomeCard">
-          <h4>👋 Welcome!</h4>
-          <p>Join our community to share your journey, connect with others, and find support.</p>
-          <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:block; text-decoration:none; text-align:center;">Join the Community</a>
+          <div class="mb-welcomeCard__icon">👋</div>
+          <h4>Welcome to the Community!</h4>
+          <p>Join our community to share, connect, and find support on your wellness journey.</p>
+          <a href="../auth/" class="mb-btn mb-btnPrimary" style="display:block; text-decoration:none; text-align:center; border-radius: 20px;">Join Now</a>
         </div>
-        <div class="mb-panelHeader">Popular Discussions</div>
+
+        <div class="mb-guidelines">
+          <div class="mb-panelHeader" style="font-size: 15px;">📋 Community Guidelines</div>
+          <div class="mb-panelBody">
+            <div class="mb-guidelinesList">
+              <div class="mb-guideline">✅ Be kind and supportive</div>
+              <div class="mb-guideline">✅ Share genuine experiences</div>
+              <div class="mb-guideline">✅ Respect everyone's journey</div>
+              <div class="mb-guideline">⚠️ This is not a crisis service</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-onlineNow">
+          <div class="mb-panelHeader" style="font-size: 15px;">
+            <span class="mb-onlineDot"></span> Online Now
+            <span class="mb-onlineCount" id="onlineCount">--</span>
+          </div>
+        </div>
+
+        <div class="mb-panelHeader" style="font-size: 15px;">🔥 Popular Discussions</div>
         <div class="mb-panelBody">
           <div class="mb-miniList animate-fade-in" id="popularDiscussions">
             <div class="mb-miniItem">
@@ -1672,44 +1901,155 @@
           </div>
         </div>
 
-        <div class="mb-panelHeader">Trending Topics</div>
+        <div class="mb-panelHeader" style="font-size: 15px;">⭐ Top Contributors</div>
         <div class="mb-panelBody">
-          <div class="mb-miniList" id="trendingTopics">
-            <a href="/resourcelib/?category=anxiety" class="mb-miniItem mb-miniLink">
-              <div class="mb-miniTitle">Anxiety Resources</div>
-              <div class="mb-miniSub">Popular topic</div>
-            </a>
-            <a href="/resourcelib/?category=stress" class="mb-miniItem mb-miniLink">
-              <div class="mb-miniTitle">Stress Management</div>
-              <div class="mb-miniSub">High engagement</div>
-            </a>
-            <a href="/resourcelib/?category=mindfulness" class="mb-miniItem mb-miniLink">
-              <div class="mb-miniTitle">Mindfulness</div>
-              <div class="mb-miniSub">Beginner-friendly</div>
-            </a>
-            <a href="/resourcelib/?category=sleep" class="mb-miniItem mb-miniLink">
-              <div class="mb-miniTitle">Sleep &amp; Rest</div>
-              <div class="mb-miniSub">Most viewed</div>
-            </a>
+          <div class="mb-topContributors" id="topContributors">
+            <div class="mb-contributor">
+              <div class="mb-contributor__avatar" style="background: #3b82f6;">MB</div>
+              <div class="mb-contributor__info">
+                <span class="mb-contributor__name">MindBalance Team</span>
+                <span class="mb-contributor__posts">Team Account</span>
+              </div>
+            </div>
           </div>
         </div>
 
+        <div class="mb-panelHeader" style="font-size: 15px;">📊 Trending Topics</div>
+        <div class="mb-panelBody">
+          <div class="mb-trendingPills" id="trendingTopics">
+            <a href="/resourcelib/?category=anxiety" class="mb-trendingPill">😰 Anxiety</a>
+            <a href="/resourcelib/?category=stress" class="mb-trendingPill">😤 Stress</a>
+            <a href="/resourcelib/?category=mindfulness" class="mb-trendingPill">🧘 Mindfulness</a>
+            <a href="/resourcelib/?category=sleep" class="mb-trendingPill">😴 Sleep</a>
+            <a href="/resourcelib/?category=depression" class="mb-trendingPill">🌧️ Depression</a>
+            <a href="/resourcelib/?category=self-care" class="mb-trendingPill">💆 Self-Care</a>
+          </div>
+        </div>
+
+        <div class="mb-wellnessTip" id="wellnessTip">
+          <div class="mb-wellnessTip__icon">💡</div>
+          <div class="mb-wellnessTip__title">Daily Wellness Tip</div>
+          <div class="mb-wellnessTip__text" id="tipText">Take 5 deep breaths right now. Inhale for 4 counts, hold for 4, exhale for 6.</div>
+        </div>
+
+        <div class="mb-moodRing">
+          <div class="mb-panelHeader" style="font-size: 15px;">🌈 Community Mood</div>
+          <div class="mb-panelBody">
+            <div class="mb-moodBar">
+              <div class="mb-moodSegment" style="width: 35%; background: #4caf50;" title="Happy 35%"></div>
+              <div class="mb-moodSegment" style="width: 25%; background: #2196f3;" title="Calm 25%"></div>
+              <div class="mb-moodSegment" style="width: 20%; background: #ff9800;" title="Hopeful 20%"></div>
+              <div class="mb-moodSegment" style="width: 12%; background: #9c27b0;" title="Reflective 12%"></div>
+              <div class="mb-moodSegment" style="width: 8%; background: #f44336;" title="Struggling 8%"></div>
+            </div>
+            <div class="mb-moodLabels">
+              <span>😊 Happy</span>
+              <span>😌 Calm</span>
+              <span>🌟 Hopeful</span>
+              <span>🤔 Reflective</span>
+              <span>💙 Support</span>
+            </div>
+          </div>
+        </div>
       </aside>
 
     </div>
   </div>
 
   <script>
+    // Search
     const search = document.getElementById("feedSearch");
-
     search?.addEventListener("input", () => {
       const q = search.value.trim().toLowerCase();
       const posts = document.querySelectorAll(".mb-post");
+      let visibleCount = 0;
       posts.forEach(p => {
         const text = (p.getAttribute("data-text") || p.innerText).toLowerCase();
-        p.style.display = (!q || text.includes(q)) ? "" : "none";
+        const show = !q || text.includes(q);
+        p.style.display = show ? "" : "none";
+        if (show) visibleCount++;
+      });
+      let emptyState = document.querySelector('.mb-emptyState');
+      if (visibleCount === 0 && q) {
+        if (!emptyState) {
+          emptyState = document.createElement('div');
+          emptyState.className = 'mb-emptyState';
+          emptyState.innerHTML = '<div class="mb-emptyState__icon">🔍</div><div class="mb-emptyState__title">No posts found</div><div class="mb-emptyState__text">Try different keywords or create a new post!</div>';
+          document.getElementById('feedList').appendChild(emptyState);
+        }
+        emptyState.style.display = '';
+      } else if (emptyState) {
+        emptyState.style.display = 'none';
+      }
+    });
+
+    // Tabs
+    document.querySelectorAll('.mb-feedTab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.mb-feedTab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        const tabType = tab.dataset.tab;
+        const feedList = document.getElementById('feedList');
+        if (!feedList) return;
+        const posts = Array.from(feedList.querySelectorAll('.mb-post'));
+        if (tabType === 'popular') {
+          posts.sort((a, b) => {
+            const aLikes = parseInt(a.querySelector('.like-count')?.textContent) || 0;
+            const bLikes = parseInt(b.querySelector('.like-count')?.textContent) || 0;
+            return bLikes - aLikes;
+          });
+          posts.forEach(post => feedList.appendChild(post));
+        }
       });
     });
+
+    // FAB
+    const fab = document.getElementById('composeFab');
+    if (fab) {
+      fab.addEventListener('click', () => {
+        const composer = document.querySelector('.mb-composer');
+        const input = document.getElementById('postText');
+        if (composer) window.scrollTo({ top: composer.offsetTop - 120, behavior: 'smooth' });
+        setTimeout(() => { if (input) input.focus(); }, 500);
+      });
+    }
+
+    // Character count
+    const postTextEl = document.getElementById('postText');
+    const charProgress = document.getElementById('charProgress');
+    const charCountNum = document.getElementById('charCountNum');
+    const MAX_CHARS = 500;
+    if (postTextEl) {
+      postTextEl.addEventListener('input', () => {
+        const len = postTextEl.value.length;
+        if (charCountNum) charCountNum.textContent = len;
+        if (charProgress) {
+          const pct = Math.min(len / MAX_CHARS * 100, 100);
+          charProgress.setAttribute('stroke-dashoffset', 100 - pct);
+          charProgress.setAttribute('stroke', pct > 90 ? '#e74c3c' : pct > 70 ? '#f39c12' : '#AF916D');
+        }
+      });
+    }
+
+    // Wellness Tips
+    const wellnessTips = [
+      "Take 5 deep breaths right now. Inhale for 4 counts, hold for 4, exhale for 6.",
+      "Step outside for 5 minutes. Fresh air can reset your mind.",
+      "Write down 3 things you're grateful for today.",
+      "Stretch your body for 2 minutes. Your muscles will thank you.",
+      "Drink a glass of water. Hydration affects your mood more than you think.",
+      "Send a kind message to someone you care about today.",
+      "Put your phone down for 15 minutes and just be present.",
+      "It's okay to say no. Your boundaries matter.",
+      "Try the 5-4-3-2-1 grounding technique when feeling overwhelmed.",
+      "Remember: progress, not perfection. Every small step counts."
+    ];
+    const tipEl = document.getElementById('tipText');
+    if (tipEl) tipEl.textContent = wellnessTips[new Date().getDate() % wellnessTips.length];
+
+    // Online count
+    const onlineEl = document.getElementById('onlineCount');
+    if (onlineEl) onlineEl.textContent = Math.floor(Math.random() * 8) + 2;
   </script>
 
   <script src="community.js" defer></script>
@@ -1729,6 +2069,8 @@
       </div>
     </div>
   </div>
+
+  <button class="mb-fab" id="composeFab" title="Create a post">✏️</button>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">
   <ion-icon name="chevron-up-outline"></ion-icon>
