@@ -743,7 +743,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #f8a29e;
+  background-color: #38b6ff;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -834,7 +834,7 @@ html {
 /* Dark mode preloader */
 [data-theme="dark"] .preload,
 .dark-mode .preload {
-  background-color: #5c3a38;
+  background-color: #143d5e;
 }
 
 [data-theme="dark"] .preload-text,
