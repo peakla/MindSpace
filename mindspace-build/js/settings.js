@@ -159,7 +159,7 @@
   // --- Accent Color ---
   function applyAccentColor(colorName) {
     const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.blue;
-    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
+    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'blue';
     
     document.documentElement.style.setProperty('--user-accent', color.hex);
     document.documentElement.style.setProperty('--user-accent-hover', color.hover);

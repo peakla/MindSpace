@@ -2018,7 +2018,7 @@ function scrollToPost(postId) {
   if (postEl) {
     postEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     postEl.style.transition = 'box-shadow 0.3s ease';
-    postEl.style.boxShadow = '0 0 0 3px rgba(184, 155, 94, 0.5)';
+    postEl.style.boxShadow = '0 0 0 3px rgba(32, 104, 168, 0.5)';
     setTimeout(() => {
       postEl.style.boxShadow = '';
     }, 2000);
