@@ -219,6 +219,8 @@ def transform_content(content, filepath):
     if ext.lower() == ".css":
         content = content.replace("--gold-crayola", "--blue-crayola")
         content = content.replace("#f8a29e", "#38b6ff")
+        content = content.replace("#AF916D", "#2068A8")
+        content = content.replace("#af916d", "#2068a8")
 
         if basename == "style.css":
             mindspace_overrides = """
