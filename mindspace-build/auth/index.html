@@ -1227,8 +1227,6 @@
     var search = window.location.search || '';
     var isOAuthCallback = hash.includes('access_token') || hash.includes('refresh_token') || search.includes('code=');
     if (isOAuthCallback) {
-      var params = new URLSearchParams(search);
-      params.delete('origin');
     }
   })();
 
@@ -1463,7 +1461,7 @@
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://www.mindspace.site/auth/?origin=mindspace'
+        redirectTo: 'https://www.mindspace.site/auth/'
       }
     });
     

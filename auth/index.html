@@ -1228,15 +1228,6 @@
     var isOAuthCallback = hash.includes('access_token') || hash.includes('refresh_token') || search.includes('code=');
     
     if (isOAuthCallback) {
-      var params = new URLSearchParams(search);
-      var origin = params.get('origin');
-      if (origin === 'mindspace') {
-        params.delete('origin');
-        var cleanSearch = params.toString() ? '?' + params.toString() : '';
-        var targetUrl = 'https://www.mindspace.site/auth/' + cleanSearch + hash;
-        window.location.replace(targetUrl);
-        return;
-      }
     }
   })();
 
