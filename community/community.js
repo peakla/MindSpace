@@ -1486,7 +1486,7 @@ async function loadTopContributors() {
     if (!posts) return;
     const counts = {};
     posts.forEach(p => {
-      const key = p.author_name || 'Anonymous';
+      const key = p.author_name || 'MindBalance Team';
       if (!counts[key]) counts[key] = { name: key, count: 0 };
       counts[key].count++;
     });
