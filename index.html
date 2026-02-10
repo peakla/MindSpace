@@ -670,7 +670,7 @@
       Your browser does not support the video tag.
     </video>
     <div class="hero-content animate-fade-in">
-
+      <h1 id="hero-cycle-text" class="hero-cycle-text">One World</h1>
     </div>
   </div>
 
@@ -1492,6 +1492,25 @@
   <script src="/js/scroll-progress.js" defer></script>
   <script src="/js/animations.js" defer></script>
   <script src="/js/footer.js" defer></script>
+
+  <script>
+    (function() {
+      var phrases = ["One World", "Believe in Love", "Life", "You Matter", "Breathe"];
+      var el = document.getElementById("hero-cycle-text");
+      if (!el) return;
+      var i = 0;
+      setInterval(function() {
+        el.classList.add("hero-fade-out");
+        el.classList.remove("hero-fade-in");
+        setTimeout(function() {
+          i = (i + 1) % phrases.length;
+          el.textContent = phrases[i];
+          el.classList.remove("hero-fade-out");
+          el.classList.add("hero-fade-in");
+        }, 1000);
+      }, 4000);
+    })();
+  </script>
 
 </body>
 </html>

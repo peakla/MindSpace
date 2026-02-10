@@ -1450,6 +1450,17 @@ html {
   -webkit-text-stroke: 2px #fff;
   font-weight: 600;
   transition: 0.5s;
+  opacity: 1;
+}
+
+#main-hero .hero-content h1.hero-fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#main-hero .hero-content h1.hero-fade-in {
+  opacity: 1;
+  transition: opacity 1s ease;
 }
 
 #main-hero .hero-content h1:hover {
