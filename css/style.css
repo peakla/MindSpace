@@ -1453,6 +1453,10 @@ html {
   opacity: 1;
 }
 
+#main-hero .hero-content h1 {
+  text-transform: uppercase;
+}
+
 #main-hero .hero-content h1.hero-fade-out {
   opacity: 0;
   transition: opacity 1s ease;
