@@ -73,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   addEventOnElements(navTogglers, "click", toggleNavbar);
 
-
 // --- Mobile Swipe Gestures ---
   let touchStartX = 0;
   let touchCurrentX = 0;
