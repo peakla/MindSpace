@@ -1,4 +1,6 @@
 {
+  "trailingSlash": true,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/resourcelib/", "destination": "/resourcelib/index.html" },
     { "source": "/support/", "destination": "/support/index.html" },

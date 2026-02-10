@@ -399,6 +399,19 @@
             followBtn.disabled = true;
             followBtn.style.opacity = '0.6';
             
+            const fromName = user.user_metadata?.display_name || user.email?.split('@')[0] || 'Someone';
+            try {
+              await window.supabaseClient.from('notifications').insert({
+                user_id: userId,
+                type: 'follow',
+                from_user_name: fromName,
+                content: `${fromName} started following you`,
+                read: false
+              });
+            } catch (notifErr) {
+              console.warn('Failed to create follow notification:', notifErr);
+            }
+            
             triggerHaptic(HapticIntensity.MEDIUM);
           } catch (err) {
             console.error('Failed to follow:', err);

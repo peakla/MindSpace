@@ -2515,6 +2515,19 @@ async function toggleFollow() {
 
       followBtn.classList.add('is-following');
       followBtn.innerHTML = '<ion-icon name="checkmark-outline"></ion-icon> Following';
+
+      const fromName = currentUser.user_metadata?.display_name || currentUser.email?.split('@')[0] || 'Someone';
+      try {
+        await supabaseClient.from('notifications').insert({
+          user_id: viewedUserId,
+          type: 'follow',
+          from_user_name: fromName,
+          content: `${fromName} started following you`,
+          read: false
+        });
+      } catch (notifErr) {
+        console.warn('Failed to create follow notification:', notifErr);
+      }
     }
 
 

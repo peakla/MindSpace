@@ -542,6 +542,22 @@ async function handleLike(e) {
       pop.textContent = '+1';
       btn.appendChild(pop);
       setTimeout(() => pop.remove(), 600);
+
+      const postAuthorId = post.getAttribute('data-author-id');
+      if (postAuthorId && postAuthorId !== currentUser.id) {
+        const fromName = currentUser.user_metadata?.display_name || currentUser.email?.split('@')[0] || 'Someone';
+        try {
+          await client.from('notifications').insert({
+            user_id: postAuthorId,
+            type: 'like',
+            from_user_name: fromName,
+            content: `${fromName} liked your post`,
+            read: false
+          });
+        } catch (notifErr) {
+          console.warn('Failed to create like notification:', notifErr);
+        }
+      }
     }
   }
 
@@ -843,6 +859,21 @@ async function handleComment(e) {
               commentBtn.textContent = `Comment (${currentCount + 1})`;
             }
 
+            const postAuthorId = post.getAttribute('data-author-id');
+            if (postAuthorId && postAuthorId !== currentUser.id) {
+              const fromName = currentUser.user_metadata?.display_name || currentUser.email?.split('@')[0] || 'Someone';
+              try {
+                await client.from('notifications').insert({
+                  user_id: postAuthorId,
+                  type: 'comment',
+                  from_user_name: fromName,
+                  content: `${fromName} commented on your post`,
+                  read: false
+                });
+              } catch (notifErr) {
+                console.warn('Failed to create comment notification:', notifErr);
+              }
+            }
 
             processMentions(text, postId, data.id);
           }

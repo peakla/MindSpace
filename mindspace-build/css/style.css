@@ -3667,7 +3667,7 @@ body.dark-theme .rl-local-search__error {
 }
 
 .wave-path {
-  fill: #5ba4e6;
+  fill: #2068A8;
 }
 
 .wave-path.wave-1 {
@@ -3724,7 +3724,7 @@ body.dark-theme .rl-local-search__error {
 }
 
 .mb-footer__top {
-  background: linear-gradient(135deg, #5ba4e6 0%, #c4a985 100%);
+  background: linear-gradient(135deg, #2068A8 0%, #1a5a94 100%);
   padding: 64px 24px 56px;
   position: relative;
   overflow: hidden;
@@ -4232,7 +4232,7 @@ body.dark-theme .rl-local-search__error {
 }
 
 .mb-footer__bottom {
-  background: linear-gradient(135deg, #a08565 0%, #8c7455 100%);
+  background: linear-gradient(135deg, #174e87 0%, #133f6e 100%);
   padding: 20px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
