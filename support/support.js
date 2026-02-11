@@ -822,4 +822,23 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   updateNavButtons();
+
+  // --- Hash-based auto-open for tools ---
+  function handleHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'breathing') {
+      const el = document.getElementById('self-help');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => openBreathingModal(), 600);
+    } else if (hash === 'grounding') {
+      const el = document.getElementById('self-help');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => openGroundingModal(), 600);
+    } else if (hash === 'journaling') {
+      const el = document.getElementById('self-help');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+  handleHash();
+  window.addEventListener('hashchange', handleHash);
 });

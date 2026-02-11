@@ -50,7 +50,7 @@
       tip: "Try the 5-4-3-2-1 technique: Name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, and 1 you taste. This helps bring you back to the present moment.",
       actions: [
         { text: "Breathing exercise", href: "/support/#breathing", icon: "🌬️", primary: true },
-        { text: "Talk to someone", href: "/find-help/", icon: "💬", primary: false }
+        { text: "Talk to someone", href: "/support/#crisis", icon: "💬", primary: false }
       ]
     },
     sad: {
