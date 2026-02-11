@@ -3,3 +3,16 @@ server.py
 __pycache__/
 *.pyc
 .git/
+.cache/
+.pythonlibs/
+node_modules/
+.upm/
+.config/
+replit.md
+replit.nix
+.replit
+*.log
+poetry.lock
+pyproject.toml
+requirements.txt
+package-lock.json
