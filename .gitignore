@@ -1,4 +1,4 @@
-node_modules/assets/images*.mp4
-assets/images/*.mp4
-assets/images/*.mp4
+node_modules/
 .vercel
+__pycache__/
+*.pyc

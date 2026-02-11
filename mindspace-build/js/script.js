@@ -48,44 +48,57 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-// --- Video Autoplay Fallback (Safari/iOS) ---
+// --- Video Autoplay Fallback ---
   document.querySelectorAll('video.back-video').forEach(function(video) {
     video.setAttribute('muted', '');
     video.muted = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('autoplay', '');
 
     function tryPlay() {
+      if (!video.paused) return;
+      video.muted = true;
       var playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise.catch(function() {
-          video.muted = true;
-          video.play().catch(function() {});
-        });
+        playPromise.catch(function() {});
       }
     }
 
-    if (video.readyState >= 3) {
+    video.addEventListener('canplay', tryPlay);
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('loadedmetadata', tryPlay);
+
+    if (video.readyState >= 2) {
       tryPlay();
     } else {
-      video.addEventListener('canplay', function() {
-        tryPlay();
-      }, { once: true });
+      video.load();
     }
 
-    document.addEventListener('touchstart', function() {
-      if (video.paused) {
-        video.muted = true;
-        video.play().catch(function() {});
+    var retryCount = 0;
+    var retryInterval = setInterval(function() {
+      retryCount++;
+      if (!video.paused || retryCount > 20) {
+        clearInterval(retryInterval);
+        return;
       }
+      tryPlay();
+    }, 500);
+
+    document.addEventListener('touchstart', function() {
+      if (video.paused) tryPlay();
+    }, { once: true });
+
+    document.addEventListener('click', function() {
+      if (video.paused) tryPlay();
     }, { once: true });
 
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && video.paused) {
-          video.muted = true;
-          video.play().catch(function() {});
+          tryPlay();
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0.1 });
     observer.observe(video);
   });
 
