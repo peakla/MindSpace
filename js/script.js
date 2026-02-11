@@ -48,6 +48,47 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+// --- Video Autoplay Fallback (Safari/iOS) ---
+  document.querySelectorAll('video.back-video').forEach(function(video) {
+    video.setAttribute('muted', '');
+    video.muted = true;
+
+    function tryPlay() {
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          video.muted = true;
+          video.play().catch(function() {});
+        });
+      }
+    }
+
+    if (video.readyState >= 3) {
+      tryPlay();
+    } else {
+      video.addEventListener('canplay', function() {
+        tryPlay();
+      }, { once: true });
+    }
+
+    document.addEventListener('touchstart', function() {
+      if (video.paused) {
+        video.muted = true;
+        video.play().catch(function() {});
+      }
+    }, { once: true });
+
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && video.paused) {
+          video.muted = true;
+          video.play().catch(function() {});
+        }
+      });
+    }, { threshold: 0.25 });
+    observer.observe(video);
+  });
+
 // --- Navbar ---
   const navbar = document.querySelector("[data-navbar]");
   const navTogglers = document.querySelectorAll("[data-nav-toggler]");
@@ -91,26 +132,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // --- Mobile Swipe Gestures ---
   let touchStartX = 0;
+  let touchStartY = 0;
   let touchCurrentX = 0;
   let isSwiping = false;
+  let swipeDirection = null;
 
   if (navbar) {
     navbar.addEventListener("touchstart", function(e) {
       touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchCurrentX = touchStartX;
       isSwiping = true;
+      swipeDirection = null;
     }, { passive: true });
 
     navbar.addEventListener("touchmove", function(e) {
       if (!isSwiping) return;
       touchCurrentX = e.touches[0].clientX;
-      const diff = touchStartX - touchCurrentX;
+      var touchCurrentY = e.touches[0].clientY;
+      var diffX = Math.abs(touchStartX - touchCurrentX);
+      var diffY = Math.abs(touchStartY - touchCurrentY);
 
+      if (!swipeDirection && (diffX > 10 || diffY > 10)) {
+        swipeDirection = diffX > diffY ? 'horizontal' : 'vertical';
+      }
 
-      const drawerWidth = navbar.offsetWidth || 360;
+      if (swipeDirection !== 'horizontal') return;
 
+      var diff = touchStartX - touchCurrentX;
+      var drawerWidth = navbar.offsetWidth || 360;
 
       if (diff > 0 && diff < drawerWidth) {
-        navbar.style.transform = `translateX(${drawerWidth - diff}px)`;
+        navbar.style.transform = "translateX(" + (drawerWidth - diff) + "px)";
         navbar.style.transition = "none";
       }
     }, { passive: true });
@@ -118,19 +171,22 @@ document.addEventListener("DOMContentLoaded", function () {
     navbar.addEventListener("touchend", function() {
       if (!isSwiping) return;
       isSwiping = false;
-      const diff = touchStartX - touchCurrentX;
 
       navbar.style.transition = "";
       navbar.style.transform = "";
 
-
-      if (diff > 80) {
-        closeNavbar();
+      if (swipeDirection === 'horizontal') {
+        var diff = touchStartX - touchCurrentX;
+        if (diff > 80) {
+          closeNavbar();
+        }
       }
+      swipeDirection = null;
     }, { passive: true });
 
     navbar.addEventListener("touchcancel", function() {
       isSwiping = false;
+      swipeDirection = null;
       navbar.style.transition = "";
       navbar.style.transform = "";
     }, { passive: true });
