@@ -937,7 +937,7 @@
     .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
     .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
 
-    .mb-fab { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; border-radius: 50%; background: #AF916D; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(175, 145, 109, 0.4); z-index: 100; transition: all 0.3s ease; display: grid; place-items: center; }
+    .mb-fab { position: fixed; bottom: 90px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: #AF916D; color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(175, 145, 109, 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
     .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(175, 145, 109, 0.5); }
     [data-theme="dark"] .mb-fab { background: #d6bd9f; color: #1a1a2e; }
 
@@ -1010,7 +1010,7 @@
       .mb-search { width: 100%; max-width: none; }
       .mb-feedTabs { overflow-x: auto; }
       .mb-feedList { max-height: none; }
-      .mb-fab { bottom: 16px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
+      .mb-fab { bottom: 80px; right: 16px; width: 48px; height: 48px; font-size: 20px; }
       .mb-userCard { display: none; }
       .mb-composerActions { flex-wrap: wrap; gap: 8px; }
       .mb-postFooter { gap: 4px; }
@@ -1819,12 +1819,12 @@
                 Register</span></a></li>
         </ul>
         <div class="mb-quickActions">
-          <button class="mb-quickAction" onclick="document.getElementById('postText').focus()">
+          <button class="mb-quickAction" onclick="(function(){ const c=document.querySelector('.mb-composer'); const t=document.getElementById('postText'); if(c && c.offsetParent !== null){ window.scrollTo({top:c.offsetTop-120,behavior:'smooth'}); setTimeout(function(){if(t)t.focus();},500); } else { window.location.href='../auth/'; } })()">
             <span>✏️</span> Create Post
           </button>
-          <a href="../resourcelib/" class="mb-quickAction">
-            <span>🔍</span> Browse Topics
-          </a>
+          <button class="mb-quickAction" onclick="(function(){ const f=document.querySelector('.mb-feedList'); if(f){ window.scrollTo({top:f.offsetTop-120,behavior:'smooth'}); } })()">
+            <span>🔍</span> Browse Posts
+          </button>
         </div>
         <div class="mb-panelBody">
           <span class="mb-pill" id="authStatusPill" data-translate="sidebar_guest">Guest mode</span>
