@@ -1531,13 +1531,17 @@
 
           if (emptyEl) emptyEl.textContent = "";
 
-          listEl.innerHTML = data.map(article => `
+          listEl.innerHTML = data.map(article => {
+            const name = article.title || article.article_title || "Saved Article";
+            const link = article.url || (article.article_slug ? "/articles/" + article.article_slug + ".html" : "#");
+            const meta = article.category || article.source ? `${article.category || ""} ${article.source ? "• " + article.source : ""}` : "";
+            return `
             <div class="mb-savedItem">
-              <a class="mb-savedItem__link" href="${article.url}" target="_blank" rel="noopener">${article.title}</a>
-              <div class="mb-savedItem__meta">${article.category || ""} ${article.source ? "• " + article.source : ""}</div>
+              <a class="mb-savedItem__link" href="${link}" target="_blank" rel="noopener">${name}</a>
+              ${meta ? `<div class="mb-savedItem__meta">${meta}</div>` : ""}
               <button class="mb-savedItem__remove" data-remove-id="${article.id}">Remove</button>
-            </div>
-          `).join("");
+            </div>`;
+          }).join("");
         }
 
         document.addEventListener("click", async (e) => {
