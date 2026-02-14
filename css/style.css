@@ -892,7 +892,8 @@ html {
   width: 100%;
   background-color: #d6bd9f;
   padding-block: 40px;
-  z-index: 4;
+  z-index: 100;
+  pointer-events: auto;
   border-block-end: 1px solid rgba(0, 0, 0, 0.1);
   transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
@@ -1373,7 +1374,7 @@ html {
   padding-block: 10px;
   background-color: #b89b5e;
   border-block-end: 1px solid rgba(0, 0, 0, 0.15);
-  z-index: 4;
+  z-index: 101;
   transition: var(--transition-1);
 }
 

@@ -29,7 +29,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     setTimeout(function () {
       document.body.classList.add("loaded");
-      if (preloader) preloader.classList.add("loaded");
+      if (preloader) {
+        preloader.classList.add("loaded");
+        setTimeout(function () {
+          preloader.style.display = "none";
+        }, 800);
+      }
       const legacyLoader = document.getElementById("preloader");
       if (legacyLoader) legacyLoader.style.display = "none";
       window.scrollTo(0, 0);
