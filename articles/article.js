@@ -56,6 +56,15 @@
 
 
 // ==================== TTS ENGINE ====================
+  const TTS_API_BASE = (function() {
+    const host = window.location.hostname;
+    if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+        host === 'mindspace.site' || host === 'www.mindspace.site') {
+      return 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev';
+    }
+    return '';
+  })();
+
   let ttsEngine = localStorage.getItem('tts-engine') || 'elevenlabs';
   let selectedVoice = localStorage.getItem('tts-voice') || 'rachel';
   let elevenLabsAvailable = false;
@@ -84,7 +93,7 @@
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-      const response = await fetch('/api/tts/health', {
+      const response = await fetch(TTS_API_BASE + '/api/tts/health', {
         method: 'GET',
         headers: {
           'Accept': 'application/json'
@@ -135,7 +144,7 @@
 // --- Voice Management ---
   async function fetchElevenLabsVoices() {
     try {
-      const response = await fetch('/api/tts/voices');
+      const response = await fetch(TTS_API_BASE + '/api/tts/voices');
       if (response.ok) {
         const data = await response.json();
         return data.voices || [];
@@ -477,7 +486,7 @@
     const userLang = getSavedLanguage();
 
     try {
-      const response = await fetch('/api/tts/generate', {
+      const response = await fetch(TTS_API_BASE + '/api/tts/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1934,7 +1943,7 @@
         const content = getArticleContent();
         const fullText = content.slice(0, 20).join(' ');
 
-        const response = await fetch('/api/tts/generate', {
+        const response = await fetch(TTS_API_BASE + '/api/tts/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

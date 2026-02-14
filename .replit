@@ -7,7 +7,7 @@ packages = ["static-web-server"]
 
 [deployment]
 publicDir = "/"
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 run = ["python", "server.py"]
 
 [workflows]
