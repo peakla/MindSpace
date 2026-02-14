@@ -6689,39 +6689,81 @@ body.nav-active .nav-open-btn {
   filter: url('#tritanopia-filter');
 }
 
-[data-adhd-mode="true"] * {
-  transition-duration: 0s !important;
-  animation-duration: 0s !important;
-}
+/* ===== FOCUS MODE (ADHD) =====
+   Principle: Reduce visual distractions WITHOUT breaking any functionality.
+   - Stop continuous/looping animations (floats, pulses, scrolling testimonials)
+   - Hide auto-playing video backgrounds (show poster instead)
+   - Preserve ALL interactive elements: header, navbar, settings, preloader, modals
+   - Keep UI transitions fast but functional (not zero) */
 
-[data-adhd-mode="true"] .hero,
-[data-adhd-mode="true"] .back-video,
-[data-adhd-mode="true"] .swiper,
-[data-adhd-mode="true"] [class*="carousel"],
-[data-adhd-mode="true"] [class*="slider"]:not(.theme-toggle-slider),
-[data-adhd-mode="true"] video:not(.settings-modal video),
-[data-adhd-mode="true"] .preload {
+[data-adhd-mode="true"] .back-video {
   display: none !important;
 }
 
-[data-adhd-mode="true"] .settings-modal,
-[data-adhd-mode="true"] .settings-panel,
-[data-adhd-mode="true"] .settings-toggle,
-[data-adhd-mode="true"] .settings-btn,
-[data-adhd-mode="true"] .navbar-actions,
-[data-adhd-mode="true"] .header,
-[data-adhd-mode="true"] .crisis-btn,
-[data-adhd-mode="true"] .user-menu-wrapper,
-[data-adhd-mode="true"] .navbar-search,
-[data-adhd-mode="true"] .nav-open-btn {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+[data-adhd-mode="true"] #main-hero.hero {
+  background-image: var(--hero-poster, url('/assets/images/hero-poster.jpg'));
+  background-size: cover;
+  background-position: center;
 }
 
-[data-adhd-mode="true"] .settings-modal * {
-  transition-duration: 0.15s !important;
-  animation-duration: 0s !important;
+[data-adhd-mode="true"] .swiper-autoplay,
+[data-adhd-mode="true"] [data-swiper-autoplay] {
+  --swiper-autoplay: 0 !important;
+}
+
+[data-adhd-mode="true"] .mb-testimonials__track {
+  animation: none !important;
+  transform: none !important;
+}
+
+[data-adhd-mode="true"] .mb-testimonials__viewport {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+[data-adhd-mode="true"] .mb-testimonials__mask {
+  display: none !important;
+}
+
+[data-adhd-mode="true"] .animate-float,
+[data-adhd-mode="true"] .animate-pulse,
+[data-adhd-mode="true"] .animate-bounce,
+[data-adhd-mode="true"] [class*="animate-continuous"],
+[data-adhd-mode="true"] .hero-cycle-text {
+  animation: none !important;
+}
+
+[data-adhd-mode="true"] .scroll-reveal,
+[data-adhd-mode="true"] .stagger-reveal,
+[data-adhd-mode="true"] [data-scroll-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+[data-adhd-mode="true"] .wave-separator svg,
+[data-adhd-mode="true"] .mb-footer__wave svg {
+  animation: none !important;
+}
+
+[data-adhd-mode="true"] section,
+[data-adhd-mode="true"] main,
+[data-adhd-mode="true"] .container,
+[data-adhd-mode="true"] .mb-actionbox,
+[data-adhd-mode="true"] .mb-card,
+[data-adhd-mode="true"] .mb-footer,
+[data-adhd-mode="true"] .event,
+[data-adhd-mode="true"] .service,
+[data-adhd-mode="true"] .about,
+[data-adhd-mode="true"] .crisis-section,
+[data-adhd-mode="true"] .quote-banner {
+  transition-duration: 0.1s !important;
+}
+
+[data-adhd-mode="true"] section *,
+[data-adhd-mode="true"] main *,
+[data-adhd-mode="true"] .mb-actionbox *,
+[data-adhd-mode="true"] .mb-footer * {
+  animation-iteration-count: 1 !important;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
