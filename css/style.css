@@ -907,6 +907,7 @@ html {
   border-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   border-radius: 0 0 16px 16px;
+  overflow: visible;
 }
 
 .header .container {
@@ -4566,13 +4567,7 @@ body.dark-theme .rl-local-search__error {
 
   .navbar-list {
     flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-
-  .navbar-list::-webkit-scrollbar {
-    display: none;
+    overflow: visible;
   }
 
   .navbar-link::after {
