@@ -9969,14 +9969,16 @@ body.reading-mode[data-theme="dark"] {
 
 .navbar-search__input {
   width: 0;
-  padding: 8px 0;
+  padding: 0;
   border: none;
+  outline: none;
   border-radius: 20px;
   background: transparent;
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
+  overflow: hidden;
 }
 
 .navbar-search.is-open .navbar-search__input {
