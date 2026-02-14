@@ -744,7 +744,7 @@ html {
   right: 0;
   bottom: 0;
   background-color: #f8a29e;
-  z-index: 10;
+  z-index: 99999;
   display: flex;
   flex-direction: column;
   align-items: center;
