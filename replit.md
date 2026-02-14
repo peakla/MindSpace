@@ -1,53 +1,38 @@
-# MindBalance
+# MindBalance & MindSpace — Compressed Technical Guide
 
 ## Overview
-MindBalance is a static website platform offering curated, credible information and resources on mental health. It features a resource library, blog content, and user authentication for personalized features. The project aims to be an accessible digital hub for mental wellness, sourcing information from authoritative providers. It supports multiple languages and is designed with a strong focus on accessibility and user experience.
+MindBalance (www.mindbalance.cloud) and MindSpace (www.mindspace.site) are twin static websites providing curated mental health resources. They share a single codebase and Supabase backend, differing primarily in color scheme and specific content: MindBalance uses a gold/brown palette and includes a Reference Page, while MindSpace uses a light blue palette and omits the Reference Page. Both platforms offer 13 wellness articles with text-to-speech functionality, a wellness check-in, AI personalization, a Community Hub, crisis support, multi-language support (6 languages), dark mode, and extensive accessibility features. The project aims to provide accessible and credible mental health support, leveraging technology for personalization and community engagement.
 
 ## User Preferences
-Preferred communication style: Simple, everyday language.
-Design preference: NO glassmorphism (no backdrop-blur effects). Use solid, clean card designs with subtle shadows and borders instead.
+- Preferred communication style: Simple, everyday language
+- Design preference: NO glassmorphism (no backdrop-blur effects). Use solid, clean card designs with subtle shadows and borders instead
 
 ## System Architecture
 
-### Core Design
-MindBalance is a static website built with HTML, CSS, and JavaScript, employing a component-based styling approach focused on accessibility and user experience.
+### UI/UX Decisions
+The design emphasizes clean, solid card designs with subtle shadows and borders, avoiding glassmorphism. Theming is managed via CSS custom properties on `:root`, enabling dynamic switching between light and dark modes, and various accessibility preferences. A critical Z-index hierarchy is maintained for UI elements like preloaders, modals, and navigation.
 
-### Frontend
--   **Structure & Styling**: Static HTML pages with custom CSS, a robust custom properties system for theming, and Poppins font family.
--   **Interactivity**: Vanilla JavaScript for DOM manipulation and user preference management.
--   **Animation System**: Comprehensive shared animation library for scroll-triggered animations, staggered reveals, hover effects, and continuous animations, with full dark mode support and `prefers-reduced-motion` respect.
--   **Accessibility**: A settings panel with 7 options (Dark Mode, Font Size, High Contrast, Colorblind modes, Focus Mode, Dyslexia Font, Reduced Motion) with preferences persisted via localStorage. Features an enhanced settings modal with onboarding, tabbed navigation, theme presets, before/after comparisons, and an accessibility score.
--   **User Accent Color System**: Theme-aware accent color picker offering 8 color options, applied via CSS custom properties, persisting independently of the theme, and affecting all interactive elements.
--   **Responsiveness**: Full responsive design with orientation lock messages and safe area support, including a comprehensive responsive framework for fluid typography, consistent spacing, and utility classes.
--   **Multilingual Support**: Supports 6 languages using `data-translate` attributes and JSON-based translation files, with preference persistence via localStorage.
+### Technical Implementations
+The application uses a Flask backend (`server.py`) to serve static files and provide API endpoints. Client-side logic is handled by JavaScript modules, separated by functionality (e.g., authentication, settings, translations, resource filtering, TTS player, analytics, community features).
 
-### Backend/Data
--   **Authentication**: Supabase for email/password authentication and user sessions.
--   **Community Hub**: Live forum with posts, comments, and likes stored in Supabase, featuring real-time updates and moderation.
--   **Data Storage**: Resource library data stored in static JSON files.
--   **Resource Suggestions**: User-submitted suggestions stored in a Supabase table for review.
+### Feature Specifications
+- **Authentication**: Uses Supabase for user authentication, managing sessions and broadcasting auth state changes.
+- **Settings & Accessibility**: Comprehensive accessibility features including dark mode, high contrast, colorblind modes, ADHD mode, dyslexia font, reduced motion, and adjustable font sizes. These settings are persisted in local storage and applied as `data-*` attributes on the `<html>` element.
+- **Translation System**: Supports six languages (English, Spanish, French, Chinese, Hindi, Korean) using `data-translate` attributes for dynamic content translation.
+- **Resource Library**: Features a filterable library of resources with search, category, provider, and tag filtering, supporting URL-based pre-selection.
+- **TTS Article Player**: Provides text-to-speech functionality for articles, with an option to use ElevenLabs API or a browser-based fallback. Includes features like highlighting, auto-scroll, sleep timer, notes, bookmarks, and a sticky table of contents. Critical production routing ensures TTS API calls are directed to an always-on Replit server.
+- **Analytics & Achievements**: Tracks user activity (page views, article reads, mood entries, community interactions) and awards 28 unique achievements based on engagement. Also tracks reading progress and daily streaks.
+- **Wellness Check-in**: Allows users to log their mood, updating streaks and providing affirmations and suggestions with visual feedback.
+- **Community Hub**: A forum-like feature enabling post creation, liking, commenting, and @mentions. Includes profanity filtering and moderation tools. Supports real-time updates via Supabase Realtime.
+- **Notifications**: An inbox system for user notifications (likes, comments, mentions, achievements) with real-time updates and badge counts.
 
-### Key Features
--   **Homepage Enhancements**: Includes an inspirational quote banner, crisis support section, and an enhanced wellness check-in with mood selection, daily tips, and streak tracking.
--   **Resource Library**: Interactive directory with featured resources, non-profit organizations, community resources, search/filtering, and share functionalities.
--   **Find Help**: Dedicated page for local mental health services, crisis resources, and national non-profits.
--   **Support Page**: Provides crisis support, helplines, self-help tools, an appointment scheduler, and a modern FAQ section.
--   **Navigation**: Dynamic navbar with crisis button, search bar, consolidated user menu dropdown, and mobile hamburger menu. The user menu provides profile access, notifications, settings, and logout for signed-in users, plus sign-in and settings access for guests. **CRITICAL: Settings/accessibility features must always be available to ALL users regardless of authentication status.** Enhanced mobile navigation includes polished card-based UI with gradient backgrounds, collapsible settings section, and complete auth section with notification inbox button, profile link, and logout functionality.
--   **User Profile Page**: Instagram-style profile with cover/avatar uploads, editable display name/bio, social links, unified stats, and multiple tabs (Activity, Liked Posts, Saved Articles, Achievements, Wellness, Settings). Features a mood tracker, wellness goals, reading streak, and privacy controls. Includes a first-time onboarding modal.
--   **Immersive Profile Experience**: Cinematic, full-page profile with day/night cycles, personalized greetings, parallax backgrounds, and scroll-triggered animations. Incorporates "People You May Know" and AI-powered wellness insights.
--   **Enhanced Wellness Tab**: Comprehensive visual overhaul for mood tracking, wellness goals, and reading streaks within the profile.
--   **Analytics & Tracking System**: Comprehensive user activity tracking via `analytics.js` and `auth.js`, including page views, article reads, daily visit logging, reading streak tracking, and an expanded achievement system with 28 badges. Data is stored across four Supabase tables.
--   **Enhanced Footer**: Comprehensive modern footer with animated wave separators, trust badges, newsletter signup, recent blog posts preview, collapsible navigation for mobile, and synchronized theme/language controls.
--   **Community Hub Enhancements**: Features popular discussions sidebar, clickable usernames, @mentions system, and an inbox/notifications modal.
--   **Article Pages**: Dedicated directory for full-length, TTS-enabled articles with a magazine-style layout, advanced TTS player controls, floating reading controls, text highlighting, bookmarking, and an enhanced sticky Table of Contents.
--   **News & Stories Section**: Dedicated blog section with real stories, research updates, and community spotlights, all featuring TTS audio and reading controls.
--   **Legal Pages**: Styled pages for Terms of Service, Privacy Policy, and Disclaimer.
+### System Design Choices
+The architecture uses a split deployment: static assets are served by Vercel, while dynamic API services (TTS, newsletter, AI) are hosted on an always-on Replit VM. CORS and rate limiting are enforced on API endpoints. The system prioritizes accessibility, ensuring settings are available to all users regardless of authentication status. A dual key system for language settings in `localStorage` is maintained for backward compatibility.
 
 ## External Dependencies
--   **Supabase**: User authentication, community forum backend (database, Realtime, Storage).
--   **Swiper.js**: Carousel and slider functionalities.
--   **Font Awesome**: Iconography.
--   **Google Fonts**: "Poppins", "Montserrat", "Noto Sans KR" font families.
--   **External Content Providers**: National Institute of Mental Health (NIMH) and Mayo Clinic for credible resource content.
--   **OpenAI (via Replit AI Integrations)**: AI-powered wellness insights, mood analysis, and goal suggestions.
--   **ElevenLabs**: High-quality text-to-speech.
+- **Supabase**: Backend-as-a-Service for authentication, database (PostgreSQL), and real-time features.
+- **ElevenLabs API**: For high-quality text-to-speech generation.
+- **OpenAI (via Replit AI Integrations)**: Powers AI wellness insights, mood analysis, and goal suggestions.
+- **Resend**: Used for sending newsletter welcome emails.
+- **Vercel**: Static site hosting for frontend deployment.
+- **PostgreSQL**: Used for newsletter subscriber management (separate from Supabase for this specific function).
