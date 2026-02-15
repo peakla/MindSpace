@@ -18,14 +18,14 @@
   };
 
   const ACCENT_COLORS = {
-    gold: { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109', name: 'Gold' },
-    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', name: 'Purple' },
-    blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217', name: 'Blue' },
-    green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150', name: 'Green' },
-    teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172', name: 'Teal' },
-    pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', name: 'Pink' },
-    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92', name: 'Orange' },
-    red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', name: 'Red' }
+    gold:   { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109', light: '#d4c4a8', soft: '#f5f0e8', dark: '#7a6548', gradEnd: '#d4a574', text: '#6b5635', name: 'Gold' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e', name: 'Purple' },
+    blue:   { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c', name: 'Blue' },
+    green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558', name: 'Green' },
+    teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65', name: 'Teal' },
+    pink:   { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', light: '#ecbdd5', soft: '#fbeef4', dark: '#b4547f', gradEnd: '#e9a3c3', text: '#993f6a', name: 'Pink' },
+    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92',  light: '#f0cca3', soft: '#fdf3e8', dark: '#b87430', gradEnd: '#edb87a', text: '#9a6228', name: 'Orange' },
+    red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535', name: 'Red' }
   };
 
   const THEME_PRESETS = {

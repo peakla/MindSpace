@@ -17,14 +17,14 @@
 
   // --- Accent Colors ---
   const ACCENT_COLORS = {
-    gold: { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109' },
-    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217' },
-    blue: { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217' },
-    green: { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150' },
-    teal: { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172' },
-    pink: { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171' },
-    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92' },
-    red: { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112' }
+    gold:   { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109', light: '#d4c4a8', soft: '#f5f0e8', dark: '#7a6548', gradEnd: '#d4a574', text: '#6b5635' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e' },
+    blue:   { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c' },
+    green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558' },
+    teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65' },
+    pink:   { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', light: '#ecbdd5', soft: '#fbeef4', dark: '#b4547f', gradEnd: '#e9a3c3', text: '#993f6a' },
+    orange: { hex: '#e09c5c', hover: '#d08b4b', rgb: '224, 156, 92',  light: '#f0cca3', soft: '#fdf3e8', dark: '#b87430', gradEnd: '#edb87a', text: '#9a6228' },
+    red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535' }
   };
 
   const DEFAULT_ACCENT = 'gold';
@@ -161,12 +161,18 @@
     const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.gold;
     const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
     
-    document.documentElement.style.setProperty('--user-accent', color.hex);
-    document.documentElement.style.setProperty('--user-accent-hover', color.hover);
-    document.documentElement.style.setProperty('--user-accent-rgb', color.rgb);
-    document.documentElement.style.setProperty('--user-accent-glow', `rgba(${color.rgb}, 0.3)`);
+    const root = document.documentElement;
+    root.style.setProperty('--user-accent', color.hex);
+    root.style.setProperty('--user-accent-hover', color.hover);
+    root.style.setProperty('--user-accent-rgb', color.rgb);
+    root.style.setProperty('--user-accent-glow', `rgba(${color.rgb}, 0.3)`);
+    root.style.setProperty('--user-accent-light', color.light);
+    root.style.setProperty('--user-accent-soft', color.soft);
+    root.style.setProperty('--user-accent-dark', color.dark);
+    root.style.setProperty('--user-accent-grad-end', color.gradEnd);
+    root.style.setProperty('--user-accent-text', color.text);
     
-    document.documentElement.setAttribute('data-accent', effectiveColorName);
+    root.setAttribute('data-accent', effectiveColorName);
     
     document.querySelectorAll('[data-accent-color]').forEach(btn => {
       const isActive = btn.getAttribute('data-accent-color') === effectiveColorName;
@@ -189,13 +195,12 @@
     const savedDyslexiaFont = getPreference(STORAGE_KEYS.dyslexiaFont, 'false');
     
     const savedAccentColor = getPreference(STORAGE_KEYS.accentColor, DEFAULT_ACCENT);
-
-    try { localStorage.removeItem(STORAGE_KEYS.highContrast); } catch(e) {}
-    document.documentElement.removeAttribute('data-high-contrast');
+    const savedHighContrast = getPreference(STORAGE_KEYS.highContrast, 'false');
 
     applyTheme(savedTheme);
     applyFontSize(savedFontSize);
     applyReduceMotion(savedReduceMotion);
+    applyHighContrast(savedHighContrast);
     applyColorblind(savedColorblind);
     applyAdhdMode(savedAdhdMode);
     applyDyslexiaFont(savedDyslexiaFont);

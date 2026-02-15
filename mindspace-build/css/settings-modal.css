@@ -53,7 +53,7 @@
 /* === SIDEBAR === */
 .settings-sidebar {
   width: 240px;
-  background: linear-gradient(180deg, #f0f7ff 0%, #f0ece5 100%);
+  background: linear-gradient(180deg, #f8f6f3 0%, #f0ece5 100%);
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
@@ -91,7 +91,7 @@
 
 .settings-sidebar-title ion-icon {
   font-size: 24px;
-  color: var(--user-accent, #2068A8);
+  color: var(--user-accent);
 }
 
 /* === CATEGORY TABS === */
@@ -127,9 +127,9 @@
 }
 
 .settings-category-btn.active {
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   color: #fff;
-  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3);
+  box-shadow: 0 4px 15px rgba(175, 145, 109, 0.3);
 }
 
 [data-theme="dark"] .settings-category-btn {
@@ -187,7 +187,7 @@
 }
 
 .accessibility-score-ring .progress-ring {
-  stroke: var(--user-accent, #2068A8);
+  stroke: var(--user-accent);
   stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease;
 }
@@ -306,7 +306,7 @@
 }
 
 .settings-compare-toggle.active {
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   color: #fff;
 }
 
@@ -427,7 +427,7 @@
 }
 
 .theme-preset-card.active {
-  border-color: var(--user-accent, #2068A8);
+  border-color: var(--user-accent);
 }
 
 .theme-preset-card.active::after {
@@ -437,7 +437,7 @@
   right: 8px;
   width: 20px;
   height: 20px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   color: #fff;
   border-radius: 50%;
   display: flex;
@@ -447,10 +447,10 @@
 }
 
 .theme-preset-default {
-  background: linear-gradient(135deg, #f0f7ff 0%, #fff 100%);
+  background: linear-gradient(135deg, #f8f6f3 0%, #fff 100%);
 }
 .theme-preset-default::before {
-  background: linear-gradient(90deg, #2068A8 0%, #2068A8 100%);
+  background: linear-gradient(90deg, var(--user-accent) 0%, var(--user-accent-grad-end) 100%);
 }
 
 .theme-preset-ocean {
@@ -553,7 +553,7 @@
 .settings-item-icon {
   width: 40px;
   height: 40px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -624,7 +624,7 @@
 }
 
 .settings-toggle input:checked + .settings-toggle-slider {
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
 }
 
 .settings-toggle input:checked + .settings-toggle-slider::before {
@@ -647,13 +647,13 @@
 }
 
 .settings-select:hover {
-  border-color: var(--user-accent, #2068A8);
+  border-color: var(--user-accent);
 }
 
 .settings-select:focus {
   outline: none;
-  border-color: var(--user-accent, #2068A8);
-  box-shadow: 0 0 0 3px rgba(32, 104, 168, 0.15);
+  border-color: var(--user-accent);
+  box-shadow: 0 0 0 3px rgba(175, 145, 109, 0.15);
 }
 
 [data-theme="dark"] .settings-select {
@@ -756,7 +756,7 @@
 .preview-sample-btn {
   display: inline-block;
   padding: 10px 20px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   color: #fff;
   border-radius: 8px;
   font-family: 'Poppins', sans-serif;
@@ -840,7 +840,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto 20px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -877,7 +877,7 @@
 
 .onboarding-btn {
   padding: 12px 32px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -890,7 +890,7 @@
 
 .onboarding-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(32, 104, 168, 0.3);
+  box-shadow: 0 6px 20px rgba(175, 145, 109, 0.3);
 }
 
 .onboarding-skip {
@@ -946,7 +946,7 @@
   }
   
   .settings-mobile-tab.active {
-    background: var(--user-accent, #2068A8);
+    background: var(--user-accent);
     color: #fff;
   }
 }
