@@ -521,6 +521,7 @@
   scroll-snap-align: start;
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, color 0.25s ease;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.4rem;
   color: var(--user-accent);
   position: relative;
@@ -2912,6 +2913,69 @@ body.reading-mode .mb-blogGrid {
 }
 
 /* ==========================================================
+   26b. COMMUNITY CTA BANNER
+   ========================================================== */
+.mb-communityCta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 32px 40px;
+  background: var(--bg-secondary, #f5f0eb);
+  border-radius: 16px;
+  margin: 40px 0;
+}
+
+.mb-communityCta__content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mb-communityCta__icon {
+  font-size: 2.4rem;
+  color: var(--user-accent);
+  flex-shrink: 0;
+}
+
+.mb-communityCta__text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary, #1a1a2e);
+  margin: 0 0 4px;
+}
+
+.mb-communityCta__text p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--text-secondary, #666);
+  margin: 0;
+}
+
+.mb-communityCta__btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--user-accent);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+.mb-communityCta__btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================
    27. MOOD-BASED RECOMMENDATIONS
    ========================================================== */
 .mb-moodRec {
@@ -3666,6 +3730,18 @@ body.reading-mode .mb-blogGrid {
 
 [data-theme="dark"] .mb-quoteBanner__icon {
   color: rgba(var(--user-accent-rgb), 0.1);
+}
+
+[data-theme="dark"] .mb-communityCta {
+  background: rgba(var(--user-accent-rgb), 0.08);
+}
+
+[data-theme="dark"] .mb-communityCta__text h3 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .mb-communityCta__text p {
+  color: #aaa;
 }
 
 [data-theme="dark"] .mb-moodRec__title {
