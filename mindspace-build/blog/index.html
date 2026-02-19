@@ -647,7 +647,7 @@
   </header>
 
   
-  <section class="mb-blogHero animate-fade-in">
+  <section class="mb-blogHero">
     <div class="mb-blogHero__shapes" aria-hidden="true">
       <span class="mb-shape mb-shape--1"></span>
       <span class="mb-shape mb-shape--2"></span>
@@ -659,101 +659,52 @@
       <div class="mb-blogHero__left">
         <div class="mb-blogHero__badge" data-translate="blog_hero_badge">MindSpace Blog</div>
         <h2 class="mb-blogHero__title" data-translate="blog_hero_title">Mental health, <span class="mb-blogHero__accent">explained clearly.</span></h2>
-        <p class="mb-blogHero__lead" data-translate="blog_hero_lead">
-          Credible sources, plain-language summaries, and practical takeaways—organized like a modern magazine page.
-          Explore expert-backed articles on anxiety, depression, stress management, and mindfulness. Whether you're
-          seeking coping strategies, understanding symptoms, or supporting a loved one, our curated content makes mental
-          wellness accessible to everyone.
-        </p>
-
+        <p class="mb-blogHero__lead" data-translate="blog_hero_lead">Credible sources, plain-language summaries, and practical takeaways—organized like a modern magazine page. Explore expert-backed articles on anxiety, depression, stress management, and mindfulness.</p>
         <div class="mb-blogHero__search">
           <label class="mb-srOnly" for="blogSearch">Search articles</label>
-          <input id="blogSearch" class="mb-blogHero__input" type="search"
-            placeholder="Search topics (anxiety, sleep, stress, teens…)" />
-          <button class="mb-blogHero__searchBtn" id="clearSearchBtn" type="button" aria-label="Clear search">×</button>
+          <input id="blogSearch" class="mb-blogHero__input" type="search" placeholder="Search topics (anxiety, sleep, stress, teens...)" />
+          <button class="mb-blogHero__searchBtn" id="clearSearchBtn" type="button" aria-label="Clear search">&times;</button>
         </div>
-
-        <div class="mb-blogHero__chips" aria-label="Quick filters">
-          <button class="mb-chip is-active" data-filter="all" type="button"
-            data-translate="blog_filter_all">All</button>
-          <button class="mb-chip" data-filter="Anxiety" type="button"
-            data-translate="blog_filter_anxiety">Anxiety</button>
-          <button class="mb-chip" data-filter="Depression" type="button"
-            data-translate="blog_filter_depression">Depression</button>
-          <button class="mb-chip" data-filter="Stress" type="button" data-translate="blog_filter_stress">Stress</button>
-          <button class="mb-chip" data-filter="Sleep" type="button" data-translate="blog_filter_sleep">Sleep</button>
-          <button class="mb-chip" data-filter="Mindfulness" type="button"
-            data-translate="blog_filter_mindfulness">Mindfulness</button>
-          <button class="mb-chip" data-filter="Teens" type="button" data-translate="blog_filter_teens">Teens</button>
-          <button class="mb-chip" data-filter="News" type="button" data-translate="blog_filter_news">News</button>
-          <button class="mb-chip" data-filter="Story" type="button" data-translate="blog_filter_stories">Stories</button>
-          <button class="mb-chip" data-filter="Community" type="button" data-translate="blog_filter_community">Community</button>
+        <div class="mb-heroStats">
+          <div class="mb-heroStats__item">
+            <span class="mb-heroStats__number" data-count="13">13+</span>
+            <span class="mb-heroStats__label">Expert Articles</span>
+          </div>
+          <div class="mb-heroStats__item">
+            <span class="mb-heroStats__number" data-count="120">120+</span>
+            <span class="mb-heroStats__label">Min of Audio</span>
+          </div>
+          <div class="mb-heroStats__item">
+            <span class="mb-heroStats__number" data-count="6">6</span>
+            <span class="mb-heroStats__label">Languages</span>
+          </div>
+          <div class="mb-heroStats__item">
+            <span class="mb-heroStats__number" data-count="10">10</span>
+            <span class="mb-heroStats__label">Categories</span>
+          </div>
         </div>
       </div>
-
       <div class="mb-blogHero__right">
-        
-        <div class="mb-ticker" aria-label="Top highlights">
-          <div class="mb-ticker__item">
-            <span class="mb-ticker__num">1</span>
-            <a class="mb-ticker__link" href="#featured" data-translate="blog_ticker_1">Featured read</a>
+        <div class="mb-heroCard">
+          <div class="mb-heroCard__badge">
+            <ion-icon name="star"></ion-icon>
+            <span>Article of the Day</span>
           </div>
-          <div class="mb-ticker__item">
-            <span class="mb-ticker__num">2</span>
-            <a class="mb-ticker__link" href="#sections" data-translate="blog_ticker_2">Browse sections</a>
-          </div>
-          <div class="mb-ticker__item">
-            <span class="mb-ticker__num">3</span>
-            <a class="mb-ticker__link" href="#trending" data-translate="blog_ticker_3">Trending picks</a>
+          <a class="mb-heroCard__imgWrap" href="../articles/mindfulness.html">
+            <img class="mb-heroCard__img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=70" alt="Mindfulness meditation" loading="lazy" />
+          </a>
+          <div class="mb-heroCard__body">
+            <div class="mb-metaRow">
+              <span class="mb-pill">Mindfulness</span>
+              <span class="mb-metaText">6 min read</span>
+            </div>
+            <h3 class="mb-heroCard__title">
+              <a href="../articles/mindfulness.html">Meditation &amp; mindfulness: a beginner&rsquo;s guide</a>
+            </h3>
+            <p class="mb-heroCard__desc">A research-based overview of mindfulness, including benefits, practical exercises, and how to start with just 5 minutes a day.</p>
+            <a class="mb-btn mb-btn--sm" href="../articles/mindfulness.html">Read Now &rarr;</a>
           </div>
         </div>
-
-        
-        <article class="mb-featureCard animate-scale-in" id="featured">
-          <a class="mb-featureCard__imgWrap" href="../articles/anxiety.html">
-            <img class="mb-featureCard__img"
-              src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?auto=format&fit=crop&w=1400&q=70"
-              alt="Calm sky and clouds" loading="lazy" />
-            <div class="mb-featureCard__overlay"></div>
-          </a>
-
-          <div class="mb-featureCard__content">
-            <div class="mb-metaRow">
-              <span class="mb-pill">Anxiety</span>
-              <span class="mb-metaDot">•</span>
-              <span class="mb-metaText">NIMH</span>
-              <span class="mb-metaDot">•</span>
-              <span class="mb-metaText">15 <span data-translate="blog_min_read">min read</span></span>
-              <span class="mb-metaDot">•</span>
-              <span class="mb-metaText mb-tts-badge">🎧 <span data-translate="blog_audio">Audio</span></span>
-            </div>
-
-            <h3 class="mb-featureCard__title">
-              <a href="../articles/anxiety.html">
-                <span data-translate="blog_feat_anxiety_title">Anxiety Disorders: symptoms, types, and treatment basics</span>
-              </a>
-            </h3>
-
-            <p class="mb-featureCard__desc" data-translate="blog_feat_anxiety_desc">
-              A comprehensive guide that explains what anxiety disorders are, how they show up, and what treatment
-              can look like. Listen to the full article with our audio player.
-            </p>
-
-            <p class="mb-featureCard__subtext" data-translate="blog_feat_anxiety_subtext">
-              Breaks down common types (GAD, panic disorder, social anxiety, and more). Lists core symptoms and when
-              anxiety becomes a disorder. Explains evidence-based treatment options (therapy, medication, support).
-            </p>
-
-            <p class="mb-postHint" data-translate="blog_feat_anxiety_hint"><strong data-translate="blog_best_for">Best for:</strong> clear definitions + credible facts for school projects or
-              awareness posts.</p>
-
-            <div class="mb-featureCard__actions">
-              <a class="mb-btn" href="../articles/anxiety.html" data-translate="blog_read_full">Read Full Article</a>
-              <a class="mb-btn mb-btn--ghost" href="https://www.nimh.nih.gov/health/topics/anxiety-disorders"
-                target="_blank" rel="noopener" data-translate="article_view_source">View Original Source</a>
-            </div>
-          </div>
-        </article>
       </div>
     </div>
   </section>
@@ -772,55 +723,28 @@
     </div>
   </div>
 
-  <section class="mb-stats container" aria-label="Blog statistics">
-    <div class="mb-stats__grid">
-      <div class="mb-stats__item" data-reveal>
-        <span class="mb-stats__number" data-count="13">0</span>
-        <span class="mb-stats__label">Expert Articles</span>
+  <section class="mb-dashboard container" data-reveal id="blogDashboard" data-auth-show style="display:none;">
+    <div class="mb-dashboard__header">
+      <div class="mb-dashboard__greeting">
+        <h3 class="mb-dashboard__title" data-translate="blog_dashboard_title">Your Reading Journey</h3>
+        <p class="mb-dashboard__subtitle" data-translate="blog_dashboard_subtitle">Pick up where you left off</p>
       </div>
-      <div class="mb-stats__item" data-reveal>
-        <span class="mb-stats__number" data-count="120">0</span>
-        <span class="mb-stats__label">Minutes of Audio</span>
-      </div>
-      <div class="mb-stats__item" data-reveal>
-        <span class="mb-stats__number" data-count="6">0</span>
-        <span class="mb-stats__label">Languages</span>
-      </div>
-      <div class="mb-stats__item" data-reveal>
-        <span class="mb-stats__number" data-count="10">0</span>
-        <span class="mb-stats__label">Topic Categories</span>
-      </div>
-    </div>
-  </section>
-
-  <section class="mb-articleOfDay container" id="articleOfDay" data-reveal>
-    <div class="mb-articleOfDay__badge">
-      <ion-icon name="star"></ion-icon>
-      <span>Article of the Day</span>
-    </div>
-    <div class="mb-articleOfDay__card">
-      <div class="mb-articleOfDay__imgWrap">
-        <img class="mb-articleOfDay__img" src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=70" alt="Mindfulness meditation" loading="lazy" />
-        <div class="mb-articleOfDay__overlay"></div>
-      </div>
-      <div class="mb-articleOfDay__content">
-        <div class="mb-metaRow">
-          <span class="mb-pill">Mindfulness</span>
-          <span class="mb-mood mb-mood--uplifting">Practical</span>
-          <span class="mb-metaDot">&bull;</span>
-          <span class="mb-metaText">6 min read</span>
+      <div class="mb-dashboard__stats">
+        <div class="mb-dashboard__ring" id="libraryProgressRing">
+          <svg viewBox="0 0 80 80">
+            <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="5"/>
+            <circle cx="40" cy="40" r="35" fill="none" stroke="var(--user-accent)" stroke-width="5" stroke-dasharray="220" stroke-dashoffset="220" stroke-linecap="round" class="mb-dashboard__ringFill" id="ringFill"/>
+          </svg>
+          <span class="mb-dashboard__ringText" id="ringText">0%</span>
         </div>
-        <h3 class="mb-articleOfDay__title">
-          <a href="../articles/mindfulness.html">Meditation &amp; mindfulness: a beginner&rsquo;s guide</a>
-        </h3>
-        <p class="mb-articleOfDay__desc">A research-based overview of mindfulness, including benefits, practical exercises, and how to get started with just 5 minutes a day.</p>
-        <div class="mb-articleOfDay__actions">
-          <a class="mb-btn" href="../articles/mindfulness.html">Read Now</a>
-          <button class="mb-btn mb-btn--ghost mb-ttsBtn" type="button" aria-label="Listen">
-            <ion-icon name="headset-outline"></ion-icon> Listen
-          </button>
+        <div class="mb-dashboard__streak" id="readingStreak">
+          <ion-icon name="flame-outline"></ion-icon>
+          <span class="mb-dashboard__streakCount" id="streakCount">0</span>
+          <span class="mb-dashboard__streakLabel" data-translate="blog_day_streak">day streak</span>
         </div>
       </div>
+    </div>
+    <div class="mb-dashboard__cards" id="dashboardCards">
     </div>
   </section>
 

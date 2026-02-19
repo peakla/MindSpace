@@ -579,13 +579,22 @@
     var chips = stickyEl.querySelectorAll('.mb-stickyChip[data-filter]');
     var categoryCards = document.querySelectorAll('.mb-categoryCard[data-filter]');
 
+    function getNavbarHeight() {
+      var header = document.querySelector('.header');
+      if (!header) return 80;
+      return header.offsetHeight;
+    }
+
     function updateStickyVisibility() {
       var rect = catSection.getBoundingClientRect();
-      var shouldShow = rect.bottom < 0;
+      var navH = getNavbarHeight();
+      var shouldShow = rect.bottom < navH;
       stickyEl.classList.toggle('is-visible', shouldShow);
+      stickyEl.style.top = navH + 'px';
     }
 
     window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+    window.addEventListener('resize', updateStickyVisibility, { passive: true });
     updateStickyVisibility();
 
     chips.forEach(function (chip) {
@@ -635,7 +644,7 @@
 
   // ==================== ANIMATED STAT COUNTERS ====================
   function initStatCounters() {
-    var statNumbers = document.querySelectorAll('.mb-stats__number[data-count]');
+    var statNumbers = document.querySelectorAll('.mb-stats__number[data-count], .mb-heroStats__number[data-count]');
     if (!statNumbers.length) return;
 
     var observer = new IntersectionObserver(function (entries) {
