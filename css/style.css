@@ -4267,7 +4267,7 @@ body.dark-theme .rl-local-search__error {
 }
 
 .mb-footer__bottom {
-  background: linear-gradient(135deg, #a08565 0%, #8c7455 100%);
+  background: linear-gradient(135deg, var(--user-accent-dark) 0%, var(--user-accent) 100%);
   padding: 20px 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
