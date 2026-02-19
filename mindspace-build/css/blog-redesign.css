@@ -2916,19 +2916,14 @@ body.reading-mode .mb-blogGrid {
    26b. COMMUNITY CTA BANNER
    ========================================================== */
 .mb-communityCta {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
   gap: 24px;
   padding: 32px 40px;
   background: var(--bg-secondary, #f5f0eb);
-  border-radius: 16px;
   margin: 40px 0;
 }
 
 .mb-communityCta__content {
-  display: flex;
-  align-items: center;
   gap: 16px;
 }
 

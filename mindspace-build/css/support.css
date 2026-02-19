@@ -4974,7 +4974,7 @@ body.dark-mode .view-toggle-btn.active {
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, var(--user-accent-light) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5091,7 +5091,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .breathing-btn--start {
-  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, var(--user-accent-light) 100%);
   color: #fff;
   box-shadow: 0 4px 20px rgba(212, 168, 83, 0.4);
 }
@@ -5177,7 +5177,7 @@ body.dark-mode .view-toggle-btn.active {
 .grounding-progress__bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--gold-crayola, #d4a853) 0%, #e8c87a 100%);
+  background: linear-gradient(90deg, var(--gold-crayola, #d4a853) 0%, var(--user-accent-light) 100%);
   border-radius: 3px;
   transition: width 0.5s ease;
 }
@@ -5207,7 +5207,7 @@ body.dark-mode .view-toggle-btn.active {
   width: 80px;
   height: 80px;
   margin: 0 auto 20px;
-  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, var(--user-accent-light) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -5314,7 +5314,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .grounding-nav__btn--next {
-  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, #e8c87a 100%);
+  background: linear-gradient(135deg, var(--gold-crayola, #d4a853) 0%, var(--user-accent-light) 100%);
   color: #fff;
 }
 

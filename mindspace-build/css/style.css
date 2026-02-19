@@ -1254,6 +1254,7 @@ html {
 
 .navbar-link {
   position: relative;
+  overflow: hidden;
   font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -1350,10 +1351,6 @@ html {
   pointer-events: all;
 }
 
-.navbar-link {
-  position: relative;
-  overflow: hidden;
-}
 
 .navbar-link .ripple {
   position: absolute;
@@ -5220,9 +5217,6 @@ body.nav-active .nav-open-btn {
   max-width: 1600px;
   width: 100%;
   margin-inline: auto;
-}
-
-.mb-blogGrid {
   display: grid;
   grid-template-columns: 1.65fr 0.95fr;
   gap: 26px;
@@ -10365,6 +10359,7 @@ body.reading-mode[data-theme="dark"] {
 .navbar-search {
   position: relative;
   margin-right: 10px;
+  z-index: 102;
 }
 
 .navbar-search__input {
@@ -10409,10 +10404,6 @@ body.reading-mode[data-theme="dark"] {
   font-size: 1.2rem;
 }
 
-.navbar-search {
-  position: relative;
-  z-index: 102;
-}
 
 .navbar-search__results {
   position: absolute;
