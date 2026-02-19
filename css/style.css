@@ -34,6 +34,10 @@
   --user-accent-grad-end: #d4a574;
   --user-accent-text: #6b5635;
 
+  --purple-accent: #8b6de1;
+  --purple-gradient: linear-gradient(135deg, #8b6de1 0%, #7c5cd4 100%);
+  --purple-glow: rgba(139, 109, 225, 0.3);
+
   
   --scrollbar-track: #f1f1f1;
   --scrollbar-thumb: var(--user-accent);
@@ -4442,8 +4446,14 @@ body.dark-theme .rl-local-search__error {
   border-color: var(--purple-accent);
 }
 
+[data-theme="dark"] .mb-footer__theme-slider {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
 [data-theme="dark"] .mb-footer__theme-toggle input:checked+.mb-footer__theme-slider {
   background: var(--purple-accent);
+  border-color: var(--purple-accent);
 }
 
 @media (min-width: 575px) {
