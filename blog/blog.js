@@ -248,8 +248,16 @@
 
     categoryCards.forEach(function (card) {
       card.addEventListener('click', function () {
+        var filter = card.dataset.filter;
         categoryCards.forEach(function (c) { c.classList.remove('is-active'); });
         card.classList.add('is-active');
+
+        var stickyChips = document.querySelectorAll('.mb-stickyChip[data-filter]');
+        stickyChips.forEach(function (c) {
+          c.classList.toggle('is-active', c.dataset.filter === filter);
+        });
+
+        filterArticlesByCategory(filter);
       });
     });
 
@@ -266,6 +274,43 @@
         observer.observe(chip, { attributes: true, attributeFilter: ['class'] });
       });
     }
+  }
+
+  // ==================== ARTICLE FILTERING ====================
+  function filterArticlesByCategory(filter) {
+    var allCards = document.querySelectorAll('[data-category]');
+    allCards.forEach(function (card) {
+      if (filter === 'all') {
+        card.style.display = '';
+        card.style.opacity = '1';
+        card.style.transform = '';
+      } else {
+        var match = card.dataset.category.toLowerCase() === filter.toLowerCase();
+        card.style.display = match ? '' : 'none';
+        if (match) {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(10px)';
+          requestAnimationFrame(function () {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.opacity = '1';
+            card.style.transform = '';
+          });
+        }
+      }
+    });
+
+    var sections = document.querySelectorAll('.mb-3up, .mb-3grid, .mb-compactGrid, [class*="mb-listPost"]');
+    sections.forEach(function (section) {
+      if (section.parentElement) {
+        var visibleCards = section.querySelectorAll('[data-category]:not([style*="display: none"])');
+        var wrapper = section.closest('[data-reveal]');
+        if (wrapper && visibleCards.length === 0 && filter !== 'all') {
+          wrapper.style.display = 'none';
+        } else if (wrapper) {
+          wrapper.style.display = '';
+        }
+      }
+    });
   }
 
   // ==================== READING DASHBOARD ====================
@@ -605,8 +650,7 @@
         categoryCards.forEach(function (c) {
           c.classList.toggle('is-active', c.dataset.filter === filter);
         });
-        var matchingCard = document.querySelector('.mb-categoryCard[data-filter="' + filter + '"]');
-        if (matchingCard) matchingCard.click();
+        filterArticlesByCategory(filter);
       });
     });
   }
