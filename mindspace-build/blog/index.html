@@ -734,6 +734,51 @@
     </div>
   </section>
 
+  <section class="mb-categoryCards container" data-reveal aria-label="Filter by category">
+    <div class="mb-categoryCards__scroll">
+      <button class="mb-categoryCard is-active" data-filter="all" type="button">
+        <ion-icon name="grid-outline"></ion-icon>
+        <span data-translate="blog_filter_all">All</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Anxiety" type="button">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <span data-translate="blog_filter_anxiety">Anxiety</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Depression" type="button">
+        <ion-icon name="rainy-outline"></ion-icon>
+        <span data-translate="blog_filter_depression">Depression</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Stress" type="button">
+        <ion-icon name="flash-outline"></ion-icon>
+        <span data-translate="blog_filter_stress">Stress</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Sleep" type="button">
+        <ion-icon name="moon-outline"></ion-icon>
+        <span data-translate="blog_filter_sleep">Sleep</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Mindfulness" type="button">
+        <ion-icon name="leaf-outline"></ion-icon>
+        <span data-translate="blog_filter_mindfulness">Mindfulness</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Teens" type="button">
+        <ion-icon name="people-outline"></ion-icon>
+        <span data-translate="blog_filter_teens">Teens</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="News" type="button">
+        <ion-icon name="newspaper-outline"></ion-icon>
+        <span data-translate="blog_filter_news">News</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Story" type="button">
+        <ion-icon name="heart-outline"></ion-icon>
+        <span data-translate="blog_filter_stories">Stories</span>
+      </button>
+      <button class="mb-categoryCard" data-filter="Community" type="button">
+        <ion-icon name="hand-left-outline"></ion-icon>
+        <span data-translate="blog_filter_community">Community</span>
+      </button>
+    </div>
+  </section>
+
   <div class="mb-stickyFilters" id="stickyFilters" aria-label="Quick filters">
     <div class="mb-stickyFilters__inner container">
       <button class="mb-stickyChip is-active" data-filter="all" type="button">All</button>
@@ -776,20 +821,18 @@
   
 <!-- ===== MAIN CONTENT ===== -->
   <main class="mb-blog container" id="sections">
-    <div class="mb-blogGrid">
+    <div class="mb-blogContent">
 
-      
       <section class="mb-posts" aria-label="Blog posts">
 
-        
         <div class="mb-resultsBar" aria-live="polite">
           <div class="mb-resultsBar__left">
             <div class="mb-resultsBar__count" id="resultsCount">Showing: 0 posts</div>
             <div class="mb-resultsBar__active" id="activeFilterLabel">Filter: All</div>
           </div>
-          <button class="mb-resultsBar__reset" id="resetFiltersBtn" type="button" aria-label="Reset filters" data-translate="blog_reset">
-            Reset
-          </button>
+          <div class="mb-resultsBar__right">
+            <button class="mb-resultsBar__reset" id="resetFiltersBtn" type="button" aria-label="Reset filters" data-translate="blog_reset">Reset</button>
+          </div>
         </div>
 
         

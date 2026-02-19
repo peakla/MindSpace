@@ -299,18 +299,15 @@
       }
     });
 
-    var sections = document.querySelectorAll('.mb-3up, .mb-3grid, .mb-compactGrid, [class*="mb-listPost"]');
-    sections.forEach(function (section) {
-      if (section.parentElement) {
-        var visibleCards = section.querySelectorAll('[data-category]:not([style*="display: none"])');
-        var wrapper = section.closest('[data-reveal]');
-        if (wrapper && visibleCards.length === 0 && filter !== 'all') {
-          wrapper.style.display = 'none';
-        } else if (wrapper) {
-          wrapper.style.display = '';
-        }
-      }
-    });
+    var resultsCount = document.getElementById('resultsCount');
+    var noResults = document.getElementById('noResults');
+    var activeLabel = document.getElementById('activeFilterLabel');
+    if (resultsCount || noResults) {
+      var visible = document.querySelectorAll('[data-category]:not([style*="display: none"])');
+      if (resultsCount) resultsCount.textContent = 'Showing: ' + visible.length + ' posts';
+      if (noResults) noResults.style.display = visible.length === 0 ? '' : 'none';
+      if (activeLabel) activeLabel.textContent = 'Filter: ' + (filter === 'all' ? 'All' : filter);
+    }
   }
 
   // ==================== READING DASHBOARD ====================
@@ -562,7 +559,7 @@
           var progressBar = document.createElement('div');
           progressBar.className = 'mb-cardProgress';
           progressBar.innerHTML = '<div class="mb-cardProgress__bar" style="width: ' + article.progress + '%"></div>';
-          var imgWrap = card.querySelector('.mb-postCard__imgWrap, .mb-miniCard__imgWrap, .mb-compactCard__imgWrap, .mb-listPost__imgWrap');
+          var imgWrap = card.querySelector('.mb-articleCard__imgWrap, .mb-postCard__imgWrap, .mb-miniCard__imgWrap, .mb-compactCard__imgWrap, .mb-listPost__imgWrap');
           if (imgWrap) imgWrap.appendChild(progressBar);
         }
       }
