@@ -1756,5 +1756,20 @@
   "blog_trending_2_hint": "<strong>Why it's trending:</strong> fast, credible definitions for projects.",
   "blog_trending_3_title": "Stress management",
   "blog_trending_3_hint": "<strong>Why it's trending:</strong> practical coping ideas people can try.",
-  "blog_sidebar_quick_actions": "Quick Actions"
+  "blog_sidebar_quick_actions": "Quick Actions",
+  "blog_mood_title": "How are you feeling?",
+  "blog_mood_subtitle": "We'll suggest articles based on your mood",
+  "blog_mood_anxious": "Anxious",
+  "blog_mood_down": "Down",
+  "blog_mood_stressed": "Stressed",
+  "blog_mood_tired": "Tired",
+  "blog_mood_hopeful": "Hopeful",
+  "blog_mood_curious": "Curious",
+  "blog_mood_recommended": "Recommended for you",
+  "blog_popular_title": "Popular This Week",
+  "blog_popular_anxiety": "Anxiety Disorders: symptoms, types & treatment",
+  "blog_popular_stress": "Stress: what it is and how to manage it",
+  "blog_popular_depression": "Understanding Depression: Complete Guide",
+  "blog_popular_sleep": "Better Sleep: Your Complete Guide",
+  "blog_popular_mindfulness": "Meditation & Mindfulness Guide"
 }

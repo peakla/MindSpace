@@ -2980,9 +2980,59 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__results {
+  margin-top: 32px;
+  text-align: left;
+}
+
+.mb-moodRec__resultsTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--user-accent, #AF916D);
+  margin: 0 0 16px;
+}
+
+.mb-moodRec__cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 16px;
+}
+
+.mb-moodRec__card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mb-moodRec__card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mb-moodRec__card .mb-pill {
+  align-self: flex-start;
+}
+
+.mb-moodRec__cardTitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary, #1a1a2e);
+  line-height: 1.4;
+}
+
+.mb-moodRec__cardMeta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #888);
 }
 
 /* ==========================================================
@@ -3638,6 +3688,23 @@ body.reading-mode .mb-blogGrid {
   color: var(--user-accent);
 }
 
+[data-theme="dark"] .mb-moodRec__card {
+  background: #252545;
+  border-color: rgba(255,255,255,0.08);
+}
+
+[data-theme="dark"] .mb-moodRec__card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="dark"] .mb-moodRec__cardTitle {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .mb-moodRec__cardMeta {
+  color: #999;
+}
+
 [data-theme="dark"] .mb-popular__item {
   border-bottom-color: rgba(255,255,255,0.1);
 }
@@ -3831,7 +3898,7 @@ body.reading-mode .mb-blogGrid {
     flex-direction: column;
   }
 
-  .mb-moodRec__results {
+  .mb-moodRec__cards {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -3850,6 +3917,10 @@ body.reading-mode .mb-blogGrid {
   .mb-articleGrid {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .mb-moodRec__cards {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -4042,7 +4113,7 @@ body.reading-mode .mb-blogGrid {
     font-size: 1.1rem;
   }
 
-  .mb-moodRec__results {
+  .mb-moodRec__cards {
     grid-template-columns: 1fr;
   }
 

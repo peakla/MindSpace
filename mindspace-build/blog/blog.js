@@ -126,11 +126,11 @@
   }
 
   // ==================== READING MODE ====================
-  var readingModeEnabled = localStorage.getItem('mindbalance-reading-mode') === 'true';
+  var readingModeEnabled = (localStorage.getItem('mindspace-reading-mode') === 'true') || (localStorage.getItem('mindbalance-reading-mode') === 'true');
 
   function toggleReadingMode() {
     readingModeEnabled = !readingModeEnabled;
-    localStorage.setItem('mindbalance-reading-mode', readingModeEnabled);
+    localStorage.setItem('mindspace-reading-mode', readingModeEnabled);
     applyReadingMode();
     updateReadingModeButton();
   }
@@ -317,7 +317,7 @@
     var ringText = document.getElementById('ringText');
     var streakCount = document.getElementById('streakCount');
 
-    var readArticles = JSON.parse(localStorage.getItem('mindbalance-read-articles') || '[]');
+    var readArticles = JSON.parse(localStorage.getItem('mindspace-read-articles') || localStorage.getItem('mindbalance-read-articles') || '[]');
     var totalArticles = 13;
     var readCount = readArticles.length;
     var percentage = Math.round((readCount / totalArticles) * 100);
@@ -541,7 +541,7 @@
 
   // ==================== CARD READING PROGRESS ====================
   function initCardProgress() {
-    var readArticles = JSON.parse(localStorage.getItem('mindbalance-read-articles') || '[]');
+    var readArticles = JSON.parse(localStorage.getItem('mindspace-read-articles') || localStorage.getItem('mindbalance-read-articles') || '[]');
     if (readArticles.length === 0) return;
 
     document.querySelectorAll('[data-category]').forEach(function (card) {
