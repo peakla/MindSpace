@@ -4281,6 +4281,11 @@ body.dark-theme .rl-local-search__error {
 .mb-footer__copy {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.60);
+  white-space: nowrap;
+}
+
+.mb-footer__copy span {
+  display: inline;
 }
 
 .mb-footer__legal {
@@ -4347,6 +4352,10 @@ body.dark-theme .rl-local-search__error {
   .mb-footer__bottomwrap {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .mb-footer__copy {
+    white-space: normal;
   }
 
   .mb-footer__newsletter-form {
