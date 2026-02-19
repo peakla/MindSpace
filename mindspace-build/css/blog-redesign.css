@@ -1,9 +1,9 @@
 /* ============================================================
    BLOG REDESIGN — loaded AFTER style.css to override defaults
-   Major visual overhaul: magazine grid, solid backgrounds, Inter + Playfair Display
+   Major visual overhaul: magazine grid, solid backgrounds, Poppins + Playfair Display
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,500&display=swap');
 
 /* === CSS CUSTOM PROPERTIES === */
 :root {
@@ -217,7 +217,7 @@
 
 .mb-blogHero__badge {
   display: inline-block;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -255,7 +255,7 @@
 }
 
 .mb-blogHero__lead {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(0.95rem, 1.3vw, 1.1rem);
   color: var(--text-secondary, #666);
   line-height: 1.75;
@@ -288,7 +288,7 @@
 .mb-blogHero__input {
   flex: 1;
   padding: 14px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   border: none;
   outline: none;
@@ -339,7 +339,7 @@
 }
 
 .mb-heroStats__number {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.3rem;
   font-weight: 800;
   color: var(--user-accent);
@@ -347,7 +347,7 @@
 }
 
 .mb-heroStats__label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 500;
   color: var(--text-secondary, #888);
@@ -389,7 +389,7 @@
   color: #1a1a2e;
   padding: 6px 14px;
   border-radius: 20px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -427,7 +427,7 @@
 }
 
 .mb-heroCard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   line-height: 1.25;
@@ -445,7 +445,7 @@
 }
 
 .mb-heroCard__desc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   color: var(--text-secondary, #666);
   line-height: 1.45;
@@ -528,7 +528,7 @@
 }
 
 .mb-categoryCard span {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-primary, #333);
@@ -641,7 +641,7 @@
   border-radius: 20px;
   border: 1px solid #ddd;
   background: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary, #666);
@@ -698,7 +698,7 @@
 }
 
 .mb-dashboard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-primary, #1a1a2e);
@@ -706,7 +706,7 @@
 }
 
 .mb-dashboard__subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   color: var(--text-secondary, #666);
   margin: 4px 0 0;
@@ -743,7 +743,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 800;
   color: var(--user-accent-text, var(--user-accent));
@@ -753,7 +753,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--user-accent-text, var(--user-accent));
@@ -771,7 +771,7 @@
 }
 
 .mb-dashboard__streakLabel {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary, #666);
@@ -826,7 +826,7 @@
 }
 
 .mb-dashboard__cardTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-primary, #333);
@@ -855,7 +855,7 @@
   text-align: center;
   padding: 20px 16px;
   color: var(--text-secondary, #666);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
 }
 
@@ -897,7 +897,7 @@
 }
 
 .mb-stats__number {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   color: var(--user-accent);
@@ -906,7 +906,7 @@
 }
 
 .mb-stats__label {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary, #777);
@@ -930,7 +930,7 @@
   padding: 6px 16px;
   background: var(--user-accent);
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1010,7 +1010,7 @@
 }
 
 .mb-articleOfDay__desc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   line-height: 1.6;
   color: var(--text-secondary, #555);
@@ -1112,7 +1112,7 @@
 }
 
 .mb-featureCard__desc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text-secondary, #555);
@@ -1120,7 +1120,7 @@
 }
 
 .mb-featureCard__subtext {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #888);
   line-height: 1.55;
@@ -1132,7 +1132,7 @@
    ========================================================== */
 .mb-pill {
   display: inline-block;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1161,7 +1161,7 @@
 }
 
 .mb-metaText {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-secondary, #888);
@@ -1171,7 +1171,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   padding: 12px 24px;
@@ -1210,7 +1210,7 @@
 }
 
 .mb-postHint {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #666);
   background: rgba(var(--user-accent-rgb), 0.04);
@@ -1295,7 +1295,7 @@
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
 }
 
@@ -1317,7 +1317,7 @@
 }
 
 .mb-articleCard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.3;
@@ -1335,7 +1335,7 @@
 }
 
 .mb-articleCard__desc {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #666);
   line-height: 1.5;
@@ -1375,7 +1375,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #777);
   border-bottom: 1px solid #eee;
@@ -1411,7 +1411,7 @@
   border: 1px solid #ddd;
   padding: 5px 16px;
   border-radius: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   color: var(--text-secondary, #666);
   cursor: pointer;
@@ -1429,7 +1429,7 @@
   text-align: center;
   padding: 56px 24px;
   color: var(--text-secondary, #666);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
 }
 
@@ -1449,7 +1449,7 @@
 }
 
 .mb-sectionHead__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary, #1a1a2e);
@@ -1458,13 +1458,13 @@
 }
 
 .mb-sectionHead__subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #888);
 }
 
 .mb-sectionHead__more {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--user-accent);
@@ -1563,7 +1563,7 @@
 }
 
 .mb-postCard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.35;
@@ -1582,7 +1582,7 @@
 }
 
 .mb-postCard__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: var(--text-secondary, #888);
@@ -1590,7 +1590,7 @@
 }
 
 .mb-postCard__excerpt {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 400;
   line-height: 1.65;
@@ -1604,7 +1604,7 @@
 }
 
 .mb-postCard__subtext {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #888);
   line-height: 1.55;
@@ -1612,7 +1612,7 @@
 }
 
 .mb-linkArrow {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--user-accent);
@@ -1651,7 +1651,7 @@
   left: 10px;
   background: var(--user-accent);
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.6rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -1668,7 +1668,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.68rem;
   font-weight: 500;
   padding: 3px 10px;
@@ -1787,7 +1787,7 @@
 }
 
 .mb-previewPanel__category {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -1838,7 +1838,7 @@
 }
 
 .mb-previewPanel__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   color: var(--text-secondary, #888);
   margin-bottom: 8px;
@@ -1853,7 +1853,7 @@
 }
 
 .mb-previewPanel__excerpt {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.92rem;
   line-height: 1.7;
   color: var(--text-secondary, #555);
@@ -1861,7 +1861,7 @@
 }
 
 .mb-previewPanel__takeaways h4 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--text-primary, #333);
@@ -1876,7 +1876,7 @@
 .mb-previewPanel__takeawaysList li {
   position: relative;
   padding-left: 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   line-height: 1.65;
   color: var(--text-primary, #333);
@@ -1901,7 +1901,7 @@
   padding: 10px 18px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text-primary, #333);
@@ -1930,7 +1930,7 @@
   width: 100%;
   padding: 14px;
   text-align: center;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: #fff;
@@ -1986,7 +1986,7 @@
 .mb-blogToc__link {
   display: block;
   padding: 6px 0;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   color: var(--text-secondary, #777);
   transition: color 0.2s ease;
@@ -2032,7 +2032,7 @@
 
 .mb-newsletterCta__text h3,
 .mb-newsletterCta__text h4 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.4rem;
   font-weight: 700;
   color: #fff;
@@ -2040,7 +2040,7 @@
 }
 
 .mb-newsletterCta__text p {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.9);
   max-width: 460px;
@@ -2062,7 +2062,7 @@
 .mb-newsletterCta__form input[type="email"] {
   flex: 1;
   padding: 14px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   border: none;
   outline: none;
@@ -2075,7 +2075,7 @@
   background: var(--user-accent);
   color: #fff;
   border: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   cursor: pointer;
@@ -2126,7 +2126,7 @@
 
 .mb-communityCta__text h3,
 .mb-communityCta__text h4 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--text-primary, #1a1a2e);
@@ -2134,7 +2134,7 @@
 }
 
 .mb-communityCta__text p {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   color: var(--text-secondary, #666);
   line-height: 1.65;
@@ -2147,7 +2147,7 @@
   background: var(--user-accent);
   color: #fff;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -2253,7 +2253,7 @@
 }
 
 .mb-miniCard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
@@ -2271,7 +2271,7 @@
 }
 
 .mb-miniCard__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   color: var(--text-secondary, #888);
 }
@@ -2351,7 +2351,7 @@
 }
 
 .mb-listPost__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.35;
@@ -2369,7 +2369,7 @@
 }
 
 .mb-listPost__excerpt {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   color: var(--text-secondary, #555);
   line-height: 1.6;
@@ -2377,7 +2377,7 @@
 }
 
 .mb-listPost__subtext {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   color: var(--text-secondary, #888);
   line-height: 1.55;
@@ -2451,7 +2451,7 @@
 }
 
 .mb-compactCard__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.92rem;
   font-weight: 600;
   line-height: 1.35;
@@ -2469,7 +2469,7 @@
 }
 
 .mb-compactCard__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
   color: var(--text-secondary, #888);
   margin: 0.25rem 1rem 0;
@@ -2498,7 +2498,7 @@
 }
 
 .mb-widget__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -2510,7 +2510,7 @@
 }
 
 .mb-widget__text {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #666);
   line-height: 1.55;
@@ -2522,7 +2522,7 @@
   padding: 11px 14px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   outline: none;
   transition: border-color 0.2s;
@@ -2562,7 +2562,7 @@
 }
 
 .mb-trending__kicker {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.62rem;
   font-weight: 700;
   color: var(--user-accent);
@@ -2571,7 +2571,7 @@
 }
 
 .mb-trending__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-primary, #1a1a2e);
@@ -2599,7 +2599,7 @@
   border: none;
   background: none;
   border-radius: 8px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   color: var(--text-secondary, #555);
   cursor: pointer;
@@ -2620,7 +2620,7 @@
 }
 
 .mb-savedEmpty {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   color: var(--text-secondary, #888);
   text-align: center;
@@ -2635,7 +2635,7 @@
 }
 
 .mb-savedItem__link {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-primary, #333);
@@ -2649,14 +2649,14 @@
 }
 
 .mb-savedItem__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.72rem;
   color: var(--text-secondary, #888);
   margin-bottom: 4px;
 }
 
 .mb-savedItem__remove {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.72rem;
   color: #e05252;
   background: none;
@@ -2682,7 +2682,7 @@
   text-align: center;
   padding: 10px 16px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
@@ -2714,7 +2714,7 @@
   text-align: center;
   padding: 10px 16px;
   border-radius: 10px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
@@ -2744,7 +2744,7 @@
   border-radius: 12px;
   background: transparent;
   color: var(--user-accent);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -2769,7 +2769,7 @@
   color: #fff;
   padding: 12px 28px;
   border-radius: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
   z-index: 9999;
   opacity: 0;
@@ -2799,7 +2799,7 @@
   border-radius: 10px;
   border: 1px solid #ddd;
   background: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-secondary, #666);
@@ -2841,7 +2841,7 @@ body.reading-mode .mb-blogGrid {
   border-radius: 8px;
   border: 1px solid #ddd;
   background: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-secondary, #666);
@@ -2903,7 +2903,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-quoteBanner__author {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -2924,7 +2924,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text-primary, #1a1a2e);
@@ -2932,7 +2932,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__subtitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   color: var(--text-secondary, #666);
   margin: 0;
@@ -2955,7 +2955,7 @@ body.reading-mode .mb-blogGrid {
   border-radius: 24px;
   border: 2px solid #e0e0e0;
   background: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text-primary, #333);
@@ -2985,7 +2985,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__resultsTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--user-accent, #AF916D);
@@ -3022,7 +3022,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__cardTitle {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary, #1a1a2e);
@@ -3030,7 +3030,7 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-moodRec__cardMeta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   color: var(--text-secondary, #888);
 }
@@ -3073,7 +3073,7 @@ body.reading-mode .mb-blogGrid {
   border-radius: 50%;
   background: rgba(var(--user-accent-rgb), 0.1);
   color: var(--user-accent);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
   display: flex;
@@ -3089,7 +3089,7 @@ body.reading-mode .mb-blogGrid {
 
 .mb-popular__name,
 .mb-popular__title {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary, #333);
@@ -3098,14 +3098,14 @@ body.reading-mode .mb-blogGrid {
 }
 
 .mb-popular__meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   color: var(--text-secondary, #888);
   display: block;
 }
 
 .mb-popular__views {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-secondary, #888);
@@ -3131,7 +3131,7 @@ body.reading-mode .mb-blogGrid {
   padding: 10px 14px;
   border: none;
   outline: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.82rem;
   background: #fafafa;
   min-width: 0;
@@ -3145,7 +3145,7 @@ body.reading-mode .mb-blogGrid {
   background: var(--user-accent);
   color: #fff;
   border: none;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
