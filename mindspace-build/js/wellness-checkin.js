@@ -148,6 +148,47 @@
     return newCount;
   }
 
+  async function syncStreakToSupabase(mood, moodScore) {
+    try {
+      if (!window.MindBalanceAuth) return;
+      const sb = window.MindBalanceAuth.getSupabase();
+      const user = window.MindBalanceAuth.getUser();
+      if (!sb || !user) return;
+
+      const moodScoreMap = { happy: 5, calm: 4, okay: 3, anxious: 2, sad: 1, stressed: 2 };
+      const score = moodScore || moodScoreMap[mood] || 3;
+
+      await sb.from('mood_logs').insert({
+        user_id: user.id,
+        mood: mood,
+        mood_score: score
+      });
+
+      const todayStr = new Date().toISOString().split('T')[0];
+      const { data: existing } = await sb
+        .from('user_engagement')
+        .select('id')
+        .eq('user_id', user.id)
+        .eq('visit_date', todayStr)
+        .maybeSingle();
+
+      if (!existing) {
+        await sb.from('user_engagement').insert({
+          user_id: user.id,
+          visit_date: todayStr,
+          articles_read: 0,
+          time_spent_minutes: 0
+        });
+      }
+
+      if (window.MindBalanceAuth.updateStreakFromActivity) {
+        await window.MindBalanceAuth.updateStreakFromActivity(user.id);
+      }
+    } catch (e) {
+      console.error('[Wellness Check-In] Streak sync error:', e);
+    }
+  }
+
   // --- Community Moods ---
   function getCommunityMoods() {
     const stored = sessionStorage.getItem('communityMoods');
@@ -324,6 +365,8 @@
           streakEl.querySelector('.wellness-checkin__streak-count').textContent = newStreak;
           streakEl.style.display = 'inline-flex';
         }
+
+        syncStreakToSupabase(mood);
 
         if (confettiCanvas && (mood === 'happy' || mood === 'calm')) {
           createConfetti(confettiCanvas);
