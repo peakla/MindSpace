@@ -630,7 +630,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     function getSlideTranslation(key, fallback) {
-      const lang = localStorage.getItem('mindspace_language') || 'en';
+      const lang = localStorage.getItem('mindbalance_language') || 'en';
       if (window.translations && window.translations[lang] && window.translations[lang][key]) {
         return window.translations[lang][key];
       }
@@ -954,14 +954,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
       const getLabel = (key, fallback) => {
-        return window.MindSpaceTranslations?.getTranslationSync?.(key) || fallback;
+        return window.MindBalanceTranslations?.getTranslationSync?.(key) || fallback;
       };
 
       const small = document.createElement("p");
       small.className = "rl-cardSmall";
       const audienceKey = `rl_aud_${(item.audience || "General").replace(/\s+/g, "")}`;
       const audienceText = getLabel(audienceKey, item.audience || "General");
-      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindSpace"}`;
+      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindBalance"}`;
 
       const title = document.createElement("h3");
       title.className = "rl-cardTitle";
@@ -998,7 +998,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const visit = document.createElement("a");
       visit.className = "rl-visitBtn";
-      visit.textContent = window.MindSpaceTranslations?.getTranslationSync?.("resourcelib_visit") || "VISIT";
+      visit.textContent = window.MindBalanceTranslations?.getTranslationSync?.("resourcelib_visit") || "VISIT";
       visit.setAttribute("data-translate", "resourcelib_visit");
       visit.href = item.url || "#";
       visit.target = "_blank";
@@ -1117,7 +1117,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const provider = document.createElement('p');
       provider.className = 'rl-spotlight-card__provider';
-      provider.textContent = item.provider || 'MindSpace';
+      provider.textContent = item.provider || 'MindBalance';
 
       const title = document.createElement('h4');
       title.className = 'rl-spotlight-card__title';
@@ -1357,7 +1357,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(checkNotifications, 1500);
 
 
-  window.addEventListener('mindspace:authchange', (e) => {
+  window.addEventListener('mindbalance:authchange', (e) => {
     if (e.detail.isSignedIn) {
       setTimeout(checkNotifications, 500);
     } else {
@@ -1666,4 +1666,59 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+(function initSmartTopbar() {
+  const topbar = document.getElementById('smartTopbar');
+  if (!topbar) return;
+
+  if (sessionStorage.getItem('topbarDismissed') === '1') {
+    topbar.classList.add('dismissed');
+    return;
+  }
+
+  const slides = topbar.querySelectorAll('.topbar__slide');
+  const dots = topbar.querySelectorAll('.topbar__dot');
+  const closeBtn = document.getElementById('topbarClose');
+  let current = 0;
+  let timer = null;
+  const INTERVAL = 5000;
+
+  function goTo(index) {
+    const prev = topbar.querySelector('.topbar__slide.active');
+    if (prev) {
+      prev.classList.remove('active');
+      prev.classList.add('exit-up');
+      setTimeout(() => prev.classList.remove('exit-up'), 500);
+    }
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+    current = index;
+  }
+
+  function next() {
+    goTo((current + 1) % slides.length);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, INTERVAL);
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      goTo(parseInt(dot.dataset.dot, 10));
+      startTimer();
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      topbar.classList.add('dismissed');
+      sessionStorage.setItem('topbarDismissed', '1');
+    });
+  }
+
+  startTimer();
+})();
 

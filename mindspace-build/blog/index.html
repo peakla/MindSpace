@@ -121,39 +121,40 @@
   </nav>
 
   
-  <div class="topbar">
-    <div class="container">
-      <address class="topbar-item">
-        <div class="icon">
-          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+  <div class="topbar" id="smartTopbar">
+    <div class="topbar__inner">
+      <div class="topbar__slides" id="topbarSlides">
+        <div class="topbar__slide active" data-slide="0">
+          <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+          <span data-translate="topbar_welcome">Welcome to MindSpace — Your wellness journey starts here</span>
         </div>
-        <span class="span">4601 N MacArthur Blvd, Irving, TX 75038</span>
-      </address>
-
-      <div class="separator"></div>
-
-      <div class="topbar-item item-2">
-        <div class="icon">
-          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        <div class="topbar__slide" data-slide="1">
+          <ion-icon name="sunny-outline" aria-hidden="true"></ion-icon>
+          <span data-translate="topbar_tip">Daily tip: Take 5 deep breaths right now. Your mind will thank you.</span>
         </div>
-        <span class="span">Daily : 8.00 am to 10.00 pm</span>
-      </div>
-
-      <a href="tel:+12142459442" class="topbar-item link">
-        <div class="icon">
+        <div class="topbar__slide" data-slide="2">
+          <ion-icon name="shield-checkmark-outline" aria-hidden="true"></ion-icon>
+          <span data-translate="topbar_crisis">Need support now? Call or text <strong>988</strong> — Suicide &amp; Crisis Lifeline (24/7)</span>
+        </div>
+        <div class="topbar__slide" data-slide="3">
           <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+          <span data-translate="topbar_contact">Reach us: <a href="tel:+12142459442">+1 (214) 245 9442</a> &nbsp;|&nbsp; <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com">mindbalancehelp@gmail.com</a></span>
         </div>
-        <span class="span">+1 (214) 245 9442</span>
-      </a>
-
-      <div class="separator"></div>
-
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mindspacehelp@gmail.com" class="topbar-item link">
-        <div class="icon">
-          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        <div class="topbar__slide" data-slide="4">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+          <span data-translate="topbar_location">4601 N MacArthur Blvd, Irving, TX 75038 &nbsp;|&nbsp; Open daily 8 AM – 10 PM</span>
         </div>
-        <span class="span">mindspacehelp@gmail.com</span>
-      </a>
+      </div>
+      <div class="topbar__dots" id="topbarDots">
+        <button class="topbar__dot active" data-dot="0" aria-label="Slide 1"></button>
+        <button class="topbar__dot" data-dot="1" aria-label="Slide 2"></button>
+        <button class="topbar__dot" data-dot="2" aria-label="Slide 3"></button>
+        <button class="topbar__dot" data-dot="3" aria-label="Slide 4"></button>
+        <button class="topbar__dot" data-dot="4" aria-label="Slide 5"></button>
+      </div>
+      <button class="topbar__close" id="topbarClose" aria-label="Dismiss top bar">
+        <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+      </button>
     </div>
   </div>
 
