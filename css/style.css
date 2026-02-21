@@ -867,10 +867,6 @@ html {
   }
 }
 
-.topbar {
-  display: none;
-}
-
 /* === HEADER === */
 .header .btn {
   display: block;
@@ -880,7 +876,7 @@ html {
 
 .header {
   position: fixed;
-  top: 0;
+  top: var(--topbar-height, 36px);
   left: 0;
   width: 100%;
   background-color: var(--user-accent-light);
@@ -891,6 +887,7 @@ html {
   transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     border-radius 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.4s ease,
     transform 0.3s ease;
 }
 
@@ -1374,12 +1371,18 @@ html {
   pointer-events: none;
 }
 
-.topbar:has(~ .header.active) {
+.topbar.topbar--hidden {
   transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.header.topbar--gone {
+  top: 0;
 }
 
 body.nav-active .topbar {
-  display: none;
+  transform: translateY(-100%);
+  pointer-events: none;
 }
 
 .topbar__inner {
@@ -1543,7 +1546,6 @@ body.nav-active .topbar {
   .topbar__close {
     margin-left: 8px;
   }
-}
 }
 
 #main-hero.hero {

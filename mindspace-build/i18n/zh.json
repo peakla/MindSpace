@@ -1755,5 +1755,10 @@
   "blog_trending_2_hint": "<strong>热门原因：</strong>用于学习项目的快速、可靠的定义。",
   "blog_trending_3_title": "压力管理",
   "blog_trending_3_hint": "<strong>热门原因：</strong>人们可以尝试的实用应对方法。",
-  "blog_sidebar_quick_actions": "快捷操作"
+  "blog_sidebar_quick_actions": "快捷操作",
+  "topbar_welcome": "欢迎来到 MindSpace — 您的健康之旅从这里开始",
+  "topbar_tip": "每日提示：现在做5次深呼吸，您的心灵会感谢您。",
+  "topbar_crisis": "需要帮助？请拨打或发短信至 <strong>988</strong> — 自杀与危机生命线（全天候）",
+  "topbar_contact": "联系我们：<a href=\"tel:+12142459442\">+1 (214) 245 9442</a> &nbsp;|&nbsp; <a href=\"https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com\">mindbalancehelp@gmail.com</a>",
+  "topbar_location": "4601 N MacArthur Blvd, Irving, TX 75038 &nbsp;|&nbsp; 每天开放 上午8点 – 晚上10点"
 }

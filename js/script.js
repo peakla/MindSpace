@@ -461,9 +461,19 @@ document.addEventListener("DOMContentLoaded", function () {
       header.classList.add("active");
       if (backTopBtn) backTopBtn.classList.add("active");
       hideHeaderOnScroll();
+      var tb = document.getElementById('smartTopbar');
+      if (tb) tb.classList.add('topbar--hidden');
+      if (header) header.classList.add('topbar--gone');
+      document.documentElement.style.setProperty('--topbar-height', '0px');
     } else {
       header.classList.remove("active");
       if (backTopBtn) backTopBtn.classList.remove("active");
+      var tb = document.getElementById('smartTopbar');
+      if (tb && !tb.classList.contains('dismissed')) {
+        tb.classList.remove('topbar--hidden');
+        if (header) header.classList.remove('topbar--gone');
+        document.documentElement.style.setProperty('--topbar-height', '36px');
+      }
     }
 
     requestAnimationFrame(updateHeaderHeight);
@@ -1671,8 +1681,15 @@ document.addEventListener('DOMContentLoaded', function() {
   const topbar = document.getElementById('smartTopbar');
   if (!topbar) return;
 
+  function hideTopbar() {
+    document.documentElement.style.setProperty('--topbar-height', '0px');
+    var hdr = document.querySelector('.header');
+    if (hdr) hdr.classList.add('topbar--gone');
+  }
+
   if (sessionStorage.getItem('topbarDismissed') === '1') {
     topbar.classList.add('dismissed');
+    hideTopbar();
     return;
   }
 
@@ -1716,6 +1733,7 @@ document.addEventListener('DOMContentLoaded', function() {
     closeBtn.addEventListener('click', () => {
       topbar.classList.add('dismissed');
       sessionStorage.setItem('topbarDismissed', '1');
+      hideTopbar();
     });
   }
 

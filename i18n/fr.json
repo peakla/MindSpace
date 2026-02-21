@@ -1755,5 +1755,10 @@
   "blog_trending_2_hint": "<strong>Pourquoi c'est tendance :</strong> définitions rapides et crédibles pour les projets.",
   "blog_trending_3_title": "Gestion du stress",
   "blog_trending_3_hint": "<strong>Pourquoi c'est tendance :</strong> des idées pratiques d'adaptation à essayer.",
-  "blog_sidebar_quick_actions": "Actions rapides"
+  "blog_sidebar_quick_actions": "Actions rapides",
+  "topbar_welcome": "Bienvenue sur MindBalance — Votre parcours bien-être commence ici",
+  "topbar_tip": "Conseil du jour : Prenez 5 grandes respirations maintenant. Votre esprit vous en remerciera.",
+  "topbar_crisis": "Besoin de soutien maintenant ? Appelez ou envoyez un SMS au <strong>988</strong> — Ligne de crise et de suicide (24h/24)",
+  "topbar_contact": "Contactez-nous : <a href=\"tel:+12142459442\">+1 (214) 245 9442</a> &nbsp;|&nbsp; <a href=\"https://mail.google.com/mail/?view=cm&fs=1&to=mindbalancehelp@gmail.com\">mindbalancehelp@gmail.com</a>",
+  "topbar_location": "4601 N MacArthur Blvd, Irving, TX 75038 &nbsp;|&nbsp; Ouvert tous les jours de 8h à 22h"
 }
