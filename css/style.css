@@ -1362,7 +1362,6 @@ html {
   z-index: 101;
   background: linear-gradient(135deg, var(--accent-color, var(--user-accent)) 0%, var(--accent-color-dark, var(--user-accent-dark)) 100%);
   transition: transform 0.4s ease, opacity 0.4s ease;
-  overflow: hidden;
 }
 
 .topbar.dismissed {
@@ -1400,35 +1399,36 @@ body.nav-active .topbar {
   position: relative;
   flex: 1;
   text-align: center;
-  height: 20px;
-  overflow: hidden;
+  min-height: 18px;
 }
 
 .topbar__slide {
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 0;
   width: 100%;
+  transform: translateY(calc(-50% + 10px));
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.45s ease, transform 0.45s ease;
   pointer-events: none;
-  white-space: nowrap;
 }
 
 .topbar__slide.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-50%);
   pointer-events: auto;
+  position: relative;
+  top: auto;
+  transform: none;
 }
 
 .topbar__slide.exit-up {
   opacity: 0;
-  transform: translateY(-12px);
+  transform: translateY(calc(-50% - 10px));
 }
 
 .topbar__slide ion-icon {
@@ -1521,16 +1521,11 @@ body.nav-active .topbar {
 
   .topbar__slide span {
     font-size: 11px;
-    white-space: normal;
     line-height: 1.3;
   }
 
   .topbar__slide ion-icon {
     font-size: 13px;
-  }
-
-  .topbar__slides {
-    height: 18px;
   }
 
   .topbar__dots {

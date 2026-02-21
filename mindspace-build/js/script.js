@@ -472,7 +472,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (tb && !tb.classList.contains('dismissed')) {
         tb.classList.remove('topbar--hidden');
         if (header) header.classList.remove('topbar--gone');
-        document.documentElement.style.setProperty('--topbar-height', '36px');
+        document.documentElement.style.setProperty('--topbar-height', tb.offsetHeight + 'px');
       }
     }
 
@@ -1681,6 +1681,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const topbar = document.getElementById('smartTopbar');
   if (!topbar) return;
 
+  function syncTopbarHeight() {
+    var h = topbar.offsetHeight;
+    document.documentElement.style.setProperty('--topbar-height', h + 'px');
+  }
+
   function hideTopbar() {
     document.documentElement.style.setProperty('--topbar-height', '0px');
     var hdr = document.querySelector('.header');
@@ -1692,6 +1697,8 @@ document.addEventListener('DOMContentLoaded', function() {
     hideTopbar();
     return;
   }
+
+  syncTopbarHeight();
 
   const slides = topbar.querySelectorAll('.topbar__slide');
   const dots = topbar.querySelectorAll('.topbar__dot');
@@ -1711,6 +1718,7 @@ document.addEventListener('DOMContentLoaded', function() {
     slides[index].classList.add('active');
     dots[index].classList.add('active');
     current = index;
+    setTimeout(syncTopbarHeight, 50);
   }
 
   function next() {
