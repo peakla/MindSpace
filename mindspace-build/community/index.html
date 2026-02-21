@@ -937,8 +937,8 @@
     .mb-charCount__num { position: absolute; font-size: 10px; font-weight: 700; color: #666; }
     .mb-charCount__progress { transition: stroke-dashoffset 0.3s ease; }
 
-    .mb-fab { position: fixed; bottom: 150px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: var(--user-accent); color: #fff; border: none; font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(var(--user-accent-rgb), 0.4); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
-    .mb-fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 8px 24px rgba(var(--user-accent-rgb), 0.5); }
+    .mb-fab { position: fixed; bottom: 150px; right: 28px; width: 56px; height: 56px; border-radius: 50%; background: #fff; color: var(--user-accent); border: 2px solid var(--user-accent); font-size: 24px; cursor: pointer; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15); z-index: 1000; transition: all 0.3s ease; display: grid; place-items: center; }
+    .mb-fab:hover { transform: scale(1.1) translateY(-2px); background: var(--user-accent); color: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); }
     [data-theme="dark"] .mb-fab { background: var(--user-accent-light); color: #1a1a2e; }
 
     .mb-reactions { position: relative; display: inline-flex; }
