@@ -253,6 +253,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const breathingDurationEl = document.getElementById('breathingDuration');
   const breathingAudioToggle = document.getElementById('breathingAudio');
   const breathingContainer = document.querySelector('.breathing-circle-container');
+  const breathingProgressFill = document.getElementById('breathingProgressFill');
+
+  const PROGRESS_CIRCUMFERENCE = 2 * Math.PI * 94;
 
   const breathingPatterns = {
     '478': { inhale: 4, hold: 7, exhale: 8, name: '4-7-8 Relaxing' },
@@ -266,7 +269,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let breathingCycles = 0;
   let breathingStartTime = null;
   let durationInterval = null;
-
+  let progressAnimFrame = null;
 
   let audioContext = null;
 
@@ -289,6 +292,51 @@ document.addEventListener('DOMContentLoaded', function() {
     } catch (e) {
       console.log('Audio not supported');
     }
+  }
+
+  function setProgressArc(fraction) {
+    if (!breathingProgressFill) return;
+    const offset = PROGRESS_CIRCUMFERENCE * (1 - fraction);
+    breathingProgressFill.style.strokeDashoffset = offset;
+  }
+
+  function animateProgress(durationSec, startFraction, endFraction) {
+    if (progressAnimFrame) cancelAnimationFrame(progressAnimFrame);
+    const startTime = performance.now();
+    const durationMs = durationSec * 1000;
+    function tick(now) {
+      const elapsed = now - startTime;
+      const t = Math.min(elapsed / durationMs, 1);
+      const current = startFraction + (endFraction - startFraction) * t;
+      setProgressArc(current);
+      if (t < 1) progressAnimFrame = requestAnimationFrame(tick);
+    }
+    progressAnimFrame = requestAnimationFrame(tick);
+  }
+
+  function showPhaseIcon(phase) {
+    const icons = document.querySelectorAll('.breathing-icon');
+    icons.forEach(icon => icon.style.display = 'none');
+    const map = {
+      'ready': '.breathing-icon--ready',
+      'inhale': '.breathing-icon--inhale',
+      'hold': '.breathing-icon--hold',
+      'holdOut': '.breathing-icon--hold',
+      'exhale': '.breathing-icon--exhale'
+    };
+    const sel = map[phase];
+    if (sel) {
+      const el = document.querySelector(sel);
+      if (el) el.style.display = '';
+    }
+  }
+
+  function setPhaseClass(phase) {
+    if (!breathingContainer) return;
+    breathingContainer.classList.remove('phase-inhale', 'phase-hold', 'phase-exhale');
+    if (phase === 'inhale') breathingContainer.classList.add('phase-inhale');
+    else if (phase === 'hold' || phase === 'holdOut') breathingContainer.classList.add('phase-hold');
+    else if (phase === 'exhale') breathingContainer.classList.add('phase-exhale');
   }
 
   function openBreathingModal() {
@@ -320,6 +368,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pattern = breathingPatterns[currentPattern];
     let phase = 'inhale';
     let countdown = pattern.inhale;
+    let phaseTotal = pattern.inhale;
 
     function updatePhase() {
       if (breathingText) {
@@ -333,17 +382,21 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       if (breathingTimer) breathingTimer.textContent = countdown;
 
+      showPhaseIcon(phase);
+      setPhaseClass(phase);
 
       breathingCircle?.classList.remove('is-inhaling', 'is-holding', 'is-exhaling');
       if (phase === 'inhale') {
         breathingCircle?.classList.add('is-inhaling');
-        breathingCircle.style.transition = `transform ${pattern.inhale}s ease-in-out`;
+        breathingCircle.style.transition = `transform ${pattern.inhale}s cubic-bezier(0.4, 0, 0.2, 1), box-shadow ${pattern.inhale}s ease`;
       } else if (phase === 'hold' || phase === 'holdOut') {
         breathingCircle?.classList.add('is-holding');
       } else if (phase === 'exhale') {
         breathingCircle?.classList.add('is-exhaling');
-        breathingCircle.style.transition = `transform ${pattern.exhale}s ease-in-out`;
+        breathingCircle.style.transition = `transform ${pattern.exhale}s cubic-bezier(0.4, 0, 0.2, 1), box-shadow ${pattern.exhale}s ease`;
       }
+
+      animateProgress(phaseTotal, 0, 1);
     }
 
     updatePhase();
@@ -353,40 +406,43 @@ document.addEventListener('DOMContentLoaded', function() {
       countdown--;
 
       if (countdown <= 0) {
-
         if (phase === 'inhale') {
           if (pattern.hold > 0) {
             phase = 'hold';
             countdown = pattern.hold;
+            phaseTotal = pattern.hold;
             playTone(523, 0.15);
           } else {
             phase = 'exhale';
             countdown = pattern.exhale;
+            phaseTotal = pattern.exhale;
             playTone(392, 0.2);
           }
         } else if (phase === 'hold') {
           phase = 'exhale';
           countdown = pattern.exhale;
+          phaseTotal = pattern.exhale;
           playTone(392, 0.2);
         } else if (phase === 'exhale') {
           if (pattern.holdOut) {
             phase = 'holdOut';
             countdown = pattern.holdOut;
+            phaseTotal = pattern.holdOut;
             playTone(349, 0.15);
           } else {
-
             breathingCycles++;
             if (breathingCyclesEl) breathingCyclesEl.textContent = breathingCycles;
             phase = 'inhale';
             countdown = pattern.inhale;
+            phaseTotal = pattern.inhale;
             playTone(440, 0.2);
           }
         } else if (phase === 'holdOut') {
-
           breathingCycles++;
           if (breathingCyclesEl) breathingCyclesEl.textContent = breathingCycles;
           phase = 'inhale';
           countdown = pattern.inhale;
+          phaseTotal = pattern.inhale;
           playTone(440, 0.2);
         }
         updatePhase();
@@ -406,6 +462,11 @@ document.addEventListener('DOMContentLoaded', function() {
     stopBreathingBtn.style.display = 'block';
     breathingContainer?.classList.add('is-active');
 
+    if (breathingProgressFill) {
+      breathingProgressFill.style.strokeDasharray = PROGRESS_CIRCUMFERENCE;
+      breathingProgressFill.style.strokeDashoffset = PROGRESS_CIRCUMFERENCE;
+    }
+
     runBreathingCycle();
   }
 
@@ -418,16 +479,21 @@ document.addEventListener('DOMContentLoaded', function() {
       clearInterval(durationInterval);
       durationInterval = null;
     }
+    if (progressAnimFrame) {
+      cancelAnimationFrame(progressAnimFrame);
+      progressAnimFrame = null;
+    }
 
     startBreathingBtn.style.display = 'block';
     stopBreathingBtn.style.display = 'none';
-    breathingContainer?.classList.remove('is-active');
+    breathingContainer?.classList.remove('is-active', 'phase-inhale', 'phase-hold', 'phase-exhale');
 
     breathingCircle?.classList.remove('is-inhaling', 'is-holding', 'is-exhaling');
     if (breathingText) breathingText.textContent = 'Ready';
     if (breathingTimer) breathingTimer.textContent = '';
+    showPhaseIcon('ready');
+    setProgressArc(0);
   }
-
 
   openBreathingBtn?.addEventListener('click', openBreathingModal);
 
@@ -436,7 +502,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   startBreathingBtn?.addEventListener('click', startBreathing);
   stopBreathingBtn?.addEventListener('click', stopBreathing);
-
 
   document.querySelectorAll('.breathing-pattern').forEach(btn => {
     btn.addEventListener('click', () => {

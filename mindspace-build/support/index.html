@@ -1271,16 +1271,25 @@
           </div>
           
           <div class="breathing-circle-container">
+            <div class="breathing-glow"></div>
+            <div class="breathing-ring breathing-ring--1"></div>
+            <div class="breathing-ring breathing-ring--2"></div>
+            <div class="breathing-ring breathing-ring--3"></div>
+            <svg class="breathing-progress-ring" viewBox="0 0 200 200">
+              <circle class="breathing-progress-ring__track" cx="100" cy="100" r="94" />
+              <circle class="breathing-progress-ring__fill" id="breathingProgressFill" cx="100" cy="100" r="94" />
+            </svg>
             <div class="breathing-circle" id="breathingCircle">
               <div class="breathing-circle__inner">
+                <div class="breathing-circle__phase-icon" id="breathingPhaseIcon">
+                  <ion-icon name="leaf-outline" class="breathing-icon breathing-icon--ready"></ion-icon>
+                  <ion-icon name="arrow-up-outline" class="breathing-icon breathing-icon--inhale" style="display:none"></ion-icon>
+                  <ion-icon name="pause-outline" class="breathing-icon breathing-icon--hold" style="display:none"></ion-icon>
+                  <ion-icon name="arrow-down-outline" class="breathing-icon breathing-icon--exhale" style="display:none"></ion-icon>
+                </div>
                 <span class="breathing-circle__text" id="breathingText" data-translate="breathing_ready">Ready</span>
                 <span class="breathing-circle__timer" id="breathingTimer"></span>
               </div>
-            </div>
-            <div class="breathing-circle__rings">
-              <div class="breathing-ring breathing-ring--1"></div>
-              <div class="breathing-ring breathing-ring--2"></div>
-              <div class="breathing-ring breathing-ring--3"></div>
             </div>
           </div>
           
