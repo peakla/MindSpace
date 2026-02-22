@@ -273,35 +273,6 @@ def transform_content(content, filepath):
         content = content.replace("#AF916D", "#2068A8")
         content = content.replace("#af916d", "#2068a8")
 
-        if basename == "style.css":
-            mindspace_overrides = """
-/* MindSpace: white-on-blue footer buttons */
-.mb-footer__btn {
-  background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important;
-  color: #fff !important;
-  box-shadow: 0 4px 15px rgba(32, 104, 168, 0.3) !important;
-}
-.mb-footer__btn:hover {
-  box-shadow: 0 6px 20px rgba(32, 104, 168, 0.4) !important;
-}
-/* MindSpace: light blue navbar & header */
-.header { background-color: #bde0fe !important; }
-.header.active { background-color: #bde0fe !important; }
-.navbar { background: #bde0fe !important; }
-.navbar-link,
-.navbar-link .span { color: #1a3a5c !important; }
-.navbar-link:is(:hover, :focus-visible),
-.navbar-link:is(:hover, :focus-visible) .span,
-.navbar-link.active,
-.navbar-link.active .span { color: #0d2847 !important; }
-.header .btn-outline { color: #1a3a5c !important; border-color: #1a3a5c !important; }
-.header .btn-outline:hover { background: #1a3a5c !important; color: #fff !important; }
-.header-search-btn ion-icon { color: #1a3a5c !important; }
-.header-action-btn ion-icon { color: #1a3a5c !important; }
-.settings-trigger-btn { color: #1a3a5c !important; }
-.mb-footer__top { background: linear-gradient(135deg, #2068A8 0%, #1B5A94 100%) !important; }
-"""
-            content += mindspace_overrides
 
     return content
 
