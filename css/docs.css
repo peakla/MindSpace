@@ -538,39 +538,3 @@
   }
 }
 
-.docs-originality-statement {
-  margin-top: 1.5rem;
-}
-
-.docs-originality-card {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  background: rgba(175, 145, 109, 0.08);
-  border: 1px solid rgba(175, 145, 109, 0.25);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-}
-
-.docs-originality-icon {
-  font-size: 1.5rem;
-  color: var(--primary, #AF916D);
-  flex-shrink: 0;
-}
-
-.docs-originality-card p {
-  margin: 0;
-  font-size: 0.88rem;
-  line-height: 1.55;
-  color: #555;
-  font-style: italic;
-}
-
-[data-theme="dark"] .docs-originality-card {
-  background: rgba(175, 145, 109, 0.1);
-  border-color: rgba(175, 145, 109, 0.2);
-}
-
-[data-theme="dark"] .docs-originality-card p {
-  color: #b0b0b0;
-}
