@@ -10,17 +10,17 @@
 
 /* === CONTAINER === */
 .docs-container {
-  max-width: 1000px;
+  max-width: 1340px;
   margin: 0 auto;
-  padding: 2.5rem 2rem 4rem;
+  padding: 2rem 2.5rem 4rem;
   min-height: 60vh;
 }
 
 /* === HEADER === */
 .docs-header {
-  text-align: center;
-  padding: 2rem 0 2.5rem;
-  margin-bottom: 2.5rem;
+  text-align: left;
+  padding: 1.5rem 0 2rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 
@@ -28,9 +28,8 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
+  left: 0;
+  width: 60px;
   height: 3px;
   background: var(--user-accent);
   border-radius: 3px;
@@ -39,18 +38,18 @@
 .docs-header__brand {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.6rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .docs-header__brand ion-icon {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   color: var(--user-accent);
 }
 
 .docs-header__brand h1 {
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #1a1a2e;
   letter-spacing: 0.3px;
@@ -61,7 +60,7 @@
 }
 
 .docs-header__subtitle {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #777;
   font-weight: 400;
   letter-spacing: 0.3px;
@@ -75,7 +74,15 @@
 .docs-main {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.75rem;
+}
+
+/* === TOP ROW: Files + Overview side by side === */
+.docs-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 1.75rem;
+  align-items: start;
 }
 
 /* === SECTIONS === */
@@ -83,7 +90,7 @@
   background: #fff;
   border: 1px solid rgba(0,0,0,0.06);
   border-radius: 16px;
-  padding: 2rem 2.25rem;
+  padding: 1.75rem 2rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.04);
   transition: box-shadow 0.2s ease;
 }
@@ -131,17 +138,23 @@
   color: rgba(255,255,255,0.88);
 }
 
+/* === OVERVIEW SECTION === */
+.docs-section--overview {
+  display: flex;
+  flex-direction: column;
+}
+
 /* === SECTION TITLES === */
 .docs-section__title {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1a1a2e;
-  padding-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid #ece8e0;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
 }
 
 [data-theme="dark"] .docs-section__title {
@@ -150,13 +163,13 @@
 }
 
 .docs-section__title ion-icon {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: var(--user-accent);
 }
 
 .docs-section__desc {
-  margin-bottom: 1.25rem;
-  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
   color: #777;
 }
 
@@ -164,11 +177,11 @@
   color: #9a9ab5;
 }
 
-/* === PDF CARDS === */
-.docs-pdf-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
+/* === PDF CARDS — stacked list in side panel === */
+.docs-pdf-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .docs-pdf-card {
@@ -178,7 +191,7 @@
   background: rgba(255,255,255,0.15);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 12px;
-  padding: 16px 18px;
+  padding: 14px 16px;
   text-decoration: none;
   color: #fff;
   transition: background 0.2s ease, transform 0.15s ease;
@@ -190,10 +203,10 @@
 }
 
 .docs-pdf-card__icon {
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   background: rgba(255,255,255,0.18);
-  border-radius: 11px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -201,7 +214,7 @@
 }
 
 .docs-pdf-card__icon ion-icon {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .docs-pdf-card__content {
@@ -210,18 +223,18 @@
 }
 
 .docs-pdf-card__content h3 {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   margin-bottom: 2px;
 }
 
 .docs-pdf-card__content p {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   opacity: 0.7;
 }
 
 .docs-pdf-card__arrow {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   opacity: 0.5;
   transition: transform 0.2s ease, opacity 0.2s ease;
   flex-shrink: 0;
@@ -260,10 +273,10 @@
   color: #e0e0e8;
 }
 
-/* === FEATURES LIST === */
+/* === FEATURES LIST — 3 columns === */
 .docs-features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
 
@@ -294,8 +307,8 @@
 }
 
 .docs-feature__icon {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   background: var(--user-accent);
   border-radius: 11px;
   display: flex;
@@ -305,7 +318,7 @@
 }
 
 .docs-feature__icon ion-icon {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #fff;
 }
 
@@ -315,7 +328,7 @@
 }
 
 .docs-feature__content h3 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #1a1a2e;
   margin-bottom: 4px;
@@ -326,7 +339,7 @@
 }
 
 .docs-feature__content p {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: #777;
   line-height: 1.6;
 }
@@ -335,10 +348,10 @@
   color: #9a9ab5;
 }
 
-/* === TECH STACK === */
+/* === TECH STACK — 4 columns === */
 .docs-tech-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
 }
 
@@ -360,7 +373,7 @@
 }
 
 .docs-tech-item h4 {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--user-accent);
   margin-bottom: 12px;
@@ -373,7 +386,7 @@
 }
 
 .docs-tech-item li {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: #666;
   padding: 4px 0;
   padding-left: 16px;
@@ -434,17 +447,21 @@
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
   .docs-container {
-    padding: 2rem 1.5rem 3rem;
+    padding: 2rem 2rem 3rem;
   }
-  
-  .docs-header__brand h1 {
-    font-size: 2.1rem;
+
+  .docs-top-row {
+    grid-template-columns: 1fr 1fr;
   }
-  
-  .docs-section {
-    padding: 1.75rem 1.75rem;
+
+  .docs-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .docs-tech-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -452,50 +469,49 @@
   .docs-container {
     padding: 1.5rem 1rem 2.5rem;
   }
-  
+
   .docs-header {
-    padding: 1.5rem 0 2rem;
-    margin-bottom: 1.75rem;
+    padding: 1.25rem 0 1.5rem;
+    margin-bottom: 1.5rem;
   }
-  
+
   .docs-header__brand {
-    flex-direction: column;
     gap: 0.4rem;
   }
-  
+
   .docs-header__brand ion-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
-  
+
   .docs-header__brand h1 {
-    font-size: 1.85rem;
+    font-size: 1.7rem;
   }
-  
+
   .docs-header__subtitle {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
-  
+
+  .docs-top-row {
+    grid-template-columns: 1fr;
+  }
+
   .docs-section {
     padding: 1.25rem 1.25rem;
     border-radius: 12px;
   }
-  
+
   .docs-section__title {
-    font-size: 1.15rem;
+    font-size: 1.12rem;
   }
-  
+
   .docs-features {
     grid-template-columns: 1fr;
   }
-  
+
   .docs-feature {
     padding: 14px 16px;
   }
-  
-  .docs-pdf-grid {
-    grid-template-columns: 1fr;
-  }
-  
+
   .docs-tech-grid {
     grid-template-columns: 1fr;
   }
@@ -503,13 +519,13 @@
 
 @media (max-width: 480px) {
   .docs-header__brand h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
-  
+
   .docs-section {
     padding: 1.1rem;
   }
-  
+
   .docs-cta-button {
     padding: 10px 24px;
     font-size: 0.9rem;
