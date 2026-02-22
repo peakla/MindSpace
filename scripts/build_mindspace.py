@@ -162,7 +162,7 @@ def transform_content(content, filepath):
 
     if ext.lower() in {".css", ".html", ".js"}:
         for old_color, new_color in COLOR_REPLACEMENTS:
-            content = content.replace(old_color, new_color)
+            content = re.sub(re.escape(old_color), new_color, content, flags=re.IGNORECASE)
 
     if ext.lower() == ".js":
         content = re.sub(

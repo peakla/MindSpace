@@ -607,7 +607,7 @@ body.dark-mode .wellness-checkin__default-tip-text {
 
 .wellness-checkin__note-input:focus {
   outline: none;
-  border-color: var(--user-accent, #2068A8);
+  border-color: var(--user-accent, #5BA4E6);
 }
 
 .wellness-checkin__note-input::placeholder {
@@ -616,7 +616,7 @@ body.dark-mode .wellness-checkin__default-tip-text {
 
 .wellness-checkin__note-save {
   padding: 10px 18px;
-  background: var(--user-accent, #2068A8);
+  background: var(--user-accent, #5BA4E6);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -649,7 +649,7 @@ body.dark-mode .wellness-checkin__default-tip-text {
 }
 
 [data-theme="dark"] .wellness-checkin__note-input:focus {
-  border-color: var(--user-accent, #2068A8);
+  border-color: var(--user-accent, #5BA4E6);
 }
 
 @media (max-width: 480px) {
