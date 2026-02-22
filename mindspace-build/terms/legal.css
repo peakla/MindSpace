@@ -143,12 +143,12 @@
 }
 
 .legal-section a:hover {
-  color: #2d6ab0;
+  color: var(--user-accent-dark);
   text-decoration: underline;
 }
 
 [data-theme="dark"] .legal-section a {
-  color: #7BBDF7;
+  color: var(--user-accent-grad-end);
 }
 
 [data-theme="dark"] .legal-section a:hover {
@@ -166,7 +166,7 @@
 
 [data-theme="dark"] .legal-highlight {
   background: linear-gradient(135deg, #3d3a50, #4d4660);
-  border-left-color: #4A93D4;
+  border-left-color: var(--user-accent);
 }
 
 .legal-highlight strong {
@@ -176,7 +176,7 @@
 }
 
 [data-theme="dark"] .legal-highlight strong {
-  color: #7BBDF7;
+  color: var(--user-accent-grad-end);
 }
 
 .legal-highlight ul {
@@ -313,8 +313,8 @@
 }
 
 [data-theme="dark"] .legal-nav-link:hover {
-  background: #4A93D4;
-  border-color: #4A93D4;
+  background: var(--user-accent);
+  border-color: var(--user-accent);
   color: #1a1a2e;
 }
 

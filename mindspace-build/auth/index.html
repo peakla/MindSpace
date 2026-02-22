@@ -33,7 +33,7 @@
     :root {
       --primary: var(--user-accent-grad-end);
       --primary-hover: var(--user-accent-dark);
-      --primary-light: #7BBDF7;
+      --primary-light: var(--user-accent-light);
       --accent: var(--user-accent-grad-end);
       --success: #10b981;
       --success-bg: #dcfce7;
@@ -423,9 +423,9 @@
     }
     
     .btn-primary:hover {
-      background: linear-gradient(135deg, var(--primary-hover) 0%, #2d6ab0 100%);
+      background: linear-gradient(135deg, var(--primary-hover) 0%, var(--user-accent-dark) 100%);
       transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(212, 165, 116, 0.45);
+      box-shadow: 0 12px 28px rgba(var(--user-accent-rgb), 0.45);
     }
     
     .btn-primary:active {

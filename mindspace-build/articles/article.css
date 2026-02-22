@@ -2791,7 +2791,7 @@ body[data-article-spacing="relaxed"] .article-content li {
 }
 
 .notes-panel__btn--export:hover {
-  background: #163F6E;
+  background: var(--user-accent-dark);
 }
 
 [data-theme="dark"] .notes-panel__actions {
