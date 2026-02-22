@@ -360,11 +360,10 @@ def newsletter_subscribe():
             )
             conn.commit()
         
-        api_key, connector_from_email = get_resend_credentials()
-        if connector_from_email and 'resend.dev' in connector_from_email:
-            from_email = connector_from_email
-        else:
-            from_email = "MindBalance <onboarding@resend.dev>"
+        api_key = os.environ.get('RESEND_API_KEY')
+        if not api_key:
+            api_key, _ = get_resend_credentials()
+        from_email = "MindBalance <onboarding@resend.dev>"
         print(f"[Newsletter] API key found: {bool(api_key)}, from_email: {from_email}")
         if api_key:
             try:
