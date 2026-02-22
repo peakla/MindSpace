@@ -10538,11 +10538,14 @@ body.reading-mode[data-theme="dark"] {
 
 .navbar-search {
   position: relative;
-  margin-right: 10px;
+  display: flex;
+  align-items: center;
   z-index: 102;
 }
 
 .navbar-search__input {
+  position: absolute;
+  right: 0;
   width: 0;
   padding: 0;
   border: none;

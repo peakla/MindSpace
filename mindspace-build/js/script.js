@@ -971,7 +971,7 @@ document.addEventListener("DOMContentLoaded", function () {
       small.className = "rl-cardSmall";
       const audienceKey = `rl_aud_${(item.audience || "General").replace(/\s+/g, "")}`;
       const audienceText = getLabel(audienceKey, item.audience || "General");
-      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindSpace"}`;
+      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindBalance"}`;
 
       const title = document.createElement("h3");
       title.className = "rl-cardTitle";
@@ -1127,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const provider = document.createElement('p');
       provider.className = 'rl-spotlight-card__provider';
-      provider.textContent = item.provider || 'MindSpace';
+      provider.textContent = item.provider || 'MindBalance';
 
       const title = document.createElement('h4');
       title.className = 'rl-spotlight-card__title';
@@ -1692,13 +1692,40 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hdr) hdr.classList.add('topbar--gone');
   }
 
+  function showTopbar() {
+    topbar.classList.remove('dismissed');
+    var hdr = document.querySelector('.header');
+    if (hdr) hdr.classList.remove('topbar--gone');
+    syncTopbarHeight();
+    startTimer();
+  }
+
+  const topbarToggle = document.querySelector('[data-topbar-toggle]');
+
   if (sessionStorage.getItem('topbarDismissed') === '1') {
     topbar.classList.add('dismissed');
     hideTopbar();
-    return;
+    if (topbarToggle) topbarToggle.checked = false;
+  } else {
+    if (topbarToggle) topbarToggle.checked = true;
   }
 
-  syncTopbarHeight();
+  if (topbarToggle) {
+    topbarToggle.addEventListener('change', function() {
+      if (this.checked) {
+        sessionStorage.removeItem('topbarDismissed');
+        showTopbar();
+      } else {
+        topbar.classList.add('dismissed');
+        sessionStorage.setItem('topbarDismissed', '1');
+        hideTopbar();
+      }
+    });
+  }
+
+  if (!topbar.classList.contains('dismissed')) {
+    syncTopbarHeight();
+  }
 
   const slides = topbar.querySelectorAll('.topbar__slide');
   const dots = topbar.querySelectorAll('.topbar__dot');
@@ -1742,9 +1769,12 @@ document.addEventListener('DOMContentLoaded', function() {
       topbar.classList.add('dismissed');
       sessionStorage.setItem('topbarDismissed', '1');
       hideTopbar();
+      if (topbarToggle) topbarToggle.checked = false;
     });
   }
 
-  startTimer();
+  if (!topbar.classList.contains('dismissed')) {
+    startTimer();
+  }
 })();
 

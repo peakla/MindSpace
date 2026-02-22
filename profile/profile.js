@@ -127,7 +127,7 @@ function createLikedPost(content, createdAt, likeCount, postId, authorName, auth
 // --- Goal Item ---
 function createGoalItem(goal) {
   const item = createSafeElement('div', 'mb-profile__goal-item');
-
+  if (goal.category) item.setAttribute('data-category', goal.category);
 
   const categoryIcons = {
     'mindfulness': 'leaf-outline',
@@ -1565,7 +1565,10 @@ async function logMood() {
 }
 
 // --- Mood History ---
-async function loadMoodHistory() {
+let moodHistoryOffset = 0;
+const MOOD_PAGE_SIZE = 9;
+
+async function loadMoodHistory(loadMore = false) {
   if (!currentUser) return;
 
   const supabaseClient = getSupabaseClient();
@@ -1573,19 +1576,21 @@ async function loadMoodHistory() {
 
   const chart = document.getElementById('moodChart');
 
+  if (!loadMore) {
+    moodHistoryOffset = 0;
+  }
+
   const { data: moods, error } = await supabaseClient
     .from('mood_logs')
     .select('*')
     .eq('user_id', currentUser.id)
     .order('created_at', { ascending: false })
-    .limit(14);
-
+    .range(moodHistoryOffset, moodHistoryOffset + MOOD_PAGE_SIZE - 1);
 
   const { count: totalCount } = await supabaseClient
     .from('mood_logs')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', currentUser.id);
-
 
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -1598,9 +1603,11 @@ async function loadMoodHistory() {
     .order('created_at', { ascending: true });
 
   if (error || !moods || moods.length === 0) {
-    chart.innerHTML = '';
-    chart.appendChild(createSafeElement('p', 'mb-profile__mood-empty', 'No mood entries yet. Start tracking today!'));
-    hideInsights();
+    if (!loadMore) {
+      chart.innerHTML = '';
+      chart.appendChild(createSafeElement('p', 'mb-profile__mood-empty', 'No mood entries yet. Start tracking today!'));
+      hideInsights();
+    }
     return;
   }
 
@@ -1609,18 +1616,39 @@ async function loadMoodHistory() {
     'sad': '😔',
     'neutral': '😐',
     'happy': '😊',
-    'very_happy': '😄'
+    'very_happy': '😄',
+    'calm': '😌',
+    'okay': '😐',
+    'anxious': '😰',
+    'stressed': '😤'
   };
 
-  chart.innerHTML = '';
-  chart.classList.add('mb-profile__mood-entries');
+  if (!loadMore) {
+    chart.innerHTML = '';
+    chart.classList.add('mb-profile__mood-entries');
+
+    const countBar = createSafeElement('div', 'mood-count-bar');
+    countBar.textContent = `Showing ${Math.min(MOOD_PAGE_SIZE, totalCount)} of ${totalCount} entries`;
+    chart.appendChild(countBar);
+  } else {
+    const existingLoadMore = chart.querySelector('.mood-load-more-wrapper');
+    if (existingLoadMore) existingLoadMore.remove();
+    const existingCount = chart.querySelector('.mood-count-bar');
+    if (existingCount) {
+      existingCount.textContent = `Showing ${moodHistoryOffset + moods.length} of ${totalCount} entries`;
+    }
+  }
 
   const moodLevels = {
     'very_sad': 1,
     'sad': 2,
     'neutral': 3,
     'happy': 4,
-    'very_happy': 5
+    'very_happy': 5,
+    'calm': 4,
+    'okay': 3,
+    'anxious': 2,
+    'stressed': 2
   };
 
   moods.reverse().forEach(mood => {
@@ -1635,14 +1663,11 @@ async function loadMoodHistory() {
     const card = createSafeElement('div', 'mood-entry-card');
     card.setAttribute('data-mood', moodLevel);
 
-
     const emojiContainer = createSafeElement('div', 'mood-entry-emoji');
     const emojiSpan = createSafeElement('span', 'mood-emoji-large', emoji);
     emojiContainer.appendChild(emojiSpan);
 
-
     const contentDiv = createSafeElement('div', 'mood-entry-content');
-
 
     const headerDiv = createSafeElement('div', 'mood-entry-header');
     const moodLabelSpan = createSafeElement('span', 'mood-label', moodLabel);
@@ -1650,12 +1675,10 @@ async function loadMoodHistory() {
     headerDiv.appendChild(moodLabelSpan);
     headerDiv.appendChild(timeSpan);
 
-
     const dateSpan = createSafeElement('span', 'mood-date', dayName);
 
     contentDiv.appendChild(headerDiv);
     contentDiv.appendChild(dateSpan);
-
 
     if (mood.note) {
       const noteDiv = createSafeElement('div', 'mood-note-preview');
@@ -1696,8 +1719,19 @@ async function loadMoodHistory() {
     chart.appendChild(card);
   });
 
+  moodHistoryOffset += moods.length;
 
-  updateMoodInsights(allMoods || moods, totalCount || moods.length);
+  if (moodHistoryOffset < totalCount) {
+    const loadMoreWrapper = createSafeElement('div', 'mood-load-more-wrapper');
+    const loadMoreBtn = createSafeElement('button', 'mood-load-more-btn', `Load More (${totalCount - moodHistoryOffset} remaining)`);
+    loadMoreBtn.onclick = () => loadMoodHistory(true);
+    loadMoreWrapper.appendChild(loadMoreBtn);
+    chart.appendChild(loadMoreWrapper);
+  }
+
+  if (!loadMore) {
+    updateMoodInsights(allMoods || moods, totalCount || moods.length);
+  }
 }
 
 function hideInsights() {
@@ -2150,6 +2184,30 @@ function updateStreakMilestones(currentStreak) {
       milestone.classList.add('locked');
     }
   });
+
+  const calendarEl = document.getElementById('streakCalendar');
+  if (!calendarEl) return;
+  let badgeContainer = calendarEl.querySelector('.streak-milestone-badges');
+  if (badgeContainer) badgeContainer.remove();
+
+  badgeContainer = createSafeElement('div', 'streak-milestone-badges');
+  const milestoneList = [
+    { days: 3, icon: '\u{1F525}', label: '3 Days' },
+    { days: 7, icon: '\u{2B50}', label: '1 Week' },
+    { days: 14, icon: '\u{1F4AA}', label: '2 Weeks' },
+    { days: 30, icon: '\u{1F3C6}', label: '1 Month' },
+    { days: 60, icon: '\u{1F48E}', label: '2 Months' },
+    { days: 100, icon: '\u{1F451}', label: '100 Days' }
+  ];
+
+  milestoneList.forEach(m => {
+    const badge = createSafeElement('div', 'streak-milestone-badge');
+    if (currentStreak >= m.days) badge.classList.add('earned');
+    badge.textContent = `${m.icon} ${m.label}`;
+    badgeContainer.appendChild(badge);
+  });
+
+  calendarEl.appendChild(badgeContainer);
 }
 
 
