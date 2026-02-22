@@ -363,7 +363,7 @@ def newsletter_subscribe():
         api_key = os.environ.get('RESEND_API_KEY')
         if not api_key:
             api_key, _ = get_resend_credentials()
-        from_email = "MindBalance <onboarding@resend.dev>"
+        from_email = "MindBalance <hello@mindbalance.cloud>"
         print(f"[Newsletter] API key found: {bool(api_key)}, from_email: {from_email}")
         if api_key:
             try:
