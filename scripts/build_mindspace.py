@@ -160,12 +160,16 @@ def transform_content(content, filepath):
     content = content.replace("MINDBALANCE", "MINDSPACE")
     content = content.replace("Mindbalance", "Mindspace")
 
-    if ext.lower() in {".css", ".html", ".js"}:
+    SETTINGS_FILES = {"settings.js", "settings-modal.js"}
+    is_settings_file = basename in SETTINGS_FILES
+
+    if ext.lower() in {".css", ".html", ".js"} and not is_settings_file:
         for old_color, new_color in COLOR_REPLACEMENTS:
             content = re.sub(re.escape(old_color), new_color, content, flags=re.IGNORECASE)
 
     if ext.lower() == ".js":
-        MINDSPACE_ACCENT_COLORS_SETTINGS = """  const ACCENT_COLORS = {
+        if is_settings_file:
+            MINDSPACE_ACCENT_COLORS_SETTINGS = """  const ACCENT_COLORS = {
     blue:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#a3c8ed', soft: '#bde0fe', dark: '#2d6ab0', gradEnd: '#7BBDF7', text: '#245a8c' },
     purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e' },
     sky:    { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c' },
@@ -176,7 +180,7 @@ def transform_content(content, filepath):
     red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535' }
   };"""
 
-        MINDSPACE_ACCENT_COLORS_MODAL = """  const ACCENT_COLORS = {
+            MINDSPACE_ACCENT_COLORS_MODAL = """  const ACCENT_COLORS = {
     blue:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#a3c8ed', soft: '#bde0fe', dark: '#2d6ab0', gradEnd: '#7BBDF7', text: '#245a8c', name: 'Blue' },
     purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e', name: 'Purple' },
     sky:    { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c', name: 'Sky' },
@@ -187,13 +191,13 @@ def transform_content(content, filepath):
     red:    { hex: '#e07070', hover: '#d05f5f', rgb: '224, 112, 112', light: '#f0b3b3', soft: '#fdeaea', dark: '#b84444', gradEnd: '#ed9494', text: '#9a3535', name: 'Red' }
   };"""
 
-        content = re.sub(
-            r'const ACCENT_COLORS\s*=\s*\{.*?\};',
-            lambda m: MINDSPACE_ACCENT_COLORS_MODAL.strip() if "name:" in m.group() else MINDSPACE_ACCENT_COLORS_SETTINGS.strip(),
-            content,
-            count=1,
-            flags=re.DOTALL
-        )
+            content = re.sub(
+                r'const ACCENT_COLORS\s*=\s*\{.*?\};',
+                lambda m: MINDSPACE_ACCENT_COLORS_MODAL.strip() if "name:" in m.group() else MINDSPACE_ACCENT_COLORS_SETTINGS.strip(),
+                content,
+                count=1,
+                flags=re.DOTALL
+            )
 
         content = content.replace("data-accent-color=\"blue\"", "data-accent-color=\"sky\"")
 
@@ -206,8 +210,8 @@ def transform_content(content, filepath):
         content = content.replace("? colorName : 'gold'", "? colorName : 'blue'")
         content = content.replace("accentColor, 'gold')", "accentColor, 'blue')")
         content = re.sub(r"getPreference\(STORAGE_KEYS\.accentColor,\s*'gold'\)", "getPreference(STORAGE_KEYS.accentColor, 'blue')", content)
-        content = content.replace("colorName : 'gold';", "colorName : 'blue';")
-        content = content.replace(": 'gold';", ": 'blue';")  
+        content = content.replace("|| '#af916d'", "|| '#5BA4E6'")
+        content = content.replace("|| '#AF916D'", "|| '#5BA4E6'")
 
     if ext.lower() == ".html":
         content = re.sub(
