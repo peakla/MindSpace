@@ -374,53 +374,175 @@ def newsletter_subscribe():
                     "from": from_email,
                     "to": [email],
                     "subject": "Welcome to MindBalance Newsletter!",
-                    "html": f"""
-                    <div style="font-family: 'Poppins', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-                        <div style="text-align: center; margin-bottom: 30px;">
-                            <h1 style="color: #3d3a50; font-size: 28px; margin: 0;">MindBalance</h1>
-                            <p style="color: #af916d; font-size: 14px; margin-top: 5px;">Your Mental Wellness Companion</p>
-                        </div>
-                        
-                        <div style="background: linear-gradient(135deg, #f8f5f0 0%, #fff 100%); border-radius: 16px; padding: 30px; border: 1px solid #e8e4dc;">
-                            <h2 style="color: #3d3a50; font-size: 22px; margin-top: 0;">Welcome to Our Community!</h2>
-                            
-                            <p style="color: #5a5770; font-size: 16px; line-height: 1.6;">
-                                Thank you for subscribing to the MindBalance newsletter! You'll now receive:
-                            </p>
-                            
-                            <ul style="color: #5a5770; font-size: 15px; line-height: 1.8; padding-left: 20px;">
-                                <li>Weekly mental wellness tips and strategies</li>
-                                <li>New articles and resources</li>
-                                <li>Community updates and stories</li>
-                                <li>Exclusive content and early access</li>
-                            </ul>
-                            
-                            <p style="color: #5a5770; font-size: 16px; line-height: 1.6;">
-                                We're committed to supporting your mental health journey with credible, 
-                                compassionate resources.
-                            </p>
-                            
-                            <div style="text-align: center; margin-top: 30px;">
-                                <a href="https://mindbalance.cloud" 
-                                   style="display: inline-block; background: #af916d; color: #fff; padding: 14px 32px; 
-                                          border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 15px;">
-                                    Visit MindBalance
-                                </a>
-                            </div>
-                        </div>
-                        
-                        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e8e4dc;">
-                            <p style="color: #8a8899; font-size: 13px; margin: 0;">
-                                You received this email because you subscribed to MindBalance newsletter.
-                            </p>
-                            <p style="color: #8a8899; font-size: 13px; margin-top: 10px;">
-                                <a href="https://mindbalance.cloud" style="color: #af916d; text-decoration: none;">
-                                    mindbalance.cloud
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                    """
+                    "html": f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark">
+<title>Welcome to MindBalance</title>
+<style>
+  :root {{
+    color-scheme: light dark;
+    supported-color-schemes: light dark;
+  }}
+  @media (prefers-color-scheme: dark) {{
+    .email-body {{ background-color: #1a1a2e !important; }}
+    .email-container {{ background-color: #16213e !important; }}
+    .header-section {{ background: linear-gradient(135deg, #2a1f3d 0%, #1a1a2e 50%, #1e2a4a 100%) !important; }}
+    .content-card {{ background-color: #1e2a4a !important; border-color: #2a3a5c !important; }}
+    .title-text {{ color: #e8e4f0 !important; }}
+    .subtitle-text {{ color: #d4a574 !important; }}
+    .heading-text {{ color: #e8e4f0 !important; }}
+    .body-text {{ color: #b8b4c8 !important; }}
+    .list-item {{ color: #b8b4c8 !important; }}
+    .check-icon {{ color: #d4a574 !important; }}
+    .divider {{ border-color: #2a3a5c !important; }}
+    .footer-text {{ color: #6a6a8a !important; }}
+    .footer-link {{ color: #d4a574 !important; }}
+    .quote-section {{ background-color: #22304a !important; border-color: #d4a574 !important; }}
+    .quote-text {{ color: #b8b4c8 !important; }}
+    .cta-button {{ background: linear-gradient(135deg, #d4a574 0%, #c49464 100%) !important; }}
+  }}
+</style>
+</head>
+<body style="margin: 0; padding: 0; -webkit-font-smoothing: antialiased;">
+<div class="email-body" style="background-color: #f5f0eb; padding: 0; margin: 0; width: 100%;">
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f5f0eb;">
+<tr><td style="padding: 30px 15px;">
+
+<table class="email-container" role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" align="center" style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+
+  <!-- Header with gradient -->
+  <tr>
+    <td class="header-section" style="background: linear-gradient(135deg, #f0e6d8 0%, #f8f5f0 50%, #e8e0f0 100%); padding: 40px 40px 30px; text-align: center;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td style="text-align: center;">
+            <div style="display: inline-block; width: 56px; height: 56px; background: linear-gradient(135deg, #af916d 0%, #c4a882 100%); border-radius: 14px; line-height: 56px; margin-bottom: 16px;">
+              <span style="font-size: 26px; color: #ffffff; font-weight: 700; font-family: Georgia, serif;">M</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;">
+            <h1 class="title-text" style="font-family: Georgia, 'Times New Roman', serif; color: #3d3a50; font-size: 30px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.5px;">MindBalance</h1>
+            <p class="subtitle-text" style="font-family: 'Poppins', Arial, sans-serif; color: #af916d; font-size: 13px; margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">Your Mental Wellness Companion</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Welcome heading -->
+  <tr>
+    <td style="padding: 36px 40px 0;">
+      <h2 class="heading-text" style="font-family: Georgia, 'Times New Roman', serif; color: #3d3a50; font-size: 24px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.3px;">Welcome to Our Community!</h2>
+      <div style="width: 50px; height: 3px; background: linear-gradient(90deg, #af916d, #c4a882); border-radius: 2px; margin-bottom: 20px;"></div>
+      <p class="body-text" style="font-family: 'Poppins', Arial, sans-serif; color: #5a5770; font-size: 15px; line-height: 1.7; margin: 0;">
+        Thank you for joining the MindBalance community! We're glad you're here. As a subscriber, you'll receive:
+      </p>
+    </td>
+  </tr>
+
+  <!-- Benefits list -->
+  <tr>
+    <td style="padding: 24px 40px 0;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td class="content-card" style="background-color: #faf8f5; border-radius: 14px; padding: 24px 28px; border: 1px solid #ece8e1;">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+              <tr>
+                <td style="padding-bottom: 14px;">
+                  <span class="check-icon" style="color: #af916d; font-size: 16px; font-weight: 700;">&#10003;</span>
+                  <span class="list-item" style="font-family: 'Poppins', Arial, sans-serif; color: #5a5770; font-size: 14px; margin-left: 10px;">Weekly mental wellness tips and strategies</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-bottom: 14px;">
+                  <span class="check-icon" style="color: #af916d; font-size: 16px; font-weight: 700;">&#10003;</span>
+                  <span class="list-item" style="font-family: 'Poppins', Arial, sans-serif; color: #5a5770; font-size: 14px; margin-left: 10px;">New articles and curated resources</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding-bottom: 14px;">
+                  <span class="check-icon" style="color: #af916d; font-size: 16px; font-weight: 700;">&#10003;</span>
+                  <span class="list-item" style="font-family: 'Poppins', Arial, sans-serif; color: #5a5770; font-size: 14px; margin-left: 10px;">Community updates and stories</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="check-icon" style="color: #af916d; font-size: 16px; font-weight: 700;">&#10003;</span>
+                  <span class="list-item" style="font-family: 'Poppins', Arial, sans-serif; color: #5a5770; font-size: 14px; margin-left: 10px;">Exclusive content and early access</span>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Inspirational quote -->
+  <tr>
+    <td style="padding: 28px 40px 0;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <td class="quote-section" style="background-color: #f8f5f0; border-left: 3px solid #af916d; border-radius: 0 10px 10px 0; padding: 18px 24px;">
+            <p class="quote-text" style="font-family: Georgia, 'Times New Roman', serif; color: #6a6680; font-size: 14px; line-height: 1.6; margin: 0; font-style: italic;">
+              "Mental health is not a destination, but a process. It's about how you drive, not where you're going."
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- CTA Button -->
+  <tr>
+    <td style="padding: 32px 40px 0; text-align: center;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
+        <tr>
+          <td>
+            <a class="cta-button" href="https://mindbalance.cloud"
+               style="display: inline-block; background: linear-gradient(135deg, #af916d 0%, #9a7d5a 100%); color: #ffffff; padding: 15px 40px;
+                      border-radius: 50px; text-decoration: none; font-family: 'Poppins', Arial, sans-serif; font-weight: 600; font-size: 15px;
+                      letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(175, 145, 109, 0.35);">
+              Explore MindBalance &#8594;
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- Divider -->
+  <tr>
+    <td style="padding: 36px 40px 0;">
+      <div class="divider" style="border-top: 1px solid #ece8e1; width: 100%;"></div>
+    </td>
+  </tr>
+
+  <!-- Footer -->
+  <tr>
+    <td style="padding: 24px 40px 36px; text-align: center;">
+      <p class="footer-text" style="font-family: 'Poppins', Arial, sans-serif; color: #9a96a8; font-size: 12px; line-height: 1.6; margin: 0 0 8px;">
+        You received this email because you subscribed to the MindBalance newsletter.
+      </p>
+      <a class="footer-link" href="https://mindbalance.cloud" style="font-family: 'Poppins', Arial, sans-serif; color: #af916d; font-size: 12px; text-decoration: none; font-weight: 500;">
+        mindbalance.cloud
+      </a>
+    </td>
+  </tr>
+
+</table>
+
+</td></tr>
+</table>
+</div>
+</body>
+</html>"""
                 })
                 print(f"Welcome email sent successfully: {result}")
             except Exception as e:
