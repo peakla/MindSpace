@@ -148,7 +148,9 @@
     return newCount;
   }
 
-  async function syncStreakToSupabase(mood, moodScore) {
+  let lastMoodLogId = null;
+
+  async function syncStreakToSupabase(mood, moodScore, note) {
     try {
       if (!window.MindBalanceAuth) return;
       const sb = window.MindBalanceAuth.getSupabase();
@@ -158,11 +160,15 @@
       const moodScoreMap = { happy: 5, calm: 4, okay: 3, anxious: 2, sad: 1, stressed: 2 };
       const score = moodScore || moodScoreMap[mood] || 3;
 
-      await sb.from('mood_logs').insert({
+      const insertData = {
         user_id: user.id,
         mood: mood,
         mood_score: score
-      });
+      };
+      if (note) insertData.note = note;
+
+      const { data: inserted } = await sb.from('mood_logs').insert(insertData).select('id').single();
+      if (inserted) lastMoodLogId = inserted.id;
 
       const todayStr = new Date().toISOString().split('T')[0];
       const { data: existing } = await sb
@@ -186,6 +192,26 @@
       }
     } catch (e) {
       console.error('[Wellness Check-In] Streak sync error:', e);
+    }
+  }
+
+  async function saveNoteToMoodLog(note) {
+    try {
+      if (!lastMoodLogId || !note) return false;
+      if (!window.MindBalanceAuth) return false;
+      const sb = window.MindBalanceAuth.getSupabase();
+      const user = window.MindBalanceAuth.getUser();
+      if (!sb || !user) return false;
+
+      const { error } = await sb.from('mood_logs')
+        .update({ note: note })
+        .eq('id', lastMoodLogId)
+        .eq('user_id', user.id);
+
+      return !error;
+    } catch (e) {
+      console.error('[Wellness Check-In] Note save error:', e);
+      return false;
     }
   }
 
@@ -291,6 +317,8 @@
     const defaultTipEl = section.querySelector('.wellness-checkin__default-tip');
     const communityBar = section.querySelector('.wellness-checkin__community-bar');
     const confettiCanvas = section.querySelector('.wellness-checkin__confetti');
+    const noteInput = section.querySelector('.wellness-checkin__note-input');
+    const noteSaveBtn = section.querySelector('.wellness-checkin__note-save');
 
     // --- Greeting Setup ---
     if (greetingEl) {
@@ -360,6 +388,14 @@
         moodButtons.forEach(b => b.classList.remove('is-selected'));
         btn.classList.add('is-selected');
 
+        if (noteInput) {
+          noteInput.value = '';
+        }
+        if (noteSaveBtn) {
+          noteSaveBtn.textContent = 'Save Note';
+          noteSaveBtn.classList.remove('is-saved');
+        }
+
         const newStreak = updateStreak();
         if (streakEl) {
           streakEl.querySelector('.wellness-checkin__streak-count').textContent = newStreak;
@@ -413,6 +449,25 @@
         section.style.setProperty('--selected-mood-color', data.color);
       });
     });
+
+    if (noteSaveBtn && noteInput) {
+      noteSaveBtn.addEventListener('click', async () => {
+        const noteText = noteInput.value.trim();
+        if (!noteText) return;
+
+        noteSaveBtn.textContent = 'Saving...';
+        noteSaveBtn.disabled = true;
+
+        const success = await saveNoteToMoodLog(noteText);
+        if (success) {
+          noteSaveBtn.textContent = 'Saved!';
+          noteSaveBtn.classList.add('is-saved');
+        } else {
+          noteSaveBtn.textContent = 'Save Note';
+          noteSaveBtn.disabled = false;
+        }
+      });
+    }
 
     console.log('[Wellness Check-In] Initialized');
   }
