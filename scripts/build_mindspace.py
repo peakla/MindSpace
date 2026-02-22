@@ -51,8 +51,7 @@ TEXT_EXTENSIONS = {
 
 NAVBAR_DOCS_PATTERN = re.compile(
     r'<li\s+class="navbar-item">\s*'
-    r'<a\s+href="/docs/"[^>]*>\s*'
-    r'<div\s+class="separator"></div>\s*'
+    r'<a\s+href="/docs/"[^>]*>.*?'
     r'<span[^>]*data-translate="nav_docs"[^>]*>[^<]*</span>\s*'
     r'</a>\s*'
     r'</li>',
