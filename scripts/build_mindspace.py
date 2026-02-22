@@ -113,6 +113,26 @@ COLOR_REPLACEMENTS = [
     ("#e5a800", "#4893D4"),
     ("#d49600", "#3B8DD4"),
 
+    ("#d4c4a8", "#a3c8ed"),
+    ("#7a6548", "#2d6ab0"),
+    ("#6b5635", "#245a8c"),
+    ("#f0ede8", "#e0f0ff"),
+
+    ("#e8c9a0", "#a3d1f7"),
+    ("#d4c4b0", "#a3c8ed"),
+    ("#c9ad8c", "#7BBDF7"),
+    ("#d0c8bc", "#b8d8f8"),
+    ("#a09080", "#6b9cc4"),
+    ("#b5844f", "#2d6ab0"),
+    ("#e4b584", "#7BBDF7"),
+    ("#c99640", "#2d6ab0"),
+    ("#d6a756", "#4A93D4"),
+    ("#e8c074", "#7BBDF7"),
+    ("#e8b060", "#5BA4E6"),
+    ("#e8c77b", "#7BBDF7"),
+    ("#d9940a", "#2d6ab0"),
+    ("#f0a500", "#3B8DD4"),
+
     ("#f5f0e8", "#bde0fe"),
     ("#f8f6f2", "#d4ecff"),
     ("#fbf4e8", "#bde0fe"),
@@ -159,6 +179,9 @@ def transform_content(content, filepath):
     content = content.replace("mindbalance", "mindspace")
     content = content.replace("MINDBALANCE", "MINDSPACE")
     content = content.replace("Mindbalance", "Mindspace")
+
+    content = content.replace("gold-crayola", "blue-crayola")
+    content = content.replace("gold_crayola", "blue_crayola")
 
     SETTINGS_FILES = {"settings.js", "settings-modal.js"}
     is_settings_file = basename in SETTINGS_FILES

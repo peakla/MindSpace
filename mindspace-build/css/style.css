@@ -28,18 +28,18 @@
   --user-accent-hover: #4893D4;
   --user-accent-rgb: 91, 164, 230;
   --user-accent-glow: rgba(91, 164, 230, 0.3);
-  --user-accent-light: #d4c4a8;
+  --user-accent-light: #a3c8ed;
   --user-accent-soft: #bde0fe;
-  --user-accent-dark: #7a6548;
+  --user-accent-dark: #2d6ab0;
   --user-accent-grad-end: #7BBDF7;
-  --user-accent-text: #6b5635;
+  --user-accent-text: #245a8c;
 
   --purple-accent: var(--user-accent-light, #8b6de1);
   --purple-gradient: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
   --purple-glow: var(--user-accent-glow, rgba(139, 109, 225, 0.3));
 
   
-  --scrollbar-track: #f0ede8;
+  --scrollbar-track: #e0f0ff;
   --scrollbar-track-dark: #1e1e30;
   --scrollbar-thumb: var(--user-accent);
   --scrollbar-thumb-hover: var(--user-accent-hover);

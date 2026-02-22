@@ -132,23 +132,23 @@
 }
 
 .legal-section li::marker {
-  color: var(--accent-color, #d6a756);
+  color: var(--accent-color, #4A93D4);
 }
 
 .legal-section a {
-  color: var(--accent-color, #d6a756);
+  color: var(--accent-color, #4A93D4);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .legal-section a:hover {
-  color: #c99640;
+  color: #2d6ab0;
   text-decoration: underline;
 }
 
 [data-theme="dark"] .legal-section a {
-  color: #e8c074;
+  color: #7BBDF7;
 }
 
 [data-theme="dark"] .legal-section a:hover {
@@ -166,7 +166,7 @@
 
 [data-theme="dark"] .legal-highlight {
   background: linear-gradient(135deg, #3d3a50, #4d4660);
-  border-left-color: #d6a756;
+  border-left-color: #4A93D4;
 }
 
 .legal-highlight strong {
@@ -176,7 +176,7 @@
 }
 
 [data-theme="dark"] .legal-highlight strong {
-  color: #e8c074;
+  color: #7BBDF7;
 }
 
 .legal-highlight ul {
@@ -299,9 +299,9 @@
 }
 
 .legal-nav-link:hover {
-  background: var(--accent-color, #d6a756);
+  background: var(--accent-color, #4A93D4);
   color: #fff;
-  border-color: var(--accent-color, #d6a756);
+  border-color: var(--accent-color, #4A93D4);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(214, 167, 86, 0.3);
 }
@@ -313,8 +313,8 @@
 }
 
 [data-theme="dark"] .legal-nav-link:hover {
-  background: #d6a756;
-  border-color: #d6a756;
+  background: #4A93D4;
+  border-color: #4A93D4;
   color: #1a1a2e;
 }
 

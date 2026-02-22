@@ -917,7 +917,7 @@ body.dark-mode .view-toggle-btn.active {
   
   .mobile-category-header__icon--crisis { background: linear-gradient(135deg, #dc3545, #c82333); }
   .mobile-category-header__icon--lgbtq { background: linear-gradient(135deg, #6DB3F2, #7f5ac8); }
-  .mobile-category-header__icon--youth { background: linear-gradient(135deg, #f0a500, #d9940a); }
+  .mobile-category-header__icon--youth { background: linear-gradient(135deg, #3B8DD4, #2d6ab0); }
   .mobile-category-header__icon--veterans { background: linear-gradient(135deg, #5a6e82, #4a5d6e); }
   .mobile-category-header__icon--specialized { background: linear-gradient(135deg, #20c997, #17a085); }
   .mobile-category-header__icon--general { background: linear-gradient(135deg, #4a90d9, #357abd); }
@@ -4080,7 +4080,7 @@ body.dark-mode .view-toggle-btn.active {
 
 [data-theme="dark"] .helpline-card__badge--hours {
   background: linear-gradient(135deg, #4a3a20 0%, #5a4525 100%);
-  color: #e8b060;
+  color: #5BA4E6;
 }
 
 [data-theme="dark"] .helpline-card__wait {
@@ -5092,7 +5092,7 @@ body.dark-mode .view-toggle-btn.active {
   width: 170px;
   height: 170px;
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--user-accent, #2068A8) 0%, var(--user-accent-light, #e8c77b) 100%);
+  background: linear-gradient(145deg, var(--user-accent, #2068A8) 0%, var(--user-accent-light, #7BBDF7) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -5203,7 +5203,7 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .breathing-btn--start {
-  background: linear-gradient(135deg, var(--user-accent, #2068A8) 0%, var(--user-accent-light, #e8c77b) 100%);
+  background: linear-gradient(135deg, var(--user-accent, #2068A8) 0%, var(--user-accent-light, #7BBDF7) 100%);
   color: #fff;
   box-shadow: 0 4px 20px rgba(var(--user-accent-rgb, 212, 168, 83), 0.4);
 }

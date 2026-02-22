@@ -101,8 +101,8 @@ const ProfileAnalytics = (function() {
           <span>Less</span>
           <div class="mb-heatmap__legend-item" style="background: #f0f0f5;"></div>
           <div class="mb-heatmap__legend-item" style="background: #D6EBFF;"></div>
-          <div class="mb-heatmap__legend-item" style="background: #d4c4b0;"></div>
-          <div class="mb-heatmap__legend-item" style="background: #c9ad8c;"></div>
+          <div class="mb-heatmap__legend-item" style="background: #a3c8ed;"></div>
+          <div class="mb-heatmap__legend-item" style="background: #7BBDF7;"></div>
           <div class="mb-heatmap__legend-item" style="background: #7BBDF7;"></div>
           <span>More</span>
         </div>
