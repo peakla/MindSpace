@@ -152,22 +152,32 @@
       return;
     }
     
-    container.innerHTML = notifications.map(notif => `
-      <div class="inbox-item ${notif.read ? '' : 'unread'}" data-notif-id="${notif.id}" data-post-id="${notif.post_id || ''}">
+    container.innerHTML = notifications.map(notif => {
+      const isAchievement = notif.type === 'achievement';
+      const fromText = isAchievement ? 'Achievement Unlocked' : escapeHtml(notif.from_user_name);
+      const actionText = isAchievement
+        ? escapeHtml(notif.from_user_name || '')
+        : getNotificationText(notif.type);
+      const previewText = isAchievement
+        ? (notif.content ? escapeHtml(notif.content) : '')
+        : (notif.content ? `"${escapeHtml(notif.content.substring(0, 80))}${notif.content.length > 80 ? '...' : ''}"` : '');
+
+      return `
+      <div class="inbox-item ${notif.read ? '' : 'unread'} ${isAchievement ? 'inbox-item--achievement' : ''}" data-notif-id="${notif.id}" data-post-id="${notif.post_id || ''}">
         <div class="inbox-item__icon">
           <ion-icon name="${getNotificationIcon(notif.type)}"></ion-icon>
         </div>
         <div class="inbox-item__content">
           <div class="inbox-item__header">
-            <span class="inbox-item__from">${escapeHtml(notif.from_user_name)}</span>
+            <span class="inbox-item__from">${fromText}</span>
             <span class="inbox-item__time">${formatTimeAgo(notif.created_at)}</span>
           </div>
-          <p class="inbox-item__text">${getNotificationText(notif.type)}</p>
-          ${notif.content ? `<p class="inbox-item__preview">"${escapeHtml(notif.content.substring(0, 80))}${notif.content.length > 80 ? '...' : ''}"</p>` : ''}
+          <p class="inbox-item__text">${actionText}</p>
+          ${previewText ? `<p class="inbox-item__preview">${previewText}</p>` : ''}
         </div>
         ${!notif.read ? '<span class="inbox-item__dot"></span>' : ''}
-      </div>
-    `).join('');
+      </div>`;
+    }).join('');
     
     container.querySelectorAll('.inbox-item').forEach(item => {
       item.addEventListener('click', async () => {

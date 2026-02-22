@@ -100,7 +100,7 @@
     feedback(target, type);
   }, { passive: true });
 
-  window.MindBalanceHaptics = {
+  window.MindSpaceHaptics = {
     vibrate: vibrate,
     tap: tapAnimation,
     feedback: feedback

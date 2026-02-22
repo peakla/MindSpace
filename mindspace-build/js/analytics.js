@@ -334,12 +334,16 @@ const MBAnalytics = (function() {
         await sb.from('notifications').insert({
           user_id: currentUser.id,
           type: 'achievement',
-          from_user_name: 'MindSpace',
-          content: `You earned the "${achievement.name}" badge: ${achievement.description}`,
+          from_user_name: achievement.name,
+          content: achievement.description,
           read: false
         });
       } catch (notifErr) {
         console.warn('Failed to create achievement notification:', notifErr);
+      }
+
+      if (typeof window.loadGlobalNotificationCount === 'function') {
+        window.loadGlobalNotificationCount();
       }
 
       showAchievementNotification(achievement);
@@ -349,7 +353,26 @@ const MBAnalytics = (function() {
   }
 
   // --- Achievement Notification ---
+  const achievementQueue = [];
+  let isShowingAchievement = false;
+
   function showAchievementNotification(achievement) {
+    achievementQueue.push(achievement);
+    if (!isShowingAchievement) {
+      processAchievementQueue();
+    }
+  }
+
+  function processAchievementQueue() {
+    if (achievementQueue.length === 0) {
+      isShowingAchievement = false;
+      return;
+    }
+    isShowingAchievement = true;
+    const achievement = achievementQueue.shift();
+
+    document.querySelectorAll('.mb-achievement-notification').forEach(el => el.remove());
+
     const notification = document.createElement('div');
     notification.className = 'mb-achievement-notification';
     notification.innerHTML = `
@@ -362,14 +385,22 @@ const MBAnalytics = (function() {
         <span class="mb-achievement-notification__desc">${achievement.description}</span>
       </div>
     `;
-    
+
     document.body.appendChild(notification);
-    
-    setTimeout(() => notification.classList.add('show'), 100);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        notification.classList.add('show');
+      });
+    });
+
     setTimeout(() => {
       notification.classList.remove('show');
-      setTimeout(() => notification.remove(), 500);
-    }, 4000);
+      setTimeout(() => {
+        notification.remove();
+        processAchievementQueue();
+      }, 600);
+    }, 5000);
   }
 
   // ==================== STATS & DATA RETRIEVAL ====================

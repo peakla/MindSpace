@@ -152,9 +152,9 @@
 
   async function syncStreakToSupabase(mood, moodScore, note) {
     try {
-      if (!window.MindBalanceAuth) return;
-      const sb = window.MindBalanceAuth.getSupabase();
-      const user = window.MindBalanceAuth.getUser();
+      if (!window.MindSpaceAuth) return;
+      const sb = window.MindSpaceAuth.getSupabase();
+      const user = window.MindSpaceAuth.getUser();
       if (!sb || !user) return;
 
       const moodScoreMap = { happy: 5, calm: 4, okay: 3, anxious: 2, sad: 1, stressed: 2 };
@@ -187,8 +187,8 @@
         });
       }
 
-      if (window.MindBalanceAuth.updateStreakFromActivity) {
-        await window.MindBalanceAuth.updateStreakFromActivity(user.id);
+      if (window.MindSpaceAuth.updateStreakFromActivity) {
+        await window.MindSpaceAuth.updateStreakFromActivity(user.id);
       }
     } catch (e) {
       console.error('[Wellness Check-In] Streak sync error:', e);
@@ -198,9 +198,9 @@
   async function saveNoteToMoodLog(note) {
     try {
       if (!lastMoodLogId || !note) return false;
-      if (!window.MindBalanceAuth) return false;
-      const sb = window.MindBalanceAuth.getSupabase();
-      const user = window.MindBalanceAuth.getUser();
+      if (!window.MindSpaceAuth) return false;
+      const sb = window.MindSpaceAuth.getSupabase();
+      const user = window.MindSpaceAuth.getUser();
       if (!sb || !user) return false;
 
       const { error } = await sb.from('mood_logs')

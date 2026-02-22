@@ -58,7 +58,7 @@
 // ==================== TTS ENGINE ====================
   const TTS_API_BASE = (function() {
     const host = window.location.hostname;
-    if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+    if (host === 'mindspace.cloud' || host === 'www.mindspace.cloud' ||
         host === 'mindspace.site' || host === 'www.mindspace.site') {
       return 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev';
     }

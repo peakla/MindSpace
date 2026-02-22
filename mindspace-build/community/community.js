@@ -41,7 +41,7 @@ async function fetchUserProfile(userId) {
 }
 
 function showConfetti() {
-  const colors = ['#AF916D', '#d6bd9f', '#8b7355', '#4caf50', '#2196f3', '#ff9800'];
+  const colors = ['#AF916D', '#2068A8', '#143E6B', '#4caf50', '#2196f3', '#ff9800'];
   for (let i = 0; i < 30; i++) {
     const confetti = document.createElement('div');
     confetti.style.cssText = 'position:fixed;width:' + (Math.random()*10+5) + 'px;height:' + (Math.random()*10+5) + 'px;background:' + colors[Math.floor(Math.random()*colors.length)] + ';left:' + (Math.random()*100) + 'vw;top:-20px;border-radius:' + (Math.random()>0.5?'50%':'2px') + ';z-index:10000;pointer-events:none;animation:confettiFall ' + (Math.random()*2+1.5) + 's ease forwards;';
@@ -52,8 +52,8 @@ function showConfetti() {
 
 // --- Helpers ---
 function getTranslation(key, fallback) {
-  if (window.translations && window.MindBalanceSettings) {
-    const lang = localStorage.getItem('mindbalance-language') || 'en';
+  if (window.translations && window.MindSpaceSettings) {
+    const lang = localStorage.getItem('mindspace-language') || 'en';
     const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
     const langKey = langMap[lang] || 'en';
     if (window.translations[langKey] && window.translations[langKey][key]) {
@@ -178,8 +178,8 @@ function containsProfanity(text) {
 
 // --- Supabase Client ---
 function initSupabase() {
-  if (window.MindBalanceAuth && window.MindBalanceAuth.getSupabase) {
-    sb = window.MindBalanceAuth.getSupabase();
+  if (window.MindSpaceAuth && window.MindSpaceAuth.getSupabase) {
+    sb = window.MindSpaceAuth.getSupabase();
   }
 
   if (!sb && typeof supabase !== 'undefined') {
@@ -1631,7 +1631,7 @@ function scrollToHashPost() {
     setTimeout(() => {
       targetPost.scrollIntoView({ behavior: 'smooth', block: 'center' });
       targetPost.style.transition = 'box-shadow 0.4s ease';
-      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #af916d), 0 4px 20px rgba(0,0,0,0.15)';
+      targetPost.style.boxShadow = '0 0 0 3px var(--accent-color, #5BA4E6), 0 4px 20px rgba(0,0,0,0.15)';
       setTimeout(() => {
         targetPost.style.boxShadow = '';
       }, 3000);
@@ -1906,11 +1906,11 @@ async function init() {
 
   setupRealtimeSubscription();
 
-  if (window.MindBalanceAuth && window.MindBalanceAuth.onAuthReady) {
+  if (window.MindSpaceAuth && window.MindSpaceAuth.onAuthReady) {
 
 
 
-    window.MindBalanceAuth.onAuthChange(handleAuthChange);
+    window.MindSpaceAuth.onAuthChange(handleAuthChange);
   } else {
 
     const user = await checkAuth();

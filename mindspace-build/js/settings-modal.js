@@ -4,22 +4,22 @@
 
   // --- Constants ---
   const STORAGE_KEYS = {
-    theme: 'mindbalance_theme',
-    fontSize: 'mindbalance_font_size',
-    reduceMotion: 'mindbalance_reduce_motion',
-    highContrast: 'mindbalance_high_contrast',
-    colorblind: 'mindbalance_colorblind',
-    adhdMode: 'mindbalance_adhd_mode',
-    dyslexiaFont: 'mindbalance_dyslexia_font',
-    accentColor: 'mindbalance_accent_color',
-    language: 'mindbalance_language',
-    onboardingComplete: 'mindbalance_onboarding_complete',
-    activePreset: 'mindbalance_active_preset'
+    theme: 'mindspace_theme',
+    fontSize: 'mindspace_font_size',
+    reduceMotion: 'mindspace_reduce_motion',
+    highContrast: 'mindspace_high_contrast',
+    colorblind: 'mindspace_colorblind',
+    adhdMode: 'mindspace_adhd_mode',
+    dyslexiaFont: 'mindspace_dyslexia_font',
+    accentColor: 'mindspace_accent_color',
+    language: 'mindspace_language',
+    onboardingComplete: 'mindspace_onboarding_complete',
+    activePreset: 'mindspace_active_preset'
   };
 
   const ACCENT_COLORS = {
-    gold:   { hex: '#af916d', hover: '#9d8260', rgb: '175, 145, 109', light: '#d4c4a8', soft: '#f5f0e8', dark: '#7a6548', gradEnd: '#d4a574', text: '#6b5635', name: 'Gold' },
-    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e', name: 'Purple' },
+    gold:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#d4c4a8', soft: '#bde0fe', dark: '#7a6548', gradEnd: '#7BBDF7', text: '#6b5635', name: 'Gold' },
+    purple: { hex: '#6DB3F2', hover: '#5CA3E6', rgb: '109, 179, 242', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e', name: 'Purple' },
     blue:   { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c', name: 'Blue' },
     green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558', name: 'Green' },
     teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65', name: 'Teal' },
@@ -31,9 +31,9 @@
   const THEME_PRESETS = {
     default: {
       name: 'Default',
-      description: 'Classic MindBalance',
+      description: 'Classic MindSpace',
       theme: 'light',
-      accent: 'gold',
+      accent: 'blue',
       fontSize: 'normal',
       highContrast: false
     },
@@ -73,7 +73,7 @@
       name: 'High Contrast',
       description: 'Maximum readability',
       theme: 'light',
-      accent: 'gold',
+      accent: 'blue',
       fontSize: 'large',
       highContrast: true
     }
@@ -220,7 +220,7 @@
                   <div class="theme-presets-grid">
                     <div class="theme-preset-card theme-preset-default" data-preset="default">
                       <div class="theme-preset-name" data-translate="settings_preset_default">Default</div>
-                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindBalance</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindSpace</div>
                     </div>
                     <div class="theme-preset-card theme-preset-ocean" data-preset="ocean">
                       <div class="theme-preset-name" data-translate="settings_preset_ocean">Calm Ocean</div>
@@ -290,7 +290,7 @@
                 <div class="settings-preview">
                   <div class="settings-preview-title" data-translate="settings_live_preview">Live Preview</div>
                   <div class="settings-preview-frame">
-                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindBalance</p>
+                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindSpace</p>
                     <p class="preview-sample-text" style="font-size: 14px; opacity: 0.8; margin-bottom: 16px;" data-translate="settings_preview_journey">Your journey to mental wellness starts here.</p>
                     <span class="preview-sample-btn" data-translate="settings_preview_btn">Get Started</span>
                   </div>
@@ -474,7 +474,7 @@
               </div>
               <h3 class="onboarding-title" data-translate="settings_onboarding_title">Welcome to Settings!</h3>
               <p class="onboarding-text" data-translate="settings_onboarding_text">
-                Customize your MindBalance experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
+                Customize your MindSpace experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
               </p>
               <button class="onboarding-btn" id="onboardingStartBtn" data-translate="settings_onboarding_start">Let's Get Started</button>
               <button class="onboarding-skip" id="onboardingSkipBtn" data-translate="settings_onboarding_skip">Skip for now</button>
@@ -585,49 +585,49 @@
     document.getElementById('settingsDarkMode')?.addEventListener('change', (e) => {
       const theme = e.target.checked ? 'dark' : 'light';
       setPreference(STORAGE_KEYS.theme, theme);
-      window.MindBalanceSettings?.applyTheme?.(theme);
+      window.MindSpaceSettings?.applyTheme?.(theme);
       clearActivePreset();
       updateSyncStatus();
     });
 
     document.getElementById('settingsHighContrast')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.highContrast, e.target.checked);
-      window.MindBalanceSettings?.applyHighContrast?.(e.target.checked);
+      window.MindSpaceSettings?.applyHighContrast?.(e.target.checked);
       updateAccessibilityScore();
       updateSyncStatus();
     });
 
     document.getElementById('settingsColorblind')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.colorblind, e.target.value);
-      window.MindBalanceSettings?.applyColorblind?.(e.target.value);
+      window.MindSpaceSettings?.applyColorblind?.(e.target.value);
       updateAccessibilityScore();
       updateSyncStatus();
     });
 
     document.getElementById('settingsAdhd')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.adhdMode, e.target.checked);
-      window.MindBalanceSettings?.applyAdhdMode?.(e.target.checked);
+      window.MindSpaceSettings?.applyAdhdMode?.(e.target.checked);
       updateAccessibilityScore();
       updateSyncStatus();
     });
 
     document.getElementById('settingsDyslexia')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.dyslexiaFont, e.target.checked);
-      window.MindBalanceSettings?.applyDyslexiaFont?.(e.target.checked);
+      window.MindSpaceSettings?.applyDyslexiaFont?.(e.target.checked);
       updateAccessibilityScore();
       updateSyncStatus();
     });
 
     document.getElementById('settingsReduceMotion')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.reduceMotion, e.target.checked);
-      window.MindBalanceSettings?.applyReduceMotion?.(e.target.checked);
+      window.MindSpaceSettings?.applyReduceMotion?.(e.target.checked);
       updateAccessibilityScore();
       updateSyncStatus();
     });
 
     document.getElementById('settingsFontSize')?.addEventListener('change', (e) => {
       setPreference(STORAGE_KEYS.fontSize, e.target.value);
-      window.MindBalanceSettings?.applyFontSize?.(e.target.value);
+      window.MindSpaceSettings?.applyFontSize?.(e.target.value);
       updateReadingPreview(e.target.value);
       updateSyncStatus();
     });
@@ -667,7 +667,7 @@
     if (fontSize) fontSize.value = getPreference(STORAGE_KEYS.fontSize, 'normal');
     if (language) language.value = getPreference(STORAGE_KEYS.language, 'en');
 
-    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'gold');
+    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'blue');
     document.querySelectorAll('.accent-color-option').forEach(option => {
       option.classList.toggle('active', option.dataset.color === activeAccent);
     });
@@ -729,10 +729,10 @@
     setPreference(STORAGE_KEYS.highContrast, preset.highContrast);
     setPreference(STORAGE_KEYS.activePreset, presetKey);
 
-    window.MindBalanceSettings?.applyTheme?.(preset.theme);
-    window.MindBalanceSettings?.applyAccentColor?.(preset.accent);
-    window.MindBalanceSettings?.applyFontSize?.(preset.fontSize);
-    window.MindBalanceSettings?.applyHighContrast?.(preset.highContrast);
+    window.MindSpaceSettings?.applyTheme?.(preset.theme);
+    window.MindSpaceSettings?.applyAccentColor?.(preset.accent);
+    window.MindSpaceSettings?.applyFontSize?.(preset.fontSize);
+    window.MindSpaceSettings?.applyHighContrast?.(preset.highContrast);
 
     document.querySelectorAll('.theme-preset-card').forEach(card => {
       card.classList.toggle('active', card.dataset.preset === presetKey);
@@ -752,7 +752,7 @@
   function selectAccentColor(colorKey) {
   // --- Accent Colors ---
     setPreference(STORAGE_KEYS.accentColor, colorKey);
-    window.MindBalanceSettings?.applyAccentColor?.(colorKey);
+    window.MindSpaceSettings?.applyAccentColor?.(colorKey);
 
     document.querySelectorAll('.accent-color-option').forEach(option => {
       option.classList.toggle('active', option.dataset.color === colorKey);
@@ -771,7 +771,7 @@
     if (compareMode) {
       savedSettings = {
         theme: getPreference(STORAGE_KEYS.theme, 'light'),
-        accent: getPreference(STORAGE_KEYS.accentColor, 'gold'),
+        accent: getPreference(STORAGE_KEYS.accentColor, 'blue'),
         fontSize: getPreference(STORAGE_KEYS.fontSize, 'normal'),
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false'),
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
@@ -780,23 +780,23 @@
         reduceMotion: getPreference(STORAGE_KEYS.reduceMotion, 'false')
       };
 
-      window.MindBalanceSettings?.applyTheme?.('light');
-      window.MindBalanceSettings?.applyAccentColor?.('gold');
-      window.MindBalanceSettings?.applyFontSize?.('normal');
-      window.MindBalanceSettings?.applyHighContrast?.(false);
-      window.MindBalanceSettings?.applyColorblind?.('none');
-      window.MindBalanceSettings?.applyAdhdMode?.(false);
-      window.MindBalanceSettings?.applyDyslexiaFont?.(false);
-      window.MindBalanceSettings?.applyReduceMotion?.(false);
+      window.MindSpaceSettings?.applyTheme?.('light');
+      window.MindSpaceSettings?.applyAccentColor?.('blue');
+      window.MindSpaceSettings?.applyFontSize?.('normal');
+      window.MindSpaceSettings?.applyHighContrast?.(false);
+      window.MindSpaceSettings?.applyColorblind?.('none');
+      window.MindSpaceSettings?.applyAdhdMode?.(false);
+      window.MindSpaceSettings?.applyDyslexiaFont?.(false);
+      window.MindSpaceSettings?.applyReduceMotion?.(false);
     } else {
-      window.MindBalanceSettings?.applyTheme?.(savedSettings.theme);
-      window.MindBalanceSettings?.applyAccentColor?.(savedSettings.accent);
-      window.MindBalanceSettings?.applyFontSize?.(savedSettings.fontSize);
-      window.MindBalanceSettings?.applyHighContrast?.(savedSettings.highContrast === 'true');
-      window.MindBalanceSettings?.applyColorblind?.(savedSettings.colorblind);
-      window.MindBalanceSettings?.applyAdhdMode?.(savedSettings.adhdMode === 'true');
-      window.MindBalanceSettings?.applyDyslexiaFont?.(savedSettings.dyslexiaFont === 'true');
-      window.MindBalanceSettings?.applyReduceMotion?.(savedSettings.reduceMotion === 'true');
+      window.MindSpaceSettings?.applyTheme?.(savedSettings.theme);
+      window.MindSpaceSettings?.applyAccentColor?.(savedSettings.accent);
+      window.MindSpaceSettings?.applyFontSize?.(savedSettings.fontSize);
+      window.MindSpaceSettings?.applyHighContrast?.(savedSettings.highContrast === 'true');
+      window.MindSpaceSettings?.applyColorblind?.(savedSettings.colorblind);
+      window.MindSpaceSettings?.applyAdhdMode?.(savedSettings.adhdMode === 'true');
+      window.MindSpaceSettings?.applyDyslexiaFont?.(savedSettings.dyslexiaFont === 'true');
+      window.MindSpaceSettings?.applyReduceMotion?.(savedSettings.reduceMotion === 'true');
     }
   }
 
@@ -809,21 +809,21 @@
         localStorage.removeItem(key);
       }
     });
-    localStorage.removeItem('mindbalance-language');
+    localStorage.removeItem('mindspace-language');
 
-    window.MindBalanceSettings?.applyTheme?.('light');
-    window.MindBalanceSettings?.applyAccentColor?.('gold');
-    window.MindBalanceSettings?.applyFontSize?.('normal');
-    window.MindBalanceSettings?.applyHighContrast?.(false);
-    window.MindBalanceSettings?.applyColorblind?.('none');
-    window.MindBalanceSettings?.applyAdhdMode?.(false);
-    window.MindBalanceSettings?.applyDyslexiaFont?.(false);
-    window.MindBalanceSettings?.applyReduceMotion?.(false);
+    window.MindSpaceSettings?.applyTheme?.('light');
+    window.MindSpaceSettings?.applyAccentColor?.('blue');
+    window.MindSpaceSettings?.applyFontSize?.('normal');
+    window.MindSpaceSettings?.applyHighContrast?.(false);
+    window.MindSpaceSettings?.applyColorblind?.('none');
+    window.MindSpaceSettings?.applyAdhdMode?.(false);
+    window.MindSpaceSettings?.applyDyslexiaFont?.(false);
+    window.MindSpaceSettings?.applyReduceMotion?.(false);
 
     if (typeof setLanguage === 'function') {
       setLanguage('en');
-    } else if (window.MindBalanceTranslations?.setLanguage) {
-      window.MindBalanceTranslations.setLanguage('en');
+    } else if (window.MindSpaceTranslations?.setLanguage) {
+      window.MindSpaceTranslations.setLanguage('en');
     }
     document.querySelectorAll('.language-selector, #languageSelect').forEach(sel => {
       sel.value = 'en';
@@ -887,10 +887,10 @@
     updateAccessibilityScore();
 
 
-    if (window.MindBalanceTranslations?.applyTranslations) {
+    if (window.MindSpaceTranslations?.applyTranslations) {
       const modal = document.getElementById('settingsModalOverlay');
       if (modal) {
-        window.MindBalanceTranslations.applyTranslations(modal);
+        window.MindSpaceTranslations.applyTranslations(modal);
       }
     }
   }

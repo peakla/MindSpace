@@ -395,6 +395,23 @@
   border-radius: 50%;
 }
 
+.inbox-item--achievement .inbox-item__icon {
+  background: linear-gradient(135deg, #d4a574 0%, #e8c9a0 100%);
+  color: #1a1a2e;
+}
+
+.inbox-item--achievement .inbox-item__from {
+  color: #d4a574;
+}
+
+.inbox-item--achievement .inbox-item__text {
+  font-weight: 600;
+}
+
+.inbox-item--achievement .inbox-item__preview {
+  font-style: normal;
+}
+
 /* === MOBILE RESPONSIVE === */
 @media (max-width: 480px) {
   .inbox-panel {

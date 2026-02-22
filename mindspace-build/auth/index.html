@@ -19,7 +19,7 @@
   
   <script>
     (function() {
-      var theme = localStorage.getItem('mindbalance_theme') || 'light';
+      var theme = localStorage.getItem('mindspace_theme') || 'light';
       if (theme === 'system') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
@@ -736,12 +736,12 @@
     
     [data-theme="dark"] .auth-panel::before,
     body.dark-mode .auth-panel::before {
-      background: rgba(155, 126, 217, 0.15);
+      background: rgba(109, 179, 242, 0.15);
     }
     
     [data-theme="dark"] .auth-panel::after,
     body.dark-mode .auth-panel::after {
-      background: rgba(155, 126, 217, 0.1);
+      background: rgba(109, 179, 242, 0.1);
     }
     
     [data-theme="dark"] .panel-title,
@@ -761,13 +761,13 @@
     
     [data-theme="dark"] .panel-feature-icon,
     body.dark-mode .panel-feature-icon {
-      background: rgba(155, 126, 217, 0.25);
-      border-color: rgba(155, 126, 217, 0.3);
+      background: rgba(109, 179, 242, 0.25);
+      border-color: rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .panel-stats,
     body.dark-mode .panel-stats {
-      border-top-color: rgba(155, 126, 217, 0.3);
+      border-top-color: rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .panel-stat-number,
@@ -782,8 +782,8 @@
     
     [data-theme="dark"] .panel-testimonial,
     body.dark-mode .panel-testimonial {
-      background: rgba(155, 126, 217, 0.15);
-      border-color: rgba(155, 126, 217, 0.2);
+      background: rgba(109, 179, 242, 0.15);
+      border-color: rgba(109, 179, 242, 0.2);
     }
     
     [data-theme="dark"] .panel-testimonial-text,
@@ -901,18 +901,18 @@
     [data-theme="dark"] .btn-primary,
     body.dark-mode .btn-primary {
       background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
-      box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
+      box-shadow: 0 4px 15px rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .btn-primary:hover,
     body.dark-mode .btn-primary:hover {
       background: linear-gradient(135deg, #a88de3 0%, #8a6acd 100%);
-      box-shadow: 0 6px 20px rgba(155, 126, 217, 0.4);
+      box-shadow: 0 6px 20px rgba(109, 179, 242, 0.4);
     }
     
     [data-theme="dark"] .btn-guest,
     body.dark-mode .btn-guest {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      background: linear-gradient(135deg, #3B8DD4 0%, #4f46e5 100%);
       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     }
     
@@ -1007,7 +1007,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #f8a29e;
+      background: #38b6ff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1462,7 +1462,7 @@
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://www.mindbalance.cloud/auth/'
+        redirectTo: 'https://www.mindspace.cloud/auth/'
       }
     });
     
@@ -1584,7 +1584,7 @@
 
           <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
           <div class="mb-footer__social">
-            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindspace2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
             <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">

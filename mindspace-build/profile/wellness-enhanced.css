@@ -77,7 +77,7 @@
   height: 64px !important;
   border: 3px solid transparent !important;
   border-radius: 50% !important;
-  background: linear-gradient(145deg, #f8f6f2 0%, #fff 100%) !important;
+  background: linear-gradient(145deg, #d4ecff 0%, #fff 100%) !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
@@ -292,7 +292,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+  background: linear-gradient(135deg, #d4ecff 0%, #fff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -351,7 +351,7 @@
   gap: 8px;
   margin-top: 10px;
   padding: 10px 12px;
-  background: #f8f6f2;
+  background: #d4ecff;
   border-radius: 10px;
   font-size: 0.875rem;
   color: #4a4a6a;
@@ -942,7 +942,7 @@
 }
 
 [data-theme="dark"] .mb-profile__wellness-section h3 {
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mb-profile__mood-input p {
@@ -957,7 +957,7 @@
 [data-theme="dark"] .mb-profile__mood-note {
   background: rgba(45, 43, 61, 0.8);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mb-profile__mood-history h4 {
@@ -983,7 +983,7 @@
 }
 
 [data-theme="dark"] .mood-label {
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mood-note-preview {
@@ -1008,7 +1008,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.9);
   border-color: rgba(184, 155, 94, 0.3);
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mb-profile__goal-item {
@@ -1017,7 +1017,7 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mb-profile__goals-empty {
@@ -1076,7 +1076,7 @@
 [data-theme="dark"] .mb-profile__goal-select {
   background: rgba(45, 43, 61, 0.95) !important;
   border-color: rgba(184, 155, 94, 0.3) !important;
-  color: #f5f0e8 !important;
+  color: #bde0fe !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-input::placeholder {
@@ -1091,7 +1091,7 @@
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-title {
-  color: #f5f0e8 !important;
+  color: #bde0fe !important;
 }
 
 [data-theme="dark"] .mb-profile__goal-item .goal-check {
