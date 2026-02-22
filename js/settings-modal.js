@@ -262,6 +262,21 @@
                       <span class="settings-toggle-slider"></span>
                     </label>
                   </div>
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <div class="settings-item-icon">
+                        <ion-icon name="megaphone-outline"></ion-icon>
+                      </div>
+                      <div class="settings-item-text">
+                        <h4>Welcome Bar</h4>
+                        <p>Show the welcome banner at the top</p>
+                      </div>
+                    </div>
+                    <label class="settings-toggle">
+                      <input type="checkbox" data-topbar-toggle checked>
+                      <span class="settings-toggle-slider"></span>
+                    </label>
+                  </div>
                 </div>
 
                 <div class="settings-section">
@@ -474,6 +489,40 @@
     updateAccessibilityScore();
     checkOnboarding();
     updateSyncStatus();
+    initTopbarToggle();
+  }
+
+  function initTopbarToggle() {
+    var toggles = document.querySelectorAll('[data-topbar-toggle]');
+    var topbar = document.getElementById('smartTopbar');
+    var isDismissed = sessionStorage.getItem('topbarDismissed') === '1';
+    toggles.forEach(function(t) { t.checked = !isDismissed; });
+    toggles.forEach(function(toggle) {
+      toggle.removeEventListener('change', toggle._topbarHandler);
+      toggle._topbarHandler = function() {
+        var checked = this.checked;
+        toggles = document.querySelectorAll('[data-topbar-toggle]');
+        toggles.forEach(function(t) { t.checked = checked; });
+        if (topbar) {
+          if (checked) {
+            sessionStorage.removeItem('topbarDismissed');
+            topbar.classList.remove('dismissed');
+            topbar.classList.remove('topbar--hidden');
+            var hdr = document.querySelector('.header');
+            if (hdr) hdr.classList.remove('topbar--gone');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.documentElement.style.setProperty('--topbar-height', topbar.offsetHeight + 'px');
+          } else {
+            topbar.classList.add('dismissed');
+            sessionStorage.setItem('topbarDismissed', '1');
+            document.documentElement.style.setProperty('--topbar-height', '0px');
+            var hdr = document.querySelector('.header');
+            if (hdr) hdr.classList.add('topbar--gone');
+          }
+        }
+      };
+      toggle.addEventListener('change', toggle._topbarHandler);
+    });
   }
 
   function initializeAccentColors() {

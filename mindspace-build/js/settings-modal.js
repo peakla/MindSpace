@@ -31,9 +31,9 @@
   const THEME_PRESETS = {
     default: {
       name: 'Default',
-      description: 'Classic MindSpace',
+      description: 'Classic MindBalance',
       theme: 'light',
-      accent: 'blue',
+      accent: 'gold',
       fontSize: 'normal',
       highContrast: false
     },
@@ -73,7 +73,7 @@
       name: 'High Contrast',
       description: 'Maximum readability',
       theme: 'light',
-      accent: 'blue',
+      accent: 'gold',
       fontSize: 'large',
       highContrast: true
     }
@@ -220,7 +220,7 @@
                   <div class="theme-presets-grid">
                     <div class="theme-preset-card theme-preset-default" data-preset="default">
                       <div class="theme-preset-name" data-translate="settings_preset_default">Default</div>
-                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindSpace</div>
+                      <div class="theme-preset-desc" data-translate="settings_preset_default_desc">Classic MindBalance</div>
                     </div>
                     <div class="theme-preset-card theme-preset-ocean" data-preset="ocean">
                       <div class="theme-preset-name" data-translate="settings_preset_ocean">Calm Ocean</div>
@@ -262,6 +262,21 @@
                       <span class="settings-toggle-slider"></span>
                     </label>
                   </div>
+                  <div class="settings-item">
+                    <div class="settings-item-info">
+                      <div class="settings-item-icon">
+                        <ion-icon name="megaphone-outline"></ion-icon>
+                      </div>
+                      <div class="settings-item-text">
+                        <h4>Welcome Bar</h4>
+                        <p>Show the welcome banner at the top</p>
+                      </div>
+                    </div>
+                    <label class="settings-toggle">
+                      <input type="checkbox" data-topbar-toggle checked>
+                      <span class="settings-toggle-slider"></span>
+                    </label>
+                  </div>
                 </div>
 
                 <div class="settings-section">
@@ -275,7 +290,7 @@
                 <div class="settings-preview">
                   <div class="settings-preview-title" data-translate="settings_live_preview">Live Preview</div>
                   <div class="settings-preview-frame">
-                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindSpace</p>
+                    <p class="preview-sample-text" style="font-size: 18px; font-weight: 600; margin-bottom: 8px;" data-translate="settings_preview_welcome">Welcome to MindBalance</p>
                     <p class="preview-sample-text" style="font-size: 14px; opacity: 0.8; margin-bottom: 16px;" data-translate="settings_preview_journey">Your journey to mental wellness starts here.</p>
                     <span class="preview-sample-btn" data-translate="settings_preview_btn">Get Started</span>
                   </div>
@@ -457,7 +472,7 @@
               </div>
               <h3 class="onboarding-title" data-translate="settings_onboarding_title">Welcome to Settings!</h3>
               <p class="onboarding-text" data-translate="settings_onboarding_text">
-                Customize your MindSpace experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
+                Customize your MindBalance experience with theme presets, accessibility options, and more. Your preferences sync across all pages.
               </p>
               <button class="onboarding-btn" id="onboardingStartBtn" data-translate="settings_onboarding_start">Let's Get Started</button>
               <button class="onboarding-skip" id="onboardingSkipBtn" data-translate="settings_onboarding_skip">Skip for now</button>
@@ -474,6 +489,40 @@
     updateAccessibilityScore();
     checkOnboarding();
     updateSyncStatus();
+    initTopbarToggle();
+  }
+
+  function initTopbarToggle() {
+    var toggles = document.querySelectorAll('[data-topbar-toggle]');
+    var topbar = document.getElementById('smartTopbar');
+    var isDismissed = sessionStorage.getItem('topbarDismissed') === '1';
+    toggles.forEach(function(t) { t.checked = !isDismissed; });
+    toggles.forEach(function(toggle) {
+      toggle.removeEventListener('change', toggle._topbarHandler);
+      toggle._topbarHandler = function() {
+        var checked = this.checked;
+        toggles = document.querySelectorAll('[data-topbar-toggle]');
+        toggles.forEach(function(t) { t.checked = checked; });
+        if (topbar) {
+          if (checked) {
+            sessionStorage.removeItem('topbarDismissed');
+            topbar.classList.remove('dismissed');
+            topbar.classList.remove('topbar--hidden');
+            var hdr = document.querySelector('.header');
+            if (hdr) hdr.classList.remove('topbar--gone');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.documentElement.style.setProperty('--topbar-height', topbar.offsetHeight + 'px');
+          } else {
+            topbar.classList.add('dismissed');
+            sessionStorage.setItem('topbarDismissed', '1');
+            document.documentElement.style.setProperty('--topbar-height', '0px');
+            var hdr = document.querySelector('.header');
+            if (hdr) hdr.classList.add('topbar--gone');
+          }
+        }
+      };
+      toggle.addEventListener('change', toggle._topbarHandler);
+    });
   }
 
   function initializeAccentColors() {
@@ -616,7 +665,7 @@
     if (fontSize) fontSize.value = getPreference(STORAGE_KEYS.fontSize, 'normal');
     if (language) language.value = getPreference(STORAGE_KEYS.language, 'en');
 
-    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'blue');
+    const activeAccent = getPreference(STORAGE_KEYS.accentColor, 'gold');
     document.querySelectorAll('.accent-color-option').forEach(option => {
       option.classList.toggle('active', option.dataset.color === activeAccent);
     });
@@ -720,7 +769,7 @@
     if (compareMode) {
       savedSettings = {
         theme: getPreference(STORAGE_KEYS.theme, 'light'),
-        accent: getPreference(STORAGE_KEYS.accentColor, 'blue'),
+        accent: getPreference(STORAGE_KEYS.accentColor, 'gold'),
         fontSize: getPreference(STORAGE_KEYS.fontSize, 'normal'),
         highContrast: getPreference(STORAGE_KEYS.highContrast, 'false'),
         colorblind: getPreference(STORAGE_KEYS.colorblind, 'none'),
@@ -730,7 +779,7 @@
       };
 
       window.MindBalanceSettings?.applyTheme?.('light');
-      window.MindBalanceSettings?.applyAccentColor?.('blue');
+      window.MindBalanceSettings?.applyAccentColor?.('gold');
       window.MindBalanceSettings?.applyFontSize?.('normal');
       window.MindBalanceSettings?.applyHighContrast?.(false);
       window.MindBalanceSettings?.applyColorblind?.('none');
@@ -761,7 +810,7 @@
     localStorage.removeItem('mindbalance-language');
 
     window.MindBalanceSettings?.applyTheme?.('light');
-    window.MindBalanceSettings?.applyAccentColor?.('blue');
+    window.MindBalanceSettings?.applyAccentColor?.('gold');
     window.MindBalanceSettings?.applyFontSize?.('normal');
     window.MindBalanceSettings?.applyHighContrast?.(false);
     window.MindBalanceSettings?.applyColorblind?.('none');
