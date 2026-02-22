@@ -524,11 +524,6 @@ body {
 
 /* === DARK MODE === */
 [data-theme="dark"] {
-  
-  --user-accent: #6DB3F2;
-  --user-accent-hover: #5CA3E6;
-  --user-accent-rgb: 109, 179, 242;
-  --user-accent-glow: rgba(109, 179, 242, 0.3);
   scrollbar-color: var(--user-accent) var(--scrollbar-track-dark);
 }
 
