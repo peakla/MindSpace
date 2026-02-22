@@ -139,6 +139,8 @@ COLOR_REPLACEMENTS = [
     ("#EBF3FC", "#bde0fe"),
     ("#EFF5FC", "#d4ecff"),
     ("#D6E8F8", "#a3d1f7"),
+
+    ("#f79f9b", "#38b6ff"),
 ]
 
 
