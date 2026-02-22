@@ -333,6 +333,22 @@
     var streak = parseInt(localStorage.getItem('mindbalance-reading-streak') || '0', 10);
     if (streakCount) streakCount.textContent = streak;
 
+    if (window.MindBalanceAuth && window.MindBalanceAuth.getUser) {
+      try {
+        var user = window.MindBalanceAuth.getUser();
+        var sb = window.MindBalanceAuth.getSupabase();
+        if (user && sb) {
+          sb.from('profiles').select('current_streak').eq('id', user.id).single().then(function(result) {
+            if (result.data && result.data.current_streak !== undefined) {
+              var dbStreak = result.data.current_streak || 0;
+              if (streakCount) streakCount.textContent = dbStreak;
+              localStorage.setItem('mindbalance-reading-streak', String(dbStreak));
+            }
+          });
+        }
+      } catch(e) {}
+    }
+
     if (dashboardCards) {
       if (readArticles.length === 0) {
         dashboardCards.innerHTML =

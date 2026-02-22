@@ -540,6 +540,12 @@ async function handleLike(e) {
       if (heartIcon) heartIcon.textContent = '♡';
       if (likeCountSpan) likeCountSpan.textContent = newCount > 0 ? newCount : '';
       btn.classList.remove('like-animating');
+
+      try {
+        await client.from('posts').update({ like_count: Math.max(0, newCount) }).eq('id', postId);
+      } catch (updateErr) {
+        console.warn('Failed to update like_count:', updateErr);
+      }
     }
   } else {
 
@@ -562,6 +568,12 @@ async function handleLike(e) {
       btn.appendChild(pop);
       setTimeout(() => pop.remove(), 600);
 
+      try {
+        await client.from('posts').update({ like_count: newCount }).eq('id', postId);
+      } catch (updateErr) {
+        console.warn('Failed to update like_count:', updateErr);
+      }
+
       const postAuthorId = post.getAttribute('data-author-id');
       if (postAuthorId && postAuthorId !== currentUser.id) {
         const fromName = currentUser.user_metadata?.display_name || currentUser.email?.split('@')[0] || 'Someone';
@@ -570,6 +582,7 @@ async function handleLike(e) {
             user_id: postAuthorId,
             type: 'like',
             from_user_name: fromName,
+            post_id: postId,
             content: `${fromName} liked your post`,
             read: false
           });
@@ -886,6 +899,7 @@ async function handleComment(e) {
                   user_id: postAuthorId,
                   type: 'comment',
                   from_user_name: fromName,
+                  post_id: postId,
                   content: `${fromName} commented on your post`,
                   read: false
                 });

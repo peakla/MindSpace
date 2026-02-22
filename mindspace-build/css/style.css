@@ -10564,24 +10564,36 @@ body.reading-mode[data-theme="dark"] {
 }
 
 .navbar-search__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #1a1a2e;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.navbar-search.is-open .navbar-search__btn {
   position: absolute;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  color: #1a1a2e;
-  transition: color 0.3s ease;
+  width: 36px;
+  height: 36px;
 }
 
 .navbar-search__btn:hover {
+  background: rgba(var(--user-accent-rgb), 0.1);
   color: var(--user-accent);
 }
 
 .navbar-search__btn ion-icon {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 
 
@@ -10663,6 +10675,11 @@ body.reading-mode[data-theme="dark"] {
 
 [data-theme="dark"] .navbar-search__btn {
   color: #fff;
+}
+
+[data-theme="dark"] .navbar-search__btn:hover {
+  background: rgba(var(--user-accent-rgb), 0.2);
+  color: var(--user-accent);
 }
 
 [data-theme="dark"] .navbar-search__results {

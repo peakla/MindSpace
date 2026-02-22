@@ -266,7 +266,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupEditProfile();
   setupSettings();
   setupActivityFilters();
-  setupThemePicker();
   setupMoodSelector();
   setupGoals();
   setupSocialLinks();
@@ -490,15 +489,6 @@ async function loadProfileData(userId) {
 
     document.getElementById('settingsName').value = profile.display_name || '';
     document.getElementById('settingsBio').value = profile.bio || '';
-
-
-    if (profile.theme_color) {
-      applyThemeColor(profile.theme_color);
-      const colorBtns = document.querySelectorAll('.mb-profile__color-btn');
-      colorBtns.forEach(btn => {
-        btn.classList.toggle('is-active', btn.dataset.color === profile.theme_color);
-      });
-    }
 
 
     if (profile.social_links) {
@@ -1679,6 +1669,30 @@ async function loadMoodHistory() {
 
     card.appendChild(emojiContainer);
     card.appendChild(contentDiv);
+
+    if (isOwnProfile) {
+      const deleteBtn = createSafeElement('button', 'mood-entry-delete');
+      const delIcon = document.createElement('ion-icon');
+      delIcon.setAttribute('name', 'trash-outline');
+      deleteBtn.appendChild(delIcon);
+      deleteBtn.onclick = async (e) => {
+        e.stopPropagation();
+        if (!confirm('Delete this mood entry?')) return;
+        const supabaseClient = getSupabaseClient();
+        if (!supabaseClient) return;
+        const { error } = await supabaseClient
+          .from('mood_logs')
+          .delete()
+          .eq('id', mood.id)
+          .eq('user_id', currentUser.id);
+        if (!error) {
+          if (typeof showToast === 'function') showToast('Mood entry deleted', 'success');
+          loadMoodHistory();
+        }
+      };
+      card.appendChild(deleteBtn);
+    }
+
     chart.appendChild(card);
   });
 
@@ -2072,6 +2086,19 @@ async function loadStreakCalendar() {
 
   calendarEl.innerHTML = '';
 
+  const headerRow = document.createElement('div');
+  headerRow.className = 'streak-calendar-header';
+  const dayLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  dayLabels.forEach(label => {
+    const labelEl = document.createElement('span');
+    labelEl.className = 'streak-day-label';
+    labelEl.textContent = label;
+    headerRow.appendChild(labelEl);
+  });
+  calendarEl.appendChild(headerRow);
+
+  const gridEl = document.createElement('div');
+  gridEl.className = 'streak-calendar-grid';
 
   for (let i = 27; i >= 0; i--) {
     const date = new Date(today);
@@ -2082,7 +2109,6 @@ async function loadStreakCalendar() {
     const dayEl = document.createElement('div');
     dayEl.className = 'streak-day';
 
-
     let activityLevel = 0;
     if (articles > 0) {
       if (articles >= 5) activityLevel = 4;
@@ -2092,11 +2118,9 @@ async function loadStreakCalendar() {
       dayEl.classList.add(`active-${activityLevel}`);
     }
 
-
     if (i === 0) {
       dayEl.classList.add('today');
     }
-
 
     const tooltip = document.createElement('span');
     tooltip.className = 'streak-tooltip';
@@ -2106,8 +2130,10 @@ async function loadStreakCalendar() {
       : `${dateLabel}: No activity`;
     dayEl.appendChild(tooltip);
 
-    calendarEl.appendChild(dayEl);
+    gridEl.appendChild(dayEl);
   }
+
+  calendarEl.appendChild(gridEl);
 
 
   updateStreakMilestones(userProfile?.current_streak || 0);
@@ -2263,44 +2289,6 @@ function filterActivities(filter) {
   filtered.forEach(activity => {
     activityFeed.appendChild(createActivityItem(activity));
   });
-}
-
-
-// ==================== THEME ====================
-function setupThemePicker() {
-  const colorBtns = document.querySelectorAll('.mb-profile__color-btn');
-
-  colorBtns.forEach(btn => {
-    btn.addEventListener('click', async () => {
-      colorBtns.forEach(b => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
-
-      const color = btn.dataset.color;
-      applyThemeColor(color);
-
-      if (!currentUser) return;
-
-      const supabaseClient = getSupabaseClient();
-      if (!supabaseClient) return;
-
-      await supabaseClient
-        .from('profiles')
-        .upsert({
-          id: currentUser.id,
-          theme_color: color,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'id' });
-
-      userProfile = { ...userProfile, theme_color: color };
-
-
-      updateProfileCompletion(userProfile);
-    });
-  });
-}
-
-function applyThemeColor(color) {
-  document.documentElement.style.setProperty('--profile-accent', color);
 }
 
 

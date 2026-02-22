@@ -1384,6 +1384,7 @@
           }
 
           if (emptyEl) emptyEl.textContent = "";
+          if (!listEl) return;
 
           listEl.innerHTML = data.map(article => {
             const name = article.title || article.article_title || "Saved Article";
