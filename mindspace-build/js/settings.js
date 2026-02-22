@@ -17,9 +17,9 @@
 
   // --- Accent Colors ---
   const ACCENT_COLORS = {
-    gold:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#d4c4a8', soft: '#bde0fe', dark: '#7a6548', gradEnd: '#7BBDF7', text: '#6b5635' },
-    purple: { hex: '#6DB3F2', hover: '#5CA3E6', rgb: '109, 179, 242', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e' },
-    blue:   { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c' },
+    blue:   { hex: '#5BA4E6', hover: '#4893D4', rgb: '91, 164, 230', light: '#a3c8ed', soft: '#bde0fe', dark: '#2d6ab0', gradEnd: '#7BBDF7', text: '#245a8c' },
+    purple: { hex: '#9b7ed9', hover: '#8a6dc8', rgb: '155, 126, 217', light: '#c9b8ec', soft: '#f3eefb', dark: '#6b4fb5', gradEnd: '#b99ae6', text: '#5a3d9e' },
+    sky:    { hex: '#4a90d9', hover: '#3d7fc8', rgb: '74, 144, 217',  light: '#a3c8ed', soft: '#eaf2fb', dark: '#2d6ab0', gradEnd: '#6daeed', text: '#245a8c' },
     green:  { hex: '#4db896', hover: '#3fa884', rgb: '77, 184, 150',  light: '#a3dbc7', soft: '#e8f7f1', dark: '#2e8a6a', gradEnd: '#6fd4aa', text: '#267558' },
     teal:   { hex: '#38b2ac', hover: '#2d9d98', rgb: '56, 178, 172',  light: '#96d8d4', soft: '#e6f5f4', dark: '#238079', gradEnd: '#5fccc6', text: '#1d6b65' },
     pink:   { hex: '#d97eab', hover: '#c86d9a', rgb: '217, 126, 171', light: '#ecbdd5', soft: '#fbeef4', dark: '#b4547f', gradEnd: '#e9a3c3', text: '#993f6a' },
@@ -159,7 +159,7 @@
   // --- Accent Color ---
   function applyAccentColor(colorName) {
     const color = ACCENT_COLORS[colorName] || ACCENT_COLORS.blue;
-    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'gold';
+    const effectiveColorName = ACCENT_COLORS[colorName] ? colorName : 'blue';
     
     const root = document.documentElement;
     root.style.setProperty('--user-accent', color.hex);
