@@ -38,14 +38,14 @@
 
 // --- Language & Translation Helpers ---
   function getSavedLanguage() {
-    return localStorage.getItem('mindbalance-language') || localStorage.getItem('mindbalance_language') || 'en';
+    return localStorage.getItem('mindspace-language') || localStorage.getItem('mindspace_language') || 'en';
   }
 
 
   function getTranslation(key, fallback) {
     if (window.translations) {
       const lang = getSavedLanguage();
-      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko' };
+      const langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
       const langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];
@@ -58,7 +58,7 @@
 // ==================== TTS ENGINE ====================
   const TTS_API_BASE = (function() {
     const host = window.location.hostname;
-    if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+    if (host === 'mindspace.cloud' || host === 'www.mindspace.cloud' ||
         host === 'mindspace.site' || host === 'www.mindspace.site') {
       return 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev';
     }
@@ -439,7 +439,10 @@
       'fr': 'fr-FR',
       'zh': 'zh-CN',
       'hi': 'hi-IN',
-      'ko': 'ko-KR'
+      'ko': 'ko-KR',
+      'de': 'de-DE',
+      'gr': 'el-GR',
+      'ru': 'ru-RU'
     };
     return langMap[savedLang] || 'en-US';
   }
@@ -1998,8 +2001,8 @@
 // --- Reading Tracker ---
   function trackArticleRead() {
 
-    if (window.MindBalanceAuth && window.MindBalanceAuth.onAuthReady) {
-      window.MindBalanceAuth.onAuthReady(async (user) => {
+    if (window.MindSpaceAuth && window.MindSpaceAuth.onAuthReady) {
+      window.MindSpaceAuth.onAuthReady(async (user) => {
         if (!user) return;
 
 
@@ -2009,7 +2012,7 @@
 
 
         try {
-          await window.MindBalanceAuth.logReadingActivity(slug, title);
+          await window.MindSpaceAuth.logReadingActivity(slug, title);
           console.log('Reading activity logged for:', slug);
         } catch (e) {
           console.error('Failed to log reading activity:', e);
@@ -2047,7 +2050,7 @@
 
 
     window.addEventListener('storage', (e) => {
-      if (e.key === 'mindbalance-language') {
+      if (e.key === 'mindspace-language') {
         setTimeout(() => {
           paragraphs = getArticleContent();
           if (isPlaying) {
@@ -2538,7 +2541,7 @@
 
 // ==================== READING ANALYTICS ====================
   const articleSlug = window.location.pathname.split('/').filter(p => p).pop().replace('.html', '');
-  const articleTitle = document.title.replace(' | MindBalance', '');
+  const articleTitle = document.title.replace(' | MindSpace', '');
 
   document.body.dataset.articleId = articleSlug;
 

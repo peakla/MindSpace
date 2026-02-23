@@ -35,7 +35,7 @@ function initBackToTop() {
 // --- Newsletter API Base ---
 function getNewsletterApiBase() {
   const host = window.location.hostname;
-  if (host === 'mindbalance.cloud' || host === 'www.mindbalance.cloud' ||
+  if (host === 'mindspace.cloud' || host === 'www.mindspace.cloud' ||
       host === 'mindspace.site' || host === 'www.mindspace.site') {
     return 'https://d519c840-a074-41fa-b89a-8627dded835a-00-f7kivyi5gpot.worf.replit.dev';
   }
@@ -236,17 +236,17 @@ function initFooterControls() {
   const themeToggle = document.getElementById('footerThemeToggle');
 
   if (langSelect) {
-    const savedLang = window.MindBalanceTranslations?.getCurrentLanguage?.() || 
-                      localStorage.getItem('mindbalance-language') || 'en';
+    const savedLang = window.MindSpaceTranslations?.getCurrentLanguage?.() || 
+                      localStorage.getItem('mindspace-language') || 'en';
     langSelect.value = savedLang;
 
     langSelect.addEventListener('change', (e) => {
       const lang = e.target.value;
       
-      if (window.MindBalanceTranslations?.setLanguage) {
-        window.MindBalanceTranslations.setLanguage(lang);
+      if (window.MindSpaceTranslations?.setLanguage) {
+        window.MindSpaceTranslations.setLanguage(lang);
       } else {
-        localStorage.setItem('mindbalance-language', lang);
+        localStorage.setItem('mindspace-language', lang);
         document.querySelectorAll('[data-language-select]').forEach(select => {
           if (select !== langSelect) {
             select.value = lang;
@@ -257,7 +257,7 @@ function initFooterControls() {
   }
 
   if (themeToggle) {
-    const savedTheme = localStorage.getItem('mindbalance_theme') || 'light';
+    const savedTheme = localStorage.getItem('mindspace_theme') || 'light';
     const isDark = savedTheme === 'dark' || document.documentElement.getAttribute('data-theme') === 'dark';
     themeToggle.checked = isDark;
 
@@ -265,7 +265,7 @@ function initFooterControls() {
       const isDarkMode = e.target.checked;
       const newTheme = isDarkMode ? 'dark' : 'light';
       
-      localStorage.setItem('mindbalance_theme', newTheme);
+      localStorage.setItem('mindspace_theme', newTheme);
       
       if (isDarkMode) {
         document.documentElement.setAttribute('data-theme', 'dark');

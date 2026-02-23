@@ -6,8 +6,8 @@
   // --- Translation Helper ---
   function getTranslation(key, fallback) {
     if (window.translations) {
-      var lang = localStorage.getItem('mindbalance-language') || 'en';
-      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr' };
+      var lang = localStorage.getItem('mindspace-language') || 'en';
+      var langMap = { en: 'en', es: 'es', fr: 'fr', zh: 'zh', hi: 'hi', ko: 'ko', de: 'de', gr: 'gr', ru: 'ru' };
       var langKey = langMap[lang] || 'en';
       if (window.translations[langKey] && window.translations[langKey][key]) {
         return window.translations[langKey][key];
@@ -126,11 +126,11 @@
   }
 
   // ==================== READING MODE ====================
-  var readingModeEnabled = localStorage.getItem('mindbalance-reading-mode') === 'true';
+  var readingModeEnabled = localStorage.getItem('mindspace-reading-mode') === 'true';
 
   function toggleReadingMode() {
     readingModeEnabled = !readingModeEnabled;
-    localStorage.setItem('mindbalance-reading-mode', readingModeEnabled);
+    localStorage.setItem('mindspace-reading-mode', readingModeEnabled);
     applyReadingMode();
     updateReadingModeButton();
   }
@@ -317,7 +317,7 @@
     var ringText = document.getElementById('ringText');
     var streakCount = document.getElementById('streakCount');
 
-    var readArticles = JSON.parse(localStorage.getItem('mindbalance-read-articles') || '[]');
+    var readArticles = JSON.parse(localStorage.getItem('mindspace-read-articles') || '[]');
     var totalArticles = 13;
     var readCount = readArticles.length;
     var percentage = Math.round((readCount / totalArticles) * 100);
@@ -330,19 +330,19 @@
     }
     if (ringText) ringText.textContent = percentage + '%';
 
-    var streak = parseInt(localStorage.getItem('mindbalance-reading-streak') || '0', 10);
+    var streak = parseInt(localStorage.getItem('mindspace-reading-streak') || '0', 10);
     if (streakCount) streakCount.textContent = streak;
 
-    if (window.MindBalanceAuth && window.MindBalanceAuth.getUser) {
+    if (window.MindSpaceAuth && window.MindSpaceAuth.getUser) {
       try {
-        var user = window.MindBalanceAuth.getUser();
-        var sb = window.MindBalanceAuth.getSupabase();
+        var user = window.MindSpaceAuth.getUser();
+        var sb = window.MindSpaceAuth.getSupabase();
         if (user && sb) {
           sb.from('profiles').select('current_streak').eq('id', user.id).single().then(function(result) {
             if (result.data && result.data.current_streak !== undefined) {
               var dbStreak = result.data.current_streak || 0;
               if (streakCount) streakCount.textContent = dbStreak;
-              localStorage.setItem('mindbalance-reading-streak', String(dbStreak));
+              localStorage.setItem('mindspace-reading-streak', String(dbStreak));
             }
           });
         }
@@ -557,7 +557,7 @@
 
   // ==================== CARD READING PROGRESS ====================
   function initCardProgress() {
-    var readArticles = JSON.parse(localStorage.getItem('mindbalance-read-articles') || '[]');
+    var readArticles = JSON.parse(localStorage.getItem('mindspace-read-articles') || '[]');
     if (readArticles.length === 0) return;
 
     document.querySelectorAll('[data-category]').forEach(function (card) {
@@ -847,7 +847,7 @@
   }
 
   // --- Public API ---
-  window.MindBalanceBlog = {
+  window.MindSpaceBlog = {
     stopSpeech: stopSpeech,
     toggleReadingMode: toggleReadingMode,
     speakText: speakText

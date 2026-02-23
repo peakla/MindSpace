@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     } else {
-      window.addEventListener('mindbalance:authready', (e) => {
+      window.addEventListener('mindspace:authready', (e) => {
         handleAuth(e.detail.user);
       });
     }
@@ -1105,8 +1105,8 @@ function setupEditProfile() {
     updateProfileCompletion(userProfile);
 
 
-    if (window.MindBalanceImmersive?.updateGreeting) {
-      window.MindBalanceImmersive.updateGreeting();
+    if (window.MindSpaceImmersive?.updateGreeting) {
+      window.MindSpaceImmersive.updateGreeting();
     }
 
     modal.hidden = true;
@@ -1153,8 +1153,8 @@ function setupSettings() {
     updateProfileCompletion(userProfile);
 
 
-    if (window.MindBalanceImmersive?.updateGreeting) {
-      window.MindBalanceImmersive.updateGreeting();
+    if (window.MindSpaceImmersive?.updateGreeting) {
+      window.MindSpaceImmersive.updateGreeting();
     }
 
     ToastManager.success('Settings saved!');
@@ -1456,7 +1456,7 @@ async function checkAndAwardBadges(allAchievements, unlockedIds) {
       return {
         user_id: currentUser.id,
         type: 'achievement',
-        from_user_name: 'MindBalance',
+        from_user_name: 'MindSpace',
         content: `You earned the "${achievement?.name || 'Achievement'}" badge: ${achievement?.description || ''}`,
         read: false
       };
@@ -2088,8 +2088,8 @@ async function loadStreakCalendar() {
   let engagementDays = [];
 
 
-  if (window.MindBalanceAuth && window.MindBalanceAuth.getReadingCalendar) {
-    engagementDays = await window.MindBalanceAuth.getReadingCalendar(targetUserId, 28);
+  if (window.MindSpaceAuth && window.MindSpaceAuth.getReadingCalendar) {
+    engagementDays = await window.MindSpaceAuth.getReadingCalendar(targetUserId, 28);
   } else {
 
     const supabaseClient = getSupabaseClient();
@@ -2213,7 +2213,7 @@ function updateStreakMilestones(currentStreak) {
 }
 
 
-window.addEventListener('mindbalance:streakupdated', (e) => {
+window.addEventListener('mindspace:streakupdated', (e) => {
   const { currentStreak, longestStreak } = e.detail;
 
   const streakEl = document.getElementById('streakNumber');
@@ -3186,14 +3186,14 @@ function showOnboardingModal() {
       updateProfileCompletion(userProfile);
 
 
-      if (window.MindBalanceImmersive?.updateGreeting) {
-        window.MindBalanceImmersive.updateGreeting();
+      if (window.MindSpaceImmersive?.updateGreeting) {
+        window.MindSpaceImmersive.updateGreeting();
       }
 
 
       hideOnboardingModal();
 
-      ToastManager.success('Profile setup complete! Welcome to MindBalance!');
+      ToastManager.success('Profile setup complete! Welcome to MindSpace!');
     } catch (error) {
       console.error('Onboarding error:', error);
       ToastManager.error('Failed to save profile. Please try again.');

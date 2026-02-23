@@ -640,7 +640,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     function getSlideTranslation(key, fallback) {
-      const lang = localStorage.getItem('mindbalance_language') || 'en';
+      const lang = localStorage.getItem('mindspace_language') || 'en';
       if (window.translations && window.translations[lang] && window.translations[lang][key]) {
         return window.translations[lang][key];
       }
@@ -964,14 +964,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
       const getLabel = (key, fallback) => {
-        return window.MindBalanceTranslations?.getTranslationSync?.(key) || fallback;
+        return window.MindSpaceTranslations?.getTranslationSync?.(key) || fallback;
       };
 
       const small = document.createElement("p");
       small.className = "rl-cardSmall";
       const audienceKey = `rl_aud_${(item.audience || "General").replace(/\s+/g, "")}`;
       const audienceText = getLabel(audienceKey, item.audience || "General");
-      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindBalance"}`;
+      small.innerHTML = `<span data-translate="${audienceKey}">${audienceText}</span> • ${item.provider || "MindSpace"}`;
 
       const title = document.createElement("h3");
       title.className = "rl-cardTitle";
@@ -1008,7 +1008,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const visit = document.createElement("a");
       visit.className = "rl-visitBtn";
-      visit.textContent = window.MindBalanceTranslations?.getTranslationSync?.("resourcelib_visit") || "VISIT";
+      visit.textContent = window.MindSpaceTranslations?.getTranslationSync?.("resourcelib_visit") || "VISIT";
       visit.setAttribute("data-translate", "resourcelib_visit");
       visit.href = item.url || "#";
       visit.target = "_blank";
@@ -1127,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const provider = document.createElement('p');
       provider.className = 'rl-spotlight-card__provider';
-      provider.textContent = item.provider || 'MindBalance';
+      provider.textContent = item.provider || 'MindSpace';
 
       const title = document.createElement('h4');
       title.className = 'rl-spotlight-card__title';
@@ -1367,7 +1367,7 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(checkNotifications, 1500);
 
 
-  window.addEventListener('mindbalance:authchange', (e) => {
+  window.addEventListener('mindspace:authchange', (e) => {
     if (e.detail.isSignedIn) {
       setTimeout(checkNotifications, 500);
     } else {

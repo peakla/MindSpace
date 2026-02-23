@@ -209,7 +209,7 @@
 
   // --- Initialization ---
   async function init() {
-    const lang = localStorage.getItem('mindbalance-language') || 'en';
+    const lang = localStorage.getItem('mindspace-language') || 'en';
     
     try {
       const response = await fetch(`/i18n/${lang}.json`);

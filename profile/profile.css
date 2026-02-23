@@ -1580,7 +1580,7 @@
 .mb-profile__goal-item[data-category="mindfulness"] { border-left-color: #8b5cf6; }
 .mb-profile__goal-item[data-category="exercise"] { border-left-color: #10b981; }
 .mb-profile__goal-item[data-category="social"] { border-left-color: #f59e0b; }
-.mb-profile__goal-item[data-category="sleep"] { border-left-color: #6366f1; }
+.mb-profile__goal-item[data-category="sleep"] { border-left-color: #3B8DD4; }
 .mb-profile__goal-item[data-category="nutrition"] { border-left-color: #ef4444; }
 .mb-profile__goal-item[data-category="self-care"] { border-left-color: #ec4899; }
 
@@ -1598,7 +1598,7 @@
 }
 
 .mb-profile__goal-item .goal-check:hover {
-  background: rgba(175, 145, 109, 0.1);
+  background: rgba(91, 164, 230, 0.1);
 }
 
 .mb-profile__goal-item .goal-check.completed {
@@ -3330,7 +3330,7 @@
 }
 
 .mood-line-chart__dots circle {
-  fill: var(--gold-crayola, #d4a853);
+  fill: var(--blue-crayola, #2068A8);
   stroke: #fff;
   stroke-width: 2;
   cursor: pointer;
@@ -3429,7 +3429,7 @@
 }
 
 [data-theme="dark"] .mood-insight-card__value {
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 [data-theme="dark"] .mood-insight-card__label {
@@ -3462,7 +3462,7 @@
 }
 
 [data-theme="dark"] .mb-profile__mood-insights > h4 {
-  color: #f5f0e8;
+  color: #bde0fe;
 }
 
 .mb-profile__analytics-section {
@@ -3738,7 +3738,7 @@
 [data-theme="dark"] .onboarding-modal__body input:focus,
 [data-theme="dark"] .onboarding-modal__body textarea:focus {
   border-color: var(--user-accent-light, var(--user-accent));
-  box-shadow: 0 0 0 4px rgba(var(--user-accent-rgb, 175, 145, 109), 0.2);
+  box-shadow: 0 0 0 4px rgba(var(--user-accent-rgb, 91, 164, 230), 0.2);
   background: #2d2b3d;
 }
 
@@ -3802,7 +3802,7 @@
 }
 
 .mood-load-more-btn {
-  background: var(--user-accent, #AF916D);
+  background: var(--user-accent, #5BA4E6);
   color: #fff;
   border: none;
   padding: 10px 28px;

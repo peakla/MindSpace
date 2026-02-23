@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sign In | MindBalance</title>
+  <title>Sign In | MindSpace</title>
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
   
   <script>
     (function() {
-      var theme = localStorage.getItem('mindbalance_theme') || 'light';
+      var theme = localStorage.getItem('mindspace_theme') || 'light';
       if (theme === 'system') {
         theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
@@ -736,12 +736,12 @@
     
     [data-theme="dark"] .auth-panel::before,
     body.dark-mode .auth-panel::before {
-      background: rgba(155, 126, 217, 0.15);
+      background: rgba(109, 179, 242, 0.15);
     }
     
     [data-theme="dark"] .auth-panel::after,
     body.dark-mode .auth-panel::after {
-      background: rgba(155, 126, 217, 0.1);
+      background: rgba(109, 179, 242, 0.1);
     }
     
     [data-theme="dark"] .panel-title,
@@ -761,13 +761,13 @@
     
     [data-theme="dark"] .panel-feature-icon,
     body.dark-mode .panel-feature-icon {
-      background: rgba(155, 126, 217, 0.25);
-      border-color: rgba(155, 126, 217, 0.3);
+      background: rgba(109, 179, 242, 0.25);
+      border-color: rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .panel-stats,
     body.dark-mode .panel-stats {
-      border-top-color: rgba(155, 126, 217, 0.3);
+      border-top-color: rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .panel-stat-number,
@@ -782,8 +782,8 @@
     
     [data-theme="dark"] .panel-testimonial,
     body.dark-mode .panel-testimonial {
-      background: rgba(155, 126, 217, 0.15);
-      border-color: rgba(155, 126, 217, 0.2);
+      background: rgba(109, 179, 242, 0.15);
+      border-color: rgba(109, 179, 242, 0.2);
     }
     
     [data-theme="dark"] .panel-testimonial-text,
@@ -901,18 +901,18 @@
     [data-theme="dark"] .btn-primary,
     body.dark-mode .btn-primary {
       background: linear-gradient(135deg, var(--user-accent) 0%, var(--user-accent-dark) 100%);
-      box-shadow: 0 4px 15px rgba(155, 126, 217, 0.3);
+      box-shadow: 0 4px 15px rgba(109, 179, 242, 0.3);
     }
     
     [data-theme="dark"] .btn-primary:hover,
     body.dark-mode .btn-primary:hover {
       background: linear-gradient(135deg, #a88de3 0%, #8a6acd 100%);
-      box-shadow: 0 6px 20px rgba(155, 126, 217, 0.4);
+      box-shadow: 0 6px 20px rgba(109, 179, 242, 0.4);
     }
     
     [data-theme="dark"] .btn-guest,
     body.dark-mode .btn-guest {
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      background: linear-gradient(135deg, #3B8DD4 0%, #4f46e5 100%);
       box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     }
     
@@ -1007,7 +1007,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #f8a29e;
+      background: #38b6ff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -1044,7 +1044,7 @@
 
 <div class="preload" data-preaload>
   <img src="/assets/images/preload.gif" alt="Loading..." class="loader-gif" decoding="async">
-  <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="preload-logo" decoding="async">
+  <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace" class="preload-logo" decoding="async">
   <span class="preload-text">Loading your wellness space</span>
   <div class="progress-bar">
     <div class="progress-bar-fill"></div>
@@ -1081,7 +1081,7 @@
   
   <div class="auth-panel">
     <div class="panel-content">
-      <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance" class="panel-logo">
+      <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace" class="panel-logo">
       <h1 class="panel-title">Your Mental Wellness Journey Starts Here</h1>
       <p class="panel-tagline">Join our community of support, discover resources, and take the first step toward better mental health.</p>
       
@@ -1120,7 +1120,7 @@
       </div>
       
       <div class="panel-testimonial">
-        <p class="panel-testimonial-text">"MindBalance helped me find the resources I needed when I felt lost. The community here truly understands."</p>
+        <p class="panel-testimonial-text">"MindSpace helped me find the resources I needed when I felt lost. The community here truly understands."</p>
         <span class="panel-testimonial-author">— Sarah M., Community Member</span>
       </div>
     </div>
@@ -1131,7 +1131,7 @@
     <div class="auth-container">
       <div class="mobile-logo">
         <a href="../">
-          <img src="/assets/images/MindBalanceLogo.svg" alt="MindBalance">
+          <img src="/assets/images/MindSpaceLogo.png" alt="MindSpace">
         </a>
       </div>
       
@@ -1215,7 +1215,7 @@
       
       <a href="../" class="back-link">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to MindBalance
+        Back to MindSpace
       </a>
     </div>
   </div>
@@ -1462,7 +1462,7 @@
     const { data, error } = await sb.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: 'https://www.mindbalance.cloud/auth/'
+        redirectTo: 'https://www.mindspace.cloud/auth/'
       }
     });
     
@@ -1514,10 +1514,10 @@
       <div class="mb-footer__main-grid">
 
         
-        <section class="mb-footer__col" aria-label="About MindBalance">
-          <h3 class="mb-footer__brand" data-translate="footer_brand">MindBalance</h3>
+        <section class="mb-footer__col" aria-label="About MindSpace">
+          <h3 class="mb-footer__brand" data-translate="footer_brand">MindSpace</h3>
           <p class="mb-footer__text" data-translate="footer_about">
-            MindBalance is a student-built mental health education and support hub.
+            MindSpace is a student-built mental health education and support hub.
             Our goal is to provide clear, reliable information and guide visitors toward safe resources.
           </p>
           <a class="mb-footer__link" href="/support/" data-translate="footer_read_more">Read more →</a>
@@ -1584,7 +1584,7 @@
 
           <h5 class="mb-footer__subheading" data-translate="footer_follow">Follow Us</h5>
           <div class="mb-footer__social">
-            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindbalance2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="mb-footer__icon mb-footer__icon--instagram" href="https://www.instagram.com/mindspace2026?igsh=MTdid3ZpdDZzdHFtcA==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <ion-icon name="logo-instagram"></ion-icon>
             </a>
             <a class="mb-footer__icon mb-footer__icon--youtube" href="https://www.youtube.com/@MindBaIance" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
@@ -1680,7 +1680,7 @@
   <div class="mb-footer__bottom">
     <div class="mb-footer__wrap mb-footer__bottomwrap">
       <p class="mb-footer__copy">
-        © <span id="mb-footer-year"></span> MindBalance. <span data-translate="footer_copy">For educational purposes only.</span>
+        © <span id="mb-footer-year"></span> MindSpace. <span data-translate="footer_copy">For educational purposes only.</span>
       </p>
 
       <div class="mb-footer__legal">

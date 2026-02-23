@@ -275,7 +275,7 @@ const MBAnalytics = (function() {
     { id: 'achiever', name: 'Achiever', description: 'Complete 5 goals', icon: 'trophy-outline', condition: { action: 'goal_complete', count: 5 } },
     { id: 'explorer', name: 'Explorer', description: 'View 20 different resources', icon: 'compass-outline', condition: { action: 'resource_view', count: 20 } },
     { id: 'social_butterfly', name: 'Social Butterfly', description: 'Follow 10 users', icon: 'people-outline', condition: { action: 'follow', count: 10 } },
-    { id: 'early_adopter', name: 'Early Adopter', description: 'Join MindBalance community', icon: 'rocket-outline', condition: { action: 'signup', count: 1 } },
+    { id: 'early_adopter', name: 'Early Adopter', description: 'Join MindSpace community', icon: 'rocket-outline', condition: { action: 'signup', count: 1 } },
     { id: 'completionist', name: 'Completionist', description: 'Complete 10 articles 100%', icon: 'checkmark-done-outline', condition: { action: 'article_complete', count: 10 } }
   ];
 

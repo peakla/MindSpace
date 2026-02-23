@@ -132,11 +132,11 @@
 }
 
 .legal-section li::marker {
-  color: var(--accent-color, #d6a756);
+  color: var(--accent-color, #4A93D4);
 }
 
 .legal-section a {
-  color: var(--accent-color, #d6a756);
+  color: var(--accent-color, #4A93D4);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -299,9 +299,9 @@
 }
 
 .legal-nav-link:hover {
-  background: var(--accent-color, #d6a756);
+  background: var(--accent-color, #4A93D4);
   color: #fff;
-  border-color: var(--accent-color, #d6a756);
+  border-color: var(--accent-color, #4A93D4);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(214, 167, 86, 0.3);
 }

@@ -18,11 +18,11 @@ const fallbackTranslations = {
   settings_language: "Language"
 };
 
-const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko', 'de', 'gr'];
+const supportedLanguages = ['en', 'es', 'fr', 'zh', 'hi', 'ko', 'de', 'gr', 'ru'];
 
 // --- Language Detection ---
 function getCurrentLanguage() {
-  const stored = localStorage.getItem('mindbalance_language') || localStorage.getItem('mindbalance-language');
+  const stored = localStorage.getItem('mindspace_language') || localStorage.getItem('mindspace-language');
   if (stored && supportedLanguages.includes(stored)) {
     return stored;
   }
@@ -117,8 +117,8 @@ async function setLanguage(lang) {
     lang = 'en';
   }
   
-  localStorage.setItem('mindbalance_language', lang);
-  localStorage.setItem('mindbalance-language', lang);
+  localStorage.setItem('mindspace_language', lang);
+  localStorage.setItem('mindspace-language', lang);
   document.documentElement.lang = lang;
   console.log('[Translations] Set document lang to:', lang);
   
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // --- Public API ---
-window.MindBalanceTranslations = {
+window.MindSpaceTranslations = {
   setLanguage,
   getCurrentLanguage,
   applyTranslations,

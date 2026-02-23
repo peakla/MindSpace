@@ -15,7 +15,6 @@
     { "source": "/terms/", "destination": "/terms/index.html" },
     { "source": "/privacy/", "destination": "/privacy/index.html" },
     { "source": "/disclaimer/", "destination": "/disclaimer/index.html" },
-    { "source": "/docs/", "destination": "/docs/index.html" },
     { "source": "/auth/", "destination": "/auth/index.html" },
     { "source": "/contact/", "destination": "/contact/index.html" }
   ],

@@ -243,7 +243,7 @@
   }
 
   // --- Public API ---
-  window.MindBalanceAnimations = {
+  window.MindSpaceAnimations = {
     init: init,
     refresh: initScrollAnimations,
     revealAll: revealAllImmediately

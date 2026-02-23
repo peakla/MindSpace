@@ -103,13 +103,13 @@ function broadcastAuthChange(user) {
   authChangeCallbacks.forEach(cb => cb(user));
   
   if (!wasReady) {
-    const event = new CustomEvent('mindbalance:authready', {
+    const event = new CustomEvent('mindspace:authready', {
       detail: { user: user, isSignedIn: !!user }
     });
     window.dispatchEvent(event);
   }
   
-  const event = new CustomEvent('mindbalance:authchange', {
+  const event = new CustomEvent('mindspace:authchange', {
     detail: { user: user, isSignedIn: !!user }
   });
   window.dispatchEvent(event);
@@ -121,9 +121,9 @@ function onAuthReady(callback) {
   } else {
     const handler = (e) => {
       callback(e.detail.user);
-      window.removeEventListener('mindbalance:authready', handler);
+      window.removeEventListener('mindspace:authready', handler);
     };
-    window.addEventListener('mindbalance:authready', handler);
+    window.addEventListener('mindspace:authready', handler);
   }
 }
 
@@ -432,7 +432,7 @@ async function updateStreakFromActivity(userId) {
       })
       .eq('id', userId);
     
-    window.dispatchEvent(new CustomEvent('mindbalance:streakupdated', {
+    window.dispatchEvent(new CustomEvent('mindspace:streakupdated', {
       detail: { currentStreak, longestStreak }
     }));
     
@@ -589,7 +589,7 @@ window.toggleUserMenu = toggleUserMenu;
 window.closeUserMenu = closeUserMenu;
 window.handleUserMenuLogout = handleUserMenuLogout;
 
-window.MindBalanceAuth = {
+window.MindSpaceAuth = {
   getSupabase,
   getCurrentUser,
   signOut,

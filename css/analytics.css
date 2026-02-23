@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(175, 145, 109, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(91, 164, 230, 0.3);
   z-index: 99999;
   transform: translateY(120px);
   opacity: 0;
@@ -67,8 +67,8 @@
 
 /* === ACHIEVEMENT ANIMATION === */
 @keyframes achievementPulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(175, 145, 109, 0.4); }
-  50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(175, 145, 109, 0.2); }
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(91, 164, 230, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px 5px rgba(91, 164, 230, 0.2); }
 }
 
 /* === CALENDAR HEATMAP === */
