@@ -2073,21 +2073,23 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .support-hub__grid {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  display: flex;
+  flex-direction: column;
   gap: 48px;
   max-width: 1400px;
   margin: 0 auto;
-  align-items: start;
   position: relative;
   z-index: 1;
-  padding: 0 20px;
+  padding: 0 40px;
 }
 
 .support-hub__left {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .support-hub__form-card {
@@ -2181,8 +2183,8 @@ body.dark-mode .view-toggle-btn.active {
 }
 
 .support-hub__right {
-  position: sticky;
-  top: 100px;
+  position: static;
+  width: 100%;
 }
 
 .support-hub__faq-card {
@@ -4888,12 +4890,12 @@ body.dark-mode .view-toggle-btn.active {
   }
 
   .support-hub__grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
+    padding: 0 16px;
   }
 
-  .support-hub__right {
-    position: static;
+  .support-hub__left {
+    max-width: 100%;
   }
 
   .support-hub__trust-row {
