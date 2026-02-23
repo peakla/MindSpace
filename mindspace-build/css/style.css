@@ -456,6 +456,13 @@ body.nav-active {
   overflow: hidden;
 }
 
+body.nav-active .mb-stickyFilters,
+body.nav-active .mb-categoryCards,
+body.nav-active .mb-readingProgress {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 /* === SCROLLBAR === */
 html,
 body {
