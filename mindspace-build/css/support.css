@@ -2087,8 +2087,6 @@ body.dark-mode .view-toggle-btn.active {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 680px;
-  margin: 0 auto;
   width: 100%;
 }
 
@@ -4892,10 +4890,6 @@ body.dark-mode .view-toggle-btn.active {
   .support-hub__grid {
     gap: 32px;
     padding: 0 16px;
-  }
-
-  .support-hub__left {
-    max-width: 100%;
   }
 
   .support-hub__trust-row {
