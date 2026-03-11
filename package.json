@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@vercel/analytics": "^1.6.1",
     "vercel": "^50.14.0"
   }
 }
